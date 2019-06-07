@@ -893,7 +893,15 @@ visibility: hidden;
         {
           // Ex: split 'minIVs=0' on '=', [0] is left 'minIVs' [1] is right '0'
           //console.log("Set '"+params[i].split('=')[0]+"' to '"+params[i].split('=')[1]+"'");
-          document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
+          // Fix weird safari bug not removing %20 properly
+          if (params[i].split('=')[1].includes("%20"))
+          {
+            console.log("Browser likely Safari...found '%20' in '"+params[i]+"', removing...");
+            document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1].replace(/%20/g, " ");
+          } else {
+            // Otherwise URL decode is working, proceed as normal...
+            document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
+          }
         }
         getFormData();
       }
