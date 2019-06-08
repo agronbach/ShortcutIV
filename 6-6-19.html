@@ -964,10 +964,10 @@ visibility: hidden;
                   var i = tpp[0 * 5 + 4]; // calculate cpm offset from highest smm result
                   
                   // calcualte ideal PvP rank using attack + base stat attack * cpm
-                  var glA = ((parseFloat(tpp[0 * 5 + 1])+parseFloat(bsa))*cpm[i]).toFixed(1);
-                  var glD = ((parseFloat(tpp[0 * 5 + 2])+parseFloat(bsd))*cpm[i]).toFixed(1);
+                  var glA = ((parseFloat(tpp[0 * 5 + 1])+parseFloat(bsa))*cpm[i]);
+                  var glD = ((parseFloat(tpp[0 * 5 + 2])+parseFloat(bsd))*cpm[i]);
                   var glS = Math.floor((parseFloat(tpp[0 * 5 + 3])+parseFloat(bss))*cpm[i]);
-                  var glst = (glA * glD * glS);
+                  var glst = (glA * glD * glS).toFixed(2);
                   var pcnt = glst;
                   var pfct = glst;
                   console.log("pfct:"+pfct+" from uA:"+glA+" uD:"+glD+" uS:"+glS+", cpm["+i+"]:"+cpm[i]);
@@ -1050,10 +1050,10 @@ visibility: hidden;
         var i = tpp[0 * 5 + 4]; // calculate cpm offset from highest smm result
         
         // calcualte ideal PvP rank using attack + base stat attack * cpm
-        var glA = ((parseFloat(tpp[0 * 5 + 1])+parseFloat(bsa))*cpm[i]).toFixed(1);
-        var glD = ((parseFloat(tpp[0 * 5 + 2])+parseFloat(bsd))*cpm[i]).toFixed(1);
+        var glA = ((parseFloat(tpp[0 * 5 + 1])+parseFloat(bsa))*cpm[i]);
+        var glD = ((parseFloat(tpp[0 * 5 + 2])+parseFloat(bsd))*cpm[i]);
         var glS = Math.floor((parseFloat(tpp[0 * 5 + 3])+parseFloat(bss))*cpm[i]);
-        var glst = (glA * glD * glS);
+        var glst = (glA * glD * glS).toFixed(2);
         var pcnt = glst;
         var pfct = glst;
         //console.log("pfct:"+pfct+" from uA:"+glA+" uD:"+glD+" uS:"+glS+", cpm["+i+"]:"+cpm[i]);
@@ -1097,9 +1097,9 @@ visibility: hidden;
         var cp = Math.floor(uA * Math.sqrt(uD) * Math.sqrt(uS) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10);
         
         // Finish calculating "battle stat" totals by adjusting for CPM now that we have level
-        uA = (uA*cpm[level]).toFixed(1);
-        uD = (uD*cpm[level]).toFixed(1);
-        uS = Math.floor(uS*cpm[level]);
+        uA = parseFloat(uA)*cpm[level];
+        uD = parseFloat(uD)*cpm[level];
+        uS = Math.floor(parseFloat(uS)*cpm[level]);
         
         // Compute user stat perfection % compared to "perfect" PvP IVs (first slot in tpp)
         glst = (uA * uD * uS);
@@ -1110,7 +1110,7 @@ visibility: hidden;
         level = parseFloat(level / 2 + 1);
         
         // add table header rows to output
-        html += "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th></tr>";
+        html += "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat product</th></tr>";
         
         // control highlight of User Data row based on rank
         if (rank < 100) {
@@ -1130,6 +1130,7 @@ visibility: hidden;
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+uA+"</td>"; //GL Atk IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+uD+"</td>"; //GL Def IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+uS+"</td>"; //GL Sta IV
+        html+="<td style=\"text-align: center; vertical-align: middle;\">"+smm+"</td>"; //stat product
         html+="</tr>";
         var lastSMM = 0;
         // Output Top "tp" number of PvP IVs, by generating each row of table individually in loop
@@ -1145,8 +1146,8 @@ visibility: hidden;
           //console.log("Retrieved aIV:"+aIV+" dIV:"+dIV+" sIV:"+sIV+" level:"+level);
           
           // use level to convert to "battle stats" at PvP level
-          glA = ((parseFloat(aIV)+parseFloat(bsa))*cpm[level]).toFixed(1);
-          glD = ((parseFloat(dIV)+parseFloat(bsd))*cpm[level]).toFixed(1);
+          glA = ((parseFloat(aIV)+parseFloat(bsa))*cpm[level]);
+          glD = ((parseFloat(dIV)+parseFloat(bsd))*cpm[level]);
           glS = Math.floor((parseFloat(sIV)+parseFloat(bss))*cpm[level]);
           cp = Math.floor((parseFloat(aIV)+parseFloat(bsa)) * Math.sqrt(parseFloat(dIV)+parseFloat(bsd)) * Math.sqrt(parseFloat(sIV)+parseFloat(bss)) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10);
           
@@ -1177,6 +1178,7 @@ visibility: hidden;
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+glA+"</td>"; //GL Atk IV
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+glD+"</td>"; //GL Def IV
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+glS+"</td>"; //GL Sta IV
+          html+="<td style=\"text-align: center; vertical-align: middle;\">"+smm+"</td>"; //stat product
           html+="</tr>";
           //console.log("rank:"+rank+" smm:"+tpp[i * 5 + 0]);
         }
@@ -1207,9 +1209,9 @@ visibility: hidden;
     }
     //console.log("GUSR: Exited loop with L:"+L+" and cp:"+cp);
     
-    glA = (glA*cpm[L]).toFixed(1);
-    glD = (glD*cpm[L]).toFixed(1);
-    glS = Math.floor(glS*cpm[L]);
+    glA = parseFloat(glA)*cpm[L];
+    glD = parseFloat(glD)*cpm[L];
+    glS = Math.floor(parseFloat(glS)*cpm[L]);
       
     // Recalculate smm using IV inputs to find rank in tpp
     return (glA * glD * glS).toFixed(2);
@@ -1267,10 +1269,15 @@ visibility: hidden;
             if (cp <= league)
             {
               // stat product used to rank IVs
-              glA = (glA*cpm[L]).toFixed(1);
-              glD = (glD*cpm[L]).toFixed(1);
-              glS = Math.floor(glS*cpm[L]);
+              // console.log(L);
+              // console.log(cpm[L]);
+
+              glA = parseFloat(glA)*cpm[L];
+              glD = parseFloat(glD)*cpm[L];
+              glS = Math.floor(parseFloat(glS)*cpm[L]);
+
               smm = parseFloat(glA * glD * glS).toFixed(2);
+              // console.log(smm);
               
               // update if these are "best" IVs
               if (glA > maxAtk) {maxAtk = glA;}
