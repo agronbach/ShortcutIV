@@ -2,16 +2,17 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
 <style>
 /* floating footer fix from: https://stackoverflow.com/questions/13881548/sticky-footer-hiding-content */
       html,
 body {
-   margin:0;
-   padding:0;
-   height:100%;
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Verdana, Geneva, sans-serif;
 }
 #container {
    min-height:100%;
@@ -19,33 +20,71 @@ body {
 }
 
 #body {
-   padding:10px;
-   padding-bottom:60px;   /* Height of the footer */
+   /*padding:10px;*/
+   padding-bottom:50px;   /* Height of the footer */
 }
 #footer {
-   position:absolute;
-   bottom:0;
-   text-align: center;
-   width:100%;
-   height:50px;   /* Height of the footer */
-   background:#C0C0C0;
+  position:absolute;
+  bottom:0;
+  text-align: center;
+  vertical-align: middle;
+  width:100%;
+  height:48px;   /* Height of the footer */
+  background:#C0C0C0;
+}
+
+.pokeballButton a {
+    background-image: linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
+background-image: -o-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
+background-image: -moz-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
+background-image: -webkit-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
+background-image: -ms-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
+    
+    color: #222224;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    margin: 12px 0 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    width: 86px;
+    border: 3px solid #222224;
+    border-radius: 8px 8px 8px 8px;
+    display: inline-block;
 }
   
-/*
-.footer {
-  position: fixed;
-  opacity: 1;
-  background-color: rgba(192,192,192,1);
-  left: 0;
-  bottom: 0;
-  width: 100%;
+.button {
+  background-color: #006400;
+  border-radius: 25px;
+  border: 0.1em solid #006400;
+  color: white;
+  padding: 0.2em 0.3em;
   text-align: center;
-}*/
-/* IE 6 and down:
-#container {
-   height:100%;
-}*/
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7em;
+  margin: 0.3em 0.2em;
+  cursor: pointer;
+}
 
+p {
+  display: block;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+  margin-left: 0;
+  margin-right: 0;
+}
+  
+img {
+  vertical-align: middle;
+  margin-left: 0;
+  margin-right: 0;
+}
+  
 /* Center tables for demo */
 [data-table-theme*=gray] {
   margin: 0 auto;
@@ -63,13 +102,13 @@ body {
 
 [data-table-theme*=gray] thead th,
 [data-table-theme*=gray] tfoot th {
-  padding: 0.5em;
+  /*padding: 0.5em;*/
   border: 1px solid lightgrey;
 }
 
-[data-table-theme*=gray] caption {
+/*[data-table-theme*=gray] caption {
   padding: 0.5em;
-}
+}*/
 
 /* Blank Table Style */
 [data-table-theme*=blank] {
@@ -106,9 +145,9 @@ visibility: hidden;
         <input id="mon" placeholder="Pok&eacute;mon" required>
       </div>
      <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
-      <tr><td>Atk</td><td>Def</td><td>Sta</td><td>Min</td></tr>
-      <tr><td>IV</td> <td>IV</td> <td>IV</td> <td>Lvl</td></tr>
-      <td><select id="AttackIV">
+      <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td title="What Level Floor to Search?">Lvl</td></tr>
+      <!--tr><td>IV</td> <td>IV</td> <td>IV</td> <td>Lvl</td></tr-->
+      <td><select title="Your Attack IV" id="AttackIV">
         <option value="15">15</option>
         <option value="14">14</option>
         <option value="13">13</option>
@@ -126,7 +165,7 @@ visibility: hidden;
         <option value="1">1</option>
         <option value="0">0</option>
       </select></td>
-      <td><select id="DefenseIV">
+      <td><select title="Your Defense IV" id="DefenseIV">
         <option value="15">15</option>
         <option value="14">14</option>
         <option value="13">13</option>
@@ -144,7 +183,7 @@ visibility: hidden;
         <option value="1">1</option>
         <option value="0">0</option>
       </select></td>
-      <td><select id="StaminaIV">
+      <td><select title="Your Stamina IV" id="StaminaIV">
         <option value="15">15</option>
         <option value="14">14</option>
         <option value="13">13</option>
@@ -162,7 +201,7 @@ visibility: hidden;
         <option value="1">1</option>
         <option value="0">0</option>
       </select></td>
-      <td><select id="minLvl">
+      <td><select title="What Level Floor to Search?" id="minLvl">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -249,14 +288,14 @@ visibility: hidden;
        <td hidden><select id="maxHP"><option value="0">0</option></select></td>
        <td hidden><select id="maxDef"><option value="0">0</option></select></td>
        <td hidden><select id="maxAtk"><option value="0">0</option></select></td>
+       <div hidden id="basestats"></div>
       </table>
       <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
       <tr>
-        <td>Minimum IVs to Search</td>
-        <td>Top</td>
+        <td title="Which IV Floor to Search?">Minimum IVs</td><td title="How many results to display?">Top</td>
       </tr>
       <tr>
-        <td><select id="minIVs">
+        <td title="Which IV Floor to Search?"><select id="minIVs">
         <option value="0">0: Wild Caught</option>
         <option value="1">1: Trade, Good Friend</option>
         <option value="2">2: Trade, Great Friend</option>
@@ -266,7 +305,7 @@ visibility: hidden;
         <option value="10">10: Raid/Hatch</option>
         <option value="12">12: Lucky Trade</option>
         </select></td>
-        <td><select id="TopRanks">
+        <td title="How many results to display?"><select id="TopRanks">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="25">25</option>
@@ -280,25 +319,28 @@ visibility: hidden;
       </tr>
       </table>
       <table align=center cellspacing="0" cellpadding="4" data-table-theme=blank><tr>
-      <td><select id="league">
+      <td><select title="Which PvP League to Search?" id="league">
         <option value="1500">Great League (1500)</option>
         <option value="2500">Ultra League (2500)</option>
         <option value="5000">Master League</option>
       </select></td>
-      <td><input id="Calculate" type="button" value="Calculate" onclick="getFormData()" /></td>
+      <td><input id="Calculate" type="button" class="button" value="Calculate" onclick="getFormData()" /></td>
       </tr></table>
     </form>
     <div style="overflow-x:auto;">
-      <table data-table-theme=gray><div id= "box"></div></table>
+      <table data-table-theme=gray><div id= "box"><br/><br/><br/></div></table>
     </div>
+    <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
+    <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
+    <a style="color:#AED6F1" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
     
     <!-- Footer Code Below -->
     <div id="footer">
       <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
-        <tr><a href="https://routinehub.co/shortcut/1721">Try iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join our Discord</a> &#124; <a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a>
+        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a> 
         </tr>
         <br/>
-        <tr><a href="https://www.google.com/recaptcha/intro/v3.html">Protected by reCAPTCHA v3</a> &#124; ShortcutIV ©2019</tr>
+        <tr><a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</tr>
       </table>
     </div>
     <script>
@@ -313,564 +355,539 @@ visibility: hidden;
       
       // global array containing all available mon and base stats (a/d/s)
       var availableMon = [
-          {'label': 'Abomasnow #460', 'value': '178 158 207'},
-          {'label': 'Abra #63', 'value': '195 82 93'},
-          {'label': 'Absol #359', 'value': '246 120 163'},
-          {'label': 'Aerodactyl #142', 'value': '221 159 190'},
-          {'label': 'Aggron #306', 'value': '198 257 172'},
-          {'label': 'Aipom #190', 'value': '136 112 146'},
-          {'label': 'Alakazam #65', 'value': '271 167 146'},
-          {'label': 'Altaria #334', 'value': '141 201 181'},
-          {'label': 'Ambipom #424', 'value': '205 143 181'},
-          {'label': 'Ampharos #181', 'value': '211 169 207'},
-          {'label': 'Anorith #347', 'value': '176 100 128'},
-          {'label': 'Arbok #24', 'value': '167 153 155'},
-          {'label': 'Arcanine #59', 'value': '227 166 207'},
-          {'label': 'Arceus (Bug) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Dark) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Dragon) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Electric) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Fairy) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Fighting) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Fire) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Flying) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Ghost) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Grass) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Ground) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Ice) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Normal) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Poison) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Psychic) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Rock) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Steel) #493', 'value': '238 238 237'},
-          {'label': 'Arceus (Water) #493', 'value': '238 238 237'},
-          {'label': 'Ariados #168', 'value': '161 124 172'},
-          {'label': 'Armaldo #348', 'value': '222 174 181'},
-          {'label': 'Aron #304', 'value': '121 141 137'},
-          {'label': 'Articuno #144', 'value': '192 236 207'},
-          {'label': 'Azelf #482', 'value': '270 151 181'},
-          {'label': 'Azumarill #184', 'value': '112 152 225'},
-          {'label': 'Azurill #298', 'value': '36 71 137'},
-          {'label': 'Bagon #371', 'value': '134 93 128'},
-          {'label': 'Baltoy #343', 'value': '77 124 120'},
-          {'label': 'Banette #354', 'value': '218 126 162'},
-          {'label': 'Barboach #339', 'value': '93 82 137'},
-          {'label': 'Bastiodon #411', 'value': '94 286 155'},
-          {'label': 'Bayleef #153', 'value': '122 155 155'},
-          {'label': 'Beautifly #267', 'value': '189 98 155'},
-          {'label': 'Beedrill #15', 'value': '169 130 163'},
-          {'label': 'Beldum #374', 'value': '96 132 120'},
-          {'label': 'Bellossom #182', 'value': '169 186 181'},
-          {'label': 'Bellsprout #69', 'value': '139 61 137'},
-          {'label': 'Bibarel #400', 'value': '162 119 188'},
-          {'label': 'Bidoof #399', 'value': '80 73 153'},
-          {'label': 'Blastoise #9', 'value': '171 207 188'},
-          {'label': 'Blaziken #257', 'value': '240 141 190'},
-          {'label': 'Blissey #242', 'value': '129 169 496'},
-          {'label': 'Bonsly #438', 'value': '124 133 137'},
-          {'label': 'Breloom #286', 'value': '241 144 155'},
-          {'label': 'Bronzong #437', 'value': '161 213 167'},
-          {'label': 'Bronzor #436', 'value': '43 154 149'},
-          {'label': 'Budew #406', 'value': '91 109 120'},
-          {'label': 'Buizel #418', 'value': '132 67 146'},
-          {'label': 'Bulbasaur #1', 'value': '118 111 128'},
-          {'label': 'Buneary #427', 'value': '130 105 146'},
-          {'label': 'Burmy #412', 'value': '53 83 120'},
-          {'label': 'Butterfree #12', 'value': '167 137 155'},
-          {'label': 'Cacnea #331', 'value': '156 74 137'},
-          {'label': 'Cacturne #332', 'value': '221 115 172'},
-          {'label': 'Camerupt #323', 'value': '194 136 172'},
-          {'label': 'Carnivine #455', 'value': '187 136 179'},
-          {'label': 'Carvanha #318', 'value': '171 39 128'},
-          {'label': 'Cascoon #268', 'value': '60 77 137'},
-          {'label': 'Castform (Normal) #351', 'value': '139 139 172'},
-          {'label': 'Castform (Rainy) #351', 'value': '139 139 172'},
-          {'label': 'Castform (Snowy) #351', 'value': '139 139 172'},
-          {'label': 'Castform (Sunny) #351', 'value': '139 139 172'},
-          {'label': 'Caterpie #10', 'value': '55 55 128'},
-          {'label': 'Celebi #251', 'value': '210 210 225'},
-          {'label': 'Chansey #113', 'value': '60 128 487'},
-          {'label': 'Charizard #6', 'value': '223 173 186'},
-          {'label': 'Charmander #4', 'value': '116 93 118'},
-          {'label': 'Charmeleon #5', 'value': '158 126 151'},
-          {'label': 'Chatot #441', 'value': '183 91 183'},
-          {'label': 'Cherrim (Overcast) #421', 'value': '170 153 172'},
-          {'label': 'Cherrim (Sunny) #421', 'value': '170 153 172'},
-          {'label': 'Cherubi #420', 'value': '108 92 128'},
-          {'label': 'Chikorita #152', 'value': '92 122 128'},
-          {'label': 'Chimchar #390', 'value': '113 86 127'},
-          {'label': 'Chimecho #358', 'value': '175 170 181'},
-          {'label': 'Chinchou #170', 'value': '106 97 181'},
-          {'label': 'Chingling #433', 'value': '114 94 128'},
-          {'label': 'Clamperl #366', 'value': '133 135 111'},
-          {'label': 'Claydol #344', 'value': '140 229 155'},
-          {'label': 'Clefable #36', 'value': '178 162 216'},
-          {'label': 'Clefairy #35', 'value': '107 108 172'},
-          {'label': 'Cleffa #173', 'value': '75 79 137'},
-          {'label': 'Cloyster #91', 'value': '186 256 137'},
-          {'label': 'Combee #415', 'value': '59 83 102'},
-          {'label': 'Combusken #256', 'value': '163 115 155'},
-          {'label': 'Corphish #341', 'value': '141 99 125'},
-          {'label': 'Corsola #222', 'value': '118 156 146'},
-          {'label': 'Cradily #346', 'value': '152 194 200'},
-          {'label': 'Cranidos #408', 'value': '218 71 167'},
-          {'label': 'Crawdaunt #342', 'value': '224 142 160'},
-          {'label': 'Cresselia #488', 'value': '152 258 260'},
-          {'label': 'Croagunk #453', 'value': '116 76 134'},
-          {'label': 'Crobat #169', 'value': '194 178 198'},
-          {'label': 'Croconaw #159', 'value': '150 142 163'},
-          {'label': 'Cubone #104', 'value': '90 144 137'},
-          {'label': 'Cyndaquil #155', 'value': '116 93 118'},
-          {'label': 'Darkrai #491', 'value': '285 198 172'},
-          {'label': 'Delcatty #301', 'value': '132 127 172'},
-          {'label': 'Delibird #225', 'value': '128 90 128'},
-          {'label': 'Deoxys (Attack) #386', 'value': '414 46 137'},
-          {'label': 'Deoxys (Defense) #386', 'value': '144 330 137'},
-          {'label': 'Deoxys (Normal) #386', 'value': '345 115 137'},
-          {'label': 'Deoxys (Speed) #386', 'value': '230 218 137'},
-          {'label': 'Dewgong #87', 'value': '139 177 207'},
-          {'label': 'Dialga #483', 'value': '275 211 205'},
-          {'label': 'Diglett (Alola) #50', 'value': '109 82 67'},
-          {'label': 'Diglett (Normal) #50', 'value': '109 78 67'},
-          {'label': 'Ditto #132', 'value': '91 91 134'},
-          {'label': 'Dodrio #85', 'value': '218 140 155'},
-          {'label': 'Doduo #84', 'value': '158 83 111'},
-          {'label': 'Donphan #232', 'value': '214 185 207'},
-          {'label': 'Dragonair #148', 'value': '163 135 156'},
-          {'label': 'Dragonite #149', 'value': '263 198 209'},
-          {'label': 'Drapion #452', 'value': '180 202 172'},
-          {'label': 'Dratini #147', 'value': '119 91 121'},
-          {'label': 'Drifblim #426', 'value': '180 102 312'},
-          {'label': 'Drifloon #425', 'value': '117 80 207'},
-          {'label': 'Drowzee #96', 'value': '89 136 155'},
-          {'label': 'Dugtrio (Alola) #51', 'value': '201 145 111'},
-          {'label': 'Dugtrio (Normal) #51', 'value': '167 134 111'},
-          {'label': 'Dunsparce #206', 'value': '131 128 225'},
-          {'label': 'Dusclops #356', 'value': '124 234 120'},
-          {'label': 'Dusknoir #477', 'value': '180 254 128'},
-          {'label': 'Duskull #355', 'value': '70 162 85'},
-          {'label': 'Dustox #269', 'value': '98 162 155'},
-          {'label': 'Eevee #133', 'value': '104 114 146'},
-          {'label': 'Ekans #23', 'value': '110 97 111'},
-          {'label': 'Electabuzz #125', 'value': '198 158 163'},
-          {'label': 'Electivire #466', 'value': '249 163 181'},
-          {'label': 'Electrike #309', 'value': '123 78 120'},
-          {'label': 'Electrode #101', 'value': '173 173 155'},
-          {'label': 'Elekid #239', 'value': '135 101 128'},
-          {'label': 'Empoleon #395', 'value': '210 186 197'},
-          {'label': 'Entei #244', 'value': '235 171 251'},
-          {'label': 'Espeon #196', 'value': '261 175 163'},
-          {'label': 'Exeggcute #102', 'value': '107 125 155'},
-          {'label': 'Exeggutor (Alola) #103', 'value': '230 153 216'},
-          {'label': 'Exeggutor (Normal) #103', 'value': '233 149 216'},
-          {'label': 'Exploud #295', 'value': '179 137 232'},
-          {'label': 'Farfetch\'d #83', 'value': '124 115 141'},
-          {'label': 'Fearow #22', 'value': '182 133 163'},
-          {'label': 'Feebas #349', 'value': '29 85 85'},
-          {'label': 'Feraligatr #160', 'value': '205 188 198'},
-          {'label': 'Finneon #456', 'value': '96 116 135'},
-          {'label': 'Flaaffy #180', 'value': '145 109 172'},
-          {'label': 'Flareon #136', 'value': '246 179 163'},
-          {'label': 'Floatzel #419', 'value': '221 114 198'},
-          {'label': 'Flygon #330', 'value': '205 168 190'},
-          {'label': 'Forretress #205', 'value': '161 205 181'},
-          {'label': 'Froslass #478', 'value': '171 150 172'},
-          {'label': 'Furret #162', 'value': '148 125 198'},
-          {'label': 'Gabite #444', 'value': '172 125 169'},
-          {'label': 'Gallade #475', 'value': '237 195 169'},
-          {'label': 'Garchomp #445', 'value': '261 193 239'},
-          {'label': 'Gardevoir #282', 'value': '237 195 169'},
-          {'label': 'Gastly #92', 'value': '186 67 102'},
-          {'label': 'Gastrodon (East_sea) #423', 'value': '169 143 244'},
-          {'label': 'Gastrodon (West_sea) #423', 'value': '169 143 244'},
-          {'label': 'Gengar #94', 'value': '261 149 155'},
-          {'label': 'Geodude (Alola) #74', 'value': '132 132 120'},
-          {'label': 'Geodude (Normal) #74', 'value': '132 132 120'},
-          {'label': 'Gible #443', 'value': '124 84 151'},
-          {'label': 'Girafarig #203', 'value': '182 133 172'},
-          {'label': 'Giratina (Altered) #487', 'value': '187 225 284'},
-          {'label': 'Giratina (Origin) #487', 'value': '225 187 284'},
-          {'label': 'Glaceon #471', 'value': '238 205 163'},
-          {'label': 'Glalie #362', 'value': '162 162 190'},
-          {'label': 'Glameow #431', 'value': '109 82 135'},
-          {'label': 'Gligar #207', 'value': '143 184 163'},
-          {'label': 'Gliscor #472', 'value': '185 222 181'},
-          {'label': 'Gloom #44', 'value': '153 136 155'},
-          {'label': 'Golbat #42', 'value': '161 150 181'},
-          {'label': 'Goldeen #118', 'value': '123 110 128'},
-          {'label': 'Golduck #55', 'value': '191 162 190'},
-          {'label': 'Golem (Alola) #76', 'value': '211 198 190'},
-          {'label': 'Golem (Normal) #76', 'value': '211 198 190'},
-          {'label': 'Gorebyss #368', 'value': '211 179 146'},
-          {'label': 'Granbull #210', 'value': '212 131 207'},
-          {'label': 'Graveler (Alola) #75', 'value': '164 164 146'},
-          {'label': 'Graveler (Normal) #75', 'value': '164 164 146'},
-          {'label': 'Grimer (Alola) #88', 'value': '135 90 190'},
-          {'label': 'Grimer (Normal) #88', 'value': '135 90 190'},
-          {'label': 'Grotle #388', 'value': '157 143 181'},
-          {'label': 'Groudon #383', 'value': '270 228 205'},
-          {'label': 'Grovyle #253', 'value': '172 120 137'},
-          {'label': 'Growlithe #58', 'value': '136 93 146'},
-          {'label': 'Grumpig #326', 'value': '171 188 190'},
-          {'label': 'Gulpin #316', 'value': '80 99 172'},
-          {'label': 'Gyarados #130', 'value': '237 186 216'},
-          {'label': 'Happiny #440', 'value': '25 77 225'},
-          {'label': 'Hariyama #297', 'value': '209 114 302'},
-          {'label': 'Haunter #93', 'value': '223 107 128'},
-          {'label': 'Heatran #485', 'value': '251 213 209'},
-          {'label': 'Heracross #214', 'value': '234 179 190'},
-          {'label': 'Hippopotas #449', 'value': '124 118 169'},
-          {'label': 'Hippowdon #450', 'value': '201 191 239'},
-          {'label': 'Hitmonchan #107', 'value': '193 197 137'},
-          {'label': 'Hitmonlee #106', 'value': '224 181 137'},
-          {'label': 'Hitmontop #237', 'value': '173 207 137'},
-          {'label': 'Ho-Oh #250', 'value': '239 244 214'},
-          {'label': 'Honchkrow #430', 'value': '243 103 225'},
-          {'label': 'Hoothoot #163', 'value': '67 88 155'},
-          {'label': 'Hoppip #187', 'value': '67 94 111'},
-          {'label': 'Horsea #116', 'value': '129 103 102'},
-          {'label': 'Houndoom #229', 'value': '224 144 181'},
-          {'label': 'Houndour #228', 'value': '152 83 128'},
-          {'label': 'Huntail #367', 'value': '197 179 146'},
-          {'label': 'Hypno #97', 'value': '144 193 198'},
-          {'label': 'Igglybuff #174', 'value': '69 32 207'},
-          {'label': 'Illumise #314', 'value': '143 166 163'},
-          {'label': 'Infernape #392', 'value': '222 151 183'},
-          {'label': 'Ivysaur #2', 'value': '151 143 155'},
-          {'label': 'Jigglypuff #39', 'value': '80 41 251'},
-          {'label': 'Jirachi #385', 'value': '210 210 225'},
-          {'label': 'Jolteon #135', 'value': '232 182 163'},
-          {'label': 'Jumpluff #189', 'value': '118 183 181'},
-          {'label': 'Jynx #124', 'value': '223 151 163'},
-          {'label': 'Kabuto #140', 'value': '148 140 102'},
-          {'label': 'Kabutops #141', 'value': '220 186 155'},
-          {'label': 'Kadabra #64', 'value': '232 117 120'},
-          {'label': 'Kakuna #14', 'value': '46 75 128'},
-          {'label': 'Kangaskhan #115', 'value': '181 165 233'},
-          {'label': 'Kecleon #352', 'value': '161 189 155'},
-          {'label': 'Kingdra #230', 'value': '194 194 181'},
-          {'label': 'Kingler #99', 'value': '240 181 146'},
-          {'label': 'Kirlia #281', 'value': '117 90 116'},
-          {'label': 'Koffing #109', 'value': '119 141 120'},
-          {'label': 'Krabby #98', 'value': '181 124 102'},
-          {'label': 'Kricketot #401', 'value': '45 74 114'},
-          {'label': 'Kricketune #402', 'value': '160 100 184'},
-          {'label': 'Kyogre #382', 'value': '270 228 205'},
-          {'label': 'Lairon #305', 'value': '158 198 155'},
-          {'label': 'Lanturn #171', 'value': '146 137 268'},
-          {'label': 'Lapras #131', 'value': '165 174 277'},
-          {'label': 'Larvitar #246', 'value': '115 93 137'},
-          {'label': 'Latias #380', 'value': '228 246 190'},
-          {'label': 'Latios #381', 'value': '268 212 190'},
-          {'label': 'Leafeon #470', 'value': '216 219 163'},
-          {'label': 'Ledian #166', 'value': '107 179 146'},
-          {'label': 'Ledyba #165', 'value': '72 118 120'},
-          {'label': 'Lickilicky #463', 'value': '161 181 242'},
-          {'label': 'Lickitung #108', 'value': '108 137 207'},
-          {'label': 'Lileep #345', 'value': '105 150 165'},
-          {'label': 'Linoone #264', 'value': '142 128 186'},
-          {'label': 'Lombre #271', 'value': '112 119 155'},
-          {'label': 'Lopunny #428', 'value': '156 194 163'},
-          {'label': 'Lotad #270', 'value': '71 77 120'},
-          {'label': 'Loudred #294', 'value': '134 81 197'},
-          {'label': 'Lucario #448', 'value': '236 144 172'},
-          {'label': 'Ludicolo #272', 'value': '173 176 190'},
-          {'label': 'Lugia #249', 'value': '193 310 235'},
-          {'label': 'Lumineon #457', 'value': '142 170 170'},
-          {'label': 'Lunatone #337', 'value': '178 153 207'},
-          {'label': 'Luvdisc #370', 'value': '81 128 125'},
-          {'label': 'Luxio #404', 'value': '159 95 155'},
-          {'label': 'Luxray #405', 'value': '232 156 190'},
-          {'label': 'Machamp #68', 'value': '234 159 207'},
-          {'label': 'Machoke #67', 'value': '177 125 190'},
-          {'label': 'Machop #66', 'value': '137 82 172'},
-          {'label': 'Magby #240', 'value': '151 99 128'},
-          {'label': 'Magcargo #219', 'value': '139 191 137'},
-          {'label': 'Magikarp #129', 'value': '29 85 85'},
-          {'label': 'Magmar #126', 'value': '206 154 163'},
-          {'label': 'Magmortar #467', 'value': '247 172 181'},
-          {'label': 'Magnemite #81', 'value': '165 121 93'},
-          {'label': 'Magneton #82', 'value': '223 169 137'},
-          {'label': 'Magnezone #462', 'value': '238 205 172'},
-          {'label': 'Makuhita #296', 'value': '99 54 176'},
-          {'label': 'Mamoswine #473', 'value': '247 146 242'},
-          {'label': 'Manaphy #490', 'value': '210 210 225'},
-          {'label': 'Manectric #310', 'value': '215 127 172'},
-          {'label': 'Mankey #56', 'value': '148 82 120'},
-          {'label': 'Mantine #226', 'value': '148 226 163'},
-          {'label': 'Mantyke #458', 'value': '105 179 128'},
-          {'label': 'Mareep #179', 'value': '114 79 146'},
-          {'label': 'Marill #183', 'value': '37 93 172'},
-          {'label': 'Marowak (Alola) #105', 'value': '144 186 155'},
-          {'label': 'Marowak (Normal) #105', 'value': '144 186 155'},
-          {'label': 'Marshtomp #259', 'value': '156 133 172'},
-          {'label': 'Masquerain #284', 'value': '192 150 172'},
-          {'label': 'Mawile #303', 'value': '155 141 137'},
-          {'label': 'Medicham #308', 'value': '121 152 155'},
-          {'label': 'Meditite #307', 'value': '78 107 102'},
-          {'label': 'Meganium #154', 'value': '168 202 190'},
-          {'label': 'Melmetal #809', 'value': '231 213 264'},
-          {'label': 'Meltan #808', 'value': '112 113 130'},
-          {'label': 'Meowth (Alola) #52', 'value': '99 78 120'},
-          {'label': 'Meowth (Normal) #52', 'value': '92 78 120'},
-          {'label': 'Mesprit #481', 'value': '212 212 190'},
-          {'label': 'Metagross #376', 'value': '257 228 190'},
-          {'label': 'Metang #375', 'value': '138 176 155'},
-          {'label': 'Metapod #11', 'value': '45 80 137'},
-          {'label': 'Mew #151', 'value': '210 210 225'},
-          {'label': 'Mewtwo #150', 'value': '300 182 214'},
-          {'label': 'Mightyena #262', 'value': '171 132 172'},
-          {'label': 'Milotic #350', 'value': '192 219 216'},
-          {'label': 'Miltank #241', 'value': '157 193 216'},
-          {'label': 'Mime (Jr) #439', 'value': '125 142 85'},
-          {'label': 'Minun #312', 'value': '147 150 155'},
-          {'label': 'Misdreavus #200', 'value': '167 154 155'},
-          {'label': 'Mismagius #429', 'value': '211 187 155'},
-          {'label': 'Moltres #146', 'value': '251 181 207'},
-          {'label': 'Monferno #391', 'value': '158 105 162'},
-          {'label': 'Mothim #414', 'value': '185 98 172'},
-          {'label': 'Mr. Mime #122', 'value': '192 205 120'},
-          {'label': 'Mudkip #258', 'value': '126 93 137'},
-          {'label': 'Muk (Alola) #89', 'value': '190 172 233'},
-          {'label': 'Muk (Normal) #89', 'value': '190 172 233'},
-          {'label': 'Munchlax #446', 'value': '137 117 286'},
-          {'label': 'Murkrow #198', 'value': '175 87 155'},
-          {'label': 'Natu #177', 'value': '134 89 120'},
-          {'label': 'Nidoking #34', 'value': '204 156 191'},
-          {'label': 'Nidoqueen #31', 'value': '180 173 207'},
-          {'label': 'Nidoran♀ #29', 'value': '86 89 146'},
-          {'label': 'Nidoran♂ #32', 'value': '105 76 130'},
-          {'label': 'Nidorina #30', 'value': '117 120 172'},
-          {'label': 'Nidorino #33', 'value': '137 111 156'},
-          {'label': 'Nincada #290', 'value': '80 126 104'},
-          {'label': 'Ninetales (Alola) #38', 'value': '170 193 177'},
-          {'label': 'Ninetales (Normal) #38', 'value': '169 190 177'},
-          {'label': 'Ninjask #291', 'value': '196 112 156'},
-          {'label': 'Noctowl #164', 'value': '145 156 225'},
-          {'label': 'Nosepass #299', 'value': '82 215 102'},
-          {'label': 'Numel #322', 'value': '119 79 155'},
-          {'label': 'Nuzleaf #274', 'value': '134 78 172'},
-          {'label': 'Octillery #224', 'value': '197 141 181'},
-          {'label': 'Oddish #43', 'value': '131 112 128'},
-          {'label': 'Omanyte #138', 'value': '155 153 111'},
-          {'label': 'Omastar #139', 'value': '207 201 172'},
-          {'label': 'Onix #95', 'value': '85 232 111'},
-          {'label': 'Pachirisu #417', 'value': '94 172 155'},
-          {'label': 'Palkia #484', 'value': '280 215 189'},
-          {'label': 'Paras #46', 'value': '121 99 111'},
-          {'label': 'Parasect #47', 'value': '165 146 155'},
-          {'label': 'Pelipper #279', 'value': '175 174 155'},
-          {'label': 'Persian (Normal) #53', 'value': '150 136 163'},
-          {'label': 'Persian (Alola) #53', 'value': '158 136 163'},
-          {'label': 'Phanpy #231', 'value': '107 98 207'},
-          {'label': 'Phione #489', 'value': '162 162 190'},
-          {'label': 'Pichu #172', 'value': '77 53 85'},
-          {'label': 'Pidgeot #18', 'value': '166 154 195'},
-          {'label': 'Pidgeotto #17', 'value': '117 105 160'},
-          {'label': 'Pidgey #16', 'value': '85 73 120'},
-          {'label': 'Pikachu #25', 'value': '112 96 111'},
-          {'label': 'Piloswine #221', 'value': '181 138 225'},
-          {'label': 'Pineco #204', 'value': '108 122 137'},
-          {'label': 'Pinsir #127', 'value': '238 182 163'},
-          {'label': 'Piplup #393', 'value': '112 102 142'},
-          {'label': 'Plusle #311', 'value': '167 129 155'},
-          {'label': 'Politoed #186', 'value': '174 179 207'},
-          {'label': 'Poliwag #60', 'value': '101 82 120'},
-          {'label': 'Poliwhirl #61', 'value': '130 123 163'},
-          {'label': 'Poliwrath #62', 'value': '182 184 207'},
-          {'label': 'Ponyta #77', 'value': '170 127 137'},
-          {'label': 'Poochyena #261', 'value': '96 61 111'},
-          {'label': 'Porygon #137', 'value': '153 136 163'},
-          {'label': 'Porygon Z #474', 'value': '264 150 198'},
-          {'label': 'Porygon2 #233', 'value': '198 180 198'},
-          {'label': 'Primeape #57', 'value': '207 138 163'},
-          {'label': 'Prinplup #394', 'value': '150 139 162'},
-          {'label': 'Probopass #476', 'value': '135 275 155'},
-          {'label': 'Psyduck #54', 'value': '122 95 137'},
-          {'label': 'Pupitar #247', 'value': '155 133 172'},
-          {'label': 'Purugly #432', 'value': '172 133 174'},
-          {'label': 'Quagsire #195', 'value': '152 143 216'},
-          {'label': 'Quilava #156', 'value': '158 126 151'},
-          {'label': 'Qwilfish #211', 'value': '184 138 163'},
-          {'label': 'Raichu (Normal) #26', 'value': '193 151 155'},
-          {'label': 'Raichu (Alola) #26', 'value': '201 154 155'},
-          {'label': 'Raikou #243', 'value': '241 195 207'},
-          {'label': 'Ralts #280', 'value': '79 59 99'},
-          {'label': 'Rampardos #409', 'value': '295 109 219'},
-          {'label': 'Rapidash #78', 'value': '207 162 163'},
-          {'label': 'Raticate (Alola) #20', 'value': '135 154 181'},
-          {'label': 'Raticate (Normal) #20', 'value': '161 139 146'},
-          {'label': 'Rattata (Alola) #19', 'value': '103 70 102'},
-          {'label': 'Rattata (Normal) #19', 'value': '103 70 102'},
-          {'label': 'Rayquaza #384', 'value': '284 170 213'},
-          {'label': 'Regice #378', 'value': '179 309 190'},
-          {'label': 'Regigigas #486', 'value': '287 210 221'},
-          {'label': 'Regirock #377', 'value': '179 309 190'},
-          {'label': 'Registeel #379', 'value': '143 285 190'},
-          {'label': 'Relicanth #369', 'value': '162 203 225'},
-          {'label': 'Remoraid #223', 'value': '127 69 111'},
-          {'label': 'Rhydon #112', 'value': '222 171 233'},
-          {'label': 'Rhyhorn #111', 'value': '140 127 190'},
-          {'label': 'Rhyperior #464', 'value': '241 190 251'},
-          {'label': 'Riolu #447', 'value': '127 78 120'},
-          {'label': 'Roselia #315', 'value': '186 131 137'},
-          {'label': 'Roserade #407', 'value': '243 185 155'},
-          {'label': 'Rotom (Fan) #479', 'value': '204 219 137'},
-          {'label': 'Rotom (Frost) #479', 'value': '204 219 137'},
-          {'label': 'Rotom (Heat) #479', 'value': '204 219 137'},
-          {'label': 'Rotom (Mow) #479', 'value': '204 219 137'},
-          {'label': 'Rotom (Normal) #479', 'value': '185 159 137'},
-          {'label': 'Rotom (Wash) #479', 'value': '204 219 137'},
-          {'label': 'Sableye #302', 'value': '141 136 137'},
-          {'label': 'Salamence #373', 'value': '277 168 216'},
-          {'label': 'Sandshrew (Normal) #27', 'value': '126 120 137'},
-          {'label': 'Sandshrew (Alola) #27', 'value': '125 129 137'},
-          {'label': 'Sandslash (Normal) #28', 'value': '182 175 181'},
-          {'label': 'Sandslash (Alola) #28', 'value': '177 195 181'},
-          {'label': 'Sceptile #254', 'value': '223 169 172'},
-          {'label': 'Scizor #212', 'value': '236 181 172'},
-          {'label': 'Scyther #123', 'value': '218 170 172'},
-          {'label': 'Seadra #117', 'value': '187 156 146'},
-          {'label': 'Seaking #119', 'value': '175 147 190'},
-          {'label': 'Sealeo #364', 'value': '137 132 207'},
-          {'label': 'Seedot #273', 'value': '71 77 120'},
-          {'label': 'Seel #86', 'value': '85 121 163'},
-          {'label': 'Sentret #161', 'value': '79 73 111'},
-          {'label': 'Seviper #336', 'value': '196 118 177'},
-          {'label': 'Sharpedo #319', 'value': '243 83 172'},
-          {'label': 'Shaymin (Land) #492', 'value': '210 210 225'},
-          {'label': 'Shaymin (Sky) #492', 'value': '261 166 225'},
-          {'label': 'Shedinja #292', 'value': '153 73 1'},
-          {'label': 'Shelgon #372', 'value': '172 155 163'},
-          {'label': 'Shellder #90', 'value': '116 134 102'},
-          {'label': 'Shellos (East_sea) #422', 'value': '103 105 183'},
-          {'label': 'Shellos (West_sea) #422', 'value': '103 105 183'},
-          {'label': 'Shieldon #410', 'value': '76 195 102'},
-          {'label': 'Shiftry #275', 'value': '200 121 207'},
-          {'label': 'Shinx #403', 'value': '117 64 128'},
-          {'label': 'Shroomish #285', 'value': '74 110 155'},
-          {'label': 'Shuckle #213', 'value': '17 396 85'},
-          {'label': 'Shuppet #353', 'value': '138 65 127'},
-          {'label': 'Silcoon #266', 'value': '60 77 137'},
-          {'label': 'Skarmory #227', 'value': '148 226 163'},
-          {'label': 'Skiploom #188', 'value': '91 120 146'},
-          {'label': 'Skitty #300', 'value': '84 79 137'},
-          {'label': 'Skorupi #451', 'value': '93 151 120'},
-          {'label': 'Skuntank #435', 'value': '184 132 230'},
-          {'label': 'Slaking #289', 'value': '290 166 284'},
-          {'label': 'Slakoth #287', 'value': '104 92 155'},
-          {'label': 'Slowbro #80', 'value': '177 180 216'},
-          {'label': 'Slowking #199', 'value': '177 180 216'},
-          {'label': 'Slowpoke #79', 'value': '109 98 207'},
-          {'label': 'Slugma #218', 'value': '118 71 120'},
-          {'label': 'Smeargle #235', 'value': '40 83 146'},
-          {'label': 'Smoochum #238', 'value': '153 91 128'},
-          {'label': 'Sneasel #215', 'value': '189 146 146'},
-          {'label': 'Snorlax #143', 'value': '190 169 330'},
-          {'label': 'Snorunt #361', 'value': '95 95 137'},
-          {'label': 'Snover #459', 'value': '115 105 155'},
-          {'label': 'Snubbull #209', 'value': '137 85 155'},
-          {'label': 'Solrock #338', 'value': '178 153 207'},
-          {'label': 'Spearow #21', 'value': '112 60 120'},
-          {'label': 'Spheal #363', 'value': '95 90 172'},
-          {'label': 'Spinarak #167', 'value': '105 73 120'},
-          {'label': 'Spinda #327', 'value': '116 116 155'},
-          {'label': 'Spiritomb #442', 'value': '169 199 137'},
-          {'label': 'Spoink #325', 'value': '125 122 155'},
-          {'label': 'Squirtle #7', 'value': '94 121 127'},
-          {'label': 'Stantler #234', 'value': '192 131 177'},
-          {'label': 'Staraptor #398', 'value': '234 140 198'},
-          {'label': 'Staravia #397', 'value': '142 94 146'},
-          {'label': 'Starly #396', 'value': '101 58 120'},
-          {'label': 'Starmie #121', 'value': '210 184 155'},
-          {'label': 'Staryu #120', 'value': '137 112 102'},
-          {'label': 'Steelix #208', 'value': '148 272 181'},
-          {'label': 'Stunky #434', 'value': '121 90 160'},
-          {'label': 'Sudowoodo #185', 'value': '167 176 172'},
-          {'label': 'Suicune #245', 'value': '180 235 225'},
-          {'label': 'Sunflora #192', 'value': '185 135 181'},
-          {'label': 'Sunkern #191', 'value': '55 55 102'},
-          {'label': 'Surskit #283', 'value': '93 87 120'},
-          {'label': 'Swablu #333', 'value': '76 132 128'},
-          {'label': 'Swalot #317', 'value': '140 159 225'},
-          {'label': 'Swampert #260', 'value': '208 175 225'},
-          {'label': 'Swellow #277', 'value': '185 124 155'},
-          {'label': 'Swinub #220', 'value': '90 69 137'},
-          {'label': 'Taillow #276', 'value': '106 61 120'},
-          {'label': 'Tangela #114', 'value': '183 169 163'},
-          {'label': 'Tangrowth #465', 'value': '207 184 225'},
-          {'label': 'Tauros #128', 'value': '198 183 181'},
-          {'label': 'Teddiursa #216', 'value': '142 93 155'},
-          {'label': 'Tentacool #72', 'value': '97 149 120'},
-          {'label': 'Tentacruel #73', 'value': '166 209 190'},
-          {'label': 'Togekiss #468', 'value': '225 217 198'},
-          {'label': 'Togepi #175', 'value': '67 116 111'},
-          {'label': 'Togetic #176', 'value': '139 181 146'},
-          {'label': 'Torchic #255', 'value': '130 87 128'},
-          {'label': 'Torkoal #324', 'value': '151 203 172'},
-          {'label': 'Torterra #389', 'value': '202 188 216'},
-          {'label': 'Totodile #158', 'value': '117 109 137'},
-          {'label': 'Toxicroak #454', 'value': '211 133 195'},
-          {'label': 'Trapinch #328', 'value': '162 78 128'},
-          {'label': 'Treecko #252', 'value': '124 94 120'},
-          {'label': 'Tropius #357', 'value': '136 163 223'},
-          {'label': 'Turtwig #387', 'value': '119 110 146'},
-          {'label': 'Typhlosion #157', 'value': '223 173 186'},
-          {'label': 'Tyranitar #248', 'value': '251 207 225'},
-          {'label': 'Tyrogue #236', 'value': '64 64 111'},
-          {'label': 'Umbreon #197', 'value': '126 240 216'},
-          {'label': 'Unown #201', 'value': '136 91 134'},
-          {'label': 'Ursaring #217', 'value': '236 144 207'},
-          {'label': 'Uxie #480', 'value': '156 270 181'},
-          {'label': 'Vaporeon #134', 'value': '205 161 277'},
-          {'label': 'Venomoth #49', 'value': '179 143 172'},
-          {'label': 'Venonat #48', 'value': '100 100 155'},
-          {'label': 'Venusaur #3', 'value': '198 189 190'},
-          {'label': 'Vespiquen #416', 'value': '149 190 172'},
-          {'label': 'Vibrava #329', 'value': '134 99 137'},
-          {'label': 'Victreebel #71', 'value': '207 135 190'},
-          {'label': 'Vigoroth #288', 'value': '159 145 190'},
-          {'label': 'Vileplume #45', 'value': '202 167 181'},
-          {'label': 'Volbeat #313', 'value': '143 166 163'},
-          {'label': 'Voltorb #100', 'value': '109 111 120'},
-          {'label': 'Vulpix (Alola) #37', 'value': '96 109 116'},
-          {'label': 'Vulpix (Normal) #37', 'value': '96 109 116'},
-          {'label': 'Wailmer #320', 'value': '136 68 277'},
-          {'label': 'Wailord #321', 'value': '175 87 347'},
-          {'label': 'Walrein #365', 'value': '182 176 242'},
-          {'label': 'Wartortle #8', 'value': '126 155 153'},
-          {'label': 'Weavile #461', 'value': '243 171 172'},
-          {'label': 'Weedle #13', 'value': '63 50 120'},
-          {'label': 'Weepinbell #70', 'value': '172 92 163'},
-          {'label': 'Weezing #110', 'value': '174 197 163'},
-          {'label': 'Whiscash #340', 'value': '151 141 242'},
-          {'label': 'Whismur #293', 'value': '92 42 162'},
-          {'label': 'Wigglytuff #40', 'value': '156 90 295'},
-          {'label': 'Wingull #278', 'value': '106 61 120'},
-          {'label': 'Wobbuffet #202', 'value': '60 106 382'},
-          {'label': 'Wooper #194', 'value': '75 66 146'},
-          {'label': 'Wormadam (Plant) #413', 'value': '141 180 155'},
-          {'label': 'Wormadam (Sandy) #413', 'value': '141 180 155'},
-          {'label': 'Wormadam (Trash) #413', 'value': '127 175 155'},
-          {'label': 'Wurmple #265', 'value': '75 59 128'},
-          {'label': 'Wynaut #360', 'value': '41 86 216'},
-          {'label': 'Xatu #178', 'value': '192 146 163'},
-          {'label': 'Yanma #193', 'value': '154 94 163'},
-          {'label': 'Yanmega #469', 'value': '231 156 200'},
-          {'label': 'Zangoose #335', 'value': '222 124 177'},
-          {'label': 'Zapdos #145', 'value': '253 185 207'},
-          {'label': 'Zigzagoon #263', 'value': '58 80 116'},
-          {'label': 'Zubat #41', 'value': '83 73 120'}];
+        {'label': '1-Bulbasaur', 'value': '118,111,128,Ivysaur,Venusaur'},
+        {'label': '2-Ivysaur', 'value': '151,143,155,Venusaur'},
+        {'label': '3-Venusaur', 'value': '198,189,190,Ivysaur'},
+        {'label': '4-Charmander', 'value': '116,93,118,Charmeleon,Charizard'},
+        {'label': '5-Charmeleon', 'value': '158,126,151,Charizard'},
+        {'label': '6-Charizard', 'value': '223,173,186,Charmeleon'},
+        {'label': '7-Squirtle', 'value': '94,121,127,Wartortle,Blastoise'},
+        {'label': '8-Wartortle', 'value': '126,155,153,Blastoise'},
+        {'label': '9-Blastoise', 'value': '171,207,188,Wartortle'},
+        {'label': '10-Caterpie', 'value': '55,55,128,Metapod,Butterfree'},
+        {'label': '11-Metapod', 'value': '45,80,137,Butterfree'},
+        {'label': '12-Butterfree', 'value': '167,137,155,Metapod'},
+        {'label': '13-Weedle', 'value': '63,50,120,Kakuna,Beedrill'},
+        {'label': '14-Kakuna', 'value': '46,75,128,Beedrill'},
+        {'label': '15-Beedrill', 'value': '169,130,163,Kakuna'},
+        {'label': '16-Pidgey', 'value': '85,73,120,Pidgeotto,Pidgeot'},
+        {'label': '17-Pidgeotto', 'value': '117,105,160,Pidgeot'},
+        {'label': '18-Pidgeot', 'value': '166,154,195,Pidgeotto'},
+        {'label': '19-Rattata (Alolan)', 'value': '103,70,102,Raticate (Alolan)'},
+        {'label': '19-Rattata', 'value': '103,70,102,Raticate'},
+        {'label': '20-Raticate (Alolan)', 'value': '135,154,181'},
+        {'label': '20-Raticate', 'value': '161,139,146'},
+        {'label': '21-Spearow', 'value': '112,60,120,Fearow'},
+        {'label': '22-Fearow', 'value': '182,133,163'},
+        {'label': '23-Ekans', 'value': '110,97,111,Arbok'},
+        {'label': '24-Arbok', 'value': '167,153,155'},
+        {'label': '25-Pikachu', 'value': '112,96,111,Raichu'},
+        {'label': '26-Raichu (Alolan)', 'value': '201,154,155'},
+        {'label': '26-Raichu', 'value': '193,151,155'},
+        {'label': '27-Sandshrew (Alolan)', 'value': '125,129,137,Sandslash_(Alolan)'},
+        {'label': '27-Sandshrew', 'value': '126,120,137,Sandslash'},
+        {'label': '28-Sandslash (Alolan)', 'value': '177,195,181'},
+        {'label': '28-Sandslash', 'value': '182,175,181'},
+        {'label': '29-Nidoran (Female)', 'value': '86,89,146,Nidorina,Nidoqueen'},
+        {'label': '30-Nidorina', 'value': '117,120,172,Nidoqueen'},
+        {'label': '31-Nidoqueen', 'value': '180,173,207,Nidorina'},
+        {'label': '32-Nidoran (Male)', 'value': '105,76,130,Nidorino,Nidoking'},
+        {'label': '33-Nidorino', 'value': '137,111,156,Nidoking'},
+        {'label': '34-Nidoking', 'value': '204,156,191,Nidorino'},
+        {'label': '35-Clefairy', 'value': '107,108,172,Clefable'},
+        {'label': '36-Clefable', 'value': '178,162,216'},
+        {'label': '37-Vulpix (Alolan)', 'value': '96,109,116,Ninetales_(Alolan)'},
+        {'label': '37-Vulpix', 'value': '96,109,116,Ninetales'},
+        {'label': '38-Ninetales (Alolan)', 'value': '170,193,177'},
+        {'label': '38-Ninetales', 'value': '169,190,177'},
+        {'label': '39-Jigglypuff', 'value': '80,41,251,Wigglytuff'},
+        {'label': '40-Wigglytuff', 'value': '156,90,295'},
+        {'label': '41-Zubat', 'value': '83,73,120,Golbat,Crobat'},
+        {'label': '42-Golbat', 'value': '161,150,181,Crobat'},
+        {'label': '43-Oddish', 'value': '131,112,128,Gloom,Bellossom,Vileplume'},
+        {'label': '44-Gloom', 'value': '153,136,155,Bellossom,Vileplume'},
+        {'label': '45-Vileplume', 'value': '202,167,181,Gloom,Bellossom'},
+        {'label': '46-Paras', 'value': '121,99,111,Parasect'},
+        {'label': '47-Parasect', 'value': '165,146,155'},
+        {'label': '48-Venonat', 'value': '100,100,155,Venomoth'},
+        {'label': '49-Venomoth', 'value': '179,143,172'},
+        {'label': '50-Diglett (Alolan)', 'value': '108,81,67,Dugtrio_(Alolan)'},
+        {'label': '50-Diglett', 'value': '109,78,67,Dugtrio'},
+        {'label': '51-Dugtrio (Alolan)', 'value': '201,142,111'},
+        {'label': '51-Dugtrio', 'value': '167,136,111'},
+        {'label': '52-Meowth (Alolan)', 'value': '99,78,120,Persian_(Alolan)'},
+        {'label': '52-Meowth', 'value': '92,78,120,Persian'},
+        {'label': '53-Persian (Alolan)', 'value': '158,136,163'},
+        {'label': '53-Persian', 'value': '150,136,163'},
+        {'label': '54-Psyduck', 'value': '122,95,137,Golduck'},
+        {'label': '55-Golduck', 'value': '191,162,190'},
+        {'label': '56-Mankey', 'value': '148,82,120,Primeape'},
+        {'label': '57-Primeape', 'value': '207,138,163'},
+        {'label': '58-Growlithe', 'value': '136,93,146,Arcanine'},
+        {'label': '59-Arcanine', 'value': '227,166,207'},
+        {'label': '60-Poliwag', 'value': '101,82,120,Poliwhirl,Politoed,Poliwrath'},
+        {'label': '61-Poliwhirl', 'value': '130,123,163,Politoed,Poliwrath'},
+        {'label': '62-Poliwrath', 'value': '182,184,207,Poliwhirl,Politoed'},
+        {'label': '63-Abra', 'value': '195,82,93,Kadabra,Alakazam'},
+        {'label': '64-Kadabra', 'value': '232,117,120,Alakazam'},
+        {'label': '65-Alakazam', 'value': '271,167,146,Kadabra'},
+        {'label': '66-Machop', 'value': '137,82,172,Machoke,Machamp'},
+        {'label': '67-Machoke', 'value': '177,125,190,Machamp'},
+        {'label': '68-Machamp', 'value': '234,159,207,Machoke'},
+        {'label': '69-Bellsprout', 'value': '139,61,137,Weepinbell,Victreebel'},
+        {'label': '70-Weepinbell', 'value': '172,92,163,Victreebel'},
+        {'label': '71-Victreebel', 'value': '207,135,190,Weepinbell'},
+        {'label': '72-Tentacool', 'value': '97,149,120,Tentacruel'},
+        {'label': '73-Tentacruel', 'value': '166,209,190'},
+        {'label': '74-Geodude (Alolan)', 'value': '132,132,120,Graveler_(Alolan),Golem_(Alolan)'},
+        {'label': '74-Geodude', 'value': '132,132,120,Graveler,Golem'},
+        {'label': '75-Graveler (Alolan)', 'value': '164,164,146,Golem_(Alolan)'},
+        {'label': '75-Graveler', 'value': '164,164,146,Golem'},
+        {'label': '76-Golem (Alolan)', 'value': '211,198,190,Graveler_(Alolan)'},
+        {'label': '76-Golem', 'value': '211,198,190,Graveler'},
+        {'label': '77-Ponyta', 'value': '170,127,137,Rapidash'},
+        {'label': '78-Rapidash', 'value': '207,162,163'},
+        {'label': '79-Slowpoke', 'value': '109,98,207,Slowking,Slowbro'},
+        {'label': '80-Slowbro', 'value': '177,180,216,Slowking,Slowpoke'},
+        {'label': '81-Magnemite', 'value': '165,121,93,Magneton,Magnezone'},
+        {'label': '82-Magneton', 'value': '223,169,137,Magnezone,Magnemite'},
+        {'label': '83-Farfetchd', 'value': '124,115,141'},
+        {'label': '84-Doduo', 'value': '158,83,111,Dodrio'},
+        {'label': '85-Dodrio', 'value': '218,140,155'},
+        {'label': '86-Seel', 'value': '85,121,163,Dewgong'},
+        {'label': '87-Dewgong', 'value': '139,177,207'},
+        {'label': '88-Grimer (Alolan)', 'value': '135,90,190,Muk_(Alolan)'},
+        {'label': '88-Grimer', 'value': '135,90,190,Muk'},
+        {'label': '89-Muk (Alolan)', 'value': '190,172,233,Grimer (Alolan)'},
+        {'label': '89-Muk', 'value': '190,172,233,Grimer'},
+        {'label': '90-Shellder', 'value': '116,134,102,Cloyster'},
+        {'label': '91-Cloyster', 'value': '186,256,137'},
+        {'label': '92-Gastly', 'value': '186,67,102,Haunter,Gengar'},
+        {'label': '93-Haunter', 'value': '223,107,128,Gengar'},
+        {'label': '94-Gengar', 'value': '261,149,155,Haunter'},
+        {'label': '95-Onix', 'value': '85,232,111,Steelix'},
+        {'label': '96-Drowzee', 'value': '89,136,155,Hypno'},
+        {'label': '97-Hypno', 'value': '144,193,198'},
+        {'label': '98-Krabby', 'value': '181,124,102,Kingler'},
+        {'label': '99-Kingler', 'value': '240,181,146'},
+        {'label': '100-Voltorb', 'value': '109,111,120,Electrode'},
+        {'label': '101-Electrode', 'value': '173,173,155'},
+        {'label': '102-Exeggcute', 'value': '107,125,155,Exeggutor'},
+        {'label': '103-Exeggutor (Alolan)', 'value': '230,153,216'},
+        {'label': '103-Exeggutor', 'value': '233,149,216,Exeggcute'},
+        {'label': '104-Cubone', 'value': '90,144,137,Marowak'},
+        {'label': '105-Marowak (Alolan)', 'value': '144,186,155'},
+        {'label': '105-Marowak', 'value': '144,186,155'},
+        {'label': '106-Hitmonlee', 'value': '224,181,137,Hitmontop,Hitmonchan'},
+        {'label': '107-Hitmonchan', 'value': '193,197,137,Hitmontop,Hitmonlee'},
+        {'label': '108-Lickitung', 'value': '108,137,207,Lickilicky'},
+        {'label': '109-Koffing', 'value': '119,141,120,Weezing'},
+        {'label': '110-Weezing', 'value': '174,197,163'},
+        {'label': '111-Rhyhorn', 'value': '140,127,190,Rhydon,Rhyperior'},
+        {'label': '112-Rhydon', 'value': '222,171,233,Rhyperior,Rhyhorn'},
+        {'label': '113-Chansey', 'value': '60,128,487,Blissey'},
+        {'label': '114-Tangela', 'value': '183,169,163,Tangrowth'},
+        {'label': '115-Kangaskhan', 'value': '181,165,233'},
+        {'label': '116-Horsea', 'value': '129,103,102,Seadra,Kingdra'},
+        {'label': '117-Seadra', 'value': '187,156,146,Kingdra'},
+        {'label': '118-Goldeen', 'value': '123,110,128,Seaking'},
+        {'label': '119-Seaking', 'value': '175,147,190'},
+        {'label': '120-Staryu', 'value': '137,112,102,Starmie'},
+        {'label': '121-Starmie', 'value': '210,184,155'},
+        {'label': '122-Mr. Mime', 'value': '192,205,120'},
+        {'label': '123-Scyther', 'value': '218,170,172,Scizor'},
+        {'label': '124-Jynx', 'value': '223,151,163'},
+        {'label': '125-Electabuzz', 'value': '198,158,163,Electivire'},
+        {'label': '126-Magmar', 'value': '206,154,163,Magmortar'},
+        {'label': '127-Pinsir', 'value': '238,182,163'},
+        {'label': '128-Tauros', 'value': '198,183,181'},
+        {'label': '129-Magikarp', 'value': '29,85,85,Gyarados'},
+        {'label': '130-Gyarados', 'value': '237,186,216'},
+        {'label': '131-Lapras', 'value': '165,174,277'},
+        {'label': '132-Ditto', 'value': '91,91,134'},
+        {'label': '133-Eevee', 'value': '104,114,146,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+        {'label': '134-Vaporeon', 'value': '205,161,277,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon'},
+        {'label': '135-Jolteon', 'value': '232,182,163,Espeon,Flareon,Glaceon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+        {'label': '136-Flareon', 'value': '246,179,163,Espeon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+        {'label': '137-Porygon', 'value': '153,136,163,Porygon2,Porygon-z'},
+        {'label': '138-Omanyte', 'value': '155,153,111,Omastar'},
+        {'label': '139-Omastar', 'value': '207,201,172'},
+        {'label': '140-Kabuto', 'value': '148,140,102,Kabutops'},
+        {'label': '141-Kabutops', 'value': '220,186,155'},
+        {'label': '142-Aerodactyl', 'value': '221,159,190'},
+        {'label': '143-Snorlax', 'value': '190,169,330'},
+        {'label': '144-Articuno', 'value': '192,236,207'},
+        {'label': '145-Zapdos', 'value': '253,185,207'},
+        {'label': '146-Moltres', 'value': '251,181,207'},
+        {'label': '147-Dratini', 'value': '119,91,121,Dragonair,Dragonite'},
+        {'label': '148-Dragonair', 'value': '163,135,156,Dragonite'},
+        {'label': '149-Dragonite', 'value': '263,198,209,Dragonair'},
+        {'label': '150-Mewtwo', 'value': '300,182,214'},
+        {'label': '151-Mew', 'value': '210,210,225'},
+        {'label': '152-Chikorita', 'value': '92,122,128,Bayleef,Meganium'},
+        {'label': '153-Bayleef', 'value': '122,155,155,Meganium'},
+        {'label': '154-Meganium', 'value': '168,202,190,Bayleef'},
+        {'label': '155-Cyndaquil', 'value': '116,93,118,Quilava,Typhlosion'},
+        {'label': '156-Quilava', 'value': '158,126,151,Typhlosion'},
+        {'label': '157-Typhlosion', 'value': '223,173,186,Quilava'},
+        {'label': '158-Totodile', 'value': '117,109,137,Croconaw,Feraligatr'},
+        {'label': '159-Croconaw', 'value': '150,142,163,Feraligatr'},
+        {'label': '160-Feraligatr', 'value': '205,188,198,Croconaw'},
+        {'label': '161-Sentret', 'value': '79,73,111,Furret'},
+        {'label': '162-Furret', 'value': '148,125,198'},
+        {'label': '163-Hoothoot', 'value': '67,88,155,Noctowl'},
+        {'label': '164-Noctowl', 'value': '145,156,225'},
+        {'label': '165-Ledyba', 'value': '72,118,120,Ledian'},
+        {'label': '166-Ledian', 'value': '107,179,146'},
+        {'label': '167-Spinarak', 'value': '105,73,120,Ariados'},
+        {'label': '168-Ariados', 'value': '161,124,172'},
+        {'label': '169-Crobat', 'value': '194,178,198,Golbat'},
+        {'label': '170-Chinchou', 'value': '106,97,181,Lanturn'},
+        {'label': '171-Lanturn', 'value': '146,137,268'},
+        {'label': '172-Pichu', 'value': '77,53,85,Pikachu,Raichu'},
+        {'label': '173-Cleffa', 'value': '75,79,137,Clefairy,Clefable'},
+        {'label': '174-Igglybuff', 'value': '69,32,207,Jigglypuff,Wigglytuff'},
+        {'label': '175-Togepi', 'value': '67,116,111,Togetic,Togekiss'},
+        {'label': '176-Togetic', 'value': '139,181,146,Togekiss'},
+        {'label': '177-Natu', 'value': '134,89,120,Xatu'},
+        {'label': '178-Xatu', 'value': '192,146,163'},
+        {'label': '179-Mareep', 'value': '114,79,146,Flaaffy,Ampharos'},
+        {'label': '180-Flaaffy', 'value': '145,109,172,Ampharos'},
+        {'label': '181-Ampharos', 'value': '211,169,207,Flaaffy'},
+        {'label': '182-Bellossom', 'value': '169,186,181,Gloom,Vileplume'},
+        {'label': '183-Marill', 'value': '37,93,172,Azumarill'},
+        {'label': '184-Azumarill', 'value': '112,152,225'},
+        {'label': '185-Sudowoodo', 'value': '167,176,172'},
+        {'label': '186-Politoed', 'value': '174,179,207,Poliwhirl,Poliwrath'},
+        {'label': '187-Hoppip', 'value': '67,94,111,Skiploom,Jumpluff'},
+        {'label': '188-Skiploom', 'value': '91,120,146,Jumpluff'},
+        {'label': '189-Jumpluff', 'value': '118,183,181'},
+        {'label': '190-Aipom', 'value': '136,112,146,Ambipom'},
+        {'label': '191-Sunkern', 'value': '55,55,102,Sunflora'},
+        {'label': '192-Sunflora', 'value': '185,135,181'},
+        {'label': '193-Yanma', 'value': '154,94,163,Yanmega'},
+        {'label': '194-Wooper', 'value': '75,66,146,Quagsire'},
+        {'label': '195-Quagsire', 'value': '152,143,216'},
+        {'label': '196-Espeon', 'value': '261,175,163,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+        {'label': '197-Umbreon', 'value': '126,240,216,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Vaporeon'},
+        {'label': '198-Murkrow', 'value': '175,87,155,Honchkrow'},
+        {'label': '199-Slowking', 'value': '177,180,216,Slowpoke,Slowbro'},
+        {'label': '200-Misdreavus', 'value': '167,154,155,Mismagius'},
+        {'label': '201-Unown', 'value': '136,91,134'},
+        {'label': '202-Wobbuffet', 'value': '60,106,382'},
+        {'label': '203-Girafarig', 'value': '182,133,172'},
+        {'label': '204-Pineco', 'value': '108,122,137,Forretress'},
+        {'label': '205-Forretress', 'value': '161,205,181'},
+        {'label': '206-Dunsparce', 'value': '131,128,225'},
+        {'label': '207-Gligar', 'value': '143,184,163,Gliscor'},
+        {'label': '208-Steelix', 'value': '148,272,181'},
+        {'label': '209-Snubbull', 'value': '137,85,155,Granbull'},
+        {'label': '210-Granbull', 'value': '212,131,207'},
+        {'label': '211-Qwilfish', 'value': '184,138,163'},
+        {'label': '212-Scizor', 'value': '236,181,172,Scyther'},
+        {'label': '213-Shuckle', 'value': '17,396,85'},
+        {'label': '214-Heracross', 'value': '234,179,190'},
+        {'label': '215-Sneasel', 'value': '189,146,146,Weavile'},
+        {'label': '216-Teddiursa', 'value': '142,93,155,Ursaring'},
+        {'label': '217-Ursaring', 'value': '236,144,207'},
+        {'label': '218-Slugma', 'value': '118,71,120,Magcargo'},
+        {'label': '219-Magcargo', 'value': '139,191,137'},
+        {'label': '220-Swinub', 'value': '90,69,137,Piloswine,Mamoswine'},
+        {'label': '221-Piloswine', 'value': '181,138,225,Mamoswine'},
+        {'label': '222-Corsola', 'value': '118,156,146'},
+        {'label': '223-Remoraid', 'value': '127,69,111,Octillery'},
+        {'label': '224-Octillery', 'value': '197,141,181'},
+        {'label': '225-Delibird', 'value': '128,90,128'},
+        {'label': '226-Mantine', 'value': '148,226,163'},
+        {'label': '227-Skarmory', 'value': '148,226,163'},
+        {'label': '228-Houndour', 'value': '152,83,128,Houndoom'},
+        {'label': '229-Houndoom', 'value': '224,144,181'},
+        {'label': '230-Kingdra', 'value': '194,194,181,Seadra'},
+        {'label': '231-Phanpy', 'value': '107,98,207,Donphan'},
+        {'label': '232-Donphan', 'value': '214,185,207'},
+        {'label': '233-Porygon2', 'value': '198,180,198,Porygon-z,Porygon'},
+        {'label': '234-Stantler', 'value': '192,131,177'},
+        {'label': '235-Smeargle', 'value': '40,83,146'},
+        {'label': '236-Tyrogue', 'value': '64,64,111,Hitmontop,Hitmonlee,Hitmonchan'},
+        {'label': '237-Hitmontop', 'value': '173,207,137,Hitmonlee,Hitmonchan'},
+        {'label': '238-Smoochum', 'value': '153,91,128,Jynx'},
+        {'label': '239-Elekid', 'value': '135,101,128,Electabuzz,Electabuzz'},
+        {'label': '240-Magby', 'value': '151,99,128,Magmar,Magmortar'},
+        {'label': '241-Miltank', 'value': '157,193,216'},
+        {'label': '242-Blissey', 'value': '129,169,496,Chansey'},
+        {'label': '243-Raikou', 'value': '241,195,207'},
+        {'label': '244-Entei', 'value': '235,171,251'},
+        {'label': '245-Suicune', 'value': '180,235,225'},
+        {'label': '246-Larvitar', 'value': '115,93,137,Pupitar,Tyranitar'},
+        {'label': '247-Pupitar', 'value': '155,133,172,Tyranitar'},
+        {'label': '248-Tyranitar', 'value': '251,207,225,Pupitar'},
+        {'label': '249-Lugia', 'value': '193,310,235'},
+        {'label': '250-Ho-Oh', 'value': '239,244,214'},
+        {'label': '251-Celebi', 'value': '210,210,225'},
+        {'label': '252-Treecko', 'value': '124,94,120,Grovyle,Sceptile'},
+        {'label': '253-Grovyle', 'value': '172,120,137,Sceptile'},
+        {'label': '254-Sceptile', 'value': '223,169,172,Grovyle'},
+        {'label': '255-Torchic', 'value': '130,87,128,Combusken,Blaziken'},
+        {'label': '256-Combusken', 'value': '163,115,155,Blaziken'},
+        {'label': '257-Blaziken', 'value': '240,141,190,Combusken'},
+        {'label': '258-Mudkip', 'value': '126,93,137,Marshtomp,Swampert'},
+        {'label': '259-Marshtomp', 'value': '156,133,172,Swampert'},
+        {'label': '260-Swampert', 'value': '208,175,225,Marshtomp'},
+        {'label': '261-Poochyena', 'value': '96,61,111,Mightyena'},
+        {'label': '262-Mightyena', 'value': '171,132,172'},
+        {'label': '263-Zigzagoon', 'value': '58,80,116,Linoone'},
+        {'label': '264-Linoone', 'value': '142,128,186'},
+        {'label': '265-Wurmple', 'value': '75,59,128,Beautifly,Dustox'},
+        {'label': '266-Silcoon', 'value': '60,77,137,Beautifly,Dustox'},
+        {'label': '267-Beautifly', 'value': '189,98,155,Dustox'},
+        {'label': '268-Cascoon', 'value': '60,77,137,Dustox,Beautifly'},
+        {'label': '269-Dustox', 'value': '98,162,155,Beautifly'},
+        {'label': '270-Lotad', 'value': '71,77,120,Lombre,Ludicolo'},
+        {'label': '271-Lombre', 'value': '112,119,155,Ludicolo'},
+        {'label': '272-Ludicolo', 'value': '173,176,190,Lombre'},
+        {'label': '273-Seedot', 'value': '71,77,120,Nuzleaf,Shiftry'},
+        {'label': '274-Nuzleaf', 'value': '134,78,172,Shiftry'},
+        {'label': '275-Shiftry', 'value': '200,121,207,Nuzleaf'},
+        {'label': '276-Taillow', 'value': '106,61,120,Swellow'},
+        {'label': '277-Swellow', 'value': '185,124,155'},
+        {'label': '278-Wingull', 'value': '106,61,120,Pelipper'},
+        {'label': '279-Pelipper', 'value': '175,174,155'},
+        {'label': '280-Ralts', 'value': '79,59,99,Gardevoir,Gallade'},
+        {'label': '281-Kirlia', 'value': '117,90,116,Gardevoir,Gallade'},
+        {'label': '282-Gardevoir', 'value': '237,195,169,Gallade'},
+        {'label': '283-Surskit', 'value': '93,87,120,Masquerain'},
+        {'label': '284-Masquerain', 'value': '192,150,172'},
+        {'label': '285-Shroomish', 'value': '74,110,155,Breloom'},
+        {'label': '286-Breloom', 'value': '241,144,155'},
+        {'label': '287-Slakoth', 'value': '104,92,155,Vigoroth,Slaking'},
+        {'label': '288-Vigoroth', 'value': '159,145,190,Slaking'},
+        {'label': '289-Slaking', 'value': '290,166,284,Vigoroth'},
+        {'label': '290-Nincada', 'value': '80,126,104,Ninjask'},
+        {'label': '291-Ninjask', 'value': '199,112,156'},
+        {'label': '292-Shedinja', 'value': '153,73,1'},
+        {'label': '293-Whismur', 'value': '92,42,162,Loudred,Exploud'},
+        {'label': '294-Loudred', 'value': '134,81,197,Exploud'},
+        {'label': '295-Exploud', 'value': '179,137,232,Loudred'},
+        {'label': '296-Makuhita', 'value': '99,54,176,Hariyama'},
+        {'label': '297-Hariyama', 'value': '209,114,302'},
+        {'label': '298-Azurill', 'value': '36,71,137,Azumarill'},
+        {'label': '299-Nosepass', 'value': '82,215,102,Probopass'},
+        {'label': '300-Skitty', 'value': '84,79,137,Delcatty'},
+        {'label': '301-Delcatty', 'value': '132,127,172'},
+        {'label': '302-Sableye', 'value': '141,136,137'},
+        {'label': '303-Mawile', 'value': '155,141,137'},
+        {'label': '304-Aron', 'value': '121,141,137,Lairon,Aggron'},
+        {'label': '305-Lairon', 'value': '158,198,155,Aggron'},
+        {'label': '306-Aggron', 'value': '198,257,172,Lairon'},
+        {'label': '307-Meditite', 'value': '78,107,102,Medicham'},
+        {'label': '308-Medicham', 'value': '121,152,155'},
+        {'label': '309-Electrike', 'value': '123,78,120,Manectric'},
+        {'label': '310-Manectric', 'value': '215,127,172'},
+        {'label': '311-Plusle', 'value': '167,129,155'},
+        {'label': '312-Minun', 'value': '147,150,155'},
+        {'label': '313-Volbeat', 'value': '143,166,163'},
+        {'label': '314-Illumise', 'value': '143,166,163'},
+        {'label': '315-Roselia', 'value': '186,131,137,Roserade'},
+        {'label': '316-Gulpin', 'value': '80,99,172,Swalot'},
+        {'label': '317-Swalot', 'value': '140,159,225'},
+        {'label': '318-Carvanha', 'value': '171,39,128,Sharpedo'},
+        {'label': '319-Sharpedo', 'value': '243,83,172'},
+        {'label': '320-Wailmer', 'value': '136,68,277,Wailord'},
+        {'label': '321-Wailord', 'value': '175,87,347'},
+        {'label': '322-Numel', 'value': '119,79,155,Camerupt'},
+        {'label': '323-Camerupt', 'value': '194,136,172'},
+        {'label': '324-Torkoal', 'value': '151,203,172'},
+        {'label': '325-Spoink', 'value': '125,122,155,Grumpig'},
+        {'label': '326-Grumpig', 'value': '171,188,190'},
+        {'label': '327-Spinda', 'value': '116,116,155'},
+        {'label': '328-Trapinch', 'value': '162,78,128,Vibrava,Flygon'},
+        {'label': '329-Vibrava', 'value': '134,99,137,Flygon'},
+        {'label': '330-Flygon', 'value': '205,168,190,Vibrava'},
+        {'label': '331-Cacnea', 'value': '156,74,137,Cacturne'},
+        {'label': '332-Cacturne', 'value': '221,115,172'},
+        {'label': '333-Swablu', 'value': '76,132,128,Altaria'},
+        {'label': '334-Altaria', 'value': '141,201,181'},
+        {'label': '335-Zangoose', 'value': '222,124,177'},
+        {'label': '336-Seviper', 'value': '196,118,177'},
+        {'label': '337-Lunatone', 'value': '178,153,207'},
+        {'label': '338-Solrock', 'value': '178,153,207'},
+        {'label': '339-Barboach', 'value': '93,82,137,Whiscash'},
+        {'label': '340-Whiscash', 'value': '151,141,242'},
+        {'label': '341-Corphish', 'value': '141,99,125,Crawdaunt'},
+        {'label': '342-Crawdaunt', 'value': '224,142,160'},
+        {'label': '343-Baltoy', 'value': '77,124,120,Claydol'},
+        {'label': '344-Claydol', 'value': '140,229,155'},
+        {'label': '345-Lileep', 'value': '105,150,165,Cradily'},
+        {'label': '346-Cradily', 'value': '152,194,200'},
+        {'label': '347-Anorith', 'value': '176,100,128,Armaldo'},
+        {'label': '348-Armaldo', 'value': '222,174,181'},
+        {'label': '349-Feebas', 'value': '29,85,85,Milotic'},
+        {'label': '350-Milotic', 'value': '192,219,216'},
+        {'label': '351-Castform', 'value': '139,139,172'},
+        {'label': '352-Kecleon', 'value': '161,189,155'},
+        {'label': '353-Shuppet', 'value': '138,65,127,Banette'},
+        {'label': '354-Banette', 'value': '218,126,162'},
+        {'label': '355-Duskull', 'value': '70,162,85,Dusclops,Dusknoir'},
+        {'label': '356-Dusclops', 'value': '124,234,120,Dusknoir'},
+        {'label': '357-Tropius', 'value': '136,163,223'},
+        {'label': '358-Chimecho', 'value': '175,170,181,Chingling'},
+        {'label': '359-Absol', 'value': '246,120,163'},
+        {'label': '360-Wynaut', 'value': '41,86,216,Wobbuffet'},
+        {'label': '361-Snorunt', 'value': '95,95,137,Glalie,Froslass'},
+        {'label': '362-Glalie', 'value': '162,162,190,Froslass'},
+        {'label': '363-Spheal', 'value': '95,90,172,Sealeo,Walrein'},
+        {'label': '364-Sealeo', 'value': '137,132,207,Walrein'},
+        {'label': '365-Walrein', 'value': '182,176,242,Sealeo'},
+        {'label': '366-Clamperl', 'value': '133,135,111,Huntail,Gorebyss'},
+        {'label': '367-Huntail', 'value': '197,179,146,Gorebyss'},
+        {'label': '368-Gorebyss', 'value': '211,179,146,Huntail'},
+        {'label': '369-Relicanth', 'value': '162,203,225'},
+        {'label': '370-Luvdisc', 'value': '81,128,125'},
+        {'label': '371-Bagon', 'value': '134,93,128,Shelgon,Salamence'},
+        {'label': '372-Shelgon', 'value': '172,155,163,Salamence'},
+        {'label': '373-Salamence', 'value': '277,168,216,Shelgon'},
+        {'label': '374-Beldum', 'value': '96,132,120,Metang,Metagross'},
+        {'label': '375-Metang', 'value': '138,176,155,Metagross'},
+        {'label': '376-Metagross', 'value': '257,228,190,Metang'},
+        {'label': '377-Regirock', 'value': '179,309,190'},
+        {'label': '378-Regice', 'value': '179,309,190'},
+        {'label': '379-Registeel', 'value': '143,285,190'},
+        {'label': '380-Latias', 'value': '228,246,190'},
+        {'label': '381-Latios', 'value': '268,212,190'},
+        {'label': '382-Kyogre', 'value': '270,228,205'},
+        {'label': '383-Groudon', 'value': '270,228,205'},
+        {'label': '384-Rayquaza', 'value': '284,170,213'},
+        {'label': '385-Jirachi', 'value': '210,210,225'},
+        {'label': '386-Deoxys (Attack)', 'value': '414,46,137'},
+        {'label': '386-Deoxys (Defense)', 'value': '144,330,137'},
+        {'label': '386-Deoxys (Normal)', 'value': '345,115,137'},
+        {'label': '386-Deoxys (Speed)', 'value': '230,218,137'},
+        {'label': '387-Turtwig', 'value': '119,110,146,Grotle,Torterra'},
+        {'label': '388-Grotle', 'value': '157,143,181,Torterra'},
+        {'label': '389-Torterra', 'value': '202,188,216,Grotle'},
+        {'label': '390-Chimchar', 'value': '113,86,127,Monferno,Infernape'},
+        {'label': '391-Monferno', 'value': '158,105,162,Infernape'},
+        {'label': '392-Infernape', 'value': '222,151,183,Monferno'},
+        {'label': '393-Piplup', 'value': '112,102,142,Prinplup,Empoleon'},
+        {'label': '394-Prinplup', 'value': '150,139,162,Empoleon'},
+        {'label': '395-Empoleon', 'value': '210,186,197,Prinplup'},
+        {'label': '396-Starly', 'value': '101,58,120,Staravia,Staraptor'},
+        {'label': '397-Staravia', 'value': '142,94,146,Staraptor'},
+        {'label': '398-Staraptor', 'value': '234,140,198,Staravia'},
+        {'label': '399-Bidoof', 'value': '80,73,153,Bibarel'},
+        {'label': '400-Bibarel', 'value': '162,119,188'},
+        {'label': '401-Kricketot', 'value': '45,74,114,Kricketune'},
+        {'label': '402-Kricketune', 'value': '160,100,184'},
+        {'label': '403-Shinx', 'value': '117,64,128,Luxio,Luxray'},
+        {'label': '404-Luxio', 'value': '159,95,155,Luxray'},
+        {'label': '405-Luxray', 'value': '232,156,190,Luxio'},
+        {'label': '406-Budew', 'value': '91,109,120,Roselia,Roserade'},
+        {'label': '407-Roserade', 'value': '243,185,155'},
+        {'label': '408-Cranidos', 'value': '218,71,167,Rampardos'},
+        {'label': '409-Rampardos', 'value': '295,109,219'},
+        {'label': '410-Shieldon', 'value': '76,195,102,Bastiodon'},
+        {'label': '411-Bastiodon', 'value': '94,286,155'},
+        {'label': '412-Burmy', 'value': '53,83,120,Wormadam_(Plant),Wormadam_(Sandy),Wormadam_(Trash),Mothim'},
+        {'label': '413-Wormadam (Plant)', 'value': '141,180,155,Wormadam_(Sandy),Wormadam_(Trash),Mothim'},
+        {'label': '413-Wormadam (Sandy)', 'value': '141,180,155,Wormadam_(Plant),Wormadam_(Trash),Mothim'},
+        {'label': '413-Wormadam (Trash)', 'value': '127,175,155,Wormadam_(Plant),Wormadam_(Sandy),Mothim'},
+        {'label': '414-Mothim', 'value': '185,98,172,Wormadam_(Plant),Wormadam_(Sandy),Wormadam_(Trash)'},
+        {'label': '415-Combee', 'value': '59,83,102,Vespiquen'},
+        {'label': '416-Vespiquen', 'value': '149,190,172'},
+        {'label': '417-Pachirisu', 'value': '94,172,155'},
+        {'label': '418-Buizel', 'value': '132,67,146,Floatzel'},
+        {'label': '419-Floatzel', 'value': '221,114,198'},
+        {'label': '420-Cherubi', 'value': '108,92,128,Cherrim'},
+        {'label': '421-Cherrim', 'value': '170,153,172'},
+        {'label': '422-Shellos', 'value': '103,105,183,Gastrodon'},
+        {'label': '423-Gastrodon', 'value': '169,143,244'},
+        {'label': '424-Ambipom', 'value': '205,143,181'},
+        {'label': '425-Drifloon', 'value': '117,80,207,Drifblim'},
+        {'label': '426-Drifblim', 'value': '180,102,312'},
+        {'label': '427-Buneary', 'value': '130,105,146,Lopunny'},
+        {'label': '428-Lopunny', 'value': '156,194,163'},
+        {'label': '429-Mismagius', 'value': '211,187,155,Misdreavus'},
+        {'label': '430-Honchkrow', 'value': '243,103,225,Murkrow'},
+        {'label': '431-Glameow', 'value': '109,82,135,Purugly'},
+        {'label': '432-Purugly', 'value': '172,133,174'},
+        {'label': '433-Chingling', 'value': '114,94,128,Chimecho'},
+        {'label': '434-Stunky', 'value': '121,90,160,Skuntank'},
+        {'label': '435-Skuntank', 'value': '184,132,230'},
+        {'label': '436-Bronzor', 'value': '43,154,149,Bronzong'},
+        {'label': '437-Bronzong', 'value': '161,213,167'},
+        {'label': '438-Bonsly', 'value': '124,133,137,Sudowoodo'},
+        {'label': '439-Mime Jr.', 'value': '125,142,85,Mr._Mime'},
+        {'label': '440-Happiny', 'value': '25,77,225,Chansey,Chansey'},
+        {'label': '441-Chatot', 'value': '183,91,183'},
+        {'label': '442-Spiritomb', 'value': '169,199,137'},
+        {'label': '443-Gible', 'value': '124,84,151,Gabite,Garchomp'},
+        {'label': '444-Gabite', 'value': '172,125,169,Garchomp'},
+        {'label': '445-Garchomp', 'value': '261,193,239'},
+        {'label': '446-Munchlax', 'value': '137,117,286,Snorlax'},
+        {'label': '447-Riolu', 'value': '127,78,120,Lucario'},
+        {'label': '448-Lucario', 'value': '236,144,172'},
+        {'label': '449-Hippopotas', 'value': '124,118,169,Hippowdon'},
+        {'label': '450-Hippowdon', 'value': '201,191,239'},
+        {'label': '451-Skorupi', 'value': '93,151,120,Drapion'},
+        {'label': '452-Drapion', 'value': '180,202,172'},
+        {'label': '453-Croagunk', 'value': '116,76,134,Toxicroak'},
+        {'label': '454-Toxicroak', 'value': '211,133,195'},
+        {'label': '455-Carnivine', 'value': '187,136,179'},
+        {'label': '456-Finneon', 'value': '96,116,135,Lumineon'},
+        {'label': '457-Lumineon', 'value': '142,170,170'},
+        {'label': '458-Mantyke', 'value': '105,179,128,Mantine'},
+        {'label': '459-Snover', 'value': '115,105,155,Abomasnow'},
+        {'label': '460-Abomasnow', 'value': '178,158,207'},
+        {'label': '461-Weavile', 'value': '243,171,172'},
+        {'label': '462-Magnezone', 'value': '238,205,172,Magneton,Magnemite'},
+        {'label': '463-Lickilicky', 'value': '161,181,242'},
+        {'label': '464-Rhyperior', 'value': '241,190,251,Rhyhorn,Rhydon'},
+        {'label': '465-Tangrowth', 'value': '207,184,225,Tangela'},
+        {'label': '466-Electivire', 'value': '249,163,181,Electabuzz'},
+        {'label': '467-Magmortar', 'value': '247,172,181,Magmortar'},
+        {'label': '468-Togekiss', 'value': '225,217,198,Togetic'},
+        {'label': '469-Yanmega', 'value': '231,156,200'},
+        {'label': '470-Leafeon', 'value': '216,219,163,Espeon,Flareon,Glaceon,Jolteon,Sylveon,Umbreon,Vaporeon'},
+        {'label': '471-Glaceon', 'value': '238,205,163,Espeon,Flareon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+        {'label': '472-Gliscor', 'value': '185,222,181,Gligar'},
+        {'label': '473-Mamoswine', 'value': '247,146,242,Piloswine'},
+        {'label': '474-Porygon-Z', 'value': '264,150,198,Porygon2,Porygon'},
+        {'label': '475-Gallade', 'value': '237,195,169,Gardevoir'},
+        {'label': '476-Probopass', 'value': '135,275,155'},
+        {'label': '477-Dusknoir', 'value': '180,254,128,Dusclops'},
+        {'label': '478-Froslass', 'value': '171,150,172,Glalie'},
+        {'label': '479-Rotom (Forms)', 'value': '204,219,137'},
+        {'label': '479-Rotom (Normal)', 'value': '185,156,137'},
+        {'label': '480-Uxie', 'value': '156,270,181'},
+        {'label': '481-Mesprit', 'value': '212,212,190'},
+        {'label': '482-Azelf', 'value': '270,151,181'},
+        {'label': '483-Dialga', 'value': '275,211,205'},
+        {'label': '484-Palkia', 'value': '280,215,189'},
+        {'label': '485-Heatran', 'value': '251,213,209'},
+        {'label': '486-Regigigas', 'value': '287,210,221'},
+        {'label': '487-Giratina (Altered)', 'value': '187,225,284'},
+        {'label': '487-Giratina (Origin)', 'value': '225,187,284'},
+        {'label': '488-Cresselia', 'value': '152,258,260'},
+        {'label': '489-Phione', 'value': '162,162,190'},
+        {'label': '490-Manaphy', 'value': '210,210,225'},
+        {'label': '491-Darkrai', 'value': '285,198,172'},
+        {'label': '492-Shaymin (Land)', 'value': '210,210,225'},
+        {'label': '492-Shaymin (Sky)', 'value': '261,166,225'},
+        {'label': '493-Arceus', 'value': '238,238,237'},
+        {'label': '808-Meltan', 'value': '118,99,130,Melmetal'},
+        {'label': '809-Melmetal', 'value': '226,190,264'},];
       $( function() {
         $( "#mon" ).autocomplete({
           source: availableMon,
           focus: function( event, ui ) {
             event.preventDefault();
             $("#mon").val(ui.item.label);
+            $('#basestats').val(ui.item.value);
           },
           select: function(event, ui) {
             event.preventDefault();
-            $("#mon").val(ui.item.value);
+            $("#mon").val(ui.item.label);
+            $('#basestats').val(ui.item.value);
           },
         });
       });
@@ -882,31 +899,33 @@ visibility: hidden;
         // stuff before ? or after # is not what we are after, so get rid of it
         url = url.split('?')[1]; // keep right of '?'
         url = url.split('#')[0]; // keep left of '#'
-        //console.log("Trimmed URL:"+url);
+        //console.log("URI: Trimmed URL:"+url);
 
         // split our query string into its component parts
         var params = url.split('&');
-        //console.log("Read params:"+JSON.stringify(params));
+        //console.log("URI: Read params:"+JSON.stringify(params));
 
         // set page paramters from URL
         for (var i=0; i<params.length; i++)
         {
           // Ex: split 'minIVs=0' on '=', [0] is left 'minIVs' [1] is right '0'
-          //console.log("Set '"+params[i].split('=')[0]+"' to '"+params[i].split('=')[1]+"'");
+          //console.log("URI: Set '"+params[i].split('=')[0]+"' to '"+params[i].split('=')[1]+"'");
           // Fix weird safari bug not removing %20 properly
           if (params[i].split('=')[1].includes("%20"))
           {
-            console.log("Browser likely Safari...found '%20' in '"+params[i]+"', removing...");
+            console.log("URI: Browser likely Safari...found '%20' in '"+params[i]+"', removing...");
             document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1].replace(/%20/g, " ");
           } else {
             // Otherwise URL decode is working, proceed as normal...
             document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
           }
         }
+        // Now that we have correct stats, let's pass them to build the table
         getFormData();
       }
 
-      function getFormData(){
+      function getFormData()
+      {
         
         // validate reCaptcha v3
         var tokenHolder;
@@ -944,8 +963,12 @@ visibility: hidden;
         //console.log("minIVs set to:"+minIVs);
         var league=document.getElementById('league').value;
         //console.log("league set to:"+league);
-        // basestats contains [attack/defense/stamina]
-        var basestats=document.getElementById('mon').value.split(" ", 3);
+        var pokemon=document.getElementById('mon').value;
+        if (pokemon.includes("-")) {pokemon = pokemon.split("-")[1];}
+        //console.log("pokemon set to:"+JSON.stringify(pokemon)+" from:'"+document.getElementById('mon').value+"'");
+        var basestats=document.getElementById('basestats').value;
+        //basestats = basestats.replace(/,/g, " "); //replace any commas with spaces
+        basestats = basestats.split(","); //split out array values by spaces
         //console.log("basestats set to:"+JSON.stringify(basestats)+" from:'"+document.getElementById('mon')+"'");
         var AttackIV=document.getElementById('AttackIV').value;
         //console.log("AttackIV set to:"+AttackIV);
@@ -960,12 +983,6 @@ visibility: hidden;
         var tp=document.getElementById('TopRanks').value;
         //console.log("TopRanks set to:"+tp); // how many IVs to display
         
-        // "Set" max stat variables to ensure shared URLs work
-        //maxHP = document.getElementById('maxHP').value;
-        //maxDef = document.getElementById('maxDef').value;
-        //maxAtk = document.getElementById('maxAtk').value;
-        //console.log("maxAtk set to:"+maxAtk+" maxDef set to:"+maxDef+" maxHP set to:"+maxHP);
-        
         // append inputs to URL for sharing
         var url = window.location.href;   
         if (url.indexOf('?') > -1){
@@ -973,113 +990,135 @@ visibility: hidden;
           url = url.split("?")[0]; // keep left of '?' (base URL)
         }
         // store paramters in URL for sharing these inputs
-        url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+document.getElementById('mon').value+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp);//+"&maxAtk="+maxAtk+"&maxDef="+maxDef+"&maxHP="+maxHP);
+        url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
         
-        // Ensure current paramters are in the URL
+        // Ensure current paramters are in the URL without screen refresh
         window.history.pushState(null, null, url);
 
         // Now call the actual search function with the User's Inputs
         var tpp = SearchPokeIVs(basestats[0], basestats[1], basestats[2], league, 4096, minIVs, minLvl, maxLvl);
         //console.log("TPP Calculated to be:"+JSON.stringify(tpp));
         
-        // Call function to build table results
-        buildResultsTable(basestats[0], basestats[1], basestats[2], AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl);
+        var evoHtml = "";
+        // Check if there are any additional evolutions available
+        if (basestats[3]) 
+        {
+          var extraEvos = parseFloat(basestats.length - 3);
+          evoHtml = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table align=center><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+          
+          // Build extra rows for each evolution available
+          for (var i=3; i < basestats.length; i++)
+          {
+            for (var j=0; j<availableMon.length; j++)
+            {
+              var searchMon = availableMon[j].label.replace(/ /g, '_');
+              if (searchMon.indexOf(basestats[i]) > 0) {
+                var poke = basestats[i];
+                var stats = availableMon[j].value.split(",");
+                var baseAtk = stats[0];
+                var baseDef = stats[1];
+                var baseSta = stats[2];
+
+                //console.log ("Found '"+poke+"' at "+j+", '"+availableMon[j].label+"' with basestats '"+baseAtk+","+baseDef+","+baseSta+"', calling SPIV...");
+                // Now call the actual search function with the User's Inputs
+                var evoTpp = SearchPokeIVs(baseAtk, baseDef, baseSta, league, 4096, minIVs, minLvl, maxLvl);
+                
+                // break ties for shown rows
+                for (var k=0; (k < tp) && (tpp[k * 5 + 0]) ; k++)
+                {
+                  evoTpp = tieBreakByCP(evoTpp, k, parseFloat(k+1), parseFloat(evoTpp[k * 5 + 0]), parseFloat(evoTpp[k * 5 + 1]), parseFloat(evoTpp[k * 5 + 2]), parseFloat(evoTpp[k * 5 + 3]), parseFloat(evoTpp[k * 5 + 4]), parseFloat(evoTpp[(k+1) * 5 + 0]), parseFloat(evoTpp[(k+1) * 5 + 1]), parseFloat(evoTpp[(k+1) * 5 + 2]), parseFloat(evoTpp[(k+1) * 5 + 3]), parseFloat(evoTpp[(k+1) * 5 + 4]), baseAtk, baseDef, baseSta);
+                }
+
+                // calcualte ideal PvP rank w/IVs + base stats * cpm[cpm offset from highest smm result]
+                var glA = (parseFloat(evoTpp[0 * 5 + 1])+parseFloat(baseAtk))*cpm[evoTpp[0 * 5 + 4]];
+                var glD = (parseFloat(evoTpp[0 * 5 + 2])+parseFloat(baseDef))*cpm[evoTpp[0 * 5 + 4]];
+                var glS = (parseFloat(evoTpp[0 * 5 + 3])+parseFloat(baseSta))*cpm[evoTpp[0 * 5 + 4]];
+                var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
+
+                //console.log("Calling OUR with poke="+poke);
+                evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst);
+              }
+            }
+          }
+          evoHtml += "</table></p>";
+        }
+                
+        // Read all rows in tpp (until end of the array) to compute max Stats
+        var rows = 0;
+        for (var i = 0; tpp[i * 5 + 0]; i++)
+        {
+          // Ensure we have the right maxStats
+          var CPM = cpm[tpp[i * 5 + 4]];
+          var tempAtk = ((parseFloat(tpp[i * 5 + 1])+parseFloat(basestats[0]))*CPM).toFixed(1);
+          var tempDef = ((parseFloat(tpp[i * 5 + 2])+parseFloat(basestats[1]))*CPM).toFixed(1);
+          var tempSta = Math.floor(parseFloat(tpp[i * 5 + 3])+parseFloat(basestats[2])*CPM);
+          
+          if (Number(tempAtk) > Number(maxAtk)) {
+            //console.log("tempAtk:"+tempAtk+" > "+maxAtk+":maxAtk, updated!");
+            maxAtk = tempAtk;
+          }
+          if (Number(tempDef) > Number(maxDef)) {
+            //console.log("tempDef:"+tempDef+" > "+maxDef+":maxDef, updated!");
+            maxDef = tempDef;
+          }
+          if (Number(tempSta) > Number(maxHP)) {
+            //console.log("tempSta:"+tempSta+" > "+maxHP+":maxHP, updated!");
+            maxHP = tempSta;
+          }
+          // track how many rows we will print with "rows" and break ties for shown rows
+          if ((i < tp) && (tpp[i * 5 + 0]))
+          {
+            rows = i+1; // fix off by 1 offset
+            tpp = tieBreakByCP(tpp, i, parseFloat(i+1), parseFloat(tpp[i * 5 + 0]), parseFloat(tpp[i * 5 + 1]), parseFloat(tpp[i * 5 + 2]), parseFloat(tpp[i * 5 + 3]), parseFloat(tpp[i * 5 + 4]), parseFloat(tpp[(i+1) * 5 + 0]), parseFloat(tpp[(i+1) * 5 + 1]), parseFloat(tpp[(i+1) * 5 + 2]), parseFloat(tpp[(i+1) * 5 + 3]), parseFloat(tpp[(i+1) * 5 + 4]), basestats[0], basestats[1], basestats[2]);
+          }
+        }
+        
+        // Output header for Table now that we have updated all Max Stats
+        var html = "<p>Your Top "+rows+" PvP "+pokemon+":<br><i>max Atk("+maxAtk+"), Def("+maxDef+"), HP("+maxHP+")</i></p>";
+        
+        // calcualte ideal PvP rank using attack + base stat attack * cpm
+        var i = tpp[0 * 5 + 4]; // calculate cpm offset from highest smm result
+        var glA = (parseFloat(tpp[0 * 5 + 1])+parseFloat(basestats[0]))*cpm[i];
+        var glD = (parseFloat(tpp[0 * 5 + 2])+parseFloat(basestats[1]))*cpm[i];
+        var glS = (parseFloat(tpp[0 * 5 + 3])+parseFloat(basestats[2]))*cpm[i];
+        var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
+                
+        // Call function to build first row of table
+        //console.log("Calling OUR with poke="+false);
+        html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst);
+        
+        // Build the main data table to show top #tp rows
+        html += buildTableRows(tpp, basestats[0], basestats[1], basestats[2], glst, tp);
+                
+        // now that table is finished building, output to webpage
+        document.getElementById("box").innerHTML = evoHtml + html;
         return;
       }
       
-      function tieBreakByCP(tpp, rows, nextRow, curSMM, curAtk, curDef, curStm, curLvl, nexSMM, nexAtk, nexDef, nexStm, nexLvl, bsa, bsd, bss)
+      function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct)
       {
-        // Does the nextSMM even exist? && are they identical?
-        if ((nexSMM > 0) && (curSMM == nexSMM))
-        {
-          //console.log ("Found a tie (row):"+rows+" curSMM:"+curSMM+"==nexSMM"+nexSMM);
-          //console.log("b4--"+rows+": "+curSMM+"-"+curAtk+"-"+curDef+"-"+curStm+"-"+curLvl);
-          //console.log("b4--"+nextRow+": "+nexSMM+"-"+nexAtk+"-"+nexDef+"-"+nexStm+"-"+nexLvl);
-          var tempA = curAtk+parseFloat(bsa);
-          var tempD = curDef+parseFloat(bsd);
-          var tempS = curStm+parseFloat(bss);
-          var tempCPM = parseFloat(cpm[curLvl]);
-          var cp0 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
-          //console.log("Calculated cp0:"+cp0+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
-            
-          var tempA = parseFloat(nexAtk+parseFloat(bsa));
-          var tempD = parseFloat(nexDef+parseFloat(bsd));
-          var tempS = parseFloat(nexStm+parseFloat(bss));
-          var tempCPM = parseFloat(cpm[nexLvl]);
-          var cp1 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
-          //console.log("Calculated cp1:"+cp1+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
-            
-          //console.log("Comparing cp0:"+cp0+" to cp1:"+cp1);
-          // need to swap these two so the higher cp gets ranked higher!
-          if (cp0 < cp1)
-          {
-            //console.log("Swapping cp0:"+cp0+"at row:"+rows+" with cp1:"+cp1+"at row:"+nextRow);
-            tpp[rows * 5 + 0] = nexSMM;
-            tpp[rows * 5 + 1] = nexAtk;
-            tpp[rows * 5 + 2] = nexDef;
-            tpp[rows * 5 + 3] = nexStm;
-            tpp[rows * 5 + 4] = nexLvl;
-            tpp[nextRow * 5 + 0] = curSMM;
-            tpp[nextRow * 5 + 1] = curAtk;
-            tpp[nextRow * 5 + 2] = curDef;
-            tpp[nextRow * 5 + 3] = curStm;
-            tpp[nextRow * 5 + 4] = curLvl;
-              
-            //console.log("after--"+rows+": "+tpp[rows * 5 + 0]+"-"+tpp[rows * 5 + 1]+"-"+tpp[rows * 5 + 2]+"-"+tpp[rows * 5 + 3]+"-"+tpp[rows * 5 + 4]);
-            //console.log("after--"+nextRow+": "+tpp[nextRow * 5 + 0]+"-"+tpp[nextRow * 5 + 1]+"-"+tpp[nextRow * 5 + 2]+"-"+tpp[nextRow * 5 + 3]+"-"+tpp[nextRow * 5 + 4]);
-          }
-        }
-        return tpp;
-      }
-      
-      function buildResultsTable(bsa, bsd, bss, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl)
-      {
-        // Determine how many rows we are going to print for header line
-        for (var rows = 0; ((rows < tp) && (tpp[rows * 5 + 0])); rows++)
-        {
-          // Ensure we have the right maxStats
-          if (((parseFloat(tpp[rows * 5 + 1])+parseFloat(bsa))*cpm[rows]) > maxAtk) {
-            maxAtk = ((parseFloat(tpp[rows * 5 + 1])+parseFloat(bsa))*cpm[rows]).toFixed(1);
-            //console.log("maxAtk updated to:"+maxAtk);
-          }
-          if (((parseFloat(tpp[rows * 5 + 2])+parseFloat(bsd))*cpm[rows]) > maxDef) {
-            maxDef = ((parseFloat(tpp[rows * 5 + 2])+parseFloat(bsd))*cpm[rows]).toFixed(1);
-            //console.log("maxDef updated to:"+maxDef);
-          }
-          if (((parseFloat(tpp[rows * 5 + 3])+parseFloat(bss))*cpm[rows]) > maxHP) {
-            maxHP = Math.floor((parseFloat(tpp[rows * 5 + 3])+parseFloat(bss))*cpm[rows]);
-            //console.log("maxHP updated to:"+maxHP);
-          }
-          tpp = tieBreakByCP(tpp, rows, parseFloat(rows+1), parseFloat(tpp[rows * 5 + 0]), parseFloat(tpp[rows * 5 + 1]), parseFloat(tpp[rows * 5 + 2]), parseFloat(tpp[rows * 5 + 3]), parseFloat(tpp[rows * 5 + 4]), parseFloat(tpp[(rows+1) * 5 + 0]), parseFloat(tpp[(rows+1) * 5 + 1]), parseFloat(tpp[(rows+1) * 5 + 2]), parseFloat(tpp[(rows+1) * 5 + 3]), parseFloat(tpp[(rows+1) * 5 + 4]), bsa, bsd, bss);
-        }
-        var html = "<p align=center>Your Top "+rows+" PvP Ranks are below <br><i>For reference: maximum Atk("+maxAtk+"), Def("+maxDef+"), HP("+maxHP+")</i></p>";
-        var rank = tpp[0 * 5 + 0]; // pull best rank from highest smm result (in tpp)
-        var i = tpp[0 * 5 + 4]; // calculate cpm offset from highest smm result
-        
-        // calcualte ideal PvP rank using attack + base stat attack * cpm
-        var glA = (parseFloat(tpp[0 * 5 + 1])+parseFloat(bsa))*cpm[i];
-        var glD = (parseFloat(tpp[0 * 5 + 2])+parseFloat(bsd))*cpm[i];
-        var glS = (parseFloat(tpp[0 * 5 + 3])+parseFloat(bss))*cpm[i];
-        var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
-        var pcnt = glst;
-        var pfct = glst;
-        //console.log("BRT: pfct:"+pfct+" from uA:"+glA+" uD:"+glD+" uS:"+glS+", cpm["+i+"]:"+cpm[i]);
-
+        // convert from array back to individual stats
+        var bsa = bs[0];
+        var bsd = bs[1];
+        var bss = bs[2];
+        // pull best rank from highest smm result (in tpp)
+        var rank = tpp[0 * 5 + 0];
         // Compute combined (but not yet adjusted by cpm) stat totals
         var uA = parseFloat(aIV)+parseFloat(bsa);
         var uD = parseFloat(dIV)+parseFloat(bsd);
         var uS = parseFloat(sIV)+parseFloat(bss);
         //console.log("AIV:"+aIV+" DIV:"+dIV+" SIV:"+sIV);
         //console.log("bsa:"+bsa+" bsd:"+bsd+" bss:"+bss);
+        //console.log(">OUR: poke:"+pokemon+" recevied with pfct:"+pfct+", uA:"+uA+" uD:"+uD+" uS:"+uS+", calling GUSR...");
         
         // get user input smm to calculate rank
         var smm = getUserStatRank(bsa, bsd, bss, aIV, dIV, sIV, league, minIVs, minLvl, maxLvl);
         
         //console.log("Entering loop with user rank:"+rank+" != smm:"+smm);
-        for (i=0; i<4096; i++)
+        for (var i=0; i<4096; i++)
         {
           // store each rank until smm == rank
-          rank = tpp[i * 5 + 0];
+          var rank = tpp[i * 5 + 0];
           
           // watch out for duplicate smm ranks!
           if (rank == smm)
@@ -1094,7 +1133,6 @@ visibility: hidden;
             }
           }
         }
-        //console.log ("Retrieved level as:"+level);
         var cp = Math.max(10, Math.floor(uA * Math.sqrt(uD) * Math.sqrt(uS) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
         
         // Finish calculating "battle stat" totals by adjusting for CPM now that we have level
@@ -1103,15 +1141,25 @@ visibility: hidden;
         uS = uS*cpm[level];
         
         // Compute user stat perfection % compared to "perfect" PvP IVs (first slot in tpp)
-        glst = (uA * uD * Math.floor(uS)); // convert stamina to HP for stat product
+        var glst = (uA * uD * Math.floor(uS)); // convert stamina to HP for stat product
         //console.log("BRT: glst:"+glst+" from uA:"+uA+" uD:"+uD+" uS:"+uS+", cpm["+level+"]:"+cpm[level]);
-        pcnt = (100 * glst / pfct).toFixed(3);
+        var pcnt = (100 * glst / pfct).toFixed(3);
         
         // Convert half-level to actual level
         level = parseFloat(level / 2 + 1);
-        
+                
         // add table header rows to output
-        html += "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+        var html = "";
+        if (!pokemon) {html = "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
+        
+        // build table URL
+        var url = window.location.href;   
+        if (url.indexOf('?') > -1){
+          // if we already have parameters in the URL, clear them and replace with these inputs
+          url = url.split("?")[0]; // keep left of '?' (base URL)
+        }
+        // store paramters in URL for sharing these inputs
+        url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+aIV+"&DefenseIV="+dIV+"&StaminaIV="+sIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+bs);
         
         // control highlight of User Data row based on rank
         if (rank < 100) {
@@ -1121,40 +1169,49 @@ visibility: hidden;
         } else {
           html+="<tr bgcolor=\"#B22222\">"; // red for "rubbish"
         }
+        if (pokemon) {  // Add evolution's name with a link to that search to beginning of evolution table
+          html+="<td style=\"text-align: center; vertical-align: middle;\"><a href="+url+">"+pokemon+"</a></td>";} //Mon
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+level+"</td>"; //Level
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+cp+"</td>"; //Final CP
+        if (!pokemon) { // Skip printing user stats if we are printing evolutions
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
+        html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>";} //Sta IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uA.toFixed(1))+"</td>"; //GL Atk IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uD.toFixed(1))+"</td>"; //GL Def IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+Math.floor(uS)+"</td>"; //GL Sta IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glst.toFixed(0))+"</td>"; // Stat Product
         html+="</tr>";
-        
+                
+        return html;
+      }
+      
+      function buildTableRows(tpp, bsa, bsd, bss, pfct, tp)
+      { 
+        var html = "";
         // Output Top "tp" number of PvP IVs, by generating each row of table individually in loop
         for (i = 0; ((i < tp) && (tpp[i * 5 + 0])); i++)
         {
-          html+="<tr>";
-          rank = i+1; // fix "rank 0" results by offsetting by 1
+          html += "<tr>";
+          var rank = i+1; // fix "rank 0" results by offsetting by 1
           // Get stats and level from tpp array
-          aIV = tpp[i * 5 + 1];
-          dIV = tpp[i * 5 + 2];
-          sIV = tpp[i * 5 + 3];
-          level = tpp[i * 5 + 4]; // keep at half-level for CPM calculations
-          //console.log("Retrieved aIV:"+aIV+" dIV:"+dIV+" sIV:"+sIV+" level:"+level);
+          var aIV = tpp[i * 5 + 1];
+          var dIV = tpp[i * 5 + 2];
+          var sIV = tpp[i * 5 + 3];
+          var level = tpp[i * 5 + 4]; // keep at half-level for CPM calculations
           
           // use level to convert to "battle stats" at PvP level
-          glA = (parseFloat(aIV)+parseFloat(bsa))*cpm[level];
-          glD = (parseFloat(dIV)+parseFloat(bsd))*cpm[level];
-          glS = (parseFloat(sIV)+parseFloat(bss))*cpm[level];
-          cp = Math.max(10, Math.floor((parseFloat(aIV)+parseFloat(bsa)) * Math.sqrt(parseFloat(dIV)+parseFloat(bsd)) * Math.sqrt(parseFloat(sIV)+parseFloat(bss)) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
+          var glA = (parseFloat(aIV)+parseFloat(bsa))*cpm[level];
+          var glD = (parseFloat(dIV)+parseFloat(bsd))*cpm[level];
+          var glS = (parseFloat(sIV)+parseFloat(bss))*cpm[level];
+          var cp = Math.max(10, Math.floor((parseFloat(aIV)+parseFloat(bsa)) * Math.sqrt(parseFloat(dIV)+parseFloat(bsd)) * Math.sqrt(parseFloat(sIV)+parseFloat(bss)) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
+          //console.log("BTR: glA:"+glA+" glD:"+dIV+" glS:"+glS+" cp:"+cp);
           
           // compute battle stat total for % calc
-          glst = (glA * glD * Math.floor(glS));
-          pcnt = (100 * glst / pfct).toFixed(3);
+          var glst = (glA * glD * Math.floor(glS));
+          var pcnt = (100 * glst / pfct).toFixed(3);
           
           // adjust to remove half-level offsets for output
           level = level / 2 + 1; 
@@ -1174,9 +1231,7 @@ visibility: hidden;
           html+="</tr>";
         }
         html+="</table>"; // finish building the whole table
-        document.getElementById("box").innerHTML = html;
-
-        return;
+        return html;
       }
 
   function getUserStatRank(baseatk0, basedef0, basesta0, AttackIV, DefenseIV, StaminaIV, league, minIVs, minLvl, maxLvl)
@@ -1303,7 +1358,51 @@ visibility: hidden;
   //console.log(JSON.stringify(tpp));
   return tpp;
   } // end of SearchPokeIVs()
- 
+      
+      function tieBreakByCP(tpp, rows, nextRow, curSMM, curAtk, curDef, curStm, curLvl, nexSMM, nexAtk, nexDef, nexStm, nexLvl, bsa, bsd, bss)
+      {
+        // Does the nextSMM even exist? && are they identical?
+        if ((nexSMM > 0) && (curSMM == nexSMM))
+        {
+          //console.log ("Found a tie (row):"+rows+" curSMM:"+curSMM+"==nexSMM"+nexSMM);
+          //console.log("b4--"+rows+": "+curSMM+"-"+curAtk+"-"+curDef+"-"+curStm+"-"+curLvl);
+          //console.log("b4--"+nextRow+": "+nexSMM+"-"+nexAtk+"-"+nexDef+"-"+nexStm+"-"+nexLvl);
+          var tempA = curAtk+parseFloat(bsa);
+          var tempD = curDef+parseFloat(bsd);
+          var tempS = curStm+parseFloat(bss);
+          var tempCPM = parseFloat(cpm[curLvl]);
+          var cp0 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
+          //console.log("Calculated cp0:"+cp0+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
+            
+          var tempA = parseFloat(nexAtk+parseFloat(bsa));
+          var tempD = parseFloat(nexDef+parseFloat(bsd));
+          var tempS = parseFloat(nexStm+parseFloat(bss));
+          var tempCPM = parseFloat(cpm[nexLvl]);
+          var cp1 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
+          //console.log("Calculated cp1:"+cp1+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
+            
+          //console.log("Comparing cp0:"+cp0+" to cp1:"+cp1);
+          // need to swap these two so the higher cp gets ranked higher!
+          if (cp0 < cp1)
+          {
+            //console.log("Swapping cp0:"+cp0+"at row:"+rows+" with cp1:"+cp1+"at row:"+nextRow);
+            tpp[rows * 5 + 0] = nexSMM;
+            tpp[rows * 5 + 1] = nexAtk;
+            tpp[rows * 5 + 2] = nexDef;
+            tpp[rows * 5 + 3] = nexStm;
+            tpp[rows * 5 + 4] = nexLvl;
+            tpp[nextRow * 5 + 0] = curSMM;
+            tpp[nextRow * 5 + 1] = curAtk;
+            tpp[nextRow * 5 + 2] = curDef;
+            tpp[nextRow * 5 + 3] = curStm;
+            tpp[nextRow * 5 + 4] = curLvl;
+              
+            //console.log("after--"+rows+": "+tpp[rows * 5 + 0]+"-"+tpp[rows * 5 + 1]+"-"+tpp[rows * 5 + 2]+"-"+tpp[rows * 5 + 3]+"-"+tpp[rows * 5 + 4]);
+            //console.log("after--"+nextRow+": "+tpp[nextRow * 5 + 0]+"-"+tpp[nextRow * 5 + 1]+"-"+tpp[nextRow * 5 + 2]+"-"+tpp[nextRow * 5 + 3]+"-"+tpp[nextRow * 5 + 4]);
+          }
+        }
+        return tpp;
+      }
 
 </script>
 </body></div></div>
