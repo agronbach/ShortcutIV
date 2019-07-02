@@ -162,7 +162,7 @@ visibility: hidden;
         <option value="4">4</option>
         <option value="3">3</option>
         <option value="2">2</option>
-        <option value="1">1</option>
+        <option selected value="1">1</option>
         <option value="0">0</option>
       </select></td>
       <td><select title="Your Defense IV" id="DefenseIV">
@@ -373,7 +373,7 @@ visibility: hidden;
         {'label': '16-Pidgey', 'value': '85,73,120,Pidgeotto,Pidgeot'},
         {'label': '17-Pidgeotto', 'value': '117,105,160,Pidgeot'},
         {'label': '18-Pidgeot', 'value': '166,154,195,Pidgeotto'},
-        {'label': '19-Rattata (Alolan)', 'value': '103,70,102,Raticate (Alolan)'},
+        {'label': '19-Rattata (Alolan)', 'value': '103,70,102,Raticate_(Alolan)'},
         {'label': '19-Rattata', 'value': '103,70,102,Raticate'},
         {'label': '20-Raticate (Alolan)', 'value': '135,154,181'},
         {'label': '20-Raticate', 'value': '161,139,146'},
@@ -458,7 +458,7 @@ visibility: hidden;
         {'label': '87-Dewgong', 'value': '139,177,207'},
         {'label': '88-Grimer (Alolan)', 'value': '135,90,190,Muk_(Alolan)'},
         {'label': '88-Grimer', 'value': '135,90,190,Muk'},
-        {'label': '89-Muk (Alolan)', 'value': '190,172,233,Grimer (Alolan)'},
+        {'label': '89-Muk (Alolan)', 'value': '190,172,233,Grimer_(Alolan)'},
         {'label': '89-Muk', 'value': '190,172,233,Grimer'},
         {'label': '90-Shellder', 'value': '116,134,102,Cloyster'},
         {'label': '91-Cloyster', 'value': '186,256,137'},
@@ -516,14 +516,14 @@ visibility: hidden;
         {'label': '141-Kabutops', 'value': '220,186,155'},
         {'label': '142-Aerodactyl', 'value': '221,159,190'},
         {'label': '143-Snorlax', 'value': '190,169,330'},
-        {'label': '144-Articuno', 'value': '192,236,207'},
-        {'label': '145-Zapdos', 'value': '253,185,207'},
-        {'label': '146-Moltres', 'value': '251,181,207'},
+        {'label': '144-Articuno', 'value': '192,236,207', 'minIVs': '1'},
+        {'label': '145-Zapdos', 'value': '253,185,207', 'minIVs': '1'},
+        {'label': '146-Moltres', 'value': '251,181,207', 'minIVs': '1'},
         {'label': '147-Dratini', 'value': '119,91,121,Dragonair,Dragonite'},
         {'label': '148-Dragonair', 'value': '163,135,156,Dragonite'},
         {'label': '149-Dragonite', 'value': '263,198,209,Dragonair'},
-        {'label': '150-Mewtwo', 'value': '300,182,214'},
-        {'label': '151-Mew', 'value': '210,210,225'},
+        {'label': '150-Mewtwo', 'value': '300,182,214', 'minIVs': '1'},
+        {'label': '151-Mew', 'value': '210,210,225', 'minIVs': '10'},
         {'label': '152-Chikorita', 'value': '92,122,128,Bayleef,Meganium'},
         {'label': '153-Bayleef', 'value': '122,155,155,Meganium'},
         {'label': '154-Meganium', 'value': '168,202,190,Bayleef'},
@@ -615,15 +615,15 @@ visibility: hidden;
         {'label': '240-Magby', 'value': '151,99,128,Magmar,Magmortar'},
         {'label': '241-Miltank', 'value': '157,193,216'},
         {'label': '242-Blissey', 'value': '129,169,496,Chansey'},
-        {'label': '243-Raikou', 'value': '241,195,207'},
-        {'label': '244-Entei', 'value': '235,171,251'},
-        {'label': '245-Suicune', 'value': '180,235,225'},
+        {'label': '243-Raikou', 'value': '241,195,207', 'minIVs': '1'},
+        {'label': '244-Entei', 'value': '235,171,251', 'minIVs': '1'},
+        {'label': '245-Suicune', 'value': '180,235,225', 'minIVs': '1'},
         {'label': '246-Larvitar', 'value': '115,93,137,Pupitar,Tyranitar'},
         {'label': '247-Pupitar', 'value': '155,133,172,Tyranitar'},
         {'label': '248-Tyranitar', 'value': '251,207,225,Pupitar'},
-        {'label': '249-Lugia', 'value': '193,310,235'},
-        {'label': '250-Ho-Oh', 'value': '239,244,214'},
-        {'label': '251-Celebi', 'value': '210,210,225'},
+        {'label': '249-Lugia', 'value': '193,310,235', 'minIVs': '1'},
+        {'label': '250-Ho-Oh', 'value': '239,244,214', 'minIVs': '1'},
+        {'label': '251-Celebi', 'value': '210,210,225', 'minIVs': '10'},
         {'label': '252-Treecko', 'value': '124,94,120,Grovyle,Sceptile'},
         {'label': '253-Grovyle', 'value': '172,120,137,Sceptile'},
         {'label': '254-Sceptile', 'value': '223,169,172,Grovyle'},
@@ -749,19 +749,19 @@ visibility: hidden;
         {'label': '374-Beldum', 'value': '96,132,120,Metang,Metagross'},
         {'label': '375-Metang', 'value': '138,176,155,Metagross'},
         {'label': '376-Metagross', 'value': '257,228,190,Metang'},
-        {'label': '377-Regirock', 'value': '179,309,190'},
-        {'label': '378-Regice', 'value': '179,309,190'},
-        {'label': '379-Registeel', 'value': '143,285,190'},
-        {'label': '380-Latias', 'value': '228,246,190'},
-        {'label': '381-Latios', 'value': '268,212,190'},
-        {'label': '382-Kyogre', 'value': '270,228,205'},
-        {'label': '383-Groudon', 'value': '270,228,205'},
-        {'label': '384-Rayquaza', 'value': '284,170,213'},
-        {'label': '385-Jirachi', 'value': '210,210,225'},
-        {'label': '386-Deoxys (Attack)', 'value': '414,46,137'},
-        {'label': '386-Deoxys (Defense)', 'value': '144,330,137'},
-        {'label': '386-Deoxys (Normal)', 'value': '345,115,137'},
-        {'label': '386-Deoxys (Speed)', 'value': '230,218,137'},
+        {'label': '377-Regirock', 'value': '179,309,190', 'minIVs': '1'},
+        {'label': '378-Regice', 'value': '179,309,190', 'minIVs': '1'},
+        {'label': '379-Registeel', 'value': '143,285,190', 'minIVs': '1'},
+        {'label': '380-Latias', 'value': '228,246,190', 'minIVs': '1'},
+        {'label': '381-Latios', 'value': '268,212,190', 'minIVs': '1'},
+        {'label': '382-Kyogre', 'value': '270,228,205', 'minIVs': '1'},
+        {'label': '383-Groudon', 'value': '270,228,205', 'minIVs': '1'},
+        {'label': '384-Rayquaza', 'value': '284,170,213', 'minIVs': '1'},
+        {'label': '385-Jirachi', 'value': '210,210,225', 'minIVs': '10'},
+        {'label': '386-Deoxys (Attack)', 'value': '414,46,137', 'minIVs': '10'},
+        {'label': '386-Deoxys (Defense)', 'value': '144,330,137', 'minIVs': '10'},
+        {'label': '386-Deoxys (Normal)', 'value': '345,115,137', 'minIVs': '10'},
+        {'label': '386-Deoxys (Speed)', 'value': '230,218,137', 'minIVs': '10'},
         {'label': '387-Turtwig', 'value': '119,110,146,Grotle,Torterra'},
         {'label': '388-Grotle', 'value': '157,143,181,Torterra'},
         {'label': '389-Torterra', 'value': '202,188,216,Grotle'},
@@ -858,24 +858,24 @@ visibility: hidden;
         {'label': '478-Froslass', 'value': '171,150,172,Glalie'},
         {'label': '479-Rotom (Forms)', 'value': '204,219,137'},
         {'label': '479-Rotom (Normal)', 'value': '185,156,137'},
-        {'label': '480-Uxie', 'value': '156,270,181'},
-        {'label': '481-Mesprit', 'value': '212,212,190'},
-        {'label': '482-Azelf', 'value': '270,151,181'},
-        {'label': '483-Dialga', 'value': '275,211,205'},
-        {'label': '484-Palkia', 'value': '280,215,189'},
-        {'label': '485-Heatran', 'value': '251,213,209'},
-        {'label': '486-Regigigas', 'value': '287,210,221'},
-        {'label': '487-Giratina (Altered)', 'value': '187,225,284'},
-        {'label': '487-Giratina (Origin)', 'value': '225,187,284'},
-        {'label': '488-Cresselia', 'value': '152,258,260'},
-        {'label': '489-Phione', 'value': '162,162,190'},
-        {'label': '490-Manaphy', 'value': '210,210,225'},
-        {'label': '491-Darkrai', 'value': '285,198,172'},
-        {'label': '492-Shaymin (Land)', 'value': '210,210,225'},
-        {'label': '492-Shaymin (Sky)', 'value': '261,166,225'},
-        {'label': '493-Arceus', 'value': '238,238,237'},
-        {'label': '808-Meltan', 'value': '118,99,130,Melmetal'},
-        {'label': '809-Melmetal', 'value': '226,190,264'},];
+        {'label': '480-Uxie', 'value': '156,270,181', 'minIVs': '1'},
+        {'label': '481-Mesprit', 'value': '212,212,190', 'minIVs': '1'},
+        {'label': '482-Azelf', 'value': '270,151,181', 'minIVs': '1'},
+        {'label': '483-Dialga', 'value': '275,211,205', 'minIVs': '1'},
+        {'label': '484-Palkia', 'value': '280,215,189', 'minIVs': '1'},
+        {'label': '485-Heatran', 'value': '251,213,209', 'minIVs': '1'},
+        {'label': '486-Regigigas', 'value': '287,210,221', 'minIVs': '1'},
+        {'label': '487-Giratina (Altered)', 'value': '187,225,284', 'minIVs': '1'},
+        {'label': '487-Giratina (Origin)', 'value': '225,187,284', 'minIVs': '1'},
+        {'label': '488-Cresselia', 'value': '152,258,260', 'minIVs': '1'},
+        {'label': '489-Phione', 'value': '162,162,190', 'minIVs': '1'},
+        {'label': '490-Manaphy', 'value': '210,210,225', 'minIVs': '1'},
+        {'label': '491-Darkrai', 'value': '285,198,172', 'minIVs': '1'},
+        {'label': '492-Shaymin (Land)', 'value': '210,210,225', 'minIVs': '1'},
+        {'label': '492-Shaymin (Sky)', 'value': '261,166,225', 'minIVs': '1'},
+        {'label': '493-Arceus', 'value': '238,238,237', 'minIVs': '1'},
+        {'label': '808-Meltan', 'value': '118,99,130,Melmetal', 'minIVs': '1'},
+        {'label': '809-Melmetal', 'value': '226,190,264', 'minIVs': '1'},];
       $( function() {
         $( "#mon" ).autocomplete({
           source: availableMon,
@@ -888,6 +888,14 @@ visibility: hidden;
             event.preventDefault();
             $("#mon").val(ui.item.label);
             $('#basestats').val(ui.item.value);
+            if (ui.item.minIVs) {
+              //console.log("minIVs found in select:"+ui.item.minIVs);
+              // ensure user inputs for A/D/S and minIVs IVs are above availableMon's minIVs
+              if ($('#AttackIV').val() < parseFloat(ui.item.minIVs)) { $('#AttackIV').val(ui.item.minIVs); }
+              if ($('#DefenseIV').val() < parseFloat(ui.item.minIVs)) { $('#DefenseIV').val(ui.item.minIVs); }
+              if ($('#StaminaIV').val() < parseFloat(ui.item.minIVs)) { $('#StaminaIV').val(ui.item.minIVs); }
+              if ($('#minIVs').val() < parseFloat(ui.item.minIVs)) { $('#minIVs').val(ui.item.minIVs); }
+            }
           },
         });
       });
@@ -924,8 +932,36 @@ visibility: hidden;
         getFormData();
       }
 
+      // function used to verify if the User's Inputs will return NaN (if they are impossible)
+      // will return true if it detects a NaN case, otherwise will return false
+      function checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl)
+      {        
+        // check if user IVs are not less than minIVs
+        if (((AttackIV/1) < (minIVs/1)) || ((DefenseIV/1) < (minIVs/1)) || ((StaminaIV/1) < (minIVs/1)))
+        {
+          alert("One or more of your IVs are below minimum IVs, please fix your inputs and try again.");
+          return true;
+        }
+        
+        // check if this pokemon with this minLvl can have a CP below this league
+        var adjMinLvl = parseFloat(minLvl-1)*2;
+        var CP = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(basestats[0])) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(basestats[1])) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(basestats[2])) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
+        if ((CP/1) > (league/1))
+        {
+          alert(pokemon+" at level "+minLvl+" with IVs "+AttackIV+"/"+DefenseIV+"/"+StaminaIV+" has CP:"+CP+" which is over "+league+". Please fix your inputs and try again");
+          return true;
+        }
+        
+        return false;
+      }
       function getFormData()
       {
+        // reset our max stat variables between calculations
+        //console.log("Before reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
+        maxHP = 0;
+        maxDef = 0;
+        maxAtk = 0;
+        //console.log("After reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
         
         // validate reCaptcha v3
         var tokenHolder;
@@ -983,6 +1019,13 @@ visibility: hidden;
         var tp=document.getElementById('TopRanks').value;
         //console.log("TopRanks set to:"+tp); // how many IVs to display
         
+        // ensure the user's inputs won't give NaN errors
+        if (checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl))
+        {
+          // throw NaN alert to let user know inputs are invalid and stop building table
+          return false;
+        }
+        
         // append inputs to URL for sharing
         var url = window.location.href;   
         if (url.indexOf('?') > -1){
@@ -993,6 +1036,13 @@ visibility: hidden;
         url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
         
         // Ensure current paramters are in the URL without screen refresh
+        // Also update the title to reflect the user's current search
+        // And add this search to user's history so back button works
+        var newTitle = "ShortcutIV - PvP Rank - "+pokemon+" "+AttackIV+"|"+DefenseIV+"|"+StaminaIV;
+        var oldTitle = document.title;
+        document.title = newTitle;
+        
+        // Ensure current paramters are in the URL without screen refresh
         window.history.pushState(null, null, url);
 
         // Now call the actual search function with the User's Inputs
@@ -1000,11 +1050,12 @@ visibility: hidden;
         //console.log("TPP Calculated to be:"+JSON.stringify(tpp));
         
         var evoHtml = "";
+        var evoHeader = "";
         // Check if there are any additional evolutions available
         if (basestats[3]) 
         {
           var extraEvos = parseFloat(basestats.length - 3);
-          evoHtml = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table align=center><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+          //console.log("Set extraEvos="+extraEvos+" as basestats.length("+basestats.length+") - 3 = "+parseFloat(basestats.length - 3));
           
           // Build extra rows for each evolution available
           for (var i=3; i < basestats.length; i++)
@@ -1013,11 +1064,17 @@ visibility: hidden;
             {
               var searchMon = availableMon[j].label.replace(/ /g, '_');
               if (searchMon.indexOf(basestats[i]) > 0) {
+                // if the mon to match isn't an alolan &&AND&& the mon we matched is an alolan
+                if ((basestats[i].indexOf("(Alolan)") < 0) &&  (searchMon.indexOf("(Alolan)") > 0))
+                {
+                    continue; // skip this match
+                }
                 var poke = basestats[i];
                 var stats = availableMon[j].value.split(",");
                 var baseAtk = stats[0];
                 var baseDef = stats[1];
                 var baseSta = stats[2];
+                var adjMinLvl = parseFloat(minLvl-1)*2;
 
                 //console.log ("Found '"+poke+"' at "+j+", '"+availableMon[j].label+"' with basestats '"+baseAtk+","+baseDef+","+baseSta+"', calling SPIV...");
                 // Now call the actual search function with the User's Inputs
@@ -1034,36 +1091,65 @@ visibility: hidden;
                 var glD = (parseFloat(evoTpp[0 * 5 + 2])+parseFloat(baseDef))*cpm[evoTpp[0 * 5 + 4]];
                 var glS = (parseFloat(evoTpp[0 * 5 + 3])+parseFloat(baseSta))*cpm[evoTpp[0 * 5 + 4]];
                 var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
+                
+                // check if this evolution's cp is valid in this league with this minLvl
+                var cp = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(baseAtk)) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(baseDef)) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(baseSta)) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
+                
+                if (cp > league)
+                {
+                  //console.log("Skipping evo:"+poke+" as cp("+cp+") at minLvl("+minLvl+") is too high for league:"+league);
+                  extraEvos--; // remove from evo counter
+                  continue; // skip the rest of this loop
+                } //else {console.log("Including evo:"+poke+" as cp("+cp+") at adjMinLvl("+adjMinLvl+") is eligible for league:"+league); }
 
                 //console.log("Calling OUR with poke="+poke);
-                evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst);
+                evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst, null);
               }
             }
           }
-          evoHtml += "</table></p>";
+          // only output if we have evolutions to output
+          if (extraEvos > 0)
+          {
+            //console.log("extraEvos:"+extraEvos);
+            evoHeader = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table align=center><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+            evoHtml += "</table></p>";
+          }
         }
                 
         // Read all rows in tpp (until end of the array) to compute max Stats
         var rows = 0;
+        var maxAtkIVs = [0,0,0];
+        var maxDefIVs = [0,0,0];
+        var maxHPIVs = [0,0,0];
         for (var i = 0; tpp[i * 5 + 0]; i++)
         {
           // Ensure we have the right maxStats
           var CPM = cpm[tpp[i * 5 + 4]];
           var tempAtk = ((parseFloat(tpp[i * 5 + 1])+parseFloat(basestats[0]))*CPM).toFixed(1);
           var tempDef = ((parseFloat(tpp[i * 5 + 2])+parseFloat(basestats[1]))*CPM).toFixed(1);
-          var tempSta = Math.floor(parseFloat(tpp[i * 5 + 3])+parseFloat(basestats[2])*CPM);
+          var tempSta = Math.floor((parseFloat(tpp[i * 5 + 3])+parseFloat(basestats[2]))*CPM);
           
           if (Number(tempAtk) > Number(maxAtk)) {
             //console.log("tempAtk:"+tempAtk+" > "+maxAtk+":maxAtk, updated!");
             maxAtk = tempAtk;
+            maxAtkIVs[0] = parseFloat(tpp[i * 5 + 1]);
+            maxAtkIVs[1] = parseFloat(tpp[i * 5 + 2]);
+            maxAtkIVs[2] = parseFloat(tpp[i * 5 + 3]);
           }
           if (Number(tempDef) > Number(maxDef)) {
             //console.log("tempDef:"+tempDef+" > "+maxDef+":maxDef, updated!");
             maxDef = tempDef;
+            maxDefIVs[0] = parseFloat(tpp[i * 5 + 1]);
+            maxDefIVs[1] = parseFloat(tpp[i * 5 + 2]);
+            maxDefIVs[2] = parseFloat(tpp[i * 5 + 3]);
           }
           if (Number(tempSta) > Number(maxHP)) {
             //console.log("tempSta:"+tempSta+" > "+maxHP+":maxHP, updated!");
+            //console.log("tempSta IVs were: "+maxHPIVs[0]+" "+maxHPIVs[1]+" "+maxHPIVs[2]+", new maxHP IVs:"+parseFloat(tpp[i * 5 + 1])+" "+parseFloat(tpp[i * 5 + 2])+" "+parseFloat(tpp[i * 5 + 3]));
             maxHP = tempSta;
+            maxHPIVs[0] = parseFloat(tpp[i * 5 + 1]);
+            maxHPIVs[1] = parseFloat(tpp[i * 5 + 2]);
+            maxHPIVs[2] = parseFloat(tpp[i * 5 + 3]);
           }
           // track how many rows we will print with "rows" and break ties for shown rows
           if ((i < tp) && (tpp[i * 5 + 0]))
@@ -1074,7 +1160,16 @@ visibility: hidden;
         }
         
         // Output header for Table now that we have updated all Max Stats
-        var html = "<p>Your Top "+rows+" PvP "+pokemon+":<br><i>max Atk("+maxAtk+"), Def("+maxDef+"), HP("+maxHP+")</i></p>";
+        // grab base URL
+        var url = window.location.href;   
+        if (url.indexOf('?') > -1){
+          // if we already have parameters in the URL, clear them and replace with these inputs
+          url = url.split("?")[0]; // keep left of '?' (base URL)
+        }
+        var maxAtkurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxAtkIVs[0]+"&DefenseIV="+maxAtkIVs[1]+"&StaminaIV="+maxAtkIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+        var maxDefurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxDefIVs[0]+"&DefenseIV="+maxDefIVs[1]+"&StaminaIV="+maxDefIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+        var maxHPurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxHPIVs[0]+"&DefenseIV="+maxHPIVs[1]+"&StaminaIV="+maxHPIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+        var html = "<p>Your Top "+rows+" PvP "+pokemon+":<br><i>max Atk(<a href="+maxAtkurl+">"+maxAtk+"</a>), Def(<a href="+maxDefurl+">"+maxDef+"</a>), HP(<a href="+maxHPurl+">"+maxHP+"</a>)</i></p>";
         
         // calcualte ideal PvP rank using attack + base stat attack * cpm
         var i = tpp[0 * 5 + 4]; // calculate cpm offset from highest smm result
@@ -1085,17 +1180,17 @@ visibility: hidden;
                 
         // Call function to build first row of table
         //console.log("Calling OUR with poke="+false);
-        html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst);
+        html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst, rows);
         
         // Build the main data table to show top #tp rows
         html += buildTableRows(tpp, basestats[0], basestats[1], basestats[2], glst, tp);
                 
         // now that table is finished building, output to webpage
-        document.getElementById("box").innerHTML = evoHtml + html;
+        document.getElementById("box").innerHTML = evoHeader + evoHtml + html;
         return;
       }
       
-      function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct)
+      function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct, rows)
       {
         // convert from array back to individual stats
         var bsa = bs[0];
@@ -1162,9 +1257,12 @@ visibility: hidden;
         url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+aIV+"&DefenseIV="+dIV+"&StaminaIV="+sIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+bs);
         
         // control highlight of User Data row based on rank
-        if (rank < 100) {
+        // 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
+        // use 0.02442 to approximate "Top 100" (green) when there are less than 4096 results
+        // use 0.2442 to approximate "Top 1000" (orange) when there are less than 4096 results
+        if ((rank/1) < (0.02442*rows/1)) {
           html+="<tr bgcolor=\"#2BA32A\">"; // green for "good"
-        } else if (rank < 1000) {
+        } else if ((rank/1) < (0.2442*rows/1)) {
           html+="<tr bgcolor=\"#FF8C00\">"; // orange for "ok"
         } else {
           html+="<tr bgcolor=\"#B22222\">"; // red for "rubbish"
