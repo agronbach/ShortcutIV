@@ -120,6 +120,20 @@ visibility: hidden;
 }
 </style>
   <head>
+    <script>
+      // Force HTTPS if connected via HTTP -- https://stackoverflow.com/questions/4723213/detect-http-or-https-then-force-https-in-javascript
+      if (location.protocol != 'https:')
+      {
+        // get the URL for the HTTPS version of this page
+        var newURL = 'https:' + window.location.href.substring(window.location.protocol.length);
+        
+        // overwrite page to inform the user they are being redirected to HTTPS in case it hangs
+        javascript:document.open('text/html');document.write('<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>ShortcutIV - HTTP redirect to HTTPS</title></head><body><p>WARNING: Your connection is using HTTP and is not secure. You are now being redirected to a secure connection over HTTPS.<p><p>To speed up the process, you may <a href="'+newURL+'">click here</a><br><br>Please report this message to us via our discord <a href="https://discord.gg/UD4Temq"><strong>https://discord.gg/UD4Temq</strong></a> and let us know how this happened!</p></body><br><br></html>');document.close();
+
+        // redirect the user to the HTTPS version of the page
+        location.href = newURL;
+      }
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
     <script>
@@ -908,8 +922,25 @@ visibility: hidden;
         url = url.split('?')[1]; // keep right of '?'
         url = url.split('#')[0]; // keep left of '#'
         //console.log("URI: Trimmed URL:"+url);
-
+        
+        setParamsfromURL(url);
+      }
+      
+      window.addEventListener('popstate', function(e) {
+        // e.state is equal to the data-attribute of the last image we clicked
+        //console.log("Back button pressed, passing e.state to setParamsfromURL");
+        if (e.state) {
+          //console.log("Passing e.state to setParamsfromURL");
+          setParamsfromURL(e.state); 
+        } else {
+          console.log("e.state does not exist, exiting popstate listener");
+        }
+      });
+      
+      function setParamsfromURL(url)
+      {
         // split our query string into its component parts
+        //console.log("Received url:"+url);
         var params = url.split('&');
         //console.log("URI: Read params:"+JSON.stringify(params));
 
@@ -924,36 +955,24 @@ visibility: hidden;
             console.log("URI: Browser likely Safari...found '%20' in '"+params[i]+"', removing...");
             document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1].replace(/%20/g, " ");
           } else {
-            // Otherwise URL decode is working, proceed as normal...
-            document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
+            if((params[i].split('=')[0] == "link") && (params[i].split('=')[1] == "true"))
+            {
+              console.log("We came here from an evoTable click, triggering replaceState with title='"+document.title+"'");
+              var error = history.replaceState(url, document.title, window.location.href);
+              if (error)
+              {
+                console.log("Received an error from replaceState:"+error);
+              }
+            } else {
+              // Otherwise URL decode is working, proceed as normal...
+              document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
+            }
           }
         }
         // Now that we have correct stats, let's pass them to build the table
         getFormData();
       }
-
-      // function used to verify if the User's Inputs will return NaN (if they are impossible)
-      // will return true if it detects a NaN case, otherwise will return false
-      function checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl)
-      {        
-        // check if user IVs are not less than minIVs
-        if (((AttackIV/1) < (minIVs/1)) || ((DefenseIV/1) < (minIVs/1)) || ((StaminaIV/1) < (minIVs/1)))
-        {
-          alert("One or more of your IVs are below minimum IVs, please fix your inputs and try again.");
-          return true;
-        }
-        
-        // check if this pokemon with this minLvl can have a CP below this league
-        var adjMinLvl = parseFloat(minLvl-1)*2;
-        var CP = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(basestats[0])) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(basestats[1])) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(basestats[2])) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
-        if ((CP/1) > (league/1))
-        {
-          alert(pokemon+" at level "+minLvl+" with IVs "+AttackIV+"/"+DefenseIV+"/"+StaminaIV+" has CP:"+CP+" which is over "+league+". Please fix your inputs and try again");
-          return true;
-        }
-        
-        return false;
-      }
+      
       function getFormData()
       {
         // reset our max stat variables between calculations
@@ -1027,23 +1046,44 @@ visibility: hidden;
         }
         
         // append inputs to URL for sharing
-        var url = window.location.href;   
+        var url = window.location.href;
         if (url.indexOf('?') > -1){
           // if we already have parameters in the URL, clear them and replace with these inputs
           url = url.split("?")[0]; // keep left of '?' (base URL)
         }
         // store paramters in URL for sharing these inputs
-        url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+        var urlParams = encodeURI("minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+        url += "?"+urlParams;
         
         // Ensure current paramters are in the URL without screen refresh
         // Also update the title to reflect the user's current search
         // And add this search to user's history so back button works
         var newTitle = "ShortcutIV - PvP Rank - "+pokemon+" "+AttackIV+"|"+DefenseIV+"|"+StaminaIV;
         var oldTitle = document.title;
-        document.title = newTitle;
+        $(document).prop('title',newTitle);
         
         // Ensure current paramters are in the URL without screen refresh
-        window.history.pushState(null, null, url);
+        //console.log("Old URL:"+window.location.href);
+        //console.log("New URL:"+url);
+        if (window.location.href != url) {
+          //console.log("Updating URL to match current urlParams:"+urlParams);
+          if (window.location.href.indexOf('&link=true') > -1) {
+            console.log("Came from evoTable link, replacingState newTitle='"+newTitle+"'");
+            var error = history.replaceState(url, newTitle, window.location.href);
+            if (error)
+            {
+              console.log("Received an error from replaceState:"+error);
+            }
+          } else {
+            //console.log("This was not from a evoTable link, triggering pushState as usual");
+            history.pushState(urlParams, newTitle, url);
+            console.log("PushedState newTitle:"+newTitle);
+          }
+        }
+        else {
+          console.log("Did not update URL to avoid duplicate history entry");
+          console.log("Skipped pushing duplicate for:"+newTitle);
+        }
 
         // Now call the actual search function with the User's Inputs
         var tpp = SearchPokeIVs(basestats[0], basestats[1], basestats[2], league, 4096, minIVs, minLvl, maxLvl);
@@ -1075,16 +1115,21 @@ visibility: hidden;
                 var baseDef = stats[1];
                 var baseSta = stats[2];
                 var adjMinLvl = parseFloat(minLvl-1)*2;
+                var totalEvoIVs = 0;
 
                 //console.log ("Found '"+poke+"' at "+j+", '"+availableMon[j].label+"' with basestats '"+baseAtk+","+baseDef+","+baseSta+"', calling SPIV...");
                 // Now call the actual search function with the User's Inputs
                 var evoTpp = SearchPokeIVs(baseAtk, baseDef, baseSta, league, 4096, minIVs, minLvl, maxLvl);
                 
-                // break ties for shown rows
-                for (var k=0; (k < tp) && (tpp[k * 5 + 0]) ; k++)
+                // break ties for shown rows, and count total rows
+                for (var k=0; (k < 4096) && (tpp[k * 5 + 0]) ; k++)
                 {
+                  if (k < tp)
+                  {
                   evoTpp = tieBreakByCP(evoTpp, k, parseFloat(k+1), parseFloat(evoTpp[k * 5 + 0]), parseFloat(evoTpp[k * 5 + 1]), parseFloat(evoTpp[k * 5 + 2]), parseFloat(evoTpp[k * 5 + 3]), parseFloat(evoTpp[k * 5 + 4]), parseFloat(evoTpp[(k+1) * 5 + 0]), parseFloat(evoTpp[(k+1) * 5 + 1]), parseFloat(evoTpp[(k+1) * 5 + 2]), parseFloat(evoTpp[(k+1) * 5 + 3]), parseFloat(evoTpp[(k+1) * 5 + 4]), baseAtk, baseDef, baseSta);
+                  }
                 }
+                totalEvoIVs = k;
 
                 // calcualte ideal PvP rank w/IVs + base stats * cpm[cpm offset from highest smm result]
                 var glA = (parseFloat(evoTpp[0 * 5 + 1])+parseFloat(baseAtk))*cpm[evoTpp[0 * 5 + 4]];
@@ -1103,7 +1148,7 @@ visibility: hidden;
                 } //else {console.log("Including evo:"+poke+" as cp("+cp+") at adjMinLvl("+adjMinLvl+") is eligible for league:"+league); }
 
                 //console.log("Calling OUR with poke="+poke);
-                evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst, null);
+                evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst, totalEvoIVs);
               }
             }
           }
@@ -1118,6 +1163,7 @@ visibility: hidden;
                 
         // Read all rows in tpp (until end of the array) to compute max Stats
         var rows = 0;
+        var totalIVs = 0;
         var maxAtkIVs = [0,0,0];
         var maxDefIVs = [0,0,0];
         var maxHPIVs = [0,0,0];
@@ -1157,6 +1203,7 @@ visibility: hidden;
             rows = i+1; // fix off by 1 offset
             tpp = tieBreakByCP(tpp, i, parseFloat(i+1), parseFloat(tpp[i * 5 + 0]), parseFloat(tpp[i * 5 + 1]), parseFloat(tpp[i * 5 + 2]), parseFloat(tpp[i * 5 + 3]), parseFloat(tpp[i * 5 + 4]), parseFloat(tpp[(i+1) * 5 + 0]), parseFloat(tpp[(i+1) * 5 + 1]), parseFloat(tpp[(i+1) * 5 + 2]), parseFloat(tpp[(i+1) * 5 + 3]), parseFloat(tpp[(i+1) * 5 + 4]), basestats[0], basestats[1], basestats[2]);
           }
+          totalIVs = i+1; // fix off by 1 offset
         }
         
         // Output header for Table now that we have updated all Max Stats
@@ -1180,7 +1227,7 @@ visibility: hidden;
                 
         // Call function to build first row of table
         //console.log("Calling OUR with poke="+false);
-        html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst, rows);
+        html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst, totalIVs);
         
         // Build the main data table to show top #tp rows
         html += buildTableRows(tpp, basestats[0], basestats[1], basestats[2], glst, tp);
@@ -1190,7 +1237,7 @@ visibility: hidden;
         return;
       }
       
-      function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct, rows)
+      function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct, totalIVs)
       {
         // convert from array back to individual stats
         var bsa = bs[0];
@@ -1260,15 +1307,15 @@ visibility: hidden;
         // 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
         // use 0.02442 to approximate "Top 100" (green) when there are less than 4096 results
         // use 0.2442 to approximate "Top 1000" (orange) when there are less than 4096 results
-        if ((rank/1) < (0.02442*rows/1)) {
+        if ((rank/1) < (0.02442*totalIVs/1)) {
           html+="<tr bgcolor=\"#2BA32A\">"; // green for "good"
-        } else if ((rank/1) < (0.2442*rows/1)) {
+        } else if ((rank/1) < (0.2442*totalIVs/1)) {
           html+="<tr bgcolor=\"#FF8C00\">"; // orange for "ok"
         } else {
           html+="<tr bgcolor=\"#B22222\">"; // red for "rubbish"
         }
         if (pokemon) {  // Add evolution's name with a link to that search to beginning of evolution table
-          html+="<td style=\"text-align: center; vertical-align: middle;\"><a href="+url+">"+pokemon+"</a></td>";} //Mon
+          html+="<td style=\"text-align: center; vertical-align: middle;\"><a href="+url+"&link=true>"+pokemon+"</a></td>";} //Mon
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+level+"</td>"; //Level
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+cp+"</td>"; //Final CP
@@ -1456,6 +1503,29 @@ visibility: hidden;
   //console.log(JSON.stringify(tpp));
   return tpp;
   } // end of SearchPokeIVs()
+      
+      // function used to verify if the User's Inputs will return NaN (if they are impossible)
+      // will return true if it detects a NaN case, otherwise will return false
+      function checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl)
+      {        
+        // check if user IVs are not less than minIVs
+        if (((AttackIV/1) < (minIVs/1)) || ((DefenseIV/1) < (minIVs/1)) || ((StaminaIV/1) < (minIVs/1)))
+        {
+          alert("One or more of your IVs are below minimum IVs, please fix your inputs and try again.");
+          return true;
+        }
+        
+        // check if this pokemon with this minLvl can have a CP below this league
+        var adjMinLvl = parseFloat(minLvl-1)*2;
+        var CP = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(basestats[0])) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(basestats[1])) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(basestats[2])) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
+        if ((CP/1) > (league/1))
+        {
+          alert(pokemon+" at level "+minLvl+" with IVs "+AttackIV+"/"+DefenseIV+"/"+StaminaIV+" has CP:"+CP+" which is over "+league+". Please fix your inputs and try again");
+          return true;
+        }
+        
+        return false;
+      }
       
       function tieBreakByCP(tpp, rows, nextRow, curSMM, curAtk, curDef, curStm, curLvl, nexSMM, nexAtk, nexDef, nexStm, nexLvl, bsa, bsd, bss)
       {
