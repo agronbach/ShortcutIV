@@ -2,9 +2,6 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
 <style>
 /* floating footer fix from: https://stackoverflow.com/questions/13881548/sticky-footer-hiding-content */
       html,
@@ -144,8 +141,7 @@ visibility: hidden;
       gtag('config', 'UA-141600603-1');
     </script>
     <!--Rest of Head-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--title>ShortcutIV - PvP Rankings Calculator</title-->
     <title>ShortcutIV - PvP Rankings Calculator</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -530,14 +526,15 @@ visibility: hidden;
         {'label': '141-Kabutops', 'value': '220,186,155'},
         {'label': '142-Aerodactyl', 'value': '221,159,190'},
         {'label': '143-Snorlax', 'value': '190,169,330'},
-        {'label': '144-Articuno', 'value': '192,236,207', 'minIVs': '1'},
-        {'label': '145-Zapdos', 'value': '253,185,207', 'minIVs': '1'},
-        {'label': '146-Moltres', 'value': '251,181,207', 'minIVs': '1'},
+        {'label': '144-Articuno', 'value': '192,236,207', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '145-Zapdos', 'value': '253,185,207', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '146-Moltres', 'value': '251,181,207', 'minIVs': '1', 'minLvl': '15'},
         {'label': '147-Dratini', 'value': '119,91,121,Dragonair,Dragonite'},
         {'label': '148-Dragonair', 'value': '163,135,156,Dragonite'},
         {'label': '149-Dragonite', 'value': '263,198,209,Dragonair'},
-        {'label': '150-Mewtwo', 'value': '300,182,214', 'minIVs': '1'},
-        {'label': '151-Mew', 'value': '210,210,225', 'minIVs': '10'},
+        {'label': '150-Mewtwo (Armor)', 'value': '182,278,214', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '150-Mewtwo', 'value': '300,182,214', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '151-Mew', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
         {'label': '152-Chikorita', 'value': '92,122,128,Bayleef,Meganium'},
         {'label': '153-Bayleef', 'value': '122,155,155,Meganium'},
         {'label': '154-Meganium', 'value': '168,202,190,Bayleef'},
@@ -629,15 +626,15 @@ visibility: hidden;
         {'label': '240-Magby', 'value': '151,99,128,Magmar,Magmortar'},
         {'label': '241-Miltank', 'value': '157,193,216'},
         {'label': '242-Blissey', 'value': '129,169,496,Chansey'},
-        {'label': '243-Raikou', 'value': '241,195,207', 'minIVs': '1'},
-        {'label': '244-Entei', 'value': '235,171,251', 'minIVs': '1'},
-        {'label': '245-Suicune', 'value': '180,235,225', 'minIVs': '1'},
+        {'label': '243-Raikou', 'value': '241,195,207', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '244-Entei', 'value': '235,171,251', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '245-Suicune', 'value': '180,235,225', 'minIVs': '1', 'minLvl': '15'},
         {'label': '246-Larvitar', 'value': '115,93,137,Pupitar,Tyranitar'},
         {'label': '247-Pupitar', 'value': '155,133,172,Tyranitar'},
         {'label': '248-Tyranitar', 'value': '251,207,225,Pupitar'},
-        {'label': '249-Lugia', 'value': '193,310,235', 'minIVs': '1'},
-        {'label': '250-Ho-Oh', 'value': '239,244,214', 'minIVs': '1'},
-        {'label': '251-Celebi', 'value': '210,210,225', 'minIVs': '10'},
+        {'label': '249-Lugia', 'value': '193,310,235', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '250-Ho-Oh', 'value': '239,244,214', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '251-Celebi', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
         {'label': '252-Treecko', 'value': '124,94,120,Grovyle,Sceptile'},
         {'label': '253-Grovyle', 'value': '172,120,137,Sceptile'},
         {'label': '254-Sceptile', 'value': '223,169,172,Grovyle'},
@@ -763,19 +760,19 @@ visibility: hidden;
         {'label': '374-Beldum', 'value': '96,132,120,Metang,Metagross'},
         {'label': '375-Metang', 'value': '138,176,155,Metagross'},
         {'label': '376-Metagross', 'value': '257,228,190,Metang'},
-        {'label': '377-Regirock', 'value': '179,309,190', 'minIVs': '1'},
-        {'label': '378-Regice', 'value': '179,309,190', 'minIVs': '1'},
-        {'label': '379-Registeel', 'value': '143,285,190', 'minIVs': '1'},
-        {'label': '380-Latias', 'value': '228,246,190', 'minIVs': '1'},
-        {'label': '381-Latios', 'value': '268,212,190', 'minIVs': '1'},
-        {'label': '382-Kyogre', 'value': '270,228,205', 'minIVs': '1'},
-        {'label': '383-Groudon', 'value': '270,228,205', 'minIVs': '1'},
-        {'label': '384-Rayquaza', 'value': '284,170,213', 'minIVs': '1'},
-        {'label': '385-Jirachi', 'value': '210,210,225', 'minIVs': '10'},
-        {'label': '386-Deoxys (Attack)', 'value': '414,46,137', 'minIVs': '10'},
-        {'label': '386-Deoxys (Defense)', 'value': '144,330,137', 'minIVs': '10'},
-        {'label': '386-Deoxys (Normal)', 'value': '345,115,137', 'minIVs': '10'},
-        {'label': '386-Deoxys (Speed)', 'value': '230,218,137', 'minIVs': '10'},
+        {'label': '377-Regirock', 'value': '179,309,190', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '378-Regice', 'value': '179,309,190', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '379-Registeel', 'value': '143,285,190', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '380-Latias', 'value': '228,246,190', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '381-Latios', 'value': '268,212,190', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '382-Kyogre', 'value': '270,228,205', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '383-Groudon', 'value': '270,228,205', 'minIVs': '1', 'minLvl': '15'},
+        {'label': '384-Rayquaza', 'value': '284,170,213', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '385-Jirachi', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
+        {'label': '386-Deoxys (Attack)', 'value': '414,46,137', 'minIVs': '10', 'minLvl': '20'},
+        {'label': '386-Deoxys (Defense)', 'value': '144,330,137', 'minIVs': '10', 'minLvl': '20'},
+        {'label': '386-Deoxys (Normal)', 'value': '345,115,137', 'minIVs': '10', 'minLvl': '20'},
+        {'label': '386-Deoxys (Speed)', 'value': '230,218,137', 'minIVs': '10', 'minLvl': '20'},
         {'label': '387-Turtwig', 'value': '119,110,146,Grotle,Torterra'},
         {'label': '388-Grotle', 'value': '157,143,181,Torterra'},
         {'label': '389-Torterra', 'value': '202,188,216,Grotle'},
@@ -872,24 +869,24 @@ visibility: hidden;
         {'label': '478-Froslass', 'value': '171,150,172,Glalie'},
         {'label': '479-Rotom (Forms)', 'value': '204,219,137'},
         {'label': '479-Rotom (Normal)', 'value': '185,156,137'},
-        {'label': '480-Uxie', 'value': '156,270,181', 'minIVs': '1'},
-        {'label': '481-Mesprit', 'value': '212,212,190', 'minIVs': '1'},
-        {'label': '482-Azelf', 'value': '270,151,181', 'minIVs': '1'},
-        {'label': '483-Dialga', 'value': '275,211,205', 'minIVs': '1'},
-        {'label': '484-Palkia', 'value': '280,215,189', 'minIVs': '1'},
-        {'label': '485-Heatran', 'value': '251,213,209', 'minIVs': '1'},
-        {'label': '486-Regigigas', 'value': '287,210,221', 'minIVs': '1'},
-        {'label': '487-Giratina (Altered)', 'value': '187,225,284', 'minIVs': '1'},
-        {'label': '487-Giratina (Origin)', 'value': '225,187,284', 'minIVs': '1'},
-        {'label': '488-Cresselia', 'value': '152,258,260', 'minIVs': '1'},
-        {'label': '489-Phione', 'value': '162,162,190', 'minIVs': '1'},
-        {'label': '490-Manaphy', 'value': '210,210,225', 'minIVs': '1'},
-        {'label': '491-Darkrai', 'value': '285,198,172', 'minIVs': '1'},
-        {'label': '492-Shaymin (Land)', 'value': '210,210,225', 'minIVs': '1'},
-        {'label': '492-Shaymin (Sky)', 'value': '261,166,225', 'minIVs': '1'},
-        {'label': '493-Arceus', 'value': '238,238,237', 'minIVs': '1'},
-        {'label': '808-Meltan', 'value': '118,99,130,Melmetal', 'minIVs': '1'},
-        {'label': '809-Melmetal', 'value': '226,190,264', 'minIVs': '1'},];
+        {'label': '480-Uxie', 'value': '156,270,181', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '481-Mesprit', 'value': '212,212,190', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '482-Azelf', 'value': '270,151,181', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '483-Dialga', 'value': '275,211,205', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '484-Palkia', 'value': '280,215,189', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '485-Heatran', 'value': '251,213,209', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '486-Regigigas', 'value': '287,210,221', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '487-Giratina (Altered)', 'value': '187,225,284', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '487-Giratina (Origin)', 'value': '225,187,284', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '488-Cresselia', 'value': '152,258,260', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '489-Phione', 'value': '162,162,190', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '490-Manaphy', 'value': '210,210,225', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '491-Darkrai', 'value': '285,198,172', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '492-Shaymin (Land)', 'value': '210,210,225', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '492-Shaymin (Sky)', 'value': '261,166,225', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '493-Arceus', 'value': '238,238,237', 'minIVs': '1', 'minLvl': '20'},
+        {'label': '808-Meltan', 'value': '118,99,130,Melmetal'},
+        {'label': '809-Melmetal', 'value': '226,190,264'},];
       $( function() {
         $( "#mon" ).autocomplete({
           source: availableMon,
@@ -909,6 +906,11 @@ visibility: hidden;
               if ($('#DefenseIV').val() < parseFloat(ui.item.minIVs)) { $('#DefenseIV').val(ui.item.minIVs); }
               if ($('#StaminaIV').val() < parseFloat(ui.item.minIVs)) { $('#StaminaIV').val(ui.item.minIVs); }
               if ($('#minIVs').val() < parseFloat(ui.item.minIVs)) { $('#minIVs').val(ui.item.minIVs); }
+            }
+            if ((ui.item.minLvl) && ($('#minLvl').val() < parseFloat(ui.item.minLvl))) {
+              //console.log("minLvl found in select:"+ui.item.minLvl);
+              // ensure user inputs for level are above availableMon's minLvl
+              $('#minLvl').val(ui.item.minLvl);
             }
           },
         });

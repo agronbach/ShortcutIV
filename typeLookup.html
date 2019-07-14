@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* floating footer fix from: https://stackoverflow.com/questions/13881548/sticky-footer-hiding-content */
+      html,
+body {
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: Verdana, Geneva, sans-serif;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#body {
+   /*padding:10px;*/
+   padding-bottom:50px;   /* Height of the footer */
+}
+#footer {
+  position:absolute;
+  bottom:0;
+  text-align: center;
+  vertical-align: middle;
+  width:100%;
+  height:48px;   /* Height of the footer */
+  background:#C0C0C0;
+}
+  
+.button {
+  background-color: #006400;
+  border-radius: 25px;
+  border: 0.1em solid #006400;
+  color: white;
+  padding: 0.2em 0.3em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7em;
+  margin: 0.3em 0.2em;
+  cursor: pointer;
+}
+
+p {
+  display: block;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+  margin-left: 0;
+  margin-right: 0;
+}
+  
+img {
+  vertical-align: middle;
+  margin-left: 0;
+  margin-right: 0;
+}
+  
+.grecaptcha-badge {
+visibility: hidden;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+  
+select {
+display: block;
+margin: 0 auto;
+}
+
+</style>
+  <head>
+    <script>
+      // Force HTTPS if connected via HTTP -- https://stackoverflow.com/questions/4723213/detect-http-or-https-then-force-https-in-javascript
+      if (location.protocol != 'https:')
+      {
+        // get the URL for the HTTPS version of this page
+        var newURL = 'https:' + window.location.href.substring(window.location.protocol.length);
+        
+        // overwrite page to inform the user they are being redirected to HTTPS in case it hangs
+        javascript:document.open('text/html');document.write('<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>ShortcutIV - HTTP redirect to HTTPS</title></head><body><p>WARNING: Your connection is using HTTP and is not secure. You are now being redirected to a secure connection over HTTPS.<p><p>To speed up the process, you may <a href="'+newURL+'">click here</a><br><br>Please report this message to us via our discord <a href="https://discord.gg/UD4Temq"><strong>https://discord.gg/UD4Temq</strong></a> and let us know how this happened!</p></body><br><br></html>');document.close();
+
+        // redirect the user to the HTTPS version of the page
+        location.href = newURL;
+      }
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-141600603-1');
+    </script>
+    <!--Rest of Head-->
+    <!--title>ShortcutIV - PvP Rankings Calculator</title-->
+    <title>ShortcutIV - Type Chart</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
+  </head>
+  <div id="container">
+    <div id="body"><body>
+      <select id="type">
+        <option value="Bug">Bug</option>
+        <option value="Dark">Dark</option>
+        <option value="Dragon">Dragon</option>
+        <option value="Electric">Electric</option>
+        <option value="Fairy">Fairy</option>
+        <option value="Fighting">Fighting</option>
+        <option value="Fire">Fire</option>
+        <option value="Flying">Flying</option>
+        <option value="Ghost">Ghost</option>
+        <option value="Grass">Grass</option>
+        <option value="Ground">Ground</option>
+        <option value="Ice">Ice</option>
+        <option value="Normal">Normal</option>
+        <option value="Poison">Poison</option>
+        <option value="Psychic">Psychic</option>
+        <option value="Rock">Rock</option>
+        <option value="Steel">Steel</option>
+        <option value="Water">Water</option>
+      </select><br /><br />
+      <div id="resultsContainer"></div>
+      <!--Results output here by JQuery-->
+      <div style="overflow-x:auto;">
+      <table data-table-theme=gray><div id= "box"><br/><br/><br/></div></table>
+    </div>
+    <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
+    <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
+    <a style="color:#AED6F1" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+    
+    <!-- Footer Code Below -->
+    <div id="footer">
+      <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
+        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a> 
+        </tr>
+        <br/>
+        <tr><a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</tr>
+      </table>
+    </div>
+    <script>
+      
+      // Array with typings, built from https://imgur.com/PY95xi0
+      var types = {"Bug": {"W":["Fire", "Flying", "Rock"],"R":["Grass", "Ground", "Fighting"],"SE":["Dark", "Grass", "Psychic"],"NVE":["Fairy", "Fire", "Fighting", "Flying", "Ghost", "Poison", "Steel"]},"Dark": {"W":["Bug", "Fairy", "Fighting"],"R":["Dark", "Ghost", "Psychic"],"SE":["Ghost", "Psychic"],"NVE":["Dark", "Fairy", "Fighting"]},"Dragon": {"W":["Dragon", "Fairy", "Ice"],"R":["Electric", "Fire", "Grass", "Water"],"SE":["Dragon"],"NVE":["Fairy", "Steel"]},"Electric": {"W":["Ground"],"R":["Electric", "Flying", "Steel"],"SE":["Flying", "Water"],"NVE":["Dragon", "Electric", "Grass", "Ground"]},"Fairy": {"W":["Poison", "Steel"],"R":["Bug", "Dark", "Dragon", "Fighting"],"SE":["Dark", "Dragon", "Fighting"],"NVE":["Fire", "Poison", "Steel"]},"Fighting": {"W":["Fairy", "Flying", "Psychic"],"R":["Bug", "Dark", "Rock"],"SE":["Dark", "Ice", "Normal", "Rock", "Steel"],"NVE":["Bug", "Fairy", "Flying", "Ghost", "Poison", "Psychic"]},"Fire": {"W":["Ground", "Rock", "Water"],"R":["Bug", "Fairy", "Fire", "Grass", "Ice", "Steel"],"SE":["Bug", "Grass", "Ice", "Steel"],"NVE":["Dragon", "Fire", "Rock", "Water"]},"Flying": {"W":["Electric", "Ice", "Rock"],"R":["Bug", "Fighting", "Grass", "Ground"],"SE":["Bug", "Fighting", "Grass"],"NVE":["Electric", "Rock", "Steel"]},"Ghost": {"W":["Dark", "Ghost"],"R":["Bug", "Fighting", "Normal", "Poison"],"SE":["Ghost", "Psychic"],"NVE":["Dark", "Normal"]},"Grass": {"W":["Bug", "Fire", "Flying", "Ice", "Poison"],"R":["Electric", "Grass", "Ground", "Water"],"SE":["Ground", "Rock", "Water"],"NVE":["Bug", "Dragon", "Fire", "Flying", "Grass", "Poison", "Steel"]},"Ground": {"W":["Grass", "Ice", "Water"],"R":["Electric", "Poison", "Rock"],"SE":["Electric", "Fire", "Poison", "Rock", "Steel"],"NVE":["Bug", "Flying", "Grass"]},"Ice": {"W":["Fighting", "Fire", "Rock", "Steel"],"R":["Ice"],"SE":["Dragon", "Flying", "Grass", "Ground"],"NVE":["FIre", "Ice", "Steel", "Water"]},"Normal": {"W":["Fighting"],"R":["Ghost"],"SE":[""],"NVE":["Ghost", "Rock", "Steel"]},"Poison": {"W":["Ground", "Psychic"],"R":["Bug", "Fairy", "Fighting", "Grass", "Poison"],"SE":["Fairy", "Grass"],"NVE":["Ghost", "Ground", "Poison", "Rock", "Steel"]},"Psychic": {"W":["Bug", "Dark", "Ghost"],"R":["Fighting", "Psychic"],"SE":["Fighting", "Poison"],"NVE":["Dark", "Psychic", "Steel"]},"Rock": {"W":["Fighting", "Grass", "Ground", "Steel", "Water"],"R":["Fire", "Flying", "Normal", "Poison"],"SE":["Bug", "Fire", "Flying", "Ice"],"NVE":["Fighting", "Ground", "Steel"]},"Steel": {"W":["Fighting", "Fire", "Ground"],"R":["Bug", "Dragon", "Fairy", "Flying", "Grass", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel"],"SE":["Fairy", "Ice", "Rock"],"NVE":["Electric", "Fire", "Steel", "Water"]},"Water": {"W":["Electric", "Grass"],"R":["Fire", "Ice", "Steel", "Water"],"SE":["Fire", "Ground", "Rock"],"NVE":["Dragon", "Grass", "Water"]}};
+      //<th>Type1</th><th>-></th><th>mType</th><th>-></th><th>Type2</th>
+      
+      // Default to loading a table
+      $(document).ready(function(){
+        outputTable();
+      });
+      
+      // Change the table shown when the user selects a new type
+      $('#type').change(outputTable);
+      
+      function outputTable(){
+        $('#resultsContainer').empty();
+        var selectedType = $( "#type option:selected" ).text();
+        
+        $.each(types, function(typ, prop){
+          if (typ == selectedType){
+            console.log("Found typ = "+selectedType);
+            $.each(prop, function(k, v){
+              console.log("Found k="+k);
+              console.log("Found v="+v);
+              $("#resultsContainer").append('<p>'+k+'='+v+'<p>');
+            });
+          }else{
+            //console.log("Skipping typ = "+typ)
+          }
+        });
+      };
+      </script>
+      </body>
+    </div>
+  </div>
+</html>
