@@ -281,7 +281,7 @@ margin: 0 auto;
         } else {
         	document.title = "ShortcutIV - "+selectedType+"/"+secondType+" Type Chart"
         }
-        //console.log("Second Type selected is :"+secondType);
+        console.log("Second Type selected is :"+secondType);
         
         var type1, type2;
         var prop1, prop2;
@@ -356,7 +356,7 @@ margin: 0 auto;
                 }
             }
             
-            //console.log("With dupes:"+JSON.stringify(merged));
+            console.log("With dupes:"+JSON.stringify(merged));
             
             var wLength = parseFloat(merged["W"].length);
             //console.log("Entering loop with wLength="+wLength);
@@ -390,18 +390,16 @@ margin: 0 auto;
                         merged["Rx"].splice(j,1);
                         i--; // decrement to not skip entries
                         }
-                    }  else { //console.log ("Skipping "+merged["W"][i]+" and "+merged["R"][j]+" at i="+i+", j="+j);}
-                    }
-              }
-              //console.log("Merged dupes-result:"+JSON.stringify(merged));
-              
-              // Need to alphabetize merged dataset
-              
-              outputTable(merged, type1, type2);
+                    }  else { //console.log ("Skipping "+merged["W"][i]+" and "+merged["R"][j]+" at i="+i+", j="+j);
+                        }
+                }
             }
+            
+            console.log("Merged dupes-result:"+JSON.stringify(merged));
+            
+            outputTable(merged, type1, type2);
         }
-        
-        // Output the table to HTML for viewing
+        }
         function outputTable(prop, type1, type2){
             var topRow = Math.max(prop["W"].length, prop["SE"].length);
             var bottomRow = Math.max(prop["R"].length, prop["NVE"].length);
