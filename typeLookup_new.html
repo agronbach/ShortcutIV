@@ -358,9 +358,16 @@ margin: 0 auto;
             
             console.log("With dupes:"+JSON.stringify(merged));
             
+            var i,j;
+            var wLength = parseFloat(merged["W"].length);
+            var rLength = parseFloat(merged["R"].length);
+            console.log("Entering loop with wLength="+wLength);
+            console.log("Entering loop with rLength="+rLength);
             // merge duplicate entries in "W"/"Wx" with "R"/"Rx"
-            for (i=0; i<merged["W"].length; i++) {
-            	for (j=0; j<merged["R"].length; j++) {
+            for (i=0; i<wLength; i++) {
+            	//console.log("Outer loop is now comparing "+merged["W"][i]+" at i="+i);
+            	for (j=0; j<rLength; j++) {
+                	//console.log("Inner loop is now comparing "+merged["R"][j]+" at j="+j);
                 	if (merged["W"][i] === merged["R"][j]) {
                     	var product = Math.round(parseFloat((merged["Wx"][i]/1 * merged["Rx"][j]/1) + 0.00001) * 1000) / 1000;
                         
@@ -384,10 +391,11 @@ margin: 0 auto;
                         merged["R"].splice(j,1);
                         merged["Rx"].splice(j,1);
                         }
-                    }  else { console.log ("Skipping "+merged["W"][i]+" and "+merged["R"][j]);
+                    }  else { console.log ("Skipping "+merged["W"][i]+" and "+merged["R"][j]+" at i="+i+", j="+j);
                         }
                 }
             }
+            console.log("Finished nested loops with i="+i+", j="+j);
             
             
             console.log("Merged dupes-result:"+JSON.stringify(merged));
