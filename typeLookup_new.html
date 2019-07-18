@@ -281,7 +281,7 @@ margin: 0 auto;
         } else {
         	document.title = "ShortcutIV - "+selectedType+"/"+secondType+" Type Chart"
         }
-        console.log("Second Type selected is :"+secondType);
+        //console.log("Second Type selected is :"+secondType);
         
         var type1, type2;
         var prop1, prop2;
@@ -356,17 +356,14 @@ margin: 0 auto;
                 }
             }
             
-            console.log("With dupes:"+JSON.stringify(merged));
+            //console.log("With dupes:"+JSON.stringify(merged));
             
-            var i,j;
             var wLength = parseFloat(merged["W"].length);
-            var rLength = parseFloat(merged["R"].length);
-            console.log("Entering loop with wLength="+wLength);
-            console.log("Entering loop with rLength="+rLength);
+            //console.log("Entering loop with wLength="+wLength);
             // merge duplicate entries in "W"/"Wx" with "R"/"Rx"
             for (i=0; i<wLength; i++) {
             	//console.log("Outer loop is now comparing "+merged["W"][i]+" at i="+i);
-            	for (j=0; j<rLength; j++) {
+            	for (j=0; j<merged["R"].length; j++) {
                 	//console.log("Inner loop is now comparing "+merged["R"][j]+" at j="+j);
                 	if (merged["W"][i] === merged["R"][j]) {
                     	var product = Math.round(parseFloat((merged["Wx"][i]/1 * merged["Rx"][j]/1) + 0.00001) * 1000) / 1000;
@@ -384,25 +381,27 @@ margin: 0 auto;
                         merged["Rx"][j] = product/1;
                         merged["W"].splice(i,1);
                         merged["Wx"].splice(i,1);
+                        i--; // decrement to not skip entries
                         } else {
                         // This cancels out, delete both
                         merged["W"].splice(i,1);
                         merged["Wx"].splice(i,1);
                         merged["R"].splice(j,1);
                         merged["Rx"].splice(j,1);
+                        i--; // decrement to not skip entries
                         }
-                    }  else { console.log ("Skipping "+merged["W"][i]+" and "+merged["R"][j]+" at i="+i+", j="+j);
-                        }
-                }
+                    }  else { //console.log ("Skipping "+merged["W"][i]+" and "+merged["R"][j]+" at i="+i+", j="+j);}
+                    }
+              }
+              //console.log("Merged dupes-result:"+JSON.stringify(merged));
+              
+              // Need to alphabetize merged dataset
+              
+              outputTable(merged, type1, type2);
             }
-            console.log("Finished nested loops with i="+i+", j="+j);
-            
-            
-            console.log("Merged dupes-result:"+JSON.stringify(merged));
-            
-            outputTable(merged, type1, type2);
         }
-        }
+        
+        // Output the table to HTML for viewing
         function outputTable(prop, type1, type2){
             var topRow = Math.max(prop["W"].length, prop["SE"].length);
             var bottomRow = Math.max(prop["R"].length, prop["NVE"].length);
