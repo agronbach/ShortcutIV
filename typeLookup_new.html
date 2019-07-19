@@ -233,7 +233,7 @@ margin: 0 auto;
     <script>
       
       // Array with typings, built from https://imgur.com/PY95xi0
-      var types = {"Bug": {"W":["Fire", "Flying", "Rock"],"Wx":["1.6", "1.6", "1.6"],"R":["Fighting", "Ground", "Grass"],"Rx":["0.625", "0.625", "0.625"],"SE":["Dark", "Grass", "Psychic"],"SEx":["1.6", "1.6", "1.6"],"NVE":["Steel", "Poison", "Ghost", "Flying", "Fighting", "Fire", "Fairy"],"NVEx":["0.625", "0.625", "0.625", "0.625", "0.625", "0.625", "0.625"]},"Dark": {"W":["Bug", "Fairy", "Fighting"],"Wx":["1.6", "1.6", "1.6"],"R":["Psychic", "Ghost", "Dark"],"Rx":["0.391", "0.625", "0.625"],"SE":["Ghost", "Psychic"],"SEx":["1.6", "1.6"],"NVE":["Fighting", "Fairy", "Dark"],"NVEx":["0.625", "0.625", "0.625"]},"Dragon": {"W":["Dragon", "Fairy", "Ice"],"Wx":["1.6", "1.6", "1.6"],"R":["Water", "Grass", "Fire", "Electric"],"Rx":["0.625", "0.625", "0.625", "0.625"],"SE":["Dragon"],"SEx":["1.6"],"NVE":["Steel", "Fairy"],"NVEx":["0.625", "0.391"]},"Electric": {"W":["Ground"],"Wx":["1.6"],"R":["Steel", "Flying", "Electric"],"Rx":["0.625", "0.625", "0.625"],"SE":["Flying", "Water"],"SEx":["1.6", "1.6"],"NVE":["Ground", "Grass", "Electric", "Dragon"],"NVEx":["0.391", "0.625", "0.625", "0.625"]},"Fairy": {"W":["Poison", "Steel"],"Wx":["1.6", "1.6"],"R":["Fighting", "Dragon", "Dark", "Bug"],"Rx":["0.625", "0.391", "0.625", "0.625"],"SE":["Dark", "Dragon", "Fighting"],"SEx":["1.6", "1.6", "1.6"],"NVE":["Steel", "Poison", "Fire"],"NVEx":["0.625", "0.625", "0.625"]},"Fighting": {"W":["Fairy", "Flying", "Psychic"],"Wx":["1.6", "1.6", "1.6"],"R":["Rock", "Dark", "Bug"],"Rx":["0.625", "0.625", "0.625"],"SE":["Dark", "Ice", "Normal", "Rock", "Steel"],"SEx":["1.6", "1.6", "1.6", "1.6", "1.6"],"NVE":["Psychic", "Poison", "Ghost", "Flying", "Fairy", "Bug"],"NVEx":["0.625", "0.625", "0.391", "0.625", "0.625", "0.625"]},"Fire": {"W":["Ground", "Rock", "Water"],"Wx":["1.6", "1.6", "1.6"],"R":["Steel", "Ice", "Grass", "Fire", "Fairy", "Bug"],"Rx":["0.625", "0.625", "0.625", "0.625", "0.625", "0.625"],"SE":["Bug", "Grass", "Ice", "Steel"],"SEx":["1.6", "1.6", "1.6", "1.6"],"NVE":["Water", "Rock", "Fire", "Dragon"],"NVEx":["0.625", "0.625", "0.625", "0.625"]},"Flying": {"W":["Electric", "Ice", "Rock"],"Wx":["1.6", "1.6", "1.6"],"R":["Ground", "Grass", "Fighting", "Bug"],"Rx":["0.391", "0.625", "0.625", "0.625"],"SE":["Bug", "Fighting", "Grass"],"SEx":["1.6", "1.6", "1.6"],"NVE":["Steel", "Rock", "Electric"],"NVEx":["0.625", "0.625", "0.625"]},"Ghost": {"W":["Dark", "Ghost"],"Wx":["1.6", "1.6"],"R":["Poison", "Normal", "Fighting", "Bug"],"Rx":["0.625", "0.391", "0.391", "0.625"],"SE":["Ghost", "Psychic"],"SEx":["1.6", "1.6"],"NVE":["Normal", "Dark"],"NVEx":["0.391", "0.625"]},"Grass": {"W":["Bug", "Fire", "Flying", "Ice", "Poison"],"Wx":["1.6", "1.6", "1.6", "1.6", "1.6"],"R":["Water", "Ground", "Grass", "Electric"],"Rx":["0.625", "0.625", "0.625", "0.625"],"SE":["Ground", "Rock", "Water"],"SEx":["1.6", "1.6", "1.6"],"NVE":["Steel", "Poison", "Grass", "Flying", "Fire", "Dragon", "Bug"],"NVEx":["0.625", "0.625", "0.625", "0.625", "0.625", "0.625", "0.625"]},"Ground": {"W":["Grass", "Ice", "Water"],"Wx":["1.6", "1.6", "1.6"],"R":["Rock", "Poison", "Electric"],"Rx":["0.625", "0.625", "0.391"],"SE":["Electric", "Fire", "Poison", "Rock", "Steel"],"SEx":["1.6", "1.6", "1.6", "1.6", "1.6"],"NVE":["Grass", "Flying", "Bug"],"NVEx":["0.625", "0.391", "0.625"]},"Ice": {"W":["Fighting", "Fire", "Rock", "Steel"],"Wx":["1.6", "1.6", "1.6", "1.6"],"R":["Ice"],"Rx":["0.625"],"SE":["Dragon", "Flying", "Grass", "Ground"],"SEx":["1.6", "1.6", "1.6", "1.6"],"NVE":["Water", "Steel", "Ice", "Fire"],"NVEx":["0.625", "0.625", "0.625", "0.625"]},"Normal": {"W":["Fighting"],"Wx":["1.6"],"R":["Ghost"],"Rx":["0.391"],"SE":[undefined],"SEx":[undefined],"NVE":["Steel", "Rock", "Ghost"],"NVEx":["0.625", "0.625", "0.391"]},"Poison": {"W":["Ground", "Psychic"],"Wx":["1.6", "1.6"],"R":["Poison", "Grass", "Fighting", "Fairy", "Bug"],"Rx":["0.625", "0.625", "0.625", "0.625", "0.625"],"SE":["Fairy", "Grass"],"SEx":["1.6", "1.6"],"NVE":["Steel", "Rock", "Poison", "Ground", "Ghost"],"NVEx":["0.391", "0.625", "0.625", "0.625", "0.625"]},"Psychic": {"W":["Bug", "Dark", "Ghost"],"Wx":["1.6", "1.6", "1.6"],"R":["Psychic", "Fighting"],"Rx":["0.625", "0.625"],"SE":["Fighting", "Poison"],"SEx":["1.6", "1.6"],"NVE":["Steel", "Psychic", "Dark"],"NVEx":["0.625", "0.625", "0.391"]},"Rock": {"W":["Fighting", "Grass", "Ground", "Steel", "Water"],"Wx":["1.6", "1.6", "1.6", "1.6", "1.6"],"R":["Poison", "Normal", "Flying", "Fire"],"Rx":["0.625", "0.625", "0.625", "0.625"],"SE":["Bug", "Fire", "Flying", "Ice"],"SEx":["1.6", "1.6", "1.6", "1.6"],"NVE":["Steel", "Ground", "Fighting"],"NVEx":["0.625", "0.625", "0.625"]},"Steel": {"W":["Fighting", "Fire", "Ground"],"Wx":["1.6", "1.6", "1.6"],"R":["Steel", "Rock", "Psychic", "Poison", "Normal", "Ice", "Grass", "Flying", "Fairy", "Dragon", "Bug"],"Rx":["0.625", "0.625", "0.625", "0.391", "0.625", "0.625", "0.625", "0.625", "0.625", "0.625", "0.625"],"SE":["Fairy", "Ice", "Rock"],"SEx":["1.6", "1.6", "1.6"],"NVE":["Water", "Steel", "Fire", "Electric"],"NVEx":["0.625", "0.625", "0.625", "0.625"]},"Water": {"W":["Electric", "Grass"],"Wx":["1.6", "1.6"],"R":["Water", "Steel", "Ice", "Fire"],"Rx":["0.625", "0.625", "0.625", "0.625"],"SE":["Fire", "Ground", "Rock"],"SEx":["1.6", "1.6", "1.6"],"NVE":["Water", "Grass", "Dragon"],"NVEx":["0.625", "0.625", "0.625"]}};
+      var types = {"Bug":{"W":{"Fire":"1.6","Flying":"1.6","Rock":"1.6"},"R":{"Fighting":"0.625","Ground":"0.625","Grass":"0.625"},"SE":{"Dark":"1.6","Grass":"1.6","Psychic":"1.6"},"NVE":{"Steel":"0.625","Poison":"0.625","Ghost":"0.625","Flying":"0.625","Fighting":"0.625","Fire":"0.625","Fairy":"0.625"}},"Dark":{"W":{"Bug":"1.6","Fairy":"1.6","Fighting":"1.6"},"R":{"Psychic":"0.391","Ghost":"0.625","Dark":"0.625"},"SE":{"Ghost":"1.6","Psychic":"1.6"},"NVE":{"Fighting":"0.625","Fairy":"0.625","Dark":"0.625"}},"Dragon":{"W":{"Dragon":"1.6","Fairy":"1.6","Ice":"1.6"},"R":{"Water":"0.625","Grass":"0.625","Fire":"0.625","Electric":"0.625"},"SE":{"Dragon":"1.6"},"NVE":{"Steel":"0.625","Fairy":"0.391"}},"Electric":{"W":{"Ground":"1.6"},"R":{"Steel":"0.625","Flying":"0.625","Electric":"0.625"},"SE":{"Flying":"1.6","Water":"1.6"},"NVE":{"Ground":"0.391","Grass":"0.625","Electric":"0.625","Dragon":"0.625"}},"Fairy":{"W":{"Poison":"1.6","Steel":"1.6"},"R":{"Fighting":"0.625","Dragon":"0.391","Dark":"0.625","Bug":"0.625"},"SE":{"Dark":"1.6","Dragon":"1.6","Fighting":"1.6"},"NVE":{"Steel":"0.625","Poison":"0.625","Fire":"0.625"}},"Fighting":{"W":{"Fairy":"1.6","Flying":"1.6","Psychic":"1.6"},"R":{"Rock":"0.625","Dark":"0.625","Bug":"0.625"},"SE":{"Dark":"1.6","Ice":"1.6","Normal":"1.6","Rock":"1.6","Steel":"1.6"},"NVE":{"Psychic":"0.625","Poison":"0.625","Ghost":"0.391","Flying":"0.625","Fairy":"0.625","Bug":"0.625"}},"Fire":{"W":{"Ground":"1.6","Rock":"1.6","Water":"1.6"},"R":{"Steel":"0.625","Ice":"0.625","Grass":"0.625","Fire":"0.625","Fairy":"0.625","Bug":"0.625"},"SE":{"Bug":"1.6","Grass":"1.6","Ice":"1.6","Steel":"1.6"},"NVE":{"Water":"0.625","Rock":"0.625","Fire":"0.625","Dragon":"0.625"}},"Flying":{"W":{"Electric":"1.6","Ice":"1.6","Rock":"1.6"},"R":{"Ground":"0.391","Grass":"0.625","Fighting":"0.625","Bug":"0.625"},"SE":{"Bug":"1.6","Fighting":"1.6","Grass":"1.6"},"NVE":{"Steel":"0.625","Rock":"0.625","Electric":"0.625"}},"Ghost":{"W":{"Dark":"1.6","Ghost":"1.6"},"R":{"Poison":"0.625","Normal":"0.391","Fighting":"0.391","Bug":"0.625"},"SE":{"Ghost":"1.6","Psychic":"1.6"},"NVE":{"Normal":"0.391","Dark":"0.625"}},"Grass":{"W":{"Bug":"1.6","Fire":"1.6","Flying":"1.6","Ice":"1.6","Poison":"1.6"},"R":{"Water":"0.625","Ground":"0.625","Grass":"0.625","Electric":"0.625"},"SE":{"Ground":"1.6","Rock":"1.6","Water":"1.6"},"NVE":{"Steel":"0.625","Poison":"0.625","Grass":"0.625","Flying":"0.625","Fire":"0.625","Dragon":"0.625","Bug":"0.625"}},"Ground":{"W":{"Grass":"1.6","Ice":"1.6","Water":"1.6"},"R":{"Rock":"0.625","Poison":"0.625","Electric":"0.391"},"SE":{"Electric":"1.6","Fire":"1.6","Poison":"1.6","Rock":"1.6","Steel":"1.6"},"NVE":{"Grass":"0.625","Flying":"0.391","Bug":"0.625"}},"Ice":{"W":{"Fighting":"1.6","Fire":"1.6","Rock":"1.6","Steel":"1.6"},"R":{"Ice":"0.625"},"SE":{"Dragon":"1.6","Flying":"1.6","Grass":"1.6","Ground":"1.6"},"NVE":{"Water":"0.625","Steel":"0.625","Ice":"0.625","Fire":"0.625"}},"Normal":{"W":{"Fighting":"1.6"},"R":{"Ghost":"0.391"},"SE":{},"NVE":{"Steel":"0.625","Rock":"0.625","Ghost":"0.391"}},"Poison":{"W":{"Ground":"1.6","Psychic":"1.6"},"R":{"Poison":"0.625","Grass":"0.625","Fighting":"0.625","Fairy":"0.625","Bug":"0.625"},"SE":{"Fairy":"1.6","Grass":"1.6"},"NVE":{"Steel":"0.391","Rock":"0.625","Poison":"0.625","Ground":"0.625","Ghost":"0.625"}},"Psychic":{"W":{"Bug":"1.6","Dark":"1.6","Ghost":"1.6"},"R":{"Psychic":"0.625","Fighting":"0.625"},"SE":{"Fighting":"1.6","Poison":"1.6"},"NVE":{"Steel":"0.625","Psychic":"0.625","Dark":"0.391"}},"Rock":{"W":{"Fighting":"1.6","Grass":"1.6","Ground":"1.6","Steel":"1.6","Water":"1.6"},"R":{"Poison":"0.625","Normal":"0.625","Flying":"0.625","Fire":"0.625"},"SE":{"Bug":"1.6","Fire":"1.6","Flying":"1.6","Ice":"1.6"},"NVE":{"Steel":"0.625","Ground":"0.625","Fighting":"0.625"}},"Steel":{"W":{"Fighting":"1.6","Fire":"1.6","Ground":"1.6"},"R":{"Steel":"0.625","Rock":"0.625","Psychic":"0.625","Poison":"0.391","Normal":"0.625","Ice":"0.625","Grass":"0.625","Flying":"0.625","Fairy":"0.625","Dragon":"0.625","Bug":"0.625"},"SE":{"Fairy":"1.6","Ice":"1.6","Rock":"1.6"},"NVE":{"Water":"0.625","Steel":"0.625","Fire":"0.625","Electric":"0.625"}},"Water":{"W":{"Electric":"1.6","Grass":"1.6"},"R":{"Water":"0.625","Steel":"0.625","Ice":"0.625","Fire":"0.625"},"SE":{"Fire":"1.6","Ground":"1.6","Rock":"1.6"},"NVE":{"Water":"0.625","Grass":"0.625","Dragon":"0.625"}}};
       
       //<th>Type1</th><th>-></th><th>mType</th><th>-></th><th>Type2</th>
       
@@ -301,8 +301,8 @@ margin: 0 auto;
         });
         
         //console.log ("Type1 = "+type1+" and Type2 = "+type2);
-        //console.log ("Prop1 = "+JSON.stringify(prop1));
-        //console.log ("Prop2 = "+JSON.stringify(prop2));
+        console.log ("Prop1 = "+JSON.stringify(prop1));
+        console.log ("Prop2 = "+JSON.stringify(prop2));
         
         if ((type2 === undefined) || (type1 == type2)) {
         	outputTable(prop1, type1, "");
@@ -320,15 +320,11 @@ margin: 0 auto;
             
             // Remove SE/SEx and NVE/NVEx values
             delete merged["SE"];
-            delete merged["SEx"];
             delete merged["NVE"];
-            delete merged["NVEx"];
             
             // Add null to ensure code doesn't crash
-            merged["SE"] = [null];
-            merged["SEx"] = [null];
-            merged["NVE"] = [null];
-            merged["NVEx"] = [null];
+            merged["SE"] = null;
+            merged["NVE"] = null;
             
             //console.log("Merged pre-result:"+JSON.stringify(merged));
             
@@ -356,7 +352,7 @@ margin: 0 auto;
                 }
             }
             
-            console.log("With dupes:"+JSON.stringify(merged));
+            //console.log("With dupes:"+JSON.stringify(merged));
             
             var wLength = parseFloat(merged["W"].length);
             //console.log("Entering loop with wLength="+wLength);
@@ -368,7 +364,7 @@ margin: 0 auto;
                 	if (merged["W"][i] === merged["R"][j]) {
                     	var product = Math.round(parseFloat((merged["Wx"][i]/1 * merged["Rx"][j]/1) + 0.00001) * 1000) / 1000;
                         
-                        console.log ("Merged "+merged["W"][i]+" and "+merged["R"][j]+" = "+product);
+                        //console.log ("Merged "+merged["W"][i]+" and "+merged["R"][j]+" = "+product);
                         
                         // check the results of the merge
                         if (product/1 > 1) {
@@ -397,20 +393,59 @@ margin: 0 auto;
             
             console.log("Merged dupes-result:"+JSON.stringify(merged));
             
+            // Alphabetize "W"/"Wx" and "R"/"Rx"
+            var sortedW = merged["W"];
+            sortedW.sort();
+            var sortedR = merged["R"];
+            sortedR.sort();
+            
+            var isSorted = 0;
+            // check if merged["W"] needs to be sorted
+            for (i=0; i<merged["W"].length; i++) {
+            	if (sortedW[i] != merged["W"][i]) {
+                	console.log("Mismatch!");
+                	isSorted--;
+                } else {
+                console.log("sortedW[i]:"+sortedW[i]+" === merged['W'][i]:"+merged["W"][i]); }
+            }
+            
+            if (isSorted < 0) {
+            console.log ("merged['W'] needs sorting!");
+            console.log("merged['W']:"+JSON.stringify(merged["W"]));
+            console.log("sortedW:"+JSON.stringify(sortedW));
+            } else { console.log("merged['W'] is sorted!");}
+            
+            isSorted = 0;
+            // check if merged["R"] needs to be sorted
+            for (i=0; i<merged["R"].length; i++) {
+            	if (!(sortedR[i] === merged["R"][i])) {
+                	console.log("Mismatch!");
+                	isSorted--;
+                } else {
+                console.log("sortedR[i]:"+sortedR[i]+" === merged['R'][i]:"+merged["R"][i]); }
+            }
+            if (isSorted < 0) {
+            console.log ("merged['R'] needs sorting!");
+            console.log("merged['R']:"+JSON.stringify(merged["R"]));
+            console.log("sortedR:"+JSON.stringify(sortedR));
+            } else { console.log("merged['R'] is sorted!");}
+            
+            console.log("Merged dupes-sorted:"+JSON.stringify(merged));
+            
             outputTable(merged, type1, type2);
         }
         }
         function outputTable(prop, type1, type2){
-            var topRow = Math.max(prop["W"].length, prop["SE"].length);
-            var bottomRow = Math.max(prop["R"].length, prop["NVE"].length);
+            var topRow = Math.max(Object.keys(prop["W"]).length, Object.keys(prop["SE"]).length);
+            var bottomRow = Math.max(Object.keys(prop["R"]).length, Object.keys(prop["NVE"]).length);
             //console.log("Found topRow:"+topRow+" bottomRow:"+bottomRow);
             //console.log("prop = "+JSON.stringify(prop));
         
             // Output first row for selectedType
-            var Weak = prop["W"][0];
-            var xWeak = prop["Wx"][0];
-            var SuperEff = prop["SE"][0];
-            var xSuperEff = prop["SEx"][0];
+            var Weak = Object.keys(prop["W"])[0];
+            var xWeak = prop["W"][Weak];
+            var SuperEff = Object.keys(prop["SE"])[0]
+            var xSuperEff = prop["SE"][SuperEff];
         
         	if (type2 === undefined) {
             if (Weak && SuperEff) {
@@ -431,10 +466,10 @@ margin: 0 auto;
         
             // Output top half of the chart, skipping null entries
             for (i=1; i<topRow; i++){
-              var Weak = prop["W"][i];
-              var xWeak = prop["Wx"][i];
-              var SuperEff = prop["SE"][i];
-              var xSuperEff = prop["SEx"][i];
+              var Weak = Object.keys(prop["W"])[i];
+              var xWeak = prop["W"][Weak];
+              var SuperEff = Object.keys(prop["SE"])[i]
+              var xSuperEff = prop["SE"][SuperEff];
         
               if (Weak && SuperEff) {
                 $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
@@ -450,10 +485,10 @@ margin: 0 auto;
         
             // Output bottom half of the chart skipping null entries
             for (i=bottomRow-1; i>=0; i--){
-              var Resist = prop["R"][i];
-              var xResist = prop["Rx"][i];
-              var NotVeryEff = prop["NVE"][i];
-              var xNotVeryEff = prop["NVEx"][i];
+              var Resist = Object.keys(prop["R"])[i];
+              var xResist = prop["R"][Resist];
+              var NotVeryEff = Object.keys(prop["NVE"])[i]
+              var xNotVeryEff = prop["NVE"][NotVeryEff];
         
               if (Resist && NotVeryEff) {
                 $("#resultsContainer").append('<tr><td>'+Resist+'</td><td style="color:red">x'+xResist+'</td><td style="color:red">x'+xNotVeryEff+'</td><td>'+NotVeryEff+'</td></tr>');
