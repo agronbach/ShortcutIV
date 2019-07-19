@@ -419,19 +419,22 @@ margin: 0 auto;
             var SuperEff = Object.keys(prop.SE)[0]
             var xSuperEff = prop.SE[SuperEff];
         
-        	if (type2 === undefined) {
+        	if (type2 === 'undefined') {
             if (Weak && SuperEff) {
               $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td style="vertical-align:middle" rowspan='+(topRow+bottomRow+1)+'>'+type1+'</td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
-            } else if (Weak === undefined) {
+            } else if (Weak === 'undefined') {
               $("#resultsContainer").append('<tr><td> </td><td> </td><td rowspan='+(topRow+bottomRow+1)+'>'+type1+'</td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
             } else {
               $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td rowspan='+(topRow+bottomRow+1)+'>'+type1+'</td><td> </td><td> </td></tr>');
             }} else {
-            if (Weak && SuperEff) {
+            if ((SuperEff != 'undefined') && (Weak && SuperEff)) {
+            console.log("Found Weak:"+Weak+" && SuperEff:"+SuperEff);
               $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td rowspan='+(topRow+bottomRow+1)+'>'+type1+'</td><td style="vertical-align:middle" rowspan='+(topRow+bottomRow+1)+'>'+type2+'</td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
-            } else if (Weak === undefined) {
+            } else if (Weak === 'undefined') {
+            console.log("Found Weak === undefined && SuperEff:"+SuperEff);
               $("#resultsContainer").append('<tr><td> </td><td> </td><td rowspan='+(topRow+bottomRow+1)+'>'+type1+'</td><td rowspan='+(topRow+bottomRow+1)+'>'+type2+'</td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
             } else {
+            console.log("Found Weak:"+Weak+" && SuperEff === undefined");
               $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td rowspan='+(topRow+bottomRow+1)+'>'+type1+'</td><td rowspan='+(topRow+bottomRow+1)+'>'+type2+'</td><td> </td><td> </td></tr>');
             }
             }
@@ -443,9 +446,9 @@ margin: 0 auto;
               var SuperEff = Object.keys(prop.SE)[i]
               var xSuperEff = prop.SE[SuperEff];
         
-              if (Weak && SuperEff) {
+              if ((SuperEff != 'undefined') && (Weak && SuperEff)) {
                 $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
-              } else if (Weak === undefined) {
+              } else if (Weak === 'undefined') {
                 $("#resultsContainer").append('<tr><td> </td><td> </td><td style="color:green">x'+xSuperEff+'</td><td>'+SuperEff+'</td></tr>');
               } else {
                 $("#resultsContainer").append('<tr><td>'+Weak+'</td><td style="color:green">x'+xWeak+'</td><td> </td><td> </td></tr>');
@@ -464,7 +467,7 @@ margin: 0 auto;
         
               if (Resist && NotVeryEff) {
                 $("#resultsContainer").append('<tr><td>'+Resist+'</td><td style="color:red">x'+xResist+'</td><td style="color:red">x'+xNotVeryEff+'</td><td>'+NotVeryEff+'</td></tr>');
-              } else if (Resist === undefined) {
+              } else if (Resist === 'undefined') {
                 $("#resultsContainer").append('<tr><td> </td><td> </td><td style="color:red">x'+xNotVeryEff+'</td><td>'+NotVeryEff+'</td></tr>');
               } else {
                 $("#resultsContainer").append('<tr><td>'+Resist+'</td><td style="color:red">x'+xResist+'</td><td> </td><td> </td></tr>');
