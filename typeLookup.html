@@ -330,8 +330,8 @@ margin: 0 auto;
             for (i=0; i<keys1.length; i++) {
             	for (j=0; j<keys2.length; j++) {
                 	if (keys1[i] === keys2[j]) {
-                    	merged.W[keys1[i]] = Math.round(((merged.W[keys1[i]]/1 * merged.W[keys2[j]]/1) + 0.00001) * 1000) / 1000;
-                        console.log ("Merged "+[keys1[i]]+" = "+merged.W[keys1[i]]);
+                    	merged.W[keys1[i]] = Math.round(((prop1.W[keys1[i]]/1 * prop2.W[keys2[j]]/1) + 0.00001) * 1000) / 1000;
+                        //console.log ("Merged "+[keys1[i]]+" = "+merged.W[keys1[i]]);
                     }
                 }   
             }
@@ -343,8 +343,9 @@ margin: 0 auto;
             for (i=0; i<keys1.length; i++) {
             	for (j=0; j<keys2.length; j++) {
                 	if (keys1[i] === keys2[j]) {
-                    	merged.R[keys1[i]] = Math.round(((merged.R[keys1[i]]/1 * merged.R[keys2[j]]/1) + 0.00001) * 1000) / 1000;
-                        //console.log ("Merged "+[keys1[i]]+" = "+merged.R[keys1[i]]);
+                    //console.log ("Merged "+keys1[i]+" "+prop1.R[keys1[i]]/1+" * "+prop2.R[keys2[j]]+"=");
+                    	merged.R[keys1[i]] = Math.round(((prop1.R[keys1[i]]/1 * prop2.R[keys2[j]]/1) + 0.00001) * 1000) / 1000;
+                      //console.log ("="+merged.R[keys1[i]]);
                     }
                 }   
             }
