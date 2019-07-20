@@ -421,30 +421,11 @@ var types = {
 	}
 };
 
-function stylizeTable() {
-	$("#resultsContainer tr").each(function() {
-		$('td', this).each(function() {
-			$("td:contains('Bug')").addClass('Bug');
-			$("td:contains('Dark')").addClass('Dark');
-			$("td:contains('Dragon')").addClass('Dragon');
-			$("td:contains('Electric')").addClass('Electric');
-			$("td:contains('Fairy')").addClass('Fairy');
-			$("td:contains('Fighting')").addClass('Fighting');
-			$("td:contains('Fire')").addClass('Fire');
-			$("td:contains('Flying')").addClass('Flying');
-			$("td:contains('Ghost')").addClass('Ghost');
-			$("td:contains('Grass')").addClass('Grass');
-			$("td:contains('Ground')").addClass('Ground');
-			$("td:contains('Ice')").addClass('Ice');
-			$("td:contains('Normal')").addClass('Normal');
-			$("td:contains('Poison')").addClass('Poison');
-			$("td:contains('Psychic')").addClass('Psychic');
-			$("td:contains('Rock')").addClass('Rock');
-			$("td:contains('Steel')").addClass('Steel');
-			$("td:contains('Water')").addClass('Water');
-		})
-	})
-};
+function outputHTML() {
+	var inputs = collectInputs();
+	outputTable(inputs);
+	stylizeTable();
+}
 
 function collectInputs() {
 	$('#resultsContainer').empty();
@@ -480,7 +461,8 @@ function collectInputs() {
 	//console.log ("Prop2 = "+JSON.stringify(prop2));
 
 	if ((type2 === undefined) || (type1 == type2)) {
-		outputTable(prop1, type1);
+		return [prop1, type1]
+		//outputTable(prop1, type1);
 	} else {
 		// Need to merge type1 and type2 into one hash
 		var merged = "";
@@ -580,7 +562,8 @@ function collectInputs() {
 
 		//console.log("Merged dupes-sorted:"+JSON.stringify(prop));
 
-		outputTable(prop, type1, type2);
+		return [prop, type1, type2];
+		//outputTable(prop, type1, type2);
 	}
 }
 
@@ -654,3 +637,28 @@ function outputTable(prop, type1, type2) {
 	// Let's add colors to our table!  
 	stylizeTable();
 }
+
+function stylizeTable() {
+	$("#resultsContainer tr").each(function() {
+		$('td', this).each(function() {
+			$("td:contains('Bug')").addClass('Bug');
+			$("td:contains('Dark')").addClass('Dark');
+			$("td:contains('Dragon')").addClass('Dragon');
+			$("td:contains('Electric')").addClass('Electric');
+			$("td:contains('Fairy')").addClass('Fairy');
+			$("td:contains('Fighting')").addClass('Fighting');
+			$("td:contains('Fire')").addClass('Fire');
+			$("td:contains('Flying')").addClass('Flying');
+			$("td:contains('Ghost')").addClass('Ghost');
+			$("td:contains('Grass')").addClass('Grass');
+			$("td:contains('Ground')").addClass('Ground');
+			$("td:contains('Ice')").addClass('Ice');
+			$("td:contains('Normal')").addClass('Normal');
+			$("td:contains('Poison')").addClass('Poison');
+			$("td:contains('Psychic')").addClass('Psychic');
+			$("td:contains('Rock')").addClass('Rock');
+			$("td:contains('Steel')").addClass('Steel');
+			$("td:contains('Water')").addClass('Water');
+		})
+	})
+};
