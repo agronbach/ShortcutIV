@@ -214,11 +214,11 @@ margin: 0 auto;
         <option value="Rock">Rock</option>
         <option value="Steel">Steel</option>
         <option value="Water">Water</option>
-      </select>
-      <button class="mybuttons" id="button1">Check Answers</button><br /><br />
+      </select><br /><br />
       <table style="text-align:center" id="resultsContainer"></table>
       <!--Results output here by JQuery-->
       <div style="overflow-x:auto;">
+      <button class="mybuttons" id="button1">Check Answers</button><br /><br />
       <table><div id= "box"><br/><br/><br/></div></table>
     </div>
     <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
@@ -237,9 +237,9 @@ margin: 0 auto;
     <script>
 	// Default to loading a table
 	$(document).ready(function(){
+    	awaitInputs();
         $("#button1").click(function() {
-        	awaitInputs();
-            console.log("WEE!");
+            checkAnswers($('#type').val(), $('#type2').val());
             return;
         });
     });
@@ -248,50 +248,101 @@ margin: 0 auto;
 	$('#type').change(awaitInputs);
 	$('#type2').change(awaitInputs);
     
+    function checkAnswers(type1, type2)
+    {
+		// collect answers from select boxes
+		var selectValues = new Array();
+        $('#resultsContainer').find('.W').each(function() {
+        	console.log("Found:"+JSON.stringify($(this).val()));
+        	selectValues.push($(this).val());
+		});
+        
+        // remove "None" inputs
+        selectValues = jQuery.grep(selectValues, function(value) {
+        	return value != "None";
+        });
+        
+        console.log("Found:"+JSON.stringify(selectValues));
+        console.log("Answers:"+JSON.stringify(types[type1]));
+        console.log("Answers checked");
+        return;
+    }
+    
     function awaitInputs() {
     	var inputs = collectInputs();
-        buildTableFrame(inputs);
-        console.log("Inputs collected as:"+JSON.stringify(inputs));
+        buildTableFrame(inputs[0], inputs[1], inputs[2]);
+        //console.log("Inputs collected as:"+JSON.stringify(inputs));
+        stylizeTable();
         return;
     }
     
     function buildTableFrame(prop, type1, type2) {
-    	console.log("Hello");
-        return
-	}/*
+        	
 		var topRow = Math.max(Object.keys(prop.W).length, Object.keys(prop.SE).length);
 		var bottomRow = Math.max(Object.keys(prop.R).length, Object.keys(prop.NVE).length);
-		console.log("Found topRow:"+topRow+" bottomRow:"+bottomRow);
-		console.log("prop = "+JSON.stringify(prop));
-
-		// Output first row for selectedType
-        var Weak = Object.keys(prop.W)[0];
-        var xWeak = prop.W[Weak];
-        var SuperEff = Object.keys(prop.SE)[0]
-        var xSuperEff = prop.SE[SuperEff];
-
+		//console.log("bTF: Found topRow:"+topRow+" bottomRow:"+bottomRow);
+		//console.log("bTF: prop = "+JSON.stringify(prop));
+                
         // check if we are outputting one type or two
         if (typeof type2 === 'undefined') {
-            // we are outputting one type only
-            if (Weak && SuperEff) {
-                $("#resultsContainer").append('<tr><td>' + Weak + '</td><td style="color:green">x' + xWeak + '</td><td style="vertical-align:middle" rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td style="color:green">x' + xSuperEff + '</td><td>' + SuperEff + '</td></tr>');
-            } else if (typeof Weak === 'undefined') {
-                $("#resultsContainer").append('<tr><td> </td><td> </td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td style="color:green">x' + xSuperEff + '</td><td>' + SuperEff + '</td></tr>');
-            } else {
-                $("#resultsContainer").append('<tr><td>' + Weak + '</td><td style="color:green">x' + xWeak + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td> </td><td> </td></tr>');
-            }
+		// we are outputting one type only
+        $("#resultsContainer").append('<tr><td>' + typeBox("W","0") + '</td><td style="color:green">' + multBox("W","0") + '</td><td style="vertical-align:middle" rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td style="color:green">' + multBox("SE","0") + '</td><td>' + typeBox("SE","0") + '</td></tr>');
         } else {
-            // We have dual types, no SuperEff to output
-            if (Weak) {
-                //console.log("Found Weak:"+Weak+" && SuperEff:"+SuperEff);
-                $("#resultsContainer").append('<tr><td>' + Weak + '</td><td style="color:green">x' + xWeak + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type2 + '</td><td> </td><td> </td></tr>');
-            } else {
-                console.log("ERROR: Didn't find Weak?? (" + Weak);
-                $("#resultsContainer").append('<tr><td> </td><td style="color:green"> </td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type2 + '</td><td> </td><td> </td></tr>');
-            }
-        }
+        	// We have dual types, no SuperEff to output
+            $("#resultsContainer").append('<tr><td>' + typeBox("W","0") + '</td><td style="color:green">' + multBox("W","0") + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type2 + '</td><td> </td><td> </td></tr>');
+		}
+
+	// Output top half of the chart, skipping null entries
+	for (i = 1; i < topRow; i++) {
+		var Weak = Object.keys(prop.W)[i];
+		var xWeak = prop.W[Weak];
+		var SuperEff = Object.keys(prop.SE)[i]
+		var xSuperEff = prop.SE[SuperEff];
+
+		if ((typeof SuperEff !== 'undefined') && (Weak && SuperEff)) {
+        	$("#resultsContainer").append('<tr><td>' + typeBox("W",i) + '</td><td style="color:green">' + multBox("W",i) + '</td><td style="color:green">' + multBox("SE",i) + '</td><td>' + typeBox("SE",i) + '</td></tr>');
+        } else if (typeof Weak === 'undefined') {
+            $("#resultsContainer").append('<tr><td> </td><td> </td><td style="color:green">' + multBox("SE",i) + '</td><td>' + typeBox("SE",i) + '</td></tr>');
+		} else {
+			$("#resultsContainer").append('<tr><td>' + typeBox("W",i) + '</td><td style="color:green">' + multBox("W",i) + '</td><td> </td><td> </td></tr>');
+		}
+	}
+
+	// Output blank center row for padding
+	$("#resultsContainer").append('<tr><td> </td><td> </td><td> </td><td> </td></tr>');
+
+	// Output bottom half of the chart skipping null entries
+	for (i = 0; i < bottomRow; i++) {
+		var Resist = Object.keys(prop.R)[i];
+		var xResist = prop.R[Resist];
+		var NotVeryEff = Object.keys(prop.NVE)[i]
+		var xNotVeryEff = prop.NVE[NotVeryEff];
+
+		if (Resist && NotVeryEff) {
+			$("#resultsContainer").append('<tr><td>' + typeBox("R",i) + '</td><td style="color:red">' + multBox("NVE",i) + '</td><td style="color:red">' + multBox("R",i) + '</td><td>' + typeBox("NVE",i) + '</td></tr>');
+		} else if (typeof Resist === 'undefined') {
+			$("#resultsContainer").append('<tr><td> </td><td> </td><td style="color:red">' + multBox("NVE",i) + '</td><td>' + typeBox("NVE",i) + '</td></tr>');
+		} else {
+			$("#resultsContainer").append('<tr><td>' + typeBox("R",i) + '</td><td style="color:red">' + multBox("R",i) + '</td><td> </td><td> </td></tr>');
+	}
+		}
+        
         return;
-    }*/
+    }
+    // Save us some repetitive formatting...
+    function multBox (type, num) {
+    	if ((type == "SE") || (type == "W")) {
+    	var output = "<select class="+type+" id="+num+"><option value='1.6'>x1.6</option><option value='2.56'>x2.56</option><option value='None'>None</option></select>";
+        } else {
+        var output = "<select class="+type+" id="+num+"><option value='0.625'>x0.625</option><option value='0.391'>x0.391</option><option value='0.244'>x0.244</option><option value='None'>None</option></select>";
+        } return output;
+    }
+    // Save us some repetitive formatting...
+    function typeBox (type, num) {
+    	var output = "<select class="+type+" id="+num+"><option value='None'>None</option><option value='Bug'>Bug</option><option value='Dark'>Dark</option><option value='Dragon'>Dragon</option><option value='Electric'>Electric</option><option value='Fairy'>Fairy</option><option value='Fighting'>Fighting</option><option value='Fire'>Fire</option><option value='Flying'>Flying</option><option value='Ghost'>Ghost</option><option value='Grass'>Grass</option><option value='Ground'>Ground</option><option value='Ice'>Ice</option><option value='Normal'>Normal</option><option value='Poison'>Poison</option><option value='Psychic'>Psychic</option><option value='Rock'>Rock</option><option value='Steel'>Steel</option><option value='Water'>Water</option></select>";
+        //console.log("Generated typeBox ("+type+", "+num+") = "+output);
+      return output;
+    }
 	</script>
 	</body>
 	</div>
