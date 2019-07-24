@@ -433,9 +433,9 @@ function collectInputs() {
 	var secondType = $("#type2 option:selected").text();
 	if (secondType == "None") {
 		secondType = "";
-		document.title = "ShortcutIV - " + selectedType + " Type Chart"
+		document.title = "ShortcutIV - " + selectedType + " Type Chart";
 	} else {
-		document.title = "ShortcutIV - " + selectedType + "/" + secondType + " Type Chart"
+		document.title = "ShortcutIV - " + selectedType + "/" + secondType + " Type Chart";
 	}
 	console.log("Second Type selected is :" + secondType);
 
@@ -461,17 +461,17 @@ function collectInputs() {
 	//console.log ("Prop2 = "+JSON.stringify(prop2));
 
 	if ((type2 === undefined) || (type1 == type2)) {
-		return [prop1, type1]
+		return [prop1, type1];
 		//outputTable(prop1, type1);
 	} else {
 		return [mergeTypes(prop1, prop2), type1, type2];
-	} 
+	}
 }
 
 // Merge type1 and type2 into one object
 function mergeTypes(prop1, prop2) {
 	var merged = "";
-	var merged = JSON.parse(JSON.stringify(prop1));
+	merged = JSON.parse(JSON.stringify(prop1));
 	$.each(prop2, function(i, obj) {
 		$.each(obj, function(k, v) {
 			//console.log("Merging k="+k+" v="+v+" i="+i);
@@ -499,8 +499,8 @@ function mergeTypes(prop1, prop2) {
 	}
 
 	// merge duplicate entries in "R"
-	var keys1 = Object.keys(prop1.R);
-	var keys2 = Object.keys(prop2.R);
+	keys1 = Object.keys(prop1.R);
+	keys2 = Object.keys(prop2.R);
 
 	for (i = 0; i < keys1.length; i++) {
 		for (j = 0; j < keys2.length; j++) {
@@ -576,7 +576,7 @@ function outputTable(prop, type1, type2) {
 	// Output first row for selectedType
 	var Weak = Object.keys(prop.W)[0];
 	var xWeak = prop.W[Weak];
-	var SuperEff = Object.keys(prop.SE)[0]
+	var SuperEff = Object.keys(prop.SE)[0];
 	var xSuperEff = prop.SE[SuperEff];
 
 	// check if we are outputting one type or two
@@ -602,10 +602,10 @@ function outputTable(prop, type1, type2) {
 
 	// Output top half of the chart, skipping null entries
 	for (i = 1; i < topRow; i++) {
-		var Weak = Object.keys(prop.W)[i];
-		var xWeak = prop.W[Weak];
-		var SuperEff = Object.keys(prop.SE)[i]
-		var xSuperEff = prop.SE[SuperEff];
+		Weak = Object.keys(prop.W)[i];
+		xWeak = prop.W[Weak];
+		SuperEff = Object.keys(prop.SE)[i];
+		xSuperEff = prop.SE[SuperEff];
 
 		if ((typeof SuperEff !== 'undefined') && (Weak && SuperEff)) {
 			$("#resultsContainer").append('<tr><td>' + Weak + '</td><td style="color:green">x' + xWeak + '</td><td style="color:green">x' + xSuperEff + '</td><td>' + SuperEff + '</td></tr>');
@@ -634,7 +634,7 @@ function outputTable(prop, type1, type2) {
 			$("#resultsContainer").append('<tr><td>' + Resist + '</td><td style="color:red">x' + xResist + '</td><td> </td><td> </td></tr>');
 		}
 	}
-	// Let's add colors to our table!  
+	// Let's add colors to our table!
 	stylizeTable();
 }
 

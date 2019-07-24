@@ -1,7 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>ShortcutIV - PvP Rankings</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pokemon Go PvP IV search, lookup and compare your Pokemon's IVs to ideal PvP IVs. Supports PvP IVs for wild-caught, weather boosted, traded, raided, and hatched Pokemon. Did you catch the very best?"/>
+  <script src="https://shortcutIV.com/httpsRedirect.js"></script>
+  <!-- Includes for FavIcon support-->
+  <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favIcon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favIcon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favIcon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favIcon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favIcon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favIcon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favIcon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favIcon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/favIcon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favIcon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favIcon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favIcon/favicon-16x16.png">
+  <link rel="manifest" href="/favIcon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- End Includes for favIcon support-->
 <style>
 /* floating footer fix from: https://stackoverflow.com/questions/13881548/sticky-footer-hiding-content */
       html,
@@ -116,47 +139,30 @@ img {
 visibility: hidden;
 }
 </style>
-  <head>
-    <script>
-      // Force HTTPS if connected via HTTP -- https://stackoverflow.com/questions/4723213/detect-http-or-https-then-force-https-in-javascript
-      if (location.protocol != 'https:')
-      {
-        // get the URL for the HTTPS version of this page
-        var newURL = 'https:' + window.location.href.substring(window.location.protocol.length);
-        
-        // overwrite page to inform the user they are being redirected to HTTPS in case it hangs
-        javascript:document.open('text/html');document.write('<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>ShortcutIV - HTTP redirect to HTTPS</title></head><body><p>WARNING: Your connection is using HTTP and is not secure. You are now being redirected to a secure connection over HTTPS.<p><p>To speed up the process, you may <a href="'+newURL+'">click here</a><br><br>Please report this message to us via our discord <a href="https://discord.gg/UD4Temq"><strong>https://discord.gg/UD4Temq</strong></a> and let us know how this happened!</p></body><br><br></html>');document.close();
-
-        // redirect the user to the HTTPS version of the page
-        location.href = newURL;
-      }
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-141600603-1');
-    </script>
-    <!--Rest of Head-->
-    <!--title>ShortcutIV - PvP Rankings Calculator</title-->
-    <title>ShortcutIV - PvP Rankings Calculator</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
-  </head>
-  <div id="container">
-  <div id="body"><body>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'UA-141600603-1');
+  </script>
+  <!--Rest of Head-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
+</head>
+<body>
+<div id="container">
+  <div id="body">
     <form align=center>
       <div class="ui-widget">
         <input id="mon" placeholder="Pok&eacute;mon" required>
       </div>
      <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
       <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td title="What Level Floor to Search?">Lvl</td></tr>
-      <!--tr><td>IV</td> <td>IV</td> <td>IV</td> <td>Lvl</td></tr-->
       <td><select title="Your Attack IV" id="AttackIV">
         <option value="15">15</option>
         <option value="14">14</option>
@@ -325,7 +331,7 @@ visibility: hidden;
         <option value="500">500</option>
         <option value="1000">1000</option>
         <option value="4096">All</option>
-        </select></td> 
+        </select></td>
       </tr>
       </table>
       <table align=center cellspacing="0" cellpadding="4" data-table-theme=blank><tr>
@@ -347,7 +353,7 @@ visibility: hidden;
     <!-- Footer Code Below -->
     <div id="footer">
       <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
-        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a> 
+        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a>
         </tr>
         <br/>
         <tr><a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</tr>
@@ -933,7 +939,7 @@ visibility: hidden;
         //console.log("Back button pressed, passing e.state to setParamsfromURL");
         if (e.state) {
           //console.log("Passing e.state to setParamsfromURL");
-          setParamsfromURL(e.state); 
+          setParamsfromURL(e.state);
         } else {
           console.log("e.state does not exist, exiting popstate listener");
         }
@@ -1094,7 +1100,7 @@ visibility: hidden;
         var evoHtml = "";
         var evoHeader = "";
         // Check if there are any additional evolutions available
-        if (basestats[3]) 
+        if (basestats[3])
         {
           var extraEvos = parseFloat(basestats.length - 3);
           //console.log("Set extraEvos="+extraEvos+" as basestats.length("+basestats.length+") - 3 = "+parseFloat(basestats.length - 3));
@@ -1124,19 +1130,19 @@ visibility: hidden;
                 var evoTpp = SearchPokeIVs(baseAtk, baseDef, baseSta, league, 4096, minIVs, minLvl, maxLvl);
                 
                 // break ties for shown rows, and count total rows
-                for (var k=0; (k < 4096) && (tpp[k * 5 + 0]) ; k++)
+                for (var k=0; (k < 4096) && (tpp[k * 6 + 0]) ; k++)
                 {
                   if (k < tp)
                   {
-                  evoTpp = tieBreakByCP(evoTpp, k, parseFloat(k+1), parseFloat(evoTpp[k * 5 + 0]), parseFloat(evoTpp[k * 5 + 1]), parseFloat(evoTpp[k * 5 + 2]), parseFloat(evoTpp[k * 5 + 3]), parseFloat(evoTpp[k * 5 + 4]), parseFloat(evoTpp[(k+1) * 5 + 0]), parseFloat(evoTpp[(k+1) * 5 + 1]), parseFloat(evoTpp[(k+1) * 5 + 2]), parseFloat(evoTpp[(k+1) * 5 + 3]), parseFloat(evoTpp[(k+1) * 5 + 4]), baseAtk, baseDef, baseSta);
+                  evoTpp = tieBreakByCP(evoTpp, k, parseFloat(k+1), parseFloat(evoTpp[k * 6 + 0]), parseFloat(evoTpp[k * 6 + 1]), parseFloat(evoTpp[k * 6 + 2]), parseFloat(evoTpp[k * 6 + 3]), parseFloat(evoTpp[k * 6 + 4]), parseFloat(evoTpp[(k+1) * 6 + 0]), parseFloat(evoTpp[(k+1) * 6 + 1]), parseFloat(evoTpp[(k+1) * 6 + 2]), parseFloat(evoTpp[(k+1) * 6 + 3]), parseFloat(evoTpp[(k+1) * 6 + 4]), baseAtk, baseDef, baseSta);
                   }
                 }
                 totalEvoIVs = k;
 
                 // calcualte ideal PvP rank w/IVs + base stats * cpm[cpm offset from highest smm result]
-                var glA = (parseFloat(evoTpp[0 * 5 + 1])+parseFloat(baseAtk))*cpm[evoTpp[0 * 5 + 4]];
-                var glD = (parseFloat(evoTpp[0 * 5 + 2])+parseFloat(baseDef))*cpm[evoTpp[0 * 5 + 4]];
-                var glS = (parseFloat(evoTpp[0 * 5 + 3])+parseFloat(baseSta))*cpm[evoTpp[0 * 5 + 4]];
+                var glA = (parseFloat(evoTpp[0 * 6 + 1])+parseFloat(baseAtk))*cpm[evoTpp[0 * 6 + 4]];
+                var glD = (parseFloat(evoTpp[0 * 6 + 2])+parseFloat(baseDef))*cpm[evoTpp[0 * 6 + 4]];
+                var glS = (parseFloat(evoTpp[0 * 6 + 3])+parseFloat(baseSta))*cpm[evoTpp[0 * 6 + 4]];
                 var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
                 
                 // check if this evolution's cp is valid in this league with this minLvl
@@ -1169,48 +1175,48 @@ visibility: hidden;
         var maxAtkIVs = [0,0,0];
         var maxDefIVs = [0,0,0];
         var maxHPIVs = [0,0,0];
-        for (var i = 0; tpp[i * 5 + 0]; i++)
+        for (var i = 0; tpp[i * 6 + 0]; i++)
         {
           // Ensure we have the right maxStats
-          var CPM = cpm[tpp[i * 5 + 4]];
-          var tempAtk = ((parseFloat(tpp[i * 5 + 1])+parseFloat(basestats[0]))*CPM).toFixed(1);
-          var tempDef = ((parseFloat(tpp[i * 5 + 2])+parseFloat(basestats[1]))*CPM).toFixed(1);
-          var tempSta = Math.floor((parseFloat(tpp[i * 5 + 3])+parseFloat(basestats[2]))*CPM);
+          var CPM = cpm[tpp[i * 6 + 4]];
+          var tempAtk = ((parseFloat(tpp[i * 6 + 1])+parseFloat(basestats[0]))*CPM).toFixed(1);
+          var tempDef = ((parseFloat(tpp[i * 6 + 2])+parseFloat(basestats[1]))*CPM).toFixed(1);
+          var tempSta = Math.floor((parseFloat(tpp[i * 6 + 3])+parseFloat(basestats[2]))*CPM);
           
           if (Number(tempAtk) > Number(maxAtk)) {
             //console.log("tempAtk:"+tempAtk+" > "+maxAtk+":maxAtk, updated!");
             maxAtk = tempAtk;
-            maxAtkIVs[0] = parseFloat(tpp[i * 5 + 1]);
-            maxAtkIVs[1] = parseFloat(tpp[i * 5 + 2]);
-            maxAtkIVs[2] = parseFloat(tpp[i * 5 + 3]);
+            maxAtkIVs[0] = parseFloat(tpp[i * 6 + 1]);
+            maxAtkIVs[1] = parseFloat(tpp[i * 6 + 2]);
+            maxAtkIVs[2] = parseFloat(tpp[i * 6 + 3]);
           }
           if (Number(tempDef) > Number(maxDef)) {
             //console.log("tempDef:"+tempDef+" > "+maxDef+":maxDef, updated!");
             maxDef = tempDef;
-            maxDefIVs[0] = parseFloat(tpp[i * 5 + 1]);
-            maxDefIVs[1] = parseFloat(tpp[i * 5 + 2]);
-            maxDefIVs[2] = parseFloat(tpp[i * 5 + 3]);
+            maxDefIVs[0] = parseFloat(tpp[i * 6 + 1]);
+            maxDefIVs[1] = parseFloat(tpp[i * 6 + 2]);
+            maxDefIVs[2] = parseFloat(tpp[i * 6 + 3]);
           }
           if (Number(tempSta) > Number(maxHP)) {
             //console.log("tempSta:"+tempSta+" > "+maxHP+":maxHP, updated!");
-            //console.log("tempSta IVs were: "+maxHPIVs[0]+" "+maxHPIVs[1]+" "+maxHPIVs[2]+", new maxHP IVs:"+parseFloat(tpp[i * 5 + 1])+" "+parseFloat(tpp[i * 5 + 2])+" "+parseFloat(tpp[i * 5 + 3]));
+            //console.log("tempSta IVs were: "+maxHPIVs[0]+" "+maxHPIVs[1]+" "+maxHPIVs[2]+", new maxHP IVs:"+parseFloat(tpp[i * 6 + 1])+" "+parseFloat(tpp[i * 6 + 2])+" "+parseFloat(tpp[i * 6 + 3]));
             maxHP = tempSta;
-            maxHPIVs[0] = parseFloat(tpp[i * 5 + 1]);
-            maxHPIVs[1] = parseFloat(tpp[i * 5 + 2]);
-            maxHPIVs[2] = parseFloat(tpp[i * 5 + 3]);
+            maxHPIVs[0] = parseFloat(tpp[i * 6 + 1]);
+            maxHPIVs[1] = parseFloat(tpp[i * 6 + 2]);
+            maxHPIVs[2] = parseFloat(tpp[i * 6 + 3]);
           }
           // track how many rows we will print with "rows" and break ties for shown rows
-          if ((i < tp) && (tpp[i * 5 + 0]))
+          if ((i < tp) && (tpp[i * 6 + 0]))
           {
             rows = i+1; // fix off by 1 offset
-            tpp = tieBreakByCP(tpp, i, parseFloat(i+1), parseFloat(tpp[i * 5 + 0]), parseFloat(tpp[i * 5 + 1]), parseFloat(tpp[i * 5 + 2]), parseFloat(tpp[i * 5 + 3]), parseFloat(tpp[i * 5 + 4]), parseFloat(tpp[(i+1) * 5 + 0]), parseFloat(tpp[(i+1) * 5 + 1]), parseFloat(tpp[(i+1) * 5 + 2]), parseFloat(tpp[(i+1) * 5 + 3]), parseFloat(tpp[(i+1) * 5 + 4]), basestats[0], basestats[1], basestats[2]);
+            tpp = tieBreakByCP(tpp, i, parseFloat(i+1), parseFloat(tpp[i * 6 + 0]), parseFloat(tpp[i * 6 + 1]), parseFloat(tpp[i * 6 + 2]), parseFloat(tpp[i * 6 + 3]), parseFloat(tpp[i * 6 + 4]), parseFloat(tpp[(i+1) * 6 + 0]), parseFloat(tpp[(i+1) * 6 + 1]), parseFloat(tpp[(i+1) * 6 + 2]), parseFloat(tpp[(i+1) * 6 + 3]), parseFloat(tpp[(i+1) * 6 + 4]), basestats[0], basestats[1], basestats[2]);
           }
           totalIVs = i+1; // fix off by 1 offset
         }
         
         // Output header for Table now that we have updated all Max Stats
         // grab base URL
-        var url = window.location.href;   
+        var url = window.location.href;
         if (url.indexOf('?') > -1){
           // if we already have parameters in the URL, clear them and replace with these inputs
           url = url.split("?")[0]; // keep left of '?' (base URL)
@@ -1221,10 +1227,10 @@ visibility: hidden;
         var html = "<p>Your Top "+rows+" PvP "+pokemon+":<br><i>max Atk(<a href="+maxAtkurl+">"+maxAtk+"</a>), Def(<a href="+maxDefurl+">"+maxDef+"</a>), HP(<a href="+maxHPurl+">"+maxHP+"</a>)</i></p>";
         
         // calcualte ideal PvP rank using attack + base stat attack * cpm
-        var i = tpp[0 * 5 + 4]; // calculate cpm offset from highest smm result
-        var glA = (parseFloat(tpp[0 * 5 + 1])+parseFloat(basestats[0]))*cpm[i];
-        var glD = (parseFloat(tpp[0 * 5 + 2])+parseFloat(basestats[1]))*cpm[i];
-        var glS = (parseFloat(tpp[0 * 5 + 3])+parseFloat(basestats[2]))*cpm[i];
+        var i = tpp[0 * 6 + 4]; // calculate cpm offset from highest smm result
+        var glA = (parseFloat(tpp[0 * 6 + 1])+parseFloat(basestats[0]))*cpm[i];
+        var glD = (parseFloat(tpp[0 * 6 + 2])+parseFloat(basestats[1]))*cpm[i];
+        var glS = (parseFloat(tpp[0 * 6 + 3])+parseFloat(basestats[2]))*cpm[i];
         var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
                 
         // Call function to build first row of table
@@ -1246,11 +1252,12 @@ visibility: hidden;
         var bsd = bs[1];
         var bss = bs[2];
         // pull best rank from highest smm result (in tpp)
-        var rank = tpp[0 * 5 + 0];
+        var rank = tpp[0 * 6 + 0];
         // Compute combined (but not yet adjusted by cpm) stat totals
         var uA = parseFloat(aIV)+parseFloat(bsa);
         var uD = parseFloat(dIV)+parseFloat(bsd);
         var uS = parseFloat(sIV)+parseFloat(bss);
+        var Star = "NA";
         //console.log("AIV:"+aIV+" DIV:"+dIV+" SIV:"+sIV);
         //console.log("bsa:"+bsa+" bsd:"+bsd+" bss:"+bss);
         //console.log(">OUR: poke:"+pokemon+" recevied with pfct:"+pfct+", uA:"+uA+" uD:"+uD+" uS:"+uS+", calling GUSR...");
@@ -1262,17 +1269,18 @@ visibility: hidden;
         for (var i=0; i<4096; i++)
         {
           // store each rank until smm == rank
-          var rank = tpp[i * 5 + 0];
+          var rank = tpp[i * 6 + 0];
+          Star = tpp[i *6 + 5];
           
           // watch out for duplicate smm ranks!
           if (rank == smm)
           {
             // ensure this is the right matching smm
-            if ((aIV == tpp[i * 5 + 1]) && (dIV == tpp[i * 5 + 2]) && (sIV == tpp[i * 5 + 3]))
+            if ((aIV == tpp[i * 6 + 1]) && (dIV == tpp[i * 6 + 2]) && (sIV == tpp[i * 6 + 3]))
             {
               // found the correct rank! Store this for later calculations
               rank = i + 1; // offset by 1 to fix "0 rank"
-              var level = tpp[i * 5 + 4]; // get raw half-level count for cpm
+              var level = tpp[i * 6 + 4]; // get raw half-level count for cpm
               break;
             }
           }
@@ -1294,10 +1302,10 @@ visibility: hidden;
                 
         // add table header rows to output
         var html = "";
-        if (!pokemon) {html = "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
+        if (!pokemon) {html = "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>*</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
         
         // build table URL
-        var url = window.location.href;   
+        var url = window.location.href;
         if (url.indexOf('?') > -1){
           // if we already have parameters in the URL, clear them and replace with these inputs
           url = url.split("?")[0]; // keep left of '?' (base URL)
@@ -1324,7 +1332,8 @@ visibility: hidden;
         if (!pokemon) { // Skip printing user stats if we are printing evolutions
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>";} //Sta IV
+        html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
+        html+="<td style=\"text-align: center; vertical-align: middle;\">"+Star+"</td>";} //Star Appraisal
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uA.toFixed(1))+"</td>"; //GL Atk IV
         html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uD.toFixed(1))+"</td>"; //GL Def IV
@@ -1336,18 +1345,19 @@ visibility: hidden;
       }
       
       function buildTableRows(tpp, bsa, bsd, bss, pfct, tp)
-      { 
+      {
         var html = "";
         // Output Top "tp" number of PvP IVs, by generating each row of table individually in loop
-        for (i = 0; ((i < tp) && (tpp[i * 5 + 0])); i++)
+        for (i = 0; ((i < tp) && (tpp[i * 6 + 0])); i++)
         {
           html += "<tr>";
           var rank = i+1; // fix "rank 0" results by offsetting by 1
           // Get stats and level from tpp array
-          var aIV = tpp[i * 5 + 1];
-          var dIV = tpp[i * 5 + 2];
-          var sIV = tpp[i * 5 + 3];
-          var level = tpp[i * 5 + 4]; // keep at half-level for CPM calculations
+          var aIV = tpp[i * 6 + 1];
+          var dIV = tpp[i * 6 + 2];
+          var sIV = tpp[i * 6 + 3];
+          var level = tpp[i * 6 + 4]; // keep at half-level for CPM calculations
+          var Star = tpp[i * 6 + 5]; // Get Star Appraisal Rating for output
           
           // use level to convert to "battle stats" at PvP level
           var glA = (parseFloat(aIV)+parseFloat(bsa))*cpm[level];
@@ -1361,7 +1371,7 @@ visibility: hidden;
           var pcnt = (100 * glst / pfct).toFixed(3);
           
           // adjust to remove half-level offsets for output
-          level = level / 2 + 1; 
+          level = level / 2 + 1;
           
           // Output this row as html to build table
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
@@ -1370,11 +1380,12 @@ visibility: hidden;
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
+          html+="<td style=\"text-align: center; vertical-align: middle;\">"+Star+"</td>"; //Star Appraisal
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glA.toFixed(1))+"</td>"; //GL Atk IV
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glD.toFixed(1))+"</td>"; //GL Def IV
           html+="<td style=\"text-align: center; vertical-align: middle;\">"+Math.floor(glS)+"</td>"; //GL Sta IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(tpp[i * 5 + 0]).toFixed(0)+"</td>"; // Stat Product
+          html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(tpp[i * 6 + 0]).toFixed(0)+"</td>"; // Stat Product
           html+="</tr>";
         }
         html+="</table>"; // finish building the whole table
@@ -1422,29 +1433,30 @@ visibility: hidden;
     //var league = league // GL or UL CP cutoff
     var tp = numOfIVs // total IVs to find
     //console.log("SPIV: Got ba0:"+ba0+" bd0:"+bd0+" bs0:"+bs0+" league:"+league+" tp:"+tp+" minIVs:"+minIVs+" adjMinLvl:"+adjMinLvl+" adjMaxLvl:"+adjMaxLvl);
-    var tq = 5 * tp // total number of nested IV combinations to store: smm (rank)/A/D/S/L
+    var tq = 6 * tp // total number of nested IV combinations to store: smm (rank)/A/D/S/L/*
     var cp = 4000
     var smm = 1000
     var n = 0
-    var n5 = 5 * n
+    var n6 = 6 * n
     // tpp: nested sorted Array of Top PvP IVs
-    // smm | Attack | Defense | Stamina | Level
-    var tpp = new Array(tq+6).join('0').split('').map(parseFloat)
-    // Output tpp as [0, 0, 0, ... 0, 0] tq+5 times
-    // 5 slot buffer is for merging in next best IVs 
+    // smm | Attack | Defense | Stamina | Level | Star rating
+    var tpp = new Array(tq+7).join('0').split('').map(parseFloat)
+    // Output tpp as [0, 0, 0, ... 0, 0] tq+6 times
+    // 6 slot buffer is for merging in next best IVs
 
     // Declare Loop Variables
     var a = 15; // Pokémon attack counter
     var s = 15; // Pokémon stamina counter
     var d = 15; // Pokémon defense counter
     var L = adjMaxLvl; // Pokémon level counter
+    var Star = "NA"; // Track pokemon appraisal (0*/1*/2*/3*/4*)
     var glA;
     var glD;
     var glS;
 
     // calculate CPs w/various Attack (a), Stamina (s), Defense (d) IVs across levels (L), with CPM look up array
     // 4 Loops run 16 x 16 x 16 x 79 = 323,583 for IVs 0-15 and levels 0-40 (w/half levels)
-    for (a = 15; a >= minIVs; a--) 
+    for (a = 15; a >= minIVs; a--)
     {
       for (s = 15; s >= minIVs; s--)
       {
@@ -1472,20 +1484,34 @@ visibility: hidden;
               {
                 //console.log("SPIV: Storing...");
                 // found a new best IV set! Storing...
-                for (n = 0; n < tp; n++) 
+                
+                // Calculate Star Appraisal Rating for Storing
+                var IVsum = a/1 + d/1 + s/1
+                if (IVsum < 23) {
+                  Star = "0*";
+                } else if (IVsum < 30) {
+                  Star = "1*";
+                } else if (IVsum < 40) {
+                  Star = "2*";
+                } else if (IVsum < 45) {
+                  Star = "3*";
+                } else {
+                  Star = "4*";
+                }
+                for (n = 0; n < tp; n++)
                 {
 
-                  n5 = 5 * n // get old smm index
+                  n6 = 6 * n // get old smm index
                   // Is new smm better than stored smm?
-                  if (smm >= tpp[n5])
+                  if (smm >= tpp[n6])
                   {
                     // Insert new high rank smm/stats/level at this index
-                    tpp.splice(n5, 0, smm, a, d, s, L)
+                    tpp.splice(n6, 0, smm, a, d, s, L, Star)
                     // Did we save too many Top IVs?
                     if (tpp.length > tq)
                     {
                       // remove old highest smm/stats/level
-                      for (var i = tpp.length - tq - 5 ; i > 0; i--)
+                      for (var i = tpp.length - tq - 6 ; i > 0; i--)
                       {
                         tpp.pop()
                       }
@@ -1499,7 +1525,7 @@ visibility: hidden;
             } // Skip next iterations of loop as we already found the max cp
     }}}} // end of quad loop
     // window.addEventListener('load', calculate, false);
-    // pass nested Array of Top IVs 
+    // pass nested Array of Top IVs
     // calculate(tpp);
   //console.log("SPIV: Finished! TPP is:");
   //console.log(JSON.stringify(tpp));
@@ -1509,7 +1535,7 @@ visibility: hidden;
       // function used to verify if the User's Inputs will return NaN (if they are impossible)
       // will return true if it detects a NaN case, otherwise will return false
       function checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl)
-      {        
+      {
         // check if user IVs are not less than minIVs
         if (((AttackIV/1) < (minIVs/1)) || ((DefenseIV/1) < (minIVs/1)) || ((StaminaIV/1) < (minIVs/1)))
         {
@@ -1556,19 +1582,19 @@ visibility: hidden;
           if (cp0 < cp1)
           {
             //console.log("Swapping cp0:"+cp0+"at row:"+rows+" with cp1:"+cp1+"at row:"+nextRow);
-            tpp[rows * 5 + 0] = nexSMM;
-            tpp[rows * 5 + 1] = nexAtk;
-            tpp[rows * 5 + 2] = nexDef;
-            tpp[rows * 5 + 3] = nexStm;
-            tpp[rows * 5 + 4] = nexLvl;
-            tpp[nextRow * 5 + 0] = curSMM;
-            tpp[nextRow * 5 + 1] = curAtk;
-            tpp[nextRow * 5 + 2] = curDef;
-            tpp[nextRow * 5 + 3] = curStm;
-            tpp[nextRow * 5 + 4] = curLvl;
+            tpp[rows * 6 + 0] = nexSMM;
+            tpp[rows * 6 + 1] = nexAtk;
+            tpp[rows * 6 + 2] = nexDef;
+            tpp[rows * 6 + 3] = nexStm;
+            tpp[rows * 6 + 4] = nexLvl;
+            tpp[nextRow * 6 + 0] = curSMM;
+            tpp[nextRow * 6 + 1] = curAtk;
+            tpp[nextRow * 6 + 2] = curDef;
+            tpp[nextRow * 6 + 3] = curStm;
+            tpp[nextRow * 6 + 4] = curLvl;
               
-            //console.log("after--"+rows+": "+tpp[rows * 5 + 0]+"-"+tpp[rows * 5 + 1]+"-"+tpp[rows * 5 + 2]+"-"+tpp[rows * 5 + 3]+"-"+tpp[rows * 5 + 4]);
-            //console.log("after--"+nextRow+": "+tpp[nextRow * 5 + 0]+"-"+tpp[nextRow * 5 + 1]+"-"+tpp[nextRow * 5 + 2]+"-"+tpp[nextRow * 5 + 3]+"-"+tpp[nextRow * 5 + 4]);
+            //console.log("after--"+rows+": "+tpp[rows * 6 + 0]+"-"+tpp[rows * 6 + 1]+"-"+tpp[rows * 6 + 2]+"-"+tpp[rows * 6 + 3]+"-"+tpp[rows * 6 + 4]);
+            //console.log("after--"+nextRow+": "+tpp[nextRow * 6 + 0]+"-"+tpp[nextRow * 6 + 1]+"-"+tpp[nextRow * 6 + 2]+"-"+tpp[nextRow * 6 + 3]+"-"+tpp[nextRow * 6 + 4]);
           }
         }
         return tpp;
