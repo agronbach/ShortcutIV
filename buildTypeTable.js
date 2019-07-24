@@ -464,107 +464,107 @@ function collectInputs() {
 		return [prop1, type1]
 		//outputTable(prop1, type1);
 	} else {
-		// Need to merge type1 and type2 into one hash
-		var merged = "";
-		var merged = JSON.parse(JSON.stringify(prop1));
-		$.each(prop2, function(i, obj) {
-			$.each(obj, function(k, v) {
-				//console.log("Merging k="+k+" v="+v+" i="+i);
-				merged[i][k] = v;
-			});
+		return [mergeTypes(prop1, prop2), type1, type2];
+	} 
+}
+
+// Merge type1 and type2 into one object
+function mergeTypes(prop1, prop2) {
+	var merged = "";
+	var merged = JSON.parse(JSON.stringify(prop1));
+	$.each(prop2, function(i, obj) {
+		$.each(obj, function(k, v) {
+			//console.log("Merging k="+k+" v="+v+" i="+i);
+			merged[i][k] = v;
 		});
+	});
 
-		// Remove SE and NVE values
-		delete merged.SE;
-		delete merged.NVE;
+	// Remove SE and NVE values
+	delete merged.SE;
+	delete merged.NVE;
 
-		//console.log("Merged pre-result:"+JSON.stringify(merged));
+	//console.log("Merged pre-result:"+JSON.stringify(merged));
 
-		// merge duplicate entries in "W"
-		var keys1 = Object.keys(prop1.W);
-		var keys2 = Object.keys(prop2.W);
+	// merge duplicate entries in "W"
+	var keys1 = Object.keys(prop1.W);
+	var keys2 = Object.keys(prop2.W);
 
-		for (i = 0; i < keys1.length; i++) {
-			for (j = 0; j < keys2.length; j++) {
-				if (keys1[i] === keys2[j]) {
-					merged.W[keys1[i]] = Math.round(((prop1.W[keys1[i]] / 1 * prop2.W[keys2[j]] / 1) + 0.00001) * 1000) / 1000;
-					//console.log ("Merged "+[keys1[i]]+" = "+merged.W[keys1[i]]);
-				}
+	for (i = 0; i < keys1.length; i++) {
+		for (j = 0; j < keys2.length; j++) {
+			if (keys1[i] === keys2[j]) {
+				merged.W[keys1[i]] = Math.round(((prop1.W[keys1[i]] / 1 * prop2.W[keys2[j]] / 1) + 0.00001) * 1000) / 1000;
+				//console.log ("Merged "+[keys1[i]]+" = "+merged.W[keys1[i]]);
 			}
 		}
-
-		// merge duplicate entries in "R"
-		var keys1 = Object.keys(prop1.R);
-		var keys2 = Object.keys(prop2.R);
-
-		for (i = 0; i < keys1.length; i++) {
-			for (j = 0; j < keys2.length; j++) {
-				if (keys1[i] === keys2[j]) {
-					//console.log ("Merged "+keys1[i]+" "+prop1.R[keys1[i]]/1+" * "+prop2.R[keys2[j]]+"=");
-					merged.R[keys1[i]] = Math.round(((prop1.R[keys1[i]] / 1 * prop2.R[keys2[j]] / 1) + 0.00001) * 1000) / 1000;
-					//console.log ("="+merged.R[keys1[i]]);
-				}
-			}
-		}
-
-		//console.log("Merged dupes:"+JSON.stringify(merged));
-
-		var keysW = Object.keys(merged.W);
-		var keysR = Object.keys(merged.R);
-		//console.log("keysW("+keysW.length+":"+keysW);
-		//console.log("keysR("+keysR.length+":"+keysR);
-
-		for (i = 0; i < (Object.keys(merged.W)).length; i++) {
-			for (j = 0; j < (Object.keys(merged.R)).length; j++) {
-				if (Object.keys(merged.W)[i] === Object.keys(merged.R)[j]) {
-					var product = Math.round(((merged.W[Object.keys(merged.W)[i]] / 1 * merged.R[Object.keys(merged.R)[j]] / 1) + 0.00001) * 1000) / 1000;
-					//console.log ("Merged "+Object.keys(merged.W)[i]+"("+merged.W[Object.keys(merged.W)[i]]/1+") and "+Object.keys(merged.R)[j]+"("+merged.R[Object.keys(merged.R)[j]]/1+") = "+product);
-
-					// check the results of the merge
-					if (product / 1 > 1) {
-						// This is still a weakness
-						merged.W[Object.keys(merged.W)[i]] = product / 1;
-						delete merged.R[Object.keys(merged.R)[j]];
-					} else if (product / 1 < 1) {
-						// This is still a resistance
-						merged.R[Object.keys(merged.R)[j]] = product / 1;
-						delete merged.W[Object.keys(merged.W)[i]];
-						i--; // decrement to not skip entries
-					} else {
-						// This cancels out, delete both
-						delete merged.W[Object.keys(merged.W)[i]];
-						delete merged.R[Object.keys(merged.R)[j]];
-						i--; // decrement to not skip entries
-					}
-				}
-			}
-		}
-
-		//console.log("Reduced result:"+JSON.stringify(merged));
-
-		const prop = {};
-		prop.W = {};
-		prop.R = {};
-
-		// Add empty sets so output code doesn't crash
-		prop.SE = {};
-		prop.NVE = {};
-
-		// Alphabetize "W"
-		Object.keys(merged.W).sort().forEach(function(key) {
-			prop.W[key] = merged.W[key];
-		});
-
-		// Alphabetize "R"
-		Object.keys(merged.R).sort().forEach(function(key) {
-			prop.R[key] = merged.R[key];
-		});
-
-		//console.log("Merged dupes-sorted:"+JSON.stringify(prop));
-
-		return [prop, type1, type2];
-		//outputTable(prop, type1, type2);
 	}
+
+	// merge duplicate entries in "R"
+	var keys1 = Object.keys(prop1.R);
+	var keys2 = Object.keys(prop2.R);
+
+	for (i = 0; i < keys1.length; i++) {
+		for (j = 0; j < keys2.length; j++) {
+			if (keys1[i] === keys2[j]) {
+				//console.log ("Merged "+keys1[i]+" "+prop1.R[keys1[i]]/1+" * "+prop2.R[keys2[j]]+"=");
+				merged.R[keys1[i]] = Math.round(((prop1.R[keys1[i]] / 1 * prop2.R[keys2[j]] / 1) + 0.00001) * 1000) / 1000;
+				//console.log ("="+merged.R[keys1[i]]);
+			}
+		}
+	}
+
+	//console.log("Merged dupes:"+JSON.stringify(merged));
+
+	var keysW = Object.keys(merged.W);
+	var keysR = Object.keys(merged.R);
+	//console.log("keysW("+keysW.length+":"+keysW);
+	//console.log("keysR("+keysR.length+":"+keysR);
+
+	for (i = 0; i < (Object.keys(merged.W)).length; i++) {
+		for (j = 0; j < (Object.keys(merged.R)).length; j++) {
+			if (Object.keys(merged.W)[i] === Object.keys(merged.R)[j]) {
+				var product = Math.round(((merged.W[Object.keys(merged.W)[i]] / 1 * merged.R[Object.keys(merged.R)[j]] / 1) + 0.00001) * 1000) / 1000;
+				//console.log ("Merged "+Object.keys(merged.W)[i]+"("+merged.W[Object.keys(merged.W)[i]]/1+") and "+Object.keys(merged.R)[j]+"("+merged.R[Object.keys(merged.R)[j]]/1+") = "+product);
+
+				// check the results of the merge
+				if (product / 1 > 1) {
+					// This is still a weakness
+					merged.W[Object.keys(merged.W)[i]] = product / 1;
+					delete merged.R[Object.keys(merged.R)[j]];
+				} else if (product / 1 < 1) {
+					// This is still a resistance
+					merged.R[Object.keys(merged.R)[j]] = product / 1;
+					delete merged.W[Object.keys(merged.W)[i]];
+					i--; // decrement to not skip entries
+				} else {
+					// This cancels out, delete both
+					delete merged.W[Object.keys(merged.W)[i]];
+					delete merged.R[Object.keys(merged.R)[j]];
+					i--; // decrement to not skip entries
+				}
+			}
+		}
+	}
+
+	//console.log("Reduced result:"+JSON.stringify(merged));
+
+	const prop = {};
+	prop.W = {};
+	prop.R = {};
+
+	// Add empty sets so output code doesn't crash
+	prop.SE = {};
+	prop.NVE = {};
+
+	// Alphabetize "W"
+	Object.keys(merged.W).sort().forEach(function(key) {
+		prop.W[key] = merged.W[key];
+	});
+
+	// Alphabetize "R"
+	Object.keys(merged.R).sort().forEach(function(key) {
+		prop.R[key] = merged.R[key];
+	});
+	return prop;
 }
 
 function outputTable(prop, type1, type2) {
