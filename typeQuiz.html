@@ -68,7 +68,7 @@ table {
   border-collapse: collapse;
   width: 350px;
   table-layout: auto;
-  margin-left:auto; 
+  margin-left:auto;
   margin-right:auto;
 }
 
@@ -83,7 +83,7 @@ display: block;
 margin: 0 auto;
 }
   
-/* Color reference: http://www.epidemicjohto.com/t882-type-colors-hex-colors */  
+/* Color reference: http://www.epidemicjohto.com/t882-type-colors-hex-colors */
 .Bug {
     background: #A6B91A;
 }
@@ -243,7 +243,7 @@ margin: 0 auto;
     <!-- Footer Code Below -->
     <div id="footer">
       <table align=center cellspacing="0" cellpadding="0">
-        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a> 
+        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a>
         </tr>
         <br/>
         <tr><a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</tr>
@@ -254,6 +254,7 @@ margin: 0 auto;
 	$(document).ready(function(){
     	awaitInputs();
         $("#button1").click(function() {
+          console.log($('#type2').val());
             if (checkAnswers($('#type').val(), $('#type2').val()))
             {
             	alert("Congratulations, that's correct!");
@@ -282,9 +283,10 @@ margin: 0 auto;
     
     function checkAnswers(type1, type2)
     {
+      console.log("cA: received type1:'"+type1+"' and type2:'"+type2+"'");
 		// collect answers from select boxes
 		var selectValues = {"W":{},"R":{},"SE":{},"NVE":{}};
-        if (typeof type2 === 'undefined') {
+        if (type2 == "None") {
         	var answerKey = types[type1];
         } else {
         	var answerKey = mergeTypes(types[type1],types[type2]);
@@ -320,9 +322,9 @@ margin: 0 auto;
         var wAnswers = Object.keys(answerKey.W);
         for (i=0; i<wInputs.length; i++)
         {
-        	if (wInputs[i] != wAnswers[i]) { 
+        	if (wInputs[i] != wAnswers[i]) {
             	console.log("Incorrect weakness: " +wInputs[i]);
-                return false; 
+                return false;
             } else if (selectValues.W[wInputs[i]] != answerKey.W[wAnswers[i]]) {
             console.log("Incorrect weakness multiplier for :"+wInputs[i]);
             return false;
@@ -332,9 +334,9 @@ margin: 0 auto;
         var rAnswers = Object.keys(answerKey.R);
         for (i=0; i<rInputs.length; i++)
         {
-        	if (rInputs[i] != rAnswers[i]) { 
+        	if (rInputs[i] != rAnswers[i]) {
             	console.log("Incorrect resistance: " +rInputs[i]);
-                return false; 
+                return false;
             } else if (selectValues.R[rInputs[i]] != answerKey.R[rAnswers[i]]) {
             console.log("Incorrect resistance multiplier for :"+rInputs[i]);
             return false;
@@ -344,9 +346,9 @@ margin: 0 auto;
         var seAnswers = Object.keys(answerKey.SE);
         for (i=0; i<seInputs.length; i++)
         {
-        	if (seInputs[i] != seAnswers[i]) { 
+        	if (seInputs[i] != seAnswers[i]) {
             	console.log("Incorrect super effective type: " +seInputs[i]);
-                return false; 
+                return false;
             } else if (selectValues.SE[seInputs[i]] != answerKey.SE[seAnswers[i]]) {
             console.log("Incorrect super effective multiplier for :"+seInputs[i]);
             return false;
@@ -356,9 +358,9 @@ margin: 0 auto;
         var nveAnswers = Object.keys(answerKey.NVE);
         for (i=0; i<nveInputs.length; i++)
         {
-        	if (nveInputs[i] != nveAnswers[i]) { 
+        	if (nveInputs[i] != nveAnswers[i]) {
             	console.log("Incorrect not very effective type: " +nveInputs[i]);
-                return false; 
+                return false;
             } else if (selectValues.NVE[nveInputs[i]] != answerKey.NVE[nveAnswers[i]]) {
             console.log("Incorrect not very effective multiplier for :"+nveInputs[i]);
             return false;
@@ -455,6 +457,7 @@ margin: 0 auto;
     function getAnswers(hash, type) {
     	//console.log("gA: Received type:"+type+" and hash:"+JSON.stringify(hash));
     	var selectValues = {};
+    	var typeBuffer = "";
         selectValues[type] = {};
         
         if ((type == "W") || (type == "R")) {
@@ -503,108 +506,8 @@ margin: 0 auto;
         //console.log("Generated typeBox ("+type+", "+num+") = "+output);
       return output;
     }
-    
-    // Merge type1 and type2 into one object
-function mergeTypes(prop1, prop2) {
-	var merged = "";
-	var merged = JSON.parse(JSON.stringify(prop1));
-	$.each(prop2, function(i, obj) {
-		$.each(obj, function(k, v) {
-			//console.log("Merging k="+k+" v="+v+" i="+i);
-			merged[i][k] = v;
-		});
-	});
-
-	// Remove SE and NVE values
-	delete merged.SE;
-	delete merged.NVE;
-
-	//console.log("Merged pre-result:"+JSON.stringify(merged));
-
-	// merge duplicate entries in "W"
-	var keys1 = Object.keys(prop1.W);
-	var keys2 = Object.keys(prop2.W);
-
-	for (i = 0; i < keys1.length; i++) {
-		for (j = 0; j < keys2.length; j++) {
-			if (keys1[i] === keys2[j]) {
-				merged.W[keys1[i]] = Math.round(((prop1.W[keys1[i]] / 1 * prop2.W[keys2[j]] / 1) + 0.00001) * 1000) / 1000;
-				//console.log ("Merged "+[keys1[i]]+" = "+merged.W[keys1[i]]);
-			}
-		}
-	}
-
-	// merge duplicate entries in "R"
-	var keys1 = Object.keys(prop1.R);
-	var keys2 = Object.keys(prop2.R);
-
-	for (i = 0; i < keys1.length; i++) {
-		for (j = 0; j < keys2.length; j++) {
-			if (keys1[i] === keys2[j]) {
-				//console.log ("Merged "+keys1[i]+" "+prop1.R[keys1[i]]/1+" * "+prop2.R[keys2[j]]+"=");
-				merged.R[keys1[i]] = Math.round(((prop1.R[keys1[i]] / 1 * prop2.R[keys2[j]] / 1) + 0.00001) * 1000) / 1000;
-				//console.log ("="+merged.R[keys1[i]]);
-			}
-		}
-	}
-
-	//console.log("Merged dupes:"+JSON.stringify(merged));
-
-	var keysW = Object.keys(merged.W);
-	var keysR = Object.keys(merged.R);
-	//console.log("keysW("+keysW.length+":"+keysW);
-	//console.log("keysR("+keysR.length+":"+keysR);
-
-	for (i = 0; i < (Object.keys(merged.W)).length; i++) {
-		for (j = 0; j < (Object.keys(merged.R)).length; j++) {
-			if (Object.keys(merged.W)[i] === Object.keys(merged.R)[j]) {
-				var product = Math.round(((merged.W[Object.keys(merged.W)[i]] / 1 * merged.R[Object.keys(merged.R)[j]] / 1) + 0.00001) * 1000) / 1000;
-				//console.log ("Merged "+Object.keys(merged.W)[i]+"("+merged.W[Object.keys(merged.W)[i]]/1+") and "+Object.keys(merged.R)[j]+"("+merged.R[Object.keys(merged.R)[j]]/1+") = "+product);
-
-				// check the results of the merge
-				if (product / 1 > 1) {
-					// This is still a weakness
-					merged.W[Object.keys(merged.W)[i]] = product / 1;
-					delete merged.R[Object.keys(merged.R)[j]];
-				} else if (product / 1 < 1) {
-					// This is still a resistance
-					merged.R[Object.keys(merged.R)[j]] = product / 1;
-					delete merged.W[Object.keys(merged.W)[i]];
-					i--; // decrement to not skip entries
-				} else {
-					// This cancels out, delete both
-					delete merged.W[Object.keys(merged.W)[i]];
-					delete merged.R[Object.keys(merged.R)[j]];
-					i--; // decrement to not skip entries
-				}
-			}
-		}
-	}
-
-	//console.log("Reduced result:"+JSON.stringify(merged));
-
-	const prop = {};
-	prop.W = {};
-	prop.R = {};
-
-	// Add empty sets so output code doesn't crash
-	prop.SE = {};
-	prop.NVE = {};
-
-	// Alphabetize "W"
-	Object.keys(merged.W).sort().forEach(function(key) {
-		prop.W[key] = merged.W[key];
-	});
-
-	// Alphabetize "R"
-	Object.keys(merged.R).sort().forEach(function(key) {
-		prop.R[key] = merged.R[key];
-	});
-	return prop;
-}
-    
 	</script>
+	</div>
+	</div>
 	</body>
-	</div>
-	</div>
 </html>
