@@ -423,6 +423,7 @@ var types = {
 
 function outputHTML() {
 	var inputs = collectInputs();
+	console.log("Collected Inputs as:"+JSON.stringify(inputs));
 	outputTable(inputs);
 	stylizeTable();
 }
@@ -462,7 +463,6 @@ function collectInputs() {
 
 	if ((type2 === undefined) || (type1 == type2)) {
 		return [prop1, type1];
-		//outputTable(prop1, type1);
 	} else {
 		return [mergeTypes(prop1, prop2), type1, type2];
 	}
@@ -570,8 +570,9 @@ function mergeTypes(prop1, prop2) {
 function outputTable(prop, type1, type2) {
 	var topRow = Math.max(Object.keys(prop.W).length, Object.keys(prop.SE).length);
 	var bottomRow = Math.max(Object.keys(prop.R).length, Object.keys(prop.NVE).length);
-	//console.log("Found topRow:"+topRow+" bottomRow:"+bottomRow);
-	//console.log("prop = "+JSON.stringify(prop));
+	console.log("oT: Found topRow:"+topRow+" bottomRow:"+bottomRow);
+	console.log("oT: type1:"+type1+", type2:"+type2);
+	console.log("oT: prop = "+JSON.stringify(prop));
 
 	// Output first row for selectedType
 	var Weak = Object.keys(prop.W)[0];

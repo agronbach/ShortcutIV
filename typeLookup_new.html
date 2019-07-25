@@ -1,7 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>ShortcutIV - Type Chart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pokemon Go Type Quiz, built to help Trainers master Resistances, Weaknesses, SE, and NVE matchups. Test your knowledge now!"/>
+  <script src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
+  <!-- Includes for FavIcon support-->
+  <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favIcon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favIcon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favIcon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favIcon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favIcon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favIcon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favIcon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favIcon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/favIcon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favIcon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favIcon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favIcon/favicon-16x16.png">
+  <link rel="manifest" href="/favIcon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- End Includes for favIcon support-->
 <style>
 /* floating footer fix from: https://stackoverflow.com/questions/13881548/sticky-footer-hiding-content */
       html,
@@ -68,7 +91,7 @@ table {
   border-collapse: collapse;
   width: 350px;
   table-layout: auto;
-  margin-left:auto; 
+  margin-left:auto;
   margin-right:auto;
 }
 
@@ -82,98 +105,28 @@ select {
 display: block;
 margin: 0 auto;
 }
-  
-/* Color reference: http://www.epidemicjohto.com/t882-type-colors-hex-colors */  
-.Bug {
-    background: #A6B91A;
-}
-.Dark {
-    background: #705746;
-}
-.Dragon {
-    background: #6F35FC;
-}
-.Electric {
-    background: #F7D02C;
-}
-.Fairy {
-    background: #D685AD;
-}
-.Fighting {
-    background: #C22E28;
-}
-.Fire {
-    background: #EE8130;
-}
-.Flying {
-    background: #A98FF3;
-}
-.Ghost {
-    background: #735797;
-}
-.Grass {
-    background: #7AC74C;
-}
-.Ground {
-    background: #E2BF65;
-}
-.Ice {
-    background: #96D9D6;
-}
-.Normal {
-    background: #A8A77A;
-}
-.Poison {
-    background: #A33EA1;
-}
-.Psychic {
-    background: #F95587;
-}
-.Rock {
-    background: #B6A136;
-}
-.Steel {
-    background: #B7B7CE;
-}
-.Water {
-    background: #6390F0;
-}
-
 </style>
-  <head>
-    <script>
-      // Force HTTPS if connected via HTTP -- https://stackoverflow.com/questions/4723213/detect-http-or-https-then-force-https-in-javascript
-      if (location.protocol != 'https:')
-      {
-        // get the URL for the HTTPS version of this page
-        var newURL = 'https:' + window.location.href.substring(window.location.protocol.length);
-        
-        // overwrite page to inform the user they are being redirected to HTTPS in case it hangs
-        javascript:document.open('text/html');document.write('<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>ShortcutIV - HTTP redirect to HTTPS</title></head><body><p>WARNING: Your connection is using HTTP and is not secure. You are now being redirected to a secure connection over HTTPS.<p><p>To speed up the process, you may <a href="'+newURL+'">click here</a><br><br>Please report this message to us via our discord <a href="https://discord.gg/UD4Temq"><strong>https://discord.gg/UD4Temq</strong></a> and let us know how this happened!</p></body><br><br></html>');document.close();
-
-        // redirect the user to the HTTPS version of the page
-        location.href = newURL;
-      }
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
-	<!-- Import JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
 	<!-- Import Type Table Building JQuery functions -->
 	<script src="https://shortcutIV.com/buildTypeTable.js"></script>
-    <script>
+  <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'UA-141600603-1');
     </script>
-    <!--Rest of Head-->
-    <title>ShortcutIV - Type Chart</title>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
-  </head>
+  <!--Rest of Head-->
+  <link rel="stylesheet" href="/includes/typeColors.css">
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
+  <!-- Import JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/includes/includes.js"></script>
+</head>
+<body>
   <div id="container">
-    <div id="body"><body>
+    <div id="body">
       <select id="type">
         <option value="Bug">Bug</option>
         <option value="Dark">Dark</option>
@@ -218,21 +171,13 @@ margin: 0 auto;
       <table style="text-align:center" id="resultsContainer"></table>
       <!--Results output here by JQuery-->
       <div style="overflow-x:auto;">
-      <table><div id= "box"><br/><br/><br/></div></table>
     </div>
     <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
     <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
     <a style="color:#AED6F1" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
     
     <!-- Footer Code Below -->
-    <div id="footer">
-      <table align=center cellspacing="0" cellpadding="0">
-        <tr><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a> 
-        </tr>
-        <br/>
-        <tr><a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</tr>
-      </table>
-    </div>
+    <nav data-load="/includes/footer.html"></nav>
     <script>
 	// Default to loading a table
 	$(document).ready(function(){outputHTML();});
@@ -241,7 +186,7 @@ margin: 0 auto;
 	$('#type').change(outputHTML);
 	$('#type2').change(outputHTML);
 	</script>
+	</div>
+	</div>
 	</body>
-	</div>
-	</div>
 </html>

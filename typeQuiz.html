@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Pokemon Go Type Quiz, built to help Trainers master Resistances, Weaknesses, SE, and NVE matchups. Test your knowledge now!"/>
-  <script src="https://shortcutIV.com/httpsRedirect.js"></script>
+  <script src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
   <!-- Includes for FavIcon support-->
   <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/favIcon/apple-icon-60x60.png">
@@ -119,10 +119,11 @@ margin: 0 auto;
       gtag('config', 'UA-141600603-1');
     </script>
   <!--Rest of Head-->
-  <link rel="stylesheet" href="https://www.shortcutIV.com/typeColors.css">
+  <link rel="stylesheet" href="/includes/typeColors.css">
   <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
   <!-- Import JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/includes/includes.js"></script>
 </head>
 <body>
   <div id="container">
@@ -171,7 +172,7 @@ margin: 0 auto;
       <table style="text-align:center" id="resultsContainer"></table>
       <!--Results output here by JQuery-->
       <div style="text-align: center;">
-        <button class="mybuttons" id="button1">Check Answers</button><br /><br />
+        <button id="button1">Check Answers</button><br /><br />
       </div>
     </div>
     <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
@@ -179,8 +180,7 @@ margin: 0 auto;
     <a style="color:#AED6F1" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
     
     <!-- Footer Code Below -->
-    <div id="footer"><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a><br />
-        <a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</div>
+    <nav data-load="/includes/footer.html"></nav>
     <script>
 	// Default to loading a table
 	$(document).ready(function(){
