@@ -423,8 +423,7 @@ var types = {
 
 function outputHTML() {
 	var inputs = collectInputs();
-	console.log("Collected Inputs as:"+JSON.stringify(inputs));
-	outputTable(inputs);
+	outputTable(inputs[0], inputs[1], inputs[2]);
 	stylizeTable();
 }
 
@@ -568,11 +567,13 @@ function mergeTypes(prop1, prop2) {
 }
 
 function outputTable(prop, type1, type2) {
+  
+  //console.log("oT: type1:"+type1+", type2:"+type2);
+  //console.log("oT: prop = "+JSON.stringify(prop));
 	var topRow = Math.max(Object.keys(prop.W).length, Object.keys(prop.SE).length);
 	var bottomRow = Math.max(Object.keys(prop.R).length, Object.keys(prop.NVE).length);
-	console.log("oT: Found topRow:"+topRow+" bottomRow:"+bottomRow);
-	console.log("oT: type1:"+type1+", type2:"+type2);
-	console.log("oT: prop = "+JSON.stringify(prop));
+	//console.log("oT: Found topRow:"+topRow+" bottomRow:"+bottomRow);
+	
 
 	// Output first row for selectedType
 	var Weak = Object.keys(prop.W)[0];
@@ -596,7 +597,7 @@ function outputTable(prop, type1, type2) {
 			//console.log("Found Weak:"+Weak+" && SuperEff:"+SuperEff);
 			$("#resultsContainer").append('<tr><td>' + Weak + '</td><td style="color:green">x' + xWeak + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type2 + '</td><td> </td><td> </td></tr>');
 		} else {
-			console.log("ERROR: Didn't find Weak?? (" + Weak);
+			console.log("oT: ERROR: Didn't find Weak?? (" + Weak);
 			$("#resultsContainer").append('<tr><td> </td><td style="color:green"> </td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type1 + '</td><td rowspan=' + (topRow + bottomRow + 1) + '>' + type2 + '</td><td> </td><td> </td></tr>');
 		}
 	}
