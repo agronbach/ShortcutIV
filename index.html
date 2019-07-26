@@ -25,120 +25,7 @@
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <!-- End Includes for favIcon support-->
-<style>
-/* floating footer fix from: https://stackoverflow.com/questions/13881548/sticky-footer-hiding-content */
-      html,
-body {
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family: Verdana, Geneva, sans-serif;
-}
-#container {
-   min-height:100%;
-   position:relative;
-}
-
-#body {
-   /*padding:10px;*/
-   padding-bottom:50px;   /* Height of the footer */
-}
-#footer {
-  position:absolute;
-  bottom:0;
-  text-align: center;
-  vertical-align: middle;
-  width:100%;
-  height:44px;   /* Height of the footer */
-  background:#C0C0C0;
-}
-
-.pokeballButton a {
-    background-image: linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
-background-image: -o-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
-background-image: -moz-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
-background-image: -webkit-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
-background-image: -ms-linear-gradient(bottom, #f0f0f0 50%, #ee1515 50%);
-    
-    color: #222224;
-    display: block;
-    font-size: 12px;
-    font-weight: bold;
-    height: 28px;
-    line-height: 28px;
-    margin: 12px 0 8px;
-    text-decoration: none;
-    text-transform: uppercase;
-    text-align: center;
-    width: 86px;
-    border: 3px solid #222224;
-    border-radius: 8px 8px 8px 8px;
-    display: inline-block;
-}
-  
-.button {
-  background-color: #006400;
-  border-radius: 25px;
-  border: 0.1em solid #006400;
-  color: white;
-  padding: 0.2em 0.3em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 0.7em;
-  margin: 0.3em 0.2em;
-  cursor: pointer;
-}
-
-p {
-  display: block;
-  text-align: center;
-  margin-top: 0.5em;
-  margin-bottom: 0em;
-  margin-left: 0;
-  margin-right: 0;
-}
-  
-img {
-  vertical-align: middle;
-  margin-left: 0;
-  margin-right: 0;
-}
-  
-/* Center tables for demo */
-[data-table-theme*=gray] {
-  margin: 0 auto;
-  color: #333;
-  background: white;
-  border: 1px solid grey;
-  font-size: 12pt;
-  border-collapse: collapse;
-}
-  
-[data-table-theme*=highlight] {
-  color: white;
-  background: #2BA32A;
-}
-
-[data-table-theme*=gray] thead th,
-[data-table-theme*=gray] tfoot th {
-  /*padding: 0.5em;*/
-  border: 1px solid lightgrey;
-}
-
-/*[data-table-theme*=gray] caption {
-  padding: 0.5em;
-}*/
-
-/* Blank Table Style */
-[data-table-theme*=blank] {
-  border: 0px;
-}
-  
-.grecaptcha-badge {
-visibility: hidden;
-}
-</style>
+  <link rel="stylesheet" href="/includes/baseSiteStyling.css">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
   <script>
@@ -148,11 +35,32 @@ visibility: hidden;
     
     gtag('config', 'UA-141600603-1');
   </script>
+  <style>
+/* Center tables for demo */
+[data-table-theme*=gray] {
+  margin: 0 auto;
+  color: #333;
+  background: white;
+  border: 1px solid grey;
+  font-size: 12pt;
+  border-collapse: collapse;
+}
+
+[data-table-theme*=gray] thead th,
+[data-table-theme*=gray] tfoot th {
+  border: 1px solid lightgrey;
+}
+
+/* Blank Table Style */
+[data-table-theme*=blank] {
+  border: 0;
+}
+  </style>
   <!--Rest of Head-->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
 </head>
 <body>
 <div id="container">
