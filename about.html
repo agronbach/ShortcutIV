@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ShortcutIV - About</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Welcome Trainers! ShortcutIV hosts our PvP IV Lookup tool, and is a playground for all of my other Pokemon Go related tool ideas, such as our Type Lookup chart generator and companion Typing Quiz"/>
+  <script src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
+  <!-- Includes for FavIcon support-->
+  <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favIcon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favIcon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favIcon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favIcon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favIcon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favIcon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favIcon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favIcon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/favIcon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favIcon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favIcon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favIcon/favicon-16x16.png">
+  <link rel="manifest" href="/favIcon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- End Includes for favIcon support-->
+  <link rel="stylesheet" href="/includes/typeChartStyling.css">
+  <link rel="stylesheet" href="/includes/baseSiteStyling.css">
+  <link rel="stylesheet" href="/includes/typeColors.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
+	<!-- Import Type Table Building JQuery functions -->
+	<script src="https://shortcutIV.com/includes/buildTypeTable.js"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-141600603-1');
+    </script>
+  <style>
+  @media only screen and (min-width: 600px) {
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+}
+
+.flex-container .box {
+  margin: 0 auto;
+  width: auto;
+  /*margin: 1px;*/
+  background-color: #f1f1f1;
+  text-align: center;
+  /*line-height: 75px;
+  font-size: 30px;*/
+}
+img { 
+	max-width: 100%;
+    min-width: 400px;
+}
+}
+
+/* Special CSS for mobile, collapse side-by-side */
+@media only screen and (max-width: 600px) {
+  /*body {
+    background-color: green;
+  }*/
+  img { 
+	max-width: 100%;
+}
+}
+  </style>
+  <!--Rest of Head-->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
+  <!-- Import JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/includes/includes.js"></script>
+</head>
+<body>
+
+<ul>
+  <li><a href="/">PvP IVs</a></li>
+  <li><a href="/typeLookup.html">Type Lookup</a></li>
+  <li><a href="typeQuiz.html">Type Quiz</a></li>
+  <li style="float:right"><a class="active" href="#about">About</a></li>
+</ul>
+
+<div >
+<div class="flex-container">
+  <div class="box"><h2> About ShortcutIV</h2><p>Welcome Trainers! I originally registered this domain when the only PvP IV checking website went down for an extended period of time, and decided I could <a href="/">build my own</a> instead. It was a fun challenge, and now has blossomed into a playground for any of my Pokemon Go related tool ideas, such as our <a href="/typeLookup.html">Type Lookup chart generator</a> and companion <a href="typeQuiz.html">Typing Quiz</a> (now with actual in-game multiplier values!)</p><p>Please feel free to <a href="https://discord.gg/UD4Temq">reach out on Discord</a> if you have any ideas of how to improve this site, or have ideas of what should be built next. Happy hunting!</p></div>
+  <div class="box"><img class="PoGoImg" src="https://scontent-sjc3-1.cdninstagram.com/vp/ab4901a0eab849d0effdf48b1ae39b47/5DCFD8E9/t51.2885-15/sh0.08/e35/p640x640/62041298_835952630137925_8593289500690909684_n.jpg?_nc_ht=scontent-sjc3-1.cdninstagram.com"></div>
+</div>
+
+</body>
+</html>
