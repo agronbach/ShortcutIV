@@ -11,12 +11,13 @@ body {
    position:relative;
 }
 
-#body {
-   padding-bottom:50px;   /* Height of the footer */
+section {
+   padding-bottom:45px;   /* Height of the footer */
 }
-#footer {
-  position:absolute;
+footer {
+  position:fixed;
   bottom:0;
+  left:0;
   text-align: center;
   vertical-align: middle;
   width:100%;
@@ -64,8 +65,8 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+  border: 1px solid #f0f0f0;
+  background:#C0C0C0;
 }
 
 li {
@@ -74,7 +75,7 @@ li {
 
 li a {
   display: block;
-  color: #666;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -87,4 +88,20 @@ li a:hover:not(.active) {
 li a.active {
   color: white;
   background-color: #4CAF50;
+}
+
+/* Special CSS for tiny mobile screens */
+@media only screen and (max-width: 365px) {
+  ul {
+    font-size: 80%;
+  }
+  li a {
+    padding: 7px 8px;
+  }
+  section {
+    font-size: 80%;
+  }
+  table {
+    width: 80%;
+  }
 }

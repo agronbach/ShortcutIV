@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Pokemon Go PvP IV search, lookup and compare your Pokemon's IVs to ideal PvP IVs. Supports PvP IVs for wild-caught, weather boosted, traded, raided, and hatched Pokemon. Did you catch the very best?"/>
-  <script src="https://shortcutIV.com/httpsRedirect.js"></script>
+  <script src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
   <!-- Includes for FavIcon support-->
   <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/favIcon/apple-icon-60x60.png">
@@ -25,7 +25,7 @@
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <!-- End Includes for favIcon support-->
-  <link rel="stylesheet" href="/includes/baseSiteStyling.css">
+  <link rel="stylesheet" href="https://shortcutIV.com/includes/baseSiteStyling.css">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
   <script>
@@ -63,1451 +63,1453 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-  <ul>
-    <li><a class="active" href="/">PvP IVs</a></li>
-    <li><a href="/typeLookup.html">Type Lookup</a></li>
-    <li><a href="/typeQuiz.html">Type Quiz</a></li>
-    <li style="float:right"><a href="/about.html">About</a></li>
-  </ul>
-<div id="container">
-  <div id="body">
-    <form align=center>
-      <div class="ui-widget">
-        <input id="mon" placeholder="Pok&eacute;mon" required>
+  <header>
+    <ul>
+      <li><a class="active" href="/">PvP IVs</a></li>
+      <li><a href="/typeLookup.html">Type Chart</a></li>
+      <li><a href="/typeQuiz.html">Quiz</a></li>
+      <li style="float:right"><a href="/about.html">About</a></li>
+    </ul>
+  </header>
+  <section>
+    <div id="container">
+      <div id="body">
+        <form align=center>
+          <div class="ui-widget">
+            <input id="mon" placeholder="Pok&eacute;mon" required>
+          </div>
+         <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
+          <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td title="What Level Floor to Search?">Lvl</td></tr>
+          <td><select title="Your Attack IV" id="AttackIV">
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option selected value="1">1</option>
+            <option value="0">0</option>
+          </select></td>
+          <td><select title="Your Defense IV" id="DefenseIV">
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select></td>
+          <td><select title="Your Stamina IV" id="StaminaIV">
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select></td>
+          <td><select title="What Level Floor to Search?" id="minLvl">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+          </select></td>
+          <td hidden><select id="maxLvl">
+            <option value="40">40</option>
+            <option value="39">39</option>
+            <option value="38">38</option>
+            <option value="37">37</option>
+            <option value="36">36</option>
+            <option value="35">35</option>
+            <option value="34">34</option>
+            <option value="33">33</option>
+            <option value="32">32</option>
+            <option value="31">31</option>
+            <option value="30">30</option>
+            <option value="29">29</option>
+            <option value="28">28</option>
+            <option value="27">27</option>
+            <option value="26">26</option>
+            <option value="25">25</option>
+            <option value="24">24</option>
+            <option value="23">23</option>
+            <option value="22">22</option>
+            <option value="21">21</option>
+            <option value="20">20</option>
+            <option value="19">19</option>
+            <option value="18">18</option>
+            <option value="17">17</option>
+            <option value="16">16</option>
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select></td>
+           <td hidden><select id="maxHP"><option value="0">0</option></select></td>
+           <td hidden><select id="maxDef"><option value="0">0</option></select></td>
+           <td hidden><select id="maxAtk"><option value="0">0</option></select></td>
+          </table>
+          <div hidden id="basestats"></div>
+          <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
+          <tr>
+            <td title="Which IV Floor to Search?">Minimum IVs</td><td title="How many results to display?">Top</td>
+          </tr>
+          <tr>
+            <td title="Which IV Floor to Search?"><select id="minIVs">
+            <option value="0">0: Wild Caught</option>
+            <option value="1">1: Trade, Good Friend</option>
+            <option value="2">2: Trade, Great Friend</option>
+            <option value="3">3: Trade, Ultra Friend</option>
+            <option value="4">4: Weather Boost</option>
+            <option value="5">5: Trade, Best Friend</option>
+            <option value="10">10: Raid/Hatch</option>
+            <option value="12">12: Lucky Trade</option>
+            </select></td>
+            <td title="How many results to display?"><select id="TopRanks">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="250">250</option>
+            <option value="500">500</option>
+            <option value="1000">1000</option>
+            <option value="4096">All</option>
+            </select></td>
+          </tr>
+          </table>
+          <table align=center cellspacing="0" cellpadding="4" data-table-theme=blank><tr>
+          <td><select title="Which PvP League to Search?" id="league">
+            <option value="1500">Great League (1500)</option>
+            <option value="2500">Ultra League (2500)</option>
+            <option value="5000">Master League</option>
+          </select></td>
+          <td><input id="Calculate" type="button" class="button" value="Calculate" onclick="getFormData()" /></td>
+          </tr></table>
+        </form>
+        <div style="overflow-x:auto;">
+          <table data-table-theme=gray><div id= "box"><br/><br/><br/></div></table>
+        </div>
+        <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
+        <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
+        <a style="color:#AED6F1" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
       </div>
-     <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
-      <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td title="What Level Floor to Search?">Lvl</td></tr>
-      <td><select title="Your Attack IV" id="AttackIV">
-        <option value="15">15</option>
-        <option value="14">14</option>
-        <option value="13">13</option>
-        <option value="12">12</option>
-        <option value="11">11</option>
-        <option value="10">10</option>
-        <option value="9">9</option>
-        <option value="8">8</option>
-        <option value="7">7</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option selected value="1">1</option>
-        <option value="0">0</option>
-      </select></td>
-      <td><select title="Your Defense IV" id="DefenseIV">
-        <option value="15">15</option>
-        <option value="14">14</option>
-        <option value="13">13</option>
-        <option value="12">12</option>
-        <option value="11">11</option>
-        <option value="10">10</option>
-        <option value="9">9</option>
-        <option value="8">8</option>
-        <option value="7">7</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
-        <option value="0">0</option>
-      </select></td>
-      <td><select title="Your Stamina IV" id="StaminaIV">
-        <option value="15">15</option>
-        <option value="14">14</option>
-        <option value="13">13</option>
-        <option value="12">12</option>
-        <option value="11">11</option>
-        <option value="10">10</option>
-        <option value="9">9</option>
-        <option value="8">8</option>
-        <option value="7">7</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
-        <option value="0">0</option>
-      </select></td>
-      <td><select title="What Level Floor to Search?" id="minLvl">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-        <option value="31">31</option>
-        <option value="32">32</option>
-        <option value="33">33</option>
-        <option value="34">34</option>
-        <option value="35">35</option>
-        <option value="36">36</option>
-        <option value="37">37</option>
-        <option value="38">38</option>
-        <option value="39">39</option>
-        <option value="40">40</option>
-      </select></td>
-      <td hidden><select id="maxLvl">
-        <option value="40">40</option>
-        <option value="39">39</option>
-        <option value="38">38</option>
-        <option value="37">37</option>
-        <option value="36">36</option>
-        <option value="35">35</option>
-        <option value="34">34</option>
-        <option value="33">33</option>
-        <option value="32">32</option>
-        <option value="31">31</option>
-        <option value="30">30</option>
-        <option value="29">29</option>
-        <option value="28">28</option>
-        <option value="27">27</option>
-        <option value="26">26</option>
-        <option value="25">25</option>
-        <option value="24">24</option>
-        <option value="23">23</option>
-        <option value="22">22</option>
-        <option value="21">21</option>
-        <option value="20">20</option>
-        <option value="19">19</option>
-        <option value="18">18</option>
-        <option value="17">17</option>
-        <option value="16">16</option>
-        <option value="15">15</option>
-        <option value="14">14</option>
-        <option value="13">13</option>
-        <option value="12">12</option>
-        <option value="11">11</option>
-        <option value="10">10</option>
-        <option value="9">9</option>
-        <option value="8">8</option>
-        <option value="7">7</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
-      </select></td>
-       <td hidden><select id="maxHP"><option value="0">0</option></select></td>
-       <td hidden><select id="maxDef"><option value="0">0</option></select></td>
-       <td hidden><select id="maxAtk"><option value="0">0</option></select></td>
-       <div hidden id="basestats"></div>
-      </table>
-      <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
-      <tr>
-        <td title="Which IV Floor to Search?">Minimum IVs</td><td title="How many results to display?">Top</td>
-      </tr>
-      <tr>
-        <td title="Which IV Floor to Search?"><select id="minIVs">
-        <option value="0">0: Wild Caught</option>
-        <option value="1">1: Trade, Good Friend</option>
-        <option value="2">2: Trade, Great Friend</option>
-        <option value="3">3: Trade, Ultra Friend</option>
-        <option value="4">4: Weather Boost</option>
-        <option value="5">5: Trade, Best Friend</option>
-        <option value="10">10: Raid/Hatch</option>
-        <option value="12">12: Lucky Trade</option>
-        </select></td>
-        <td title="How many results to display?"><select id="TopRanks">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="250">250</option>
-        <option value="500">500</option>
-        <option value="1000">1000</option>
-        <option value="4096">All</option>
-        </select></td>
-      </tr>
-      </table>
-      <table align=center cellspacing="0" cellpadding="4" data-table-theme=blank><tr>
-      <td><select title="Which PvP League to Search?" id="league">
-        <option value="1500">Great League (1500)</option>
-        <option value="2500">Ultra League (2500)</option>
-        <option value="5000">Master League</option>
-      </select></td>
-      <td><input id="Calculate" type="button" class="button" value="Calculate" onclick="getFormData()" /></td>
-      </tr></table>
-    </form>
-    <div style="overflow-x:auto;">
-      <table data-table-theme=gray><div id= "box"><br/><br/><br/></div></table>
     </div>
-    <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
-    <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
-    <a style="color:#AED6F1" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
-    
-    <!-- Footer Code Below -->
-    <div id="footer"><a href="https://routinehub.co/shortcut/1721">iOS ShortcutIV</a> &#124; <a href="https://discord.gg/UD4Temq">Join Us on Discord</a><br />
-        <a href="https://www.patreon.com/bePatron?u=7793657" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width=auto height="22"></a> &#124; ShortcutIV ©2019</div>
-    <script>
-      
-      // Global Array for CPM values, w/ half-levels
-      var cpm = [0.094, 0.1351374318, 0.16639787, 0.192650919, 0.21573247, 0.2365726613, 0.25572005, 0.2735303812, 0.29024988, 0.3060573775, 0.3210876, 0.3354450362, 0.34921268, 0.3624577511, 0.3752356, 0.387592416, 0.39956728, 0.4111935514, 0.4225, 0.4329264091, 0.44310755, 0.4530599591, 0.4627984, 0.472336093, 0.48168495, 0.4908558003, 0.49985844, 0.508701765, 0.51739395, 0.5259425113, 0.5343543, 0.5426357375, 0.5507927, 0.5588305862, 0.5667545, 0.5745691333, 0.5822789, 0.5898879072, 0.5974, 0.6048236651, 0.6121573, 0.6194041216, 0.6265671, 0.6336491432, 0.64065295, 0.6475809666, 0.65443563, 0.6612192524, 0.667934, 0.6745818959, 0.6811649, 0.6876849038, 0.69414365, 0.70054287, 0.7068842, 0.7131691091, 0.7193991, 0.7255756136, 0.7317, 0.7347410093, 0.7377695, 0.7407855938, 0.74378943, 0.7467812109, 0.74976104, 0.7527290867, 0.7556855, 0.7586303683, 0.76156384, 0.7644860647, 0.76739717, 0.7702972656, 0.7731865, 0.7760649616, 0.77893275, 0.7817900548, 0.784637, 0.7874736075, 0.7903]
-      
-      // Global variables to track min/max Stats across all IVs
-      var maxHP = 0;
-      var maxDef = 0;
-      var maxAtk = 0;
-      
-      // global array containing all available mon and base stats (a/d/s)
-      var availableMon = [
-        {'label': '1-Bulbasaur', 'value': '118,111,128,Ivysaur,Venusaur'},
-        {'label': '2-Ivysaur', 'value': '151,143,155,Venusaur'},
-        {'label': '3-Venusaur', 'value': '198,189,190,Ivysaur'},
-        {'label': '4-Charmander', 'value': '116,93,118,Charmeleon,Charizard'},
-        {'label': '5-Charmeleon', 'value': '158,126,151,Charizard'},
-        {'label': '6-Charizard', 'value': '223,173,186,Charmeleon'},
-        {'label': '7-Squirtle', 'value': '94,121,127,Wartortle,Blastoise'},
-        {'label': '8-Wartortle', 'value': '126,155,153,Blastoise'},
-        {'label': '9-Blastoise', 'value': '171,207,188,Wartortle'},
-        {'label': '10-Caterpie', 'value': '55,55,128,Metapod,Butterfree'},
-        {'label': '11-Metapod', 'value': '45,80,137,Butterfree'},
-        {'label': '12-Butterfree', 'value': '167,137,155,Metapod'},
-        {'label': '13-Weedle', 'value': '63,50,120,Kakuna,Beedrill'},
-        {'label': '14-Kakuna', 'value': '46,75,128,Beedrill'},
-        {'label': '15-Beedrill', 'value': '169,130,163,Kakuna'},
-        {'label': '16-Pidgey', 'value': '85,73,120,Pidgeotto,Pidgeot'},
-        {'label': '17-Pidgeotto', 'value': '117,105,160,Pidgeot'},
-        {'label': '18-Pidgeot', 'value': '166,154,195,Pidgeotto'},
-        {'label': '19-Rattata (Alolan)', 'value': '103,70,102,Raticate_(Alolan)'},
-        {'label': '19-Rattata', 'value': '103,70,102,Raticate'},
-        {'label': '20-Raticate (Alolan)', 'value': '135,154,181'},
-        {'label': '20-Raticate', 'value': '161,139,146'},
-        {'label': '21-Spearow', 'value': '112,60,120,Fearow'},
-        {'label': '22-Fearow', 'value': '182,133,163'},
-        {'label': '23-Ekans', 'value': '110,97,111,Arbok'},
-        {'label': '24-Arbok', 'value': '167,153,155'},
-        {'label': '25-Pikachu', 'value': '112,96,111,Raichu'},
-        {'label': '26-Raichu (Alolan)', 'value': '201,154,155'},
-        {'label': '26-Raichu', 'value': '193,151,155'},
-        {'label': '27-Sandshrew (Alolan)', 'value': '125,129,137,Sandslash_(Alolan)'},
-        {'label': '27-Sandshrew', 'value': '126,120,137,Sandslash'},
-        {'label': '28-Sandslash (Alolan)', 'value': '177,195,181'},
-        {'label': '28-Sandslash', 'value': '182,175,181'},
-        {'label': '29-Nidoran (Female)', 'value': '86,89,146,Nidorina,Nidoqueen'},
-        {'label': '30-Nidorina', 'value': '117,120,172,Nidoqueen'},
-        {'label': '31-Nidoqueen', 'value': '180,173,207,Nidorina'},
-        {'label': '32-Nidoran (Male)', 'value': '105,76,130,Nidorino,Nidoking'},
-        {'label': '33-Nidorino', 'value': '137,111,156,Nidoking'},
-        {'label': '34-Nidoking', 'value': '204,156,191,Nidorino'},
-        {'label': '35-Clefairy', 'value': '107,108,172,Clefable'},
-        {'label': '36-Clefable', 'value': '178,162,216'},
-        {'label': '37-Vulpix (Alolan)', 'value': '96,109,116,Ninetales_(Alolan)'},
-        {'label': '37-Vulpix', 'value': '96,109,116,Ninetales'},
-        {'label': '38-Ninetales (Alolan)', 'value': '170,193,177'},
-        {'label': '38-Ninetales', 'value': '169,190,177'},
-        {'label': '39-Jigglypuff', 'value': '80,41,251,Wigglytuff'},
-        {'label': '40-Wigglytuff', 'value': '156,90,295'},
-        {'label': '41-Zubat', 'value': '83,73,120,Golbat,Crobat'},
-        {'label': '42-Golbat', 'value': '161,150,181,Crobat'},
-        {'label': '43-Oddish', 'value': '131,112,128,Gloom,Bellossom,Vileplume'},
-        {'label': '44-Gloom', 'value': '153,136,155,Bellossom,Vileplume'},
-        {'label': '45-Vileplume', 'value': '202,167,181,Gloom,Bellossom'},
-        {'label': '46-Paras', 'value': '121,99,111,Parasect'},
-        {'label': '47-Parasect', 'value': '165,146,155'},
-        {'label': '48-Venonat', 'value': '100,100,155,Venomoth'},
-        {'label': '49-Venomoth', 'value': '179,143,172'},
-        {'label': '50-Diglett (Alolan)', 'value': '108,81,67,Dugtrio_(Alolan)'},
-        {'label': '50-Diglett', 'value': '109,78,67,Dugtrio'},
-        {'label': '51-Dugtrio (Alolan)', 'value': '201,142,111'},
-        {'label': '51-Dugtrio', 'value': '167,136,111'},
-        {'label': '52-Meowth (Alolan)', 'value': '99,78,120,Persian_(Alolan)'},
-        {'label': '52-Meowth', 'value': '92,78,120,Persian'},
-        {'label': '53-Persian (Alolan)', 'value': '158,136,163'},
-        {'label': '53-Persian', 'value': '150,136,163'},
-        {'label': '54-Psyduck', 'value': '122,95,137,Golduck'},
-        {'label': '55-Golduck', 'value': '191,162,190'},
-        {'label': '56-Mankey', 'value': '148,82,120,Primeape'},
-        {'label': '57-Primeape', 'value': '207,138,163'},
-        {'label': '58-Growlithe', 'value': '136,93,146,Arcanine'},
-        {'label': '59-Arcanine', 'value': '227,166,207'},
-        {'label': '60-Poliwag', 'value': '101,82,120,Poliwhirl,Politoed,Poliwrath'},
-        {'label': '61-Poliwhirl', 'value': '130,123,163,Politoed,Poliwrath'},
-        {'label': '62-Poliwrath', 'value': '182,184,207,Poliwhirl,Politoed'},
-        {'label': '63-Abra', 'value': '195,82,93,Kadabra,Alakazam'},
-        {'label': '64-Kadabra', 'value': '232,117,120,Alakazam'},
-        {'label': '65-Alakazam', 'value': '271,167,146,Kadabra'},
-        {'label': '66-Machop', 'value': '137,82,172,Machoke,Machamp'},
-        {'label': '67-Machoke', 'value': '177,125,190,Machamp'},
-        {'label': '68-Machamp', 'value': '234,159,207,Machoke'},
-        {'label': '69-Bellsprout', 'value': '139,61,137,Weepinbell,Victreebel'},
-        {'label': '70-Weepinbell', 'value': '172,92,163,Victreebel'},
-        {'label': '71-Victreebel', 'value': '207,135,190,Weepinbell'},
-        {'label': '72-Tentacool', 'value': '97,149,120,Tentacruel'},
-        {'label': '73-Tentacruel', 'value': '166,209,190'},
-        {'label': '74-Geodude (Alolan)', 'value': '132,132,120,Graveler_(Alolan),Golem_(Alolan)'},
-        {'label': '74-Geodude', 'value': '132,132,120,Graveler,Golem'},
-        {'label': '75-Graveler (Alolan)', 'value': '164,164,146,Golem_(Alolan)'},
-        {'label': '75-Graveler', 'value': '164,164,146,Golem'},
-        {'label': '76-Golem (Alolan)', 'value': '211,198,190,Graveler_(Alolan)'},
-        {'label': '76-Golem', 'value': '211,198,190,Graveler'},
-        {'label': '77-Ponyta', 'value': '170,127,137,Rapidash'},
-        {'label': '78-Rapidash', 'value': '207,162,163'},
-        {'label': '79-Slowpoke', 'value': '109,98,207,Slowking,Slowbro'},
-        {'label': '80-Slowbro', 'value': '177,180,216,Slowking,Slowpoke'},
-        {'label': '81-Magnemite', 'value': '165,121,93,Magneton,Magnezone'},
-        {'label': '82-Magneton', 'value': '223,169,137,Magnezone,Magnemite'},
-        {'label': '83-Farfetchd', 'value': '124,115,141'},
-        {'label': '84-Doduo', 'value': '158,83,111,Dodrio'},
-        {'label': '85-Dodrio', 'value': '218,140,155'},
-        {'label': '86-Seel', 'value': '85,121,163,Dewgong'},
-        {'label': '87-Dewgong', 'value': '139,177,207'},
-        {'label': '88-Grimer (Alolan)', 'value': '135,90,190,Muk_(Alolan)'},
-        {'label': '88-Grimer', 'value': '135,90,190,Muk'},
-        {'label': '89-Muk (Alolan)', 'value': '190,172,233,Grimer_(Alolan)'},
-        {'label': '89-Muk', 'value': '190,172,233,Grimer'},
-        {'label': '90-Shellder', 'value': '116,134,102,Cloyster'},
-        {'label': '91-Cloyster', 'value': '186,256,137'},
-        {'label': '92-Gastly', 'value': '186,67,102,Haunter,Gengar'},
-        {'label': '93-Haunter', 'value': '223,107,128,Gengar'},
-        {'label': '94-Gengar', 'value': '261,149,155,Haunter'},
-        {'label': '95-Onix', 'value': '85,232,111,Steelix'},
-        {'label': '96-Drowzee', 'value': '89,136,155,Hypno'},
-        {'label': '97-Hypno', 'value': '144,193,198'},
-        {'label': '98-Krabby', 'value': '181,124,102,Kingler'},
-        {'label': '99-Kingler', 'value': '240,181,146'},
-        {'label': '100-Voltorb', 'value': '109,111,120,Electrode'},
-        {'label': '101-Electrode', 'value': '173,173,155'},
-        {'label': '102-Exeggcute', 'value': '107,125,155,Exeggutor'},
-        {'label': '103-Exeggutor (Alolan)', 'value': '230,153,216'},
-        {'label': '103-Exeggutor', 'value': '233,149,216,Exeggcute'},
-        {'label': '104-Cubone', 'value': '90,144,137,Marowak'},
-        {'label': '105-Marowak (Alolan)', 'value': '144,186,155'},
-        {'label': '105-Marowak', 'value': '144,186,155'},
-        {'label': '106-Hitmonlee', 'value': '224,181,137,Hitmontop,Hitmonchan'},
-        {'label': '107-Hitmonchan', 'value': '193,197,137,Hitmontop,Hitmonlee'},
-        {'label': '108-Lickitung', 'value': '108,137,207,Lickilicky'},
-        {'label': '109-Koffing', 'value': '119,141,120,Weezing'},
-        {'label': '110-Weezing', 'value': '174,197,163'},
-        {'label': '111-Rhyhorn', 'value': '140,127,190,Rhydon,Rhyperior'},
-        {'label': '112-Rhydon', 'value': '222,171,233,Rhyperior,Rhyhorn'},
-        {'label': '113-Chansey', 'value': '60,128,487,Blissey'},
-        {'label': '114-Tangela', 'value': '183,169,163,Tangrowth'},
-        {'label': '115-Kangaskhan', 'value': '181,165,233'},
-        {'label': '116-Horsea', 'value': '129,103,102,Seadra,Kingdra'},
-        {'label': '117-Seadra', 'value': '187,156,146,Kingdra'},
-        {'label': '118-Goldeen', 'value': '123,110,128,Seaking'},
-        {'label': '119-Seaking', 'value': '175,147,190'},
-        {'label': '120-Staryu', 'value': '137,112,102,Starmie'},
-        {'label': '121-Starmie', 'value': '210,184,155'},
-        {'label': '122-Mr. Mime', 'value': '192,205,120'},
-        {'label': '123-Scyther', 'value': '218,170,172,Scizor'},
-        {'label': '124-Jynx', 'value': '223,151,163'},
-        {'label': '125-Electabuzz', 'value': '198,158,163,Electivire'},
-        {'label': '126-Magmar', 'value': '206,154,163,Magmortar'},
-        {'label': '127-Pinsir', 'value': '238,182,163'},
-        {'label': '128-Tauros', 'value': '198,183,181'},
-        {'label': '129-Magikarp', 'value': '29,85,85,Gyarados'},
-        {'label': '130-Gyarados', 'value': '237,186,216'},
-        {'label': '131-Lapras', 'value': '165,174,277'},
-        {'label': '132-Ditto', 'value': '91,91,134'},
-        {'label': '133-Eevee', 'value': '104,114,146,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
-        {'label': '134-Vaporeon', 'value': '205,161,277,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon'},
-        {'label': '135-Jolteon', 'value': '232,182,163,Espeon,Flareon,Glaceon,Leafeon,Sylveon,Umbreon,Vaporeon'},
-        {'label': '136-Flareon', 'value': '246,179,163,Espeon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
-        {'label': '137-Porygon', 'value': '153,136,163,Porygon2,Porygon-z'},
-        {'label': '138-Omanyte', 'value': '155,153,111,Omastar'},
-        {'label': '139-Omastar', 'value': '207,201,172'},
-        {'label': '140-Kabuto', 'value': '148,140,102,Kabutops'},
-        {'label': '141-Kabutops', 'value': '220,186,155'},
-        {'label': '142-Aerodactyl', 'value': '221,159,190'},
-        {'label': '143-Snorlax', 'value': '190,169,330'},
-        {'label': '144-Articuno', 'value': '192,236,207', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '145-Zapdos', 'value': '253,185,207', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '146-Moltres', 'value': '251,181,207', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '147-Dratini', 'value': '119,91,121,Dragonair,Dragonite'},
-        {'label': '148-Dragonair', 'value': '163,135,156,Dragonite'},
-        {'label': '149-Dragonite', 'value': '263,198,209,Dragonair'},
-        {'label': '150-Mewtwo (Armor)', 'value': '182,278,214', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '150-Mewtwo', 'value': '300,182,214', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '151-Mew', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
-        {'label': '152-Chikorita', 'value': '92,122,128,Bayleef,Meganium'},
-        {'label': '153-Bayleef', 'value': '122,155,155,Meganium'},
-        {'label': '154-Meganium', 'value': '168,202,190,Bayleef'},
-        {'label': '155-Cyndaquil', 'value': '116,93,118,Quilava,Typhlosion'},
-        {'label': '156-Quilava', 'value': '158,126,151,Typhlosion'},
-        {'label': '157-Typhlosion', 'value': '223,173,186,Quilava'},
-        {'label': '158-Totodile', 'value': '117,109,137,Croconaw,Feraligatr'},
-        {'label': '159-Croconaw', 'value': '150,142,163,Feraligatr'},
-        {'label': '160-Feraligatr', 'value': '205,188,198,Croconaw'},
-        {'label': '161-Sentret', 'value': '79,73,111,Furret'},
-        {'label': '162-Furret', 'value': '148,125,198'},
-        {'label': '163-Hoothoot', 'value': '67,88,155,Noctowl'},
-        {'label': '164-Noctowl', 'value': '145,156,225'},
-        {'label': '165-Ledyba', 'value': '72,118,120,Ledian'},
-        {'label': '166-Ledian', 'value': '107,179,146'},
-        {'label': '167-Spinarak', 'value': '105,73,120,Ariados'},
-        {'label': '168-Ariados', 'value': '161,124,172'},
-        {'label': '169-Crobat', 'value': '194,178,198,Golbat'},
-        {'label': '170-Chinchou', 'value': '106,97,181,Lanturn'},
-        {'label': '171-Lanturn', 'value': '146,137,268'},
-        {'label': '172-Pichu', 'value': '77,53,85,Pikachu,Raichu'},
-        {'label': '173-Cleffa', 'value': '75,79,137,Clefairy,Clefable'},
-        {'label': '174-Igglybuff', 'value': '69,32,207,Jigglypuff,Wigglytuff'},
-        {'label': '175-Togepi', 'value': '67,116,111,Togetic,Togekiss'},
-        {'label': '176-Togetic', 'value': '139,181,146,Togekiss'},
-        {'label': '177-Natu', 'value': '134,89,120,Xatu'},
-        {'label': '178-Xatu', 'value': '192,146,163'},
-        {'label': '179-Mareep', 'value': '114,79,146,Flaaffy,Ampharos'},
-        {'label': '180-Flaaffy', 'value': '145,109,172,Ampharos'},
-        {'label': '181-Ampharos', 'value': '211,169,207,Flaaffy'},
-        {'label': '182-Bellossom', 'value': '169,186,181,Gloom,Vileplume'},
-        {'label': '183-Marill', 'value': '37,93,172,Azumarill'},
-        {'label': '184-Azumarill', 'value': '112,152,225'},
-        {'label': '185-Sudowoodo', 'value': '167,176,172'},
-        {'label': '186-Politoed', 'value': '174,179,207,Poliwhirl,Poliwrath'},
-        {'label': '187-Hoppip', 'value': '67,94,111,Skiploom,Jumpluff'},
-        {'label': '188-Skiploom', 'value': '91,120,146,Jumpluff'},
-        {'label': '189-Jumpluff', 'value': '118,183,181'},
-        {'label': '190-Aipom', 'value': '136,112,146,Ambipom'},
-        {'label': '191-Sunkern', 'value': '55,55,102,Sunflora'},
-        {'label': '192-Sunflora', 'value': '185,135,181'},
-        {'label': '193-Yanma', 'value': '154,94,163,Yanmega'},
-        {'label': '194-Wooper', 'value': '75,66,146,Quagsire'},
-        {'label': '195-Quagsire', 'value': '152,143,216'},
-        {'label': '196-Espeon', 'value': '261,175,163,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
-        {'label': '197-Umbreon', 'value': '126,240,216,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Vaporeon'},
-        {'label': '198-Murkrow', 'value': '175,87,155,Honchkrow'},
-        {'label': '199-Slowking', 'value': '177,180,216,Slowpoke,Slowbro'},
-        {'label': '200-Misdreavus', 'value': '167,154,155,Mismagius'},
-        {'label': '201-Unown', 'value': '136,91,134'},
-        {'label': '202-Wobbuffet', 'value': '60,106,382'},
-        {'label': '203-Girafarig', 'value': '182,133,172'},
-        {'label': '204-Pineco', 'value': '108,122,137,Forretress'},
-        {'label': '205-Forretress', 'value': '161,205,181'},
-        {'label': '206-Dunsparce', 'value': '131,128,225'},
-        {'label': '207-Gligar', 'value': '143,184,163,Gliscor'},
-        {'label': '208-Steelix', 'value': '148,272,181'},
-        {'label': '209-Snubbull', 'value': '137,85,155,Granbull'},
-        {'label': '210-Granbull', 'value': '212,131,207'},
-        {'label': '211-Qwilfish', 'value': '184,138,163'},
-        {'label': '212-Scizor', 'value': '236,181,172,Scyther'},
-        {'label': '213-Shuckle', 'value': '17,396,85'},
-        {'label': '214-Heracross', 'value': '234,179,190'},
-        {'label': '215-Sneasel', 'value': '189,146,146,Weavile'},
-        {'label': '216-Teddiursa', 'value': '142,93,155,Ursaring'},
-        {'label': '217-Ursaring', 'value': '236,144,207'},
-        {'label': '218-Slugma', 'value': '118,71,120,Magcargo'},
-        {'label': '219-Magcargo', 'value': '139,191,137'},
-        {'label': '220-Swinub', 'value': '90,69,137,Piloswine,Mamoswine'},
-        {'label': '221-Piloswine', 'value': '181,138,225,Mamoswine'},
-        {'label': '222-Corsola', 'value': '118,156,146'},
-        {'label': '223-Remoraid', 'value': '127,69,111,Octillery'},
-        {'label': '224-Octillery', 'value': '197,141,181'},
-        {'label': '225-Delibird', 'value': '128,90,128'},
-        {'label': '226-Mantine', 'value': '148,226,163'},
-        {'label': '227-Skarmory', 'value': '148,226,163'},
-        {'label': '228-Houndour', 'value': '152,83,128,Houndoom'},
-        {'label': '229-Houndoom', 'value': '224,144,181'},
-        {'label': '230-Kingdra', 'value': '194,194,181,Seadra'},
-        {'label': '231-Phanpy', 'value': '107,98,207,Donphan'},
-        {'label': '232-Donphan', 'value': '214,185,207'},
-        {'label': '233-Porygon2', 'value': '198,180,198,Porygon-z,Porygon'},
-        {'label': '234-Stantler', 'value': '192,131,177'},
-        {'label': '235-Smeargle', 'value': '40,83,146'},
-        {'label': '236-Tyrogue', 'value': '64,64,111,Hitmontop,Hitmonlee,Hitmonchan'},
-        {'label': '237-Hitmontop', 'value': '173,207,137,Hitmonlee,Hitmonchan'},
-        {'label': '238-Smoochum', 'value': '153,91,128,Jynx'},
-        {'label': '239-Elekid', 'value': '135,101,128,Electabuzz,Electabuzz'},
-        {'label': '240-Magby', 'value': '151,99,128,Magmar,Magmortar'},
-        {'label': '241-Miltank', 'value': '157,193,216'},
-        {'label': '242-Blissey', 'value': '129,169,496,Chansey'},
-        {'label': '243-Raikou', 'value': '241,195,207', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '244-Entei', 'value': '235,171,251', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '245-Suicune', 'value': '180,235,225', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '246-Larvitar', 'value': '115,93,137,Pupitar,Tyranitar'},
-        {'label': '247-Pupitar', 'value': '155,133,172,Tyranitar'},
-        {'label': '248-Tyranitar', 'value': '251,207,225,Pupitar'},
-        {'label': '249-Lugia', 'value': '193,310,235', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '250-Ho-Oh', 'value': '239,244,214', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '251-Celebi', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
-        {'label': '252-Treecko', 'value': '124,94,120,Grovyle,Sceptile'},
-        {'label': '253-Grovyle', 'value': '172,120,137,Sceptile'},
-        {'label': '254-Sceptile', 'value': '223,169,172,Grovyle'},
-        {'label': '255-Torchic', 'value': '130,87,128,Combusken,Blaziken'},
-        {'label': '256-Combusken', 'value': '163,115,155,Blaziken'},
-        {'label': '257-Blaziken', 'value': '240,141,190,Combusken'},
-        {'label': '258-Mudkip', 'value': '126,93,137,Marshtomp,Swampert'},
-        {'label': '259-Marshtomp', 'value': '156,133,172,Swampert'},
-        {'label': '260-Swampert', 'value': '208,175,225,Marshtomp'},
-        {'label': '261-Poochyena', 'value': '96,61,111,Mightyena'},
-        {'label': '262-Mightyena', 'value': '171,132,172'},
-        {'label': '263-Zigzagoon', 'value': '58,80,116,Linoone'},
-        {'label': '264-Linoone', 'value': '142,128,186'},
-        {'label': '265-Wurmple', 'value': '75,59,128,Beautifly,Dustox'},
-        {'label': '266-Silcoon', 'value': '60,77,137,Beautifly,Dustox'},
-        {'label': '267-Beautifly', 'value': '189,98,155,Dustox'},
-        {'label': '268-Cascoon', 'value': '60,77,137,Dustox,Beautifly'},
-        {'label': '269-Dustox', 'value': '98,162,155,Beautifly'},
-        {'label': '270-Lotad', 'value': '71,77,120,Lombre,Ludicolo'},
-        {'label': '271-Lombre', 'value': '112,119,155,Ludicolo'},
-        {'label': '272-Ludicolo', 'value': '173,176,190,Lombre'},
-        {'label': '273-Seedot', 'value': '71,77,120,Nuzleaf,Shiftry'},
-        {'label': '274-Nuzleaf', 'value': '134,78,172,Shiftry'},
-        {'label': '275-Shiftry', 'value': '200,121,207,Nuzleaf'},
-        {'label': '276-Taillow', 'value': '106,61,120,Swellow'},
-        {'label': '277-Swellow', 'value': '185,124,155'},
-        {'label': '278-Wingull', 'value': '106,61,120,Pelipper'},
-        {'label': '279-Pelipper', 'value': '175,174,155'},
-        {'label': '280-Ralts', 'value': '79,59,99,Gardevoir,Gallade'},
-        {'label': '281-Kirlia', 'value': '117,90,116,Gardevoir,Gallade'},
-        {'label': '282-Gardevoir', 'value': '237,195,169,Gallade'},
-        {'label': '283-Surskit', 'value': '93,87,120,Masquerain'},
-        {'label': '284-Masquerain', 'value': '192,150,172'},
-        {'label': '285-Shroomish', 'value': '74,110,155,Breloom'},
-        {'label': '286-Breloom', 'value': '241,144,155'},
-        {'label': '287-Slakoth', 'value': '104,92,155,Vigoroth,Slaking'},
-        {'label': '288-Vigoroth', 'value': '159,145,190,Slaking'},
-        {'label': '289-Slaking', 'value': '290,166,284,Vigoroth'},
-        {'label': '290-Nincada', 'value': '80,126,104,Ninjask'},
-        {'label': '291-Ninjask', 'value': '199,112,156'},
-        {'label': '292-Shedinja', 'value': '153,73,1'},
-        {'label': '293-Whismur', 'value': '92,42,162,Loudred,Exploud'},
-        {'label': '294-Loudred', 'value': '134,81,197,Exploud'},
-        {'label': '295-Exploud', 'value': '179,137,232,Loudred'},
-        {'label': '296-Makuhita', 'value': '99,54,176,Hariyama'},
-        {'label': '297-Hariyama', 'value': '209,114,302'},
-        {'label': '298-Azurill', 'value': '36,71,137,Azumarill'},
-        {'label': '299-Nosepass', 'value': '82,215,102,Probopass'},
-        {'label': '300-Skitty', 'value': '84,79,137,Delcatty'},
-        {'label': '301-Delcatty', 'value': '132,127,172'},
-        {'label': '302-Sableye', 'value': '141,136,137'},
-        {'label': '303-Mawile', 'value': '155,141,137'},
-        {'label': '304-Aron', 'value': '121,141,137,Lairon,Aggron'},
-        {'label': '305-Lairon', 'value': '158,198,155,Aggron'},
-        {'label': '306-Aggron', 'value': '198,257,172,Lairon'},
-        {'label': '307-Meditite', 'value': '78,107,102,Medicham'},
-        {'label': '308-Medicham', 'value': '121,152,155'},
-        {'label': '309-Electrike', 'value': '123,78,120,Manectric'},
-        {'label': '310-Manectric', 'value': '215,127,172'},
-        {'label': '311-Plusle', 'value': '167,129,155'},
-        {'label': '312-Minun', 'value': '147,150,155'},
-        {'label': '313-Volbeat', 'value': '143,166,163'},
-        {'label': '314-Illumise', 'value': '143,166,163'},
-        {'label': '315-Roselia', 'value': '186,131,137,Roserade'},
-        {'label': '316-Gulpin', 'value': '80,99,172,Swalot'},
-        {'label': '317-Swalot', 'value': '140,159,225'},
-        {'label': '318-Carvanha', 'value': '171,39,128,Sharpedo'},
-        {'label': '319-Sharpedo', 'value': '243,83,172'},
-        {'label': '320-Wailmer', 'value': '136,68,277,Wailord'},
-        {'label': '321-Wailord', 'value': '175,87,347'},
-        {'label': '322-Numel', 'value': '119,79,155,Camerupt'},
-        {'label': '323-Camerupt', 'value': '194,136,172'},
-        {'label': '324-Torkoal', 'value': '151,203,172'},
-        {'label': '325-Spoink', 'value': '125,122,155,Grumpig'},
-        {'label': '326-Grumpig', 'value': '171,188,190'},
-        {'label': '327-Spinda', 'value': '116,116,155'},
-        {'label': '328-Trapinch', 'value': '162,78,128,Vibrava,Flygon'},
-        {'label': '329-Vibrava', 'value': '134,99,137,Flygon'},
-        {'label': '330-Flygon', 'value': '205,168,190,Vibrava'},
-        {'label': '331-Cacnea', 'value': '156,74,137,Cacturne'},
-        {'label': '332-Cacturne', 'value': '221,115,172'},
-        {'label': '333-Swablu', 'value': '76,132,128,Altaria'},
-        {'label': '334-Altaria', 'value': '141,201,181'},
-        {'label': '335-Zangoose', 'value': '222,124,177'},
-        {'label': '336-Seviper', 'value': '196,118,177'},
-        {'label': '337-Lunatone', 'value': '178,153,207'},
-        {'label': '338-Solrock', 'value': '178,153,207'},
-        {'label': '339-Barboach', 'value': '93,82,137,Whiscash'},
-        {'label': '340-Whiscash', 'value': '151,141,242'},
-        {'label': '341-Corphish', 'value': '141,99,125,Crawdaunt'},
-        {'label': '342-Crawdaunt', 'value': '224,142,160'},
-        {'label': '343-Baltoy', 'value': '77,124,120,Claydol'},
-        {'label': '344-Claydol', 'value': '140,229,155'},
-        {'label': '345-Lileep', 'value': '105,150,165,Cradily'},
-        {'label': '346-Cradily', 'value': '152,194,200'},
-        {'label': '347-Anorith', 'value': '176,100,128,Armaldo'},
-        {'label': '348-Armaldo', 'value': '222,174,181'},
-        {'label': '349-Feebas', 'value': '29,85,85,Milotic'},
-        {'label': '350-Milotic', 'value': '192,219,216'},
-        {'label': '351-Castform', 'value': '139,139,172'},
-        {'label': '352-Kecleon', 'value': '161,189,155'},
-        {'label': '353-Shuppet', 'value': '138,65,127,Banette'},
-        {'label': '354-Banette', 'value': '218,126,162'},
-        {'label': '355-Duskull', 'value': '70,162,85,Dusclops,Dusknoir'},
-        {'label': '356-Dusclops', 'value': '124,234,120,Dusknoir'},
-        {'label': '357-Tropius', 'value': '136,163,223'},
-        {'label': '358-Chimecho', 'value': '175,170,181,Chingling'},
-        {'label': '359-Absol', 'value': '246,120,163'},
-        {'label': '360-Wynaut', 'value': '41,86,216,Wobbuffet'},
-        {'label': '361-Snorunt', 'value': '95,95,137,Glalie,Froslass'},
-        {'label': '362-Glalie', 'value': '162,162,190,Froslass'},
-        {'label': '363-Spheal', 'value': '95,90,172,Sealeo,Walrein'},
-        {'label': '364-Sealeo', 'value': '137,132,207,Walrein'},
-        {'label': '365-Walrein', 'value': '182,176,242,Sealeo'},
-        {'label': '366-Clamperl', 'value': '133,135,111,Huntail,Gorebyss'},
-        {'label': '367-Huntail', 'value': '197,179,146,Gorebyss'},
-        {'label': '368-Gorebyss', 'value': '211,179,146,Huntail'},
-        {'label': '369-Relicanth', 'value': '162,203,225'},
-        {'label': '370-Luvdisc', 'value': '81,128,125'},
-        {'label': '371-Bagon', 'value': '134,93,128,Shelgon,Salamence'},
-        {'label': '372-Shelgon', 'value': '172,155,163,Salamence'},
-        {'label': '373-Salamence', 'value': '277,168,216,Shelgon'},
-        {'label': '374-Beldum', 'value': '96,132,120,Metang,Metagross'},
-        {'label': '375-Metang', 'value': '138,176,155,Metagross'},
-        {'label': '376-Metagross', 'value': '257,228,190,Metang'},
-        {'label': '377-Regirock', 'value': '179,309,190', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '378-Regice', 'value': '179,309,190', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '379-Registeel', 'value': '143,285,190', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '380-Latias', 'value': '228,246,190', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '381-Latios', 'value': '268,212,190', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '382-Kyogre', 'value': '270,228,205', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '383-Groudon', 'value': '270,228,205', 'minIVs': '1', 'minLvl': '15'},
-        {'label': '384-Rayquaza', 'value': '284,170,213', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '385-Jirachi', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
-        {'label': '386-Deoxys (Attack)', 'value': '414,46,137', 'minIVs': '10', 'minLvl': '20'},
-        {'label': '386-Deoxys (Defense)', 'value': '144,330,137', 'minIVs': '10', 'minLvl': '20'},
-        {'label': '386-Deoxys (Normal)', 'value': '345,115,137', 'minIVs': '10', 'minLvl': '20'},
-        {'label': '386-Deoxys (Speed)', 'value': '230,218,137', 'minIVs': '10', 'minLvl': '20'},
-        {'label': '387-Turtwig', 'value': '119,110,146,Grotle,Torterra'},
-        {'label': '388-Grotle', 'value': '157,143,181,Torterra'},
-        {'label': '389-Torterra', 'value': '202,188,216,Grotle'},
-        {'label': '390-Chimchar', 'value': '113,86,127,Monferno,Infernape'},
-        {'label': '391-Monferno', 'value': '158,105,162,Infernape'},
-        {'label': '392-Infernape', 'value': '222,151,183,Monferno'},
-        {'label': '393-Piplup', 'value': '112,102,142,Prinplup,Empoleon'},
-        {'label': '394-Prinplup', 'value': '150,139,162,Empoleon'},
-        {'label': '395-Empoleon', 'value': '210,186,197,Prinplup'},
-        {'label': '396-Starly', 'value': '101,58,120,Staravia,Staraptor'},
-        {'label': '397-Staravia', 'value': '142,94,146,Staraptor'},
-        {'label': '398-Staraptor', 'value': '234,140,198,Staravia'},
-        {'label': '399-Bidoof', 'value': '80,73,153,Bibarel'},
-        {'label': '400-Bibarel', 'value': '162,119,188'},
-        {'label': '401-Kricketot', 'value': '45,74,114,Kricketune'},
-        {'label': '402-Kricketune', 'value': '160,100,184'},
-        {'label': '403-Shinx', 'value': '117,64,128,Luxio,Luxray'},
-        {'label': '404-Luxio', 'value': '159,95,155,Luxray'},
-        {'label': '405-Luxray', 'value': '232,156,190,Luxio'},
-        {'label': '406-Budew', 'value': '91,109,120,Roselia,Roserade'},
-        {'label': '407-Roserade', 'value': '243,185,155'},
-        {'label': '408-Cranidos', 'value': '218,71,167,Rampardos'},
-        {'label': '409-Rampardos', 'value': '295,109,219'},
-        {'label': '410-Shieldon', 'value': '76,195,102,Bastiodon'},
-        {'label': '411-Bastiodon', 'value': '94,286,155'},
-        {'label': '412-Burmy', 'value': '53,83,120,Wormadam_(Plant),Wormadam_(Sandy),Wormadam_(Trash),Mothim'},
-        {'label': '413-Wormadam (Plant)', 'value': '141,180,155,Wormadam_(Sandy),Wormadam_(Trash),Mothim'},
-        {'label': '413-Wormadam (Sandy)', 'value': '141,180,155,Wormadam_(Plant),Wormadam_(Trash),Mothim'},
-        {'label': '413-Wormadam (Trash)', 'value': '127,175,155,Wormadam_(Plant),Wormadam_(Sandy),Mothim'},
-        {'label': '414-Mothim', 'value': '185,98,172,Wormadam_(Plant),Wormadam_(Sandy),Wormadam_(Trash)'},
-        {'label': '415-Combee', 'value': '59,83,102,Vespiquen'},
-        {'label': '416-Vespiquen', 'value': '149,190,172'},
-        {'label': '417-Pachirisu', 'value': '94,172,155'},
-        {'label': '418-Buizel', 'value': '132,67,146,Floatzel'},
-        {'label': '419-Floatzel', 'value': '221,114,198'},
-        {'label': '420-Cherubi', 'value': '108,92,128,Cherrim'},
-        {'label': '421-Cherrim', 'value': '170,153,172'},
-        {'label': '422-Shellos', 'value': '103,105,183,Gastrodon'},
-        {'label': '423-Gastrodon', 'value': '169,143,244'},
-        {'label': '424-Ambipom', 'value': '205,143,181'},
-        {'label': '425-Drifloon', 'value': '117,80,207,Drifblim'},
-        {'label': '426-Drifblim', 'value': '180,102,312'},
-        {'label': '427-Buneary', 'value': '130,105,146,Lopunny'},
-        {'label': '428-Lopunny', 'value': '156,194,163'},
-        {'label': '429-Mismagius', 'value': '211,187,155,Misdreavus'},
-        {'label': '430-Honchkrow', 'value': '243,103,225,Murkrow'},
-        {'label': '431-Glameow', 'value': '109,82,135,Purugly'},
-        {'label': '432-Purugly', 'value': '172,133,174'},
-        {'label': '433-Chingling', 'value': '114,94,128,Chimecho'},
-        {'label': '434-Stunky', 'value': '121,90,160,Skuntank'},
-        {'label': '435-Skuntank', 'value': '184,132,230'},
-        {'label': '436-Bronzor', 'value': '43,154,149,Bronzong'},
-        {'label': '437-Bronzong', 'value': '161,213,167'},
-        {'label': '438-Bonsly', 'value': '124,133,137,Sudowoodo'},
-        {'label': '439-Mime Jr.', 'value': '125,142,85,Mr._Mime'},
-        {'label': '440-Happiny', 'value': '25,77,225,Chansey,Chansey'},
-        {'label': '441-Chatot', 'value': '183,91,183'},
-        {'label': '442-Spiritomb', 'value': '169,199,137'},
-        {'label': '443-Gible', 'value': '124,84,151,Gabite,Garchomp'},
-        {'label': '444-Gabite', 'value': '172,125,169,Garchomp'},
-        {'label': '445-Garchomp', 'value': '261,193,239'},
-        {'label': '446-Munchlax', 'value': '137,117,286,Snorlax'},
-        {'label': '447-Riolu', 'value': '127,78,120,Lucario'},
-        {'label': '448-Lucario', 'value': '236,144,172'},
-        {'label': '449-Hippopotas', 'value': '124,118,169,Hippowdon'},
-        {'label': '450-Hippowdon', 'value': '201,191,239'},
-        {'label': '451-Skorupi', 'value': '93,151,120,Drapion'},
-        {'label': '452-Drapion', 'value': '180,202,172'},
-        {'label': '453-Croagunk', 'value': '116,76,134,Toxicroak'},
-        {'label': '454-Toxicroak', 'value': '211,133,195'},
-        {'label': '455-Carnivine', 'value': '187,136,179'},
-        {'label': '456-Finneon', 'value': '96,116,135,Lumineon'},
-        {'label': '457-Lumineon', 'value': '142,170,170'},
-        {'label': '458-Mantyke', 'value': '105,179,128,Mantine'},
-        {'label': '459-Snover', 'value': '115,105,155,Abomasnow'},
-        {'label': '460-Abomasnow', 'value': '178,158,207'},
-        {'label': '461-Weavile', 'value': '243,171,172'},
-        {'label': '462-Magnezone', 'value': '238,205,172,Magneton,Magnemite'},
-        {'label': '463-Lickilicky', 'value': '161,181,242'},
-        {'label': '464-Rhyperior', 'value': '241,190,251,Rhyhorn,Rhydon'},
-        {'label': '465-Tangrowth', 'value': '207,184,225,Tangela'},
-        {'label': '466-Electivire', 'value': '249,163,181,Electabuzz'},
-        {'label': '467-Magmortar', 'value': '247,172,181,Magmortar'},
-        {'label': '468-Togekiss', 'value': '225,217,198,Togetic'},
-        {'label': '469-Yanmega', 'value': '231,156,200'},
-        {'label': '470-Leafeon', 'value': '216,219,163,Espeon,Flareon,Glaceon,Jolteon,Sylveon,Umbreon,Vaporeon'},
-        {'label': '471-Glaceon', 'value': '238,205,163,Espeon,Flareon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
-        {'label': '472-Gliscor', 'value': '185,222,181,Gligar'},
-        {'label': '473-Mamoswine', 'value': '247,146,242,Piloswine'},
-        {'label': '474-Porygon-Z', 'value': '264,150,198,Porygon2,Porygon'},
-        {'label': '475-Gallade', 'value': '237,195,169,Gardevoir'},
-        {'label': '476-Probopass', 'value': '135,275,155'},
-        {'label': '477-Dusknoir', 'value': '180,254,128,Dusclops'},
-        {'label': '478-Froslass', 'value': '171,150,172,Glalie'},
-        {'label': '479-Rotom (Forms)', 'value': '204,219,137'},
-        {'label': '479-Rotom (Normal)', 'value': '185,156,137'},
-        {'label': '480-Uxie', 'value': '156,270,181', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '481-Mesprit', 'value': '212,212,190', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '482-Azelf', 'value': '270,151,181', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '483-Dialga', 'value': '275,211,205', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '484-Palkia', 'value': '280,215,189', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '485-Heatran', 'value': '251,213,209', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '486-Regigigas', 'value': '287,210,221', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '487-Giratina (Altered)', 'value': '187,225,284', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '487-Giratina (Origin)', 'value': '225,187,284', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '488-Cresselia', 'value': '152,258,260', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '489-Phione', 'value': '162,162,190', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '490-Manaphy', 'value': '210,210,225', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '491-Darkrai', 'value': '285,198,172', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '492-Shaymin (Land)', 'value': '210,210,225', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '492-Shaymin (Sky)', 'value': '261,166,225', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '493-Arceus', 'value': '238,238,237', 'minIVs': '1', 'minLvl': '20'},
-        {'label': '808-Meltan', 'value': '118,99,130,Melmetal'},
-        {'label': '809-Melmetal', 'value': '226,190,264'},];
-      $( function() {
-        $( "#mon" ).autocomplete({
-          source: availableMon,
-          focus: function( event, ui ) {
-            event.preventDefault();
-            $("#mon").val(ui.item.label);
-            $('#basestats').val(ui.item.value);
-          },
-          select: function(event, ui) {
-            event.preventDefault();
-            $("#mon").val(ui.item.label);
-            $('#basestats').val(ui.item.value);
-            if (ui.item.minIVs) {
-              //console.log("minIVs found in select:"+ui.item.minIVs);
-              // ensure user inputs for A/D/S and minIVs IVs are above availableMon's minIVs
-              if ($('#AttackIV').val() < parseFloat(ui.item.minIVs)) { $('#AttackIV').val(ui.item.minIVs); }
-              if ($('#DefenseIV').val() < parseFloat(ui.item.minIVs)) { $('#DefenseIV').val(ui.item.minIVs); }
-              if ($('#StaminaIV').val() < parseFloat(ui.item.minIVs)) { $('#StaminaIV').val(ui.item.minIVs); }
-              if ($('#minIVs').val() < parseFloat(ui.item.minIVs)) { $('#minIVs').val(ui.item.minIVs); }
-            }
-            if ((ui.item.minLvl) && ($('#minLvl').val() < parseFloat(ui.item.minLvl))) {
-              //console.log("minLvl found in select:"+ui.item.minLvl);
-              // ensure user inputs for level are above availableMon's minLvl
-              $('#minLvl').val(ui.item.minLvl);
-            }
-          },
-        });
-      });
-    
-      // check URL for inputs
-      var url = decodeURI(window.location.href);
-      if (url.indexOf('?') > -1)
-      {
-        // stuff before ? or after # is not what we are after, so get rid of it
-        url = url.split('?')[1]; // keep right of '?'
-        url = url.split('#')[0]; // keep left of '#'
-        //console.log("URI: Trimmed URL:"+url);
-        
-        setParamsfromURL(url);
-      }
-      
-      window.addEventListener('popstate', function(e) {
-        // e.state is equal to the data-attribute of the last image we clicked
-        //console.log("Back button pressed, passing e.state to setParamsfromURL");
-        if (e.state) {
-          //console.log("Passing e.state to setParamsfromURL");
-          setParamsfromURL(e.state);
-        } else {
-          console.log("e.state does not exist, exiting popstate listener");
-        }
-      });
-      
-      function setParamsfromURL(url)
-      {
-        // split our query string into its component parts
-        //console.log("Received url:"+url);
-        var params = url.split('&');
-        //console.log("URI: Read params:"+JSON.stringify(params));
+  </section>
+  <!-- Footer Code Below -->
+  <nav data-load="/includes/footer.html"></nav>
+  <script>
+  // Global Array for CPM values, w/ half-levels
+  var cpm = [0.094, 0.1351374318, 0.16639787, 0.192650919, 0.21573247, 0.2365726613, 0.25572005, 0.2735303812, 0.29024988, 0.3060573775, 0.3210876, 0.3354450362, 0.34921268, 0.3624577511, 0.3752356, 0.387592416, 0.39956728, 0.4111935514, 0.4225, 0.4329264091, 0.44310755, 0.4530599591, 0.4627984, 0.472336093, 0.48168495, 0.4908558003, 0.49985844, 0.508701765, 0.51739395, 0.5259425113, 0.5343543, 0.5426357375, 0.5507927, 0.5588305862, 0.5667545, 0.5745691333, 0.5822789, 0.5898879072, 0.5974, 0.6048236651, 0.6121573, 0.6194041216, 0.6265671, 0.6336491432, 0.64065295, 0.6475809666, 0.65443563, 0.6612192524, 0.667934, 0.6745818959, 0.6811649, 0.6876849038, 0.69414365, 0.70054287, 0.7068842, 0.7131691091, 0.7193991, 0.7255756136, 0.7317, 0.7347410093, 0.7377695, 0.7407855938, 0.74378943, 0.7467812109, 0.74976104, 0.7527290867, 0.7556855, 0.7586303683, 0.76156384, 0.7644860647, 0.76739717, 0.7702972656, 0.7731865, 0.7760649616, 0.77893275, 0.7817900548, 0.784637, 0.7874736075, 0.7903]
+  
+  // Global variables to track min/max Stats across all IVs
+  var maxHP = 0;
+  var maxDef = 0;
+  var maxAtk = 0;
 
-        // set page paramters from URL
-        for (var i=0; i<params.length; i++)
+  // global array containing all available mon and base stats (a/d/s)
+  var availableMon = [
+    {'label': '1-Bulbasaur', 'value': '118,111,128,Ivysaur,Venusaur'},
+    {'label': '2-Ivysaur', 'value': '151,143,155,Venusaur'},
+    {'label': '3-Venusaur', 'value': '198,189,190,Ivysaur'},
+    {'label': '4-Charmander', 'value': '116,93,118,Charmeleon,Charizard'},
+    {'label': '5-Charmeleon', 'value': '158,126,151,Charizard'},
+    {'label': '6-Charizard', 'value': '223,173,186,Charmeleon'},
+    {'label': '7-Squirtle', 'value': '94,121,127,Wartortle,Blastoise'},
+    {'label': '8-Wartortle', 'value': '126,155,153,Blastoise'},
+    {'label': '9-Blastoise', 'value': '171,207,188,Wartortle'},
+    {'label': '10-Caterpie', 'value': '55,55,128,Metapod,Butterfree'},
+    {'label': '11-Metapod', 'value': '45,80,137,Butterfree'},
+    {'label': '12-Butterfree', 'value': '167,137,155,Metapod'},
+    {'label': '13-Weedle', 'value': '63,50,120,Kakuna,Beedrill'},
+    {'label': '14-Kakuna', 'value': '46,75,128,Beedrill'},
+    {'label': '15-Beedrill', 'value': '169,130,163,Kakuna'},
+    {'label': '16-Pidgey', 'value': '85,73,120,Pidgeotto,Pidgeot'},
+    {'label': '17-Pidgeotto', 'value': '117,105,160,Pidgeot'},
+    {'label': '18-Pidgeot', 'value': '166,154,195,Pidgeotto'},
+    {'label': '19-Rattata (Alolan)', 'value': '103,70,102,Raticate_(Alolan)'},
+    {'label': '19-Rattata', 'value': '103,70,102,Raticate'},
+    {'label': '20-Raticate (Alolan)', 'value': '135,154,181'},
+    {'label': '20-Raticate', 'value': '161,139,146'},
+    {'label': '21-Spearow', 'value': '112,60,120,Fearow'},
+    {'label': '22-Fearow', 'value': '182,133,163'},
+    {'label': '23-Ekans', 'value': '110,97,111,Arbok'},
+    {'label': '24-Arbok', 'value': '167,153,155'},
+    {'label': '25-Pikachu', 'value': '112,96,111,Raichu'},
+    {'label': '26-Raichu (Alolan)', 'value': '201,154,155'},
+    {'label': '26-Raichu', 'value': '193,151,155'},
+    {'label': '27-Sandshrew (Alolan)', 'value': '125,129,137,Sandslash_(Alolan)'},
+    {'label': '27-Sandshrew', 'value': '126,120,137,Sandslash'},
+    {'label': '28-Sandslash (Alolan)', 'value': '177,195,181'},
+    {'label': '28-Sandslash', 'value': '182,175,181'},
+    {'label': '29-Nidoran (Female)', 'value': '86,89,146,Nidorina,Nidoqueen'},
+    {'label': '30-Nidorina', 'value': '117,120,172,Nidoqueen'},
+    {'label': '31-Nidoqueen', 'value': '180,173,207,Nidorina'},
+    {'label': '32-Nidoran (Male)', 'value': '105,76,130,Nidorino,Nidoking'},
+    {'label': '33-Nidorino', 'value': '137,111,156,Nidoking'},
+    {'label': '34-Nidoking', 'value': '204,156,191,Nidorino'},
+    {'label': '35-Clefairy', 'value': '107,108,172,Clefable'},
+    {'label': '36-Clefable', 'value': '178,162,216'},
+    {'label': '37-Vulpix (Alolan)', 'value': '96,109,116,Ninetales_(Alolan)'},
+    {'label': '37-Vulpix', 'value': '96,109,116,Ninetales'},
+    {'label': '38-Ninetales (Alolan)', 'value': '170,193,177'},
+    {'label': '38-Ninetales', 'value': '169,190,177'},
+    {'label': '39-Jigglypuff', 'value': '80,41,251,Wigglytuff'},
+    {'label': '40-Wigglytuff', 'value': '156,90,295'},
+    {'label': '41-Zubat', 'value': '83,73,120,Golbat,Crobat'},
+    {'label': '42-Golbat', 'value': '161,150,181,Crobat'},
+    {'label': '43-Oddish', 'value': '131,112,128,Gloom,Bellossom,Vileplume'},
+    {'label': '44-Gloom', 'value': '153,136,155,Bellossom,Vileplume'},
+    {'label': '45-Vileplume', 'value': '202,167,181,Gloom,Bellossom'},
+    {'label': '46-Paras', 'value': '121,99,111,Parasect'},
+    {'label': '47-Parasect', 'value': '165,146,155'},
+    {'label': '48-Venonat', 'value': '100,100,155,Venomoth'},
+    {'label': '49-Venomoth', 'value': '179,143,172'},
+    {'label': '50-Diglett (Alolan)', 'value': '108,81,67,Dugtrio_(Alolan)'},
+    {'label': '50-Diglett', 'value': '109,78,67,Dugtrio'},
+    {'label': '51-Dugtrio (Alolan)', 'value': '201,142,111'},
+    {'label': '51-Dugtrio', 'value': '167,136,111'},
+    {'label': '52-Meowth (Alolan)', 'value': '99,78,120,Persian_(Alolan)'},
+    {'label': '52-Meowth', 'value': '92,78,120,Persian'},
+    {'label': '53-Persian (Alolan)', 'value': '158,136,163'},
+    {'label': '53-Persian', 'value': '150,136,163'},
+    {'label': '54-Psyduck', 'value': '122,95,137,Golduck'},
+    {'label': '55-Golduck', 'value': '191,162,190'},
+    {'label': '56-Mankey', 'value': '148,82,120,Primeape'},
+    {'label': '57-Primeape', 'value': '207,138,163'},
+    {'label': '58-Growlithe', 'value': '136,93,146,Arcanine'},
+    {'label': '59-Arcanine', 'value': '227,166,207'},
+    {'label': '60-Poliwag', 'value': '101,82,120,Poliwhirl,Politoed,Poliwrath'},
+    {'label': '61-Poliwhirl', 'value': '130,123,163,Politoed,Poliwrath'},
+    {'label': '62-Poliwrath', 'value': '182,184,207,Poliwhirl,Politoed'},
+    {'label': '63-Abra', 'value': '195,82,93,Kadabra,Alakazam'},
+    {'label': '64-Kadabra', 'value': '232,117,120,Alakazam'},
+    {'label': '65-Alakazam', 'value': '271,167,146,Kadabra'},
+    {'label': '66-Machop', 'value': '137,82,172,Machoke,Machamp'},
+    {'label': '67-Machoke', 'value': '177,125,190,Machamp'},
+    {'label': '68-Machamp', 'value': '234,159,207,Machoke'},
+    {'label': '69-Bellsprout', 'value': '139,61,137,Weepinbell,Victreebel'},
+    {'label': '70-Weepinbell', 'value': '172,92,163,Victreebel'},
+    {'label': '71-Victreebel', 'value': '207,135,190,Weepinbell'},
+    {'label': '72-Tentacool', 'value': '97,149,120,Tentacruel'},
+    {'label': '73-Tentacruel', 'value': '166,209,190'},
+    {'label': '74-Geodude (Alolan)', 'value': '132,132,120,Graveler_(Alolan),Golem_(Alolan)'},
+    {'label': '74-Geodude', 'value': '132,132,120,Graveler,Golem'},
+    {'label': '75-Graveler (Alolan)', 'value': '164,164,146,Golem_(Alolan)'},
+    {'label': '75-Graveler', 'value': '164,164,146,Golem'},
+    {'label': '76-Golem (Alolan)', 'value': '211,198,190,Graveler_(Alolan)'},
+    {'label': '76-Golem', 'value': '211,198,190,Graveler'},
+    {'label': '77-Ponyta', 'value': '170,127,137,Rapidash'},
+    {'label': '78-Rapidash', 'value': '207,162,163'},
+    {'label': '79-Slowpoke', 'value': '109,98,207,Slowking,Slowbro'},
+    {'label': '80-Slowbro', 'value': '177,180,216,Slowking,Slowpoke'},
+    {'label': '81-Magnemite', 'value': '165,121,93,Magneton,Magnezone'},
+    {'label': '82-Magneton', 'value': '223,169,137,Magnezone,Magnemite'},
+    {'label': '83-Farfetchd', 'value': '124,115,141'},
+    {'label': '84-Doduo', 'value': '158,83,111,Dodrio'},
+    {'label': '85-Dodrio', 'value': '218,140,155'},
+    {'label': '86-Seel', 'value': '85,121,163,Dewgong'},
+    {'label': '87-Dewgong', 'value': '139,177,207'},
+    {'label': '88-Grimer (Alolan)', 'value': '135,90,190,Muk_(Alolan)'},
+    {'label': '88-Grimer', 'value': '135,90,190,Muk'},
+    {'label': '89-Muk (Alolan)', 'value': '190,172,233,Grimer_(Alolan)'},
+    {'label': '89-Muk', 'value': '190,172,233,Grimer'},
+    {'label': '90-Shellder', 'value': '116,134,102,Cloyster'},
+    {'label': '91-Cloyster', 'value': '186,256,137'},
+    {'label': '92-Gastly', 'value': '186,67,102,Haunter,Gengar'},
+    {'label': '93-Haunter', 'value': '223,107,128,Gengar'},
+    {'label': '94-Gengar', 'value': '261,149,155,Haunter'},
+    {'label': '95-Onix', 'value': '85,232,111,Steelix'},
+    {'label': '96-Drowzee', 'value': '89,136,155,Hypno'},
+    {'label': '97-Hypno', 'value': '144,193,198'},
+    {'label': '98-Krabby', 'value': '181,124,102,Kingler'},
+    {'label': '99-Kingler', 'value': '240,181,146'},
+    {'label': '100-Voltorb', 'value': '109,111,120,Electrode'},
+    {'label': '101-Electrode', 'value': '173,173,155'},
+    {'label': '102-Exeggcute', 'value': '107,125,155,Exeggutor'},
+    {'label': '103-Exeggutor (Alolan)', 'value': '230,153,216'},
+    {'label': '103-Exeggutor', 'value': '233,149,216,Exeggcute'},
+    {'label': '104-Cubone', 'value': '90,144,137,Marowak'},
+    {'label': '105-Marowak (Alolan)', 'value': '144,186,155'},
+    {'label': '105-Marowak', 'value': '144,186,155'},
+    {'label': '106-Hitmonlee', 'value': '224,181,137,Hitmontop,Hitmonchan'},
+    {'label': '107-Hitmonchan', 'value': '193,197,137,Hitmontop,Hitmonlee'},
+    {'label': '108-Lickitung', 'value': '108,137,207,Lickilicky'},
+    {'label': '109-Koffing', 'value': '119,141,120,Weezing'},
+    {'label': '110-Weezing', 'value': '174,197,163'},
+    {'label': '111-Rhyhorn', 'value': '140,127,190,Rhydon,Rhyperior'},
+    {'label': '112-Rhydon', 'value': '222,171,233,Rhyperior,Rhyhorn'},
+    {'label': '113-Chansey', 'value': '60,128,487,Blissey'},
+    {'label': '114-Tangela', 'value': '183,169,163,Tangrowth'},
+    {'label': '115-Kangaskhan', 'value': '181,165,233'},
+    {'label': '116-Horsea', 'value': '129,103,102,Seadra,Kingdra'},
+    {'label': '117-Seadra', 'value': '187,156,146,Kingdra'},
+    {'label': '118-Goldeen', 'value': '123,110,128,Seaking'},
+    {'label': '119-Seaking', 'value': '175,147,190'},
+    {'label': '120-Staryu', 'value': '137,112,102,Starmie'},
+    {'label': '121-Starmie', 'value': '210,184,155'},
+    {'label': '122-Mr. Mime', 'value': '192,205,120'},
+    {'label': '123-Scyther', 'value': '218,170,172,Scizor'},
+    {'label': '124-Jynx', 'value': '223,151,163'},
+    {'label': '125-Electabuzz', 'value': '198,158,163,Electivire'},
+    {'label': '126-Magmar', 'value': '206,154,163,Magmortar'},
+    {'label': '127-Pinsir', 'value': '238,182,163'},
+    {'label': '128-Tauros', 'value': '198,183,181'},
+    {'label': '129-Magikarp', 'value': '29,85,85,Gyarados'},
+    {'label': '130-Gyarados', 'value': '237,186,216'},
+    {'label': '131-Lapras', 'value': '165,174,277'},
+    {'label': '132-Ditto', 'value': '91,91,134'},
+    {'label': '133-Eevee', 'value': '104,114,146,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+    {'label': '134-Vaporeon', 'value': '205,161,277,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon'},
+    {'label': '135-Jolteon', 'value': '232,182,163,Espeon,Flareon,Glaceon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+    {'label': '136-Flareon', 'value': '246,179,163,Espeon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+    {'label': '137-Porygon', 'value': '153,136,163,Porygon2,Porygon-z'},
+    {'label': '138-Omanyte', 'value': '155,153,111,Omastar'},
+    {'label': '139-Omastar', 'value': '207,201,172'},
+    {'label': '140-Kabuto', 'value': '148,140,102,Kabutops'},
+    {'label': '141-Kabutops', 'value': '220,186,155'},
+    {'label': '142-Aerodactyl', 'value': '221,159,190'},
+    {'label': '143-Snorlax', 'value': '190,169,330'},
+    {'label': '144-Articuno', 'value': '192,236,207', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '145-Zapdos', 'value': '253,185,207', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '146-Moltres', 'value': '251,181,207', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '147-Dratini', 'value': '119,91,121,Dragonair,Dragonite'},
+    {'label': '148-Dragonair', 'value': '163,135,156,Dragonite'},
+    {'label': '149-Dragonite', 'value': '263,198,209,Dragonair'},
+    {'label': '150-Mewtwo (Armor)', 'value': '182,278,214', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '150-Mewtwo', 'value': '300,182,214', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '151-Mew', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
+    {'label': '152-Chikorita', 'value': '92,122,128,Bayleef,Meganium'},
+    {'label': '153-Bayleef', 'value': '122,155,155,Meganium'},
+    {'label': '154-Meganium', 'value': '168,202,190,Bayleef'},
+    {'label': '155-Cyndaquil', 'value': '116,93,118,Quilava,Typhlosion'},
+    {'label': '156-Quilava', 'value': '158,126,151,Typhlosion'},
+    {'label': '157-Typhlosion', 'value': '223,173,186,Quilava'},
+    {'label': '158-Totodile', 'value': '117,109,137,Croconaw,Feraligatr'},
+    {'label': '159-Croconaw', 'value': '150,142,163,Feraligatr'},
+    {'label': '160-Feraligatr', 'value': '205,188,198,Croconaw'},
+    {'label': '161-Sentret', 'value': '79,73,111,Furret'},
+    {'label': '162-Furret', 'value': '148,125,198'},
+    {'label': '163-Hoothoot', 'value': '67,88,155,Noctowl'},
+    {'label': '164-Noctowl', 'value': '145,156,225'},
+    {'label': '165-Ledyba', 'value': '72,118,120,Ledian'},
+    {'label': '166-Ledian', 'value': '107,179,146'},
+    {'label': '167-Spinarak', 'value': '105,73,120,Ariados'},
+    {'label': '168-Ariados', 'value': '161,124,172'},
+    {'label': '169-Crobat', 'value': '194,178,198,Golbat'},
+    {'label': '170-Chinchou', 'value': '106,97,181,Lanturn'},
+    {'label': '171-Lanturn', 'value': '146,137,268'},
+    {'label': '172-Pichu', 'value': '77,53,85,Pikachu,Raichu'},
+    {'label': '173-Cleffa', 'value': '75,79,137,Clefairy,Clefable'},
+    {'label': '174-Igglybuff', 'value': '69,32,207,Jigglypuff,Wigglytuff'},
+    {'label': '175-Togepi', 'value': '67,116,111,Togetic,Togekiss'},
+    {'label': '176-Togetic', 'value': '139,181,146,Togekiss'},
+    {'label': '177-Natu', 'value': '134,89,120,Xatu'},
+    {'label': '178-Xatu', 'value': '192,146,163'},
+    {'label': '179-Mareep', 'value': '114,79,146,Flaaffy,Ampharos'},
+    {'label': '180-Flaaffy', 'value': '145,109,172,Ampharos'},
+    {'label': '181-Ampharos', 'value': '211,169,207,Flaaffy'},
+    {'label': '182-Bellossom', 'value': '169,186,181,Gloom,Vileplume'},
+    {'label': '183-Marill', 'value': '37,93,172,Azumarill'},
+    {'label': '184-Azumarill', 'value': '112,152,225'},
+    {'label': '185-Sudowoodo', 'value': '167,176,172'},
+    {'label': '186-Politoed', 'value': '174,179,207,Poliwhirl,Poliwrath'},
+    {'label': '187-Hoppip', 'value': '67,94,111,Skiploom,Jumpluff'},
+    {'label': '188-Skiploom', 'value': '91,120,146,Jumpluff'},
+    {'label': '189-Jumpluff', 'value': '118,183,181'},
+    {'label': '190-Aipom', 'value': '136,112,146,Ambipom'},
+    {'label': '191-Sunkern', 'value': '55,55,102,Sunflora'},
+    {'label': '192-Sunflora', 'value': '185,135,181'},
+    {'label': '193-Yanma', 'value': '154,94,163,Yanmega'},
+    {'label': '194-Wooper', 'value': '75,66,146,Quagsire'},
+    {'label': '195-Quagsire', 'value': '152,143,216'},
+    {'label': '196-Espeon', 'value': '261,175,163,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+    {'label': '197-Umbreon', 'value': '126,240,216,Espeon,Flareon,Glaceon,Jolteon,Leafeon,Sylveon,Vaporeon'},
+    {'label': '198-Murkrow', 'value': '175,87,155,Honchkrow'},
+    {'label': '199-Slowking', 'value': '177,180,216,Slowpoke,Slowbro'},
+    {'label': '200-Misdreavus', 'value': '167,154,155,Mismagius'},
+    {'label': '201-Unown', 'value': '136,91,134'},
+    {'label': '202-Wobbuffet', 'value': '60,106,382'},
+    {'label': '203-Girafarig', 'value': '182,133,172'},
+    {'label': '204-Pineco', 'value': '108,122,137,Forretress'},
+    {'label': '205-Forretress', 'value': '161,205,181'},
+    {'label': '206-Dunsparce', 'value': '131,128,225'},
+    {'label': '207-Gligar', 'value': '143,184,163,Gliscor'},
+    {'label': '208-Steelix', 'value': '148,272,181'},
+    {'label': '209-Snubbull', 'value': '137,85,155,Granbull'},
+    {'label': '210-Granbull', 'value': '212,131,207'},
+    {'label': '211-Qwilfish', 'value': '184,138,163'},
+    {'label': '212-Scizor', 'value': '236,181,172,Scyther'},
+    {'label': '213-Shuckle', 'value': '17,396,85'},
+    {'label': '214-Heracross', 'value': '234,179,190'},
+    {'label': '215-Sneasel', 'value': '189,146,146,Weavile'},
+    {'label': '216-Teddiursa', 'value': '142,93,155,Ursaring'},
+    {'label': '217-Ursaring', 'value': '236,144,207'},
+    {'label': '218-Slugma', 'value': '118,71,120,Magcargo'},
+    {'label': '219-Magcargo', 'value': '139,191,137'},
+    {'label': '220-Swinub', 'value': '90,69,137,Piloswine,Mamoswine'},
+    {'label': '221-Piloswine', 'value': '181,138,225,Mamoswine'},
+    {'label': '222-Corsola', 'value': '118,156,146'},
+    {'label': '223-Remoraid', 'value': '127,69,111,Octillery'},
+    {'label': '224-Octillery', 'value': '197,141,181'},
+    {'label': '225-Delibird', 'value': '128,90,128'},
+    {'label': '226-Mantine', 'value': '148,226,163'},
+    {'label': '227-Skarmory', 'value': '148,226,163'},
+    {'label': '228-Houndour', 'value': '152,83,128,Houndoom'},
+    {'label': '229-Houndoom', 'value': '224,144,181'},
+    {'label': '230-Kingdra', 'value': '194,194,181,Seadra'},
+    {'label': '231-Phanpy', 'value': '107,98,207,Donphan'},
+    {'label': '232-Donphan', 'value': '214,185,207'},
+    {'label': '233-Porygon2', 'value': '198,180,198,Porygon-z,Porygon'},
+    {'label': '234-Stantler', 'value': '192,131,177'},
+    {'label': '235-Smeargle', 'value': '40,83,146'},
+    {'label': '236-Tyrogue', 'value': '64,64,111,Hitmontop,Hitmonlee,Hitmonchan'},
+    {'label': '237-Hitmontop', 'value': '173,207,137,Hitmonlee,Hitmonchan'},
+    {'label': '238-Smoochum', 'value': '153,91,128,Jynx'},
+    {'label': '239-Elekid', 'value': '135,101,128,Electabuzz,Electabuzz'},
+    {'label': '240-Magby', 'value': '151,99,128,Magmar,Magmortar'},
+    {'label': '241-Miltank', 'value': '157,193,216'},
+    {'label': '242-Blissey', 'value': '129,169,496,Chansey'},
+    {'label': '243-Raikou', 'value': '241,195,207', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '244-Entei', 'value': '235,171,251', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '245-Suicune', 'value': '180,235,225', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '246-Larvitar', 'value': '115,93,137,Pupitar,Tyranitar'},
+    {'label': '247-Pupitar', 'value': '155,133,172,Tyranitar'},
+    {'label': '248-Tyranitar', 'value': '251,207,225,Pupitar'},
+    {'label': '249-Lugia', 'value': '193,310,235', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '250-Ho-Oh', 'value': '239,244,214', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '251-Celebi', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
+    {'label': '252-Treecko', 'value': '124,94,120,Grovyle,Sceptile'},
+    {'label': '253-Grovyle', 'value': '172,120,137,Sceptile'},
+    {'label': '254-Sceptile', 'value': '223,169,172,Grovyle'},
+    {'label': '255-Torchic', 'value': '130,87,128,Combusken,Blaziken'},
+    {'label': '256-Combusken', 'value': '163,115,155,Blaziken'},
+    {'label': '257-Blaziken', 'value': '240,141,190,Combusken'},
+    {'label': '258-Mudkip', 'value': '126,93,137,Marshtomp,Swampert'},
+    {'label': '259-Marshtomp', 'value': '156,133,172,Swampert'},
+    {'label': '260-Swampert', 'value': '208,175,225,Marshtomp'},
+    {'label': '261-Poochyena', 'value': '96,61,111,Mightyena'},
+    {'label': '262-Mightyena', 'value': '171,132,172'},
+    {'label': '263-Zigzagoon', 'value': '58,80,116,Linoone'},
+    {'label': '264-Linoone', 'value': '142,128,186'},
+    {'label': '265-Wurmple', 'value': '75,59,128,Beautifly,Dustox'},
+    {'label': '266-Silcoon', 'value': '60,77,137,Beautifly,Dustox'},
+    {'label': '267-Beautifly', 'value': '189,98,155,Dustox'},
+    {'label': '268-Cascoon', 'value': '60,77,137,Dustox,Beautifly'},
+    {'label': '269-Dustox', 'value': '98,162,155,Beautifly'},
+    {'label': '270-Lotad', 'value': '71,77,120,Lombre,Ludicolo'},
+    {'label': '271-Lombre', 'value': '112,119,155,Ludicolo'},
+    {'label': '272-Ludicolo', 'value': '173,176,190,Lombre'},
+    {'label': '273-Seedot', 'value': '71,77,120,Nuzleaf,Shiftry'},
+    {'label': '274-Nuzleaf', 'value': '134,78,172,Shiftry'},
+    {'label': '275-Shiftry', 'value': '200,121,207,Nuzleaf'},
+    {'label': '276-Taillow', 'value': '106,61,120,Swellow'},
+    {'label': '277-Swellow', 'value': '185,124,155'},
+    {'label': '278-Wingull', 'value': '106,61,120,Pelipper'},
+    {'label': '279-Pelipper', 'value': '175,174,155'},
+    {'label': '280-Ralts', 'value': '79,59,99,Gardevoir,Gallade'},
+    {'label': '281-Kirlia', 'value': '117,90,116,Gardevoir,Gallade'},
+    {'label': '282-Gardevoir', 'value': '237,195,169,Gallade'},
+    {'label': '283-Surskit', 'value': '93,87,120,Masquerain'},
+    {'label': '284-Masquerain', 'value': '192,150,172'},
+    {'label': '285-Shroomish', 'value': '74,110,155,Breloom'},
+    {'label': '286-Breloom', 'value': '241,144,155'},
+    {'label': '287-Slakoth', 'value': '104,92,155,Vigoroth,Slaking'},
+    {'label': '288-Vigoroth', 'value': '159,145,190,Slaking'},
+    {'label': '289-Slaking', 'value': '290,166,284,Vigoroth'},
+    {'label': '290-Nincada', 'value': '80,126,104,Ninjask'},
+    {'label': '291-Ninjask', 'value': '199,112,156'},
+    {'label': '292-Shedinja', 'value': '153,73,1'},
+    {'label': '293-Whismur', 'value': '92,42,162,Loudred,Exploud'},
+    {'label': '294-Loudred', 'value': '134,81,197,Exploud'},
+    {'label': '295-Exploud', 'value': '179,137,232,Loudred'},
+    {'label': '296-Makuhita', 'value': '99,54,176,Hariyama'},
+    {'label': '297-Hariyama', 'value': '209,114,302'},
+    {'label': '298-Azurill', 'value': '36,71,137,Azumarill'},
+    {'label': '299-Nosepass', 'value': '82,215,102,Probopass'},
+    {'label': '300-Skitty', 'value': '84,79,137,Delcatty'},
+    {'label': '301-Delcatty', 'value': '132,127,172'},
+    {'label': '302-Sableye', 'value': '141,136,137'},
+    {'label': '303-Mawile', 'value': '155,141,137'},
+    {'label': '304-Aron', 'value': '121,141,137,Lairon,Aggron'},
+    {'label': '305-Lairon', 'value': '158,198,155,Aggron'},
+    {'label': '306-Aggron', 'value': '198,257,172,Lairon'},
+    {'label': '307-Meditite', 'value': '78,107,102,Medicham'},
+    {'label': '308-Medicham', 'value': '121,152,155'},
+    {'label': '309-Electrike', 'value': '123,78,120,Manectric'},
+    {'label': '310-Manectric', 'value': '215,127,172'},
+    {'label': '311-Plusle', 'value': '167,129,155'},
+    {'label': '312-Minun', 'value': '147,150,155'},
+    {'label': '313-Volbeat', 'value': '143,166,163'},
+    {'label': '314-Illumise', 'value': '143,166,163'},
+    {'label': '315-Roselia', 'value': '186,131,137,Roserade'},
+    {'label': '316-Gulpin', 'value': '80,99,172,Swalot'},
+    {'label': '317-Swalot', 'value': '140,159,225'},
+    {'label': '318-Carvanha', 'value': '171,39,128,Sharpedo'},
+    {'label': '319-Sharpedo', 'value': '243,83,172'},
+    {'label': '320-Wailmer', 'value': '136,68,277,Wailord'},
+    {'label': '321-Wailord', 'value': '175,87,347'},
+    {'label': '322-Numel', 'value': '119,79,155,Camerupt'},
+    {'label': '323-Camerupt', 'value': '194,136,172'},
+    {'label': '324-Torkoal', 'value': '151,203,172'},
+    {'label': '325-Spoink', 'value': '125,122,155,Grumpig'},
+    {'label': '326-Grumpig', 'value': '171,188,190'},
+    {'label': '327-Spinda', 'value': '116,116,155'},
+    {'label': '328-Trapinch', 'value': '162,78,128,Vibrava,Flygon'},
+    {'label': '329-Vibrava', 'value': '134,99,137,Flygon'},
+    {'label': '330-Flygon', 'value': '205,168,190,Vibrava'},
+    {'label': '331-Cacnea', 'value': '156,74,137,Cacturne'},
+    {'label': '332-Cacturne', 'value': '221,115,172'},
+    {'label': '333-Swablu', 'value': '76,132,128,Altaria'},
+    {'label': '334-Altaria', 'value': '141,201,181'},
+    {'label': '335-Zangoose', 'value': '222,124,177'},
+    {'label': '336-Seviper', 'value': '196,118,177'},
+    {'label': '337-Lunatone', 'value': '178,153,207'},
+    {'label': '338-Solrock', 'value': '178,153,207'},
+    {'label': '339-Barboach', 'value': '93,82,137,Whiscash'},
+    {'label': '340-Whiscash', 'value': '151,141,242'},
+    {'label': '341-Corphish', 'value': '141,99,125,Crawdaunt'},
+    {'label': '342-Crawdaunt', 'value': '224,142,160'},
+    {'label': '343-Baltoy', 'value': '77,124,120,Claydol'},
+    {'label': '344-Claydol', 'value': '140,229,155'},
+    {'label': '345-Lileep', 'value': '105,150,165,Cradily'},
+    {'label': '346-Cradily', 'value': '152,194,200'},
+    {'label': '347-Anorith', 'value': '176,100,128,Armaldo'},
+    {'label': '348-Armaldo', 'value': '222,174,181'},
+    {'label': '349-Feebas', 'value': '29,85,85,Milotic'},
+    {'label': '350-Milotic', 'value': '192,219,216'},
+    {'label': '351-Castform', 'value': '139,139,172'},
+    {'label': '352-Kecleon', 'value': '161,189,155'},
+    {'label': '353-Shuppet', 'value': '138,65,127,Banette'},
+    {'label': '354-Banette', 'value': '218,126,162'},
+    {'label': '355-Duskull', 'value': '70,162,85,Dusclops,Dusknoir'},
+    {'label': '356-Dusclops', 'value': '124,234,120,Dusknoir'},
+    {'label': '357-Tropius', 'value': '136,163,223'},
+    {'label': '358-Chimecho', 'value': '175,170,181,Chingling'},
+    {'label': '359-Absol', 'value': '246,120,163'},
+    {'label': '360-Wynaut', 'value': '41,86,216,Wobbuffet'},
+    {'label': '361-Snorunt', 'value': '95,95,137,Glalie,Froslass'},
+    {'label': '362-Glalie', 'value': '162,162,190,Froslass'},
+    {'label': '363-Spheal', 'value': '95,90,172,Sealeo,Walrein'},
+    {'label': '364-Sealeo', 'value': '137,132,207,Walrein'},
+    {'label': '365-Walrein', 'value': '182,176,242,Sealeo'},
+    {'label': '366-Clamperl', 'value': '133,135,111,Huntail,Gorebyss'},
+    {'label': '367-Huntail', 'value': '197,179,146,Gorebyss'},
+    {'label': '368-Gorebyss', 'value': '211,179,146,Huntail'},
+    {'label': '369-Relicanth', 'value': '162,203,225'},
+    {'label': '370-Luvdisc', 'value': '81,128,125'},
+    {'label': '371-Bagon', 'value': '134,93,128,Shelgon,Salamence'},
+    {'label': '372-Shelgon', 'value': '172,155,163,Salamence'},
+    {'label': '373-Salamence', 'value': '277,168,216,Shelgon'},
+    {'label': '374-Beldum', 'value': '96,132,120,Metang,Metagross'},
+    {'label': '375-Metang', 'value': '138,176,155,Metagross'},
+    {'label': '376-Metagross', 'value': '257,228,190,Metang'},
+    {'label': '377-Regirock', 'value': '179,309,190', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '378-Regice', 'value': '179,309,190', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '379-Registeel', 'value': '143,285,190', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '380-Latias', 'value': '228,246,190', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '381-Latios', 'value': '268,212,190', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '382-Kyogre', 'value': '270,228,205', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '383-Groudon', 'value': '270,228,205', 'minIVs': '1', 'minLvl': '15'},
+    {'label': '384-Rayquaza', 'value': '284,170,213', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '385-Jirachi', 'value': '210,210,225', 'minIVs': '10', 'minLvl': '15'},
+    {'label': '386-Deoxys (Attack)', 'value': '414,46,137', 'minIVs': '10', 'minLvl': '20'},
+    {'label': '386-Deoxys (Defense)', 'value': '144,330,137', 'minIVs': '10', 'minLvl': '20'},
+    {'label': '386-Deoxys (Normal)', 'value': '345,115,137', 'minIVs': '10', 'minLvl': '20'},
+    {'label': '386-Deoxys (Speed)', 'value': '230,218,137', 'minIVs': '10', 'minLvl': '20'},
+    {'label': '387-Turtwig', 'value': '119,110,146,Grotle,Torterra'},
+    {'label': '388-Grotle', 'value': '157,143,181,Torterra'},
+    {'label': '389-Torterra', 'value': '202,188,216,Grotle'},
+    {'label': '390-Chimchar', 'value': '113,86,127,Monferno,Infernape'},
+    {'label': '391-Monferno', 'value': '158,105,162,Infernape'},
+    {'label': '392-Infernape', 'value': '222,151,183,Monferno'},
+    {'label': '393-Piplup', 'value': '112,102,142,Prinplup,Empoleon'},
+    {'label': '394-Prinplup', 'value': '150,139,162,Empoleon'},
+    {'label': '395-Empoleon', 'value': '210,186,197,Prinplup'},
+    {'label': '396-Starly', 'value': '101,58,120,Staravia,Staraptor'},
+    {'label': '397-Staravia', 'value': '142,94,146,Staraptor'},
+    {'label': '398-Staraptor', 'value': '234,140,198,Staravia'},
+    {'label': '399-Bidoof', 'value': '80,73,153,Bibarel'},
+    {'label': '400-Bibarel', 'value': '162,119,188'},
+    {'label': '401-Kricketot', 'value': '45,74,114,Kricketune'},
+    {'label': '402-Kricketune', 'value': '160,100,184'},
+    {'label': '403-Shinx', 'value': '117,64,128,Luxio,Luxray'},
+    {'label': '404-Luxio', 'value': '159,95,155,Luxray'},
+    {'label': '405-Luxray', 'value': '232,156,190,Luxio'},
+    {'label': '406-Budew', 'value': '91,109,120,Roselia,Roserade'},
+    {'label': '407-Roserade', 'value': '243,185,155'},
+    {'label': '408-Cranidos', 'value': '218,71,167,Rampardos'},
+    {'label': '409-Rampardos', 'value': '295,109,219'},
+    {'label': '410-Shieldon', 'value': '76,195,102,Bastiodon'},
+    {'label': '411-Bastiodon', 'value': '94,286,155'},
+    {'label': '412-Burmy', 'value': '53,83,120,Wormadam_(Plant),Wormadam_(Sandy),Wormadam_(Trash),Mothim'},
+    {'label': '413-Wormadam (Plant)', 'value': '141,180,155,Wormadam_(Sandy),Wormadam_(Trash),Mothim'},
+    {'label': '413-Wormadam (Sandy)', 'value': '141,180,155,Wormadam_(Plant),Wormadam_(Trash),Mothim'},
+    {'label': '413-Wormadam (Trash)', 'value': '127,175,155,Wormadam_(Plant),Wormadam_(Sandy),Mothim'},
+    {'label': '414-Mothim', 'value': '185,98,172,Wormadam_(Plant),Wormadam_(Sandy),Wormadam_(Trash)'},
+    {'label': '415-Combee', 'value': '59,83,102,Vespiquen'},
+    {'label': '416-Vespiquen', 'value': '149,190,172'},
+    {'label': '417-Pachirisu', 'value': '94,172,155'},
+    {'label': '418-Buizel', 'value': '132,67,146,Floatzel'},
+    {'label': '419-Floatzel', 'value': '221,114,198'},
+    {'label': '420-Cherubi', 'value': '108,92,128,Cherrim'},
+    {'label': '421-Cherrim', 'value': '170,153,172'},
+    {'label': '422-Shellos', 'value': '103,105,183,Gastrodon'},
+    {'label': '423-Gastrodon', 'value': '169,143,244'},
+    {'label': '424-Ambipom', 'value': '205,143,181'},
+    {'label': '425-Drifloon', 'value': '117,80,207,Drifblim'},
+    {'label': '426-Drifblim', 'value': '180,102,312'},
+    {'label': '427-Buneary', 'value': '130,105,146,Lopunny'},
+    {'label': '428-Lopunny', 'value': '156,194,163'},
+    {'label': '429-Mismagius', 'value': '211,187,155,Misdreavus'},
+    {'label': '430-Honchkrow', 'value': '243,103,225,Murkrow'},
+    {'label': '431-Glameow', 'value': '109,82,135,Purugly'},
+    {'label': '432-Purugly', 'value': '172,133,174'},
+    {'label': '433-Chingling', 'value': '114,94,128,Chimecho'},
+    {'label': '434-Stunky', 'value': '121,90,160,Skuntank'},
+    {'label': '435-Skuntank', 'value': '184,132,230'},
+    {'label': '436-Bronzor', 'value': '43,154,149,Bronzong'},
+    {'label': '437-Bronzong', 'value': '161,213,167'},
+    {'label': '438-Bonsly', 'value': '124,133,137,Sudowoodo'},
+    {'label': '439-Mime Jr.', 'value': '125,142,85,Mr._Mime'},
+    {'label': '440-Happiny', 'value': '25,77,225,Chansey,Chansey'},
+    {'label': '441-Chatot', 'value': '183,91,183'},
+    {'label': '442-Spiritomb', 'value': '169,199,137'},
+    {'label': '443-Gible', 'value': '124,84,151,Gabite,Garchomp'},
+    {'label': '444-Gabite', 'value': '172,125,169,Garchomp'},
+    {'label': '445-Garchomp', 'value': '261,193,239'},
+    {'label': '446-Munchlax', 'value': '137,117,286,Snorlax'},
+    {'label': '447-Riolu', 'value': '127,78,120,Lucario'},
+    {'label': '448-Lucario', 'value': '236,144,172'},
+    {'label': '449-Hippopotas', 'value': '124,118,169,Hippowdon'},
+    {'label': '450-Hippowdon', 'value': '201,191,239'},
+    {'label': '451-Skorupi', 'value': '93,151,120,Drapion'},
+    {'label': '452-Drapion', 'value': '180,202,172'},
+    {'label': '453-Croagunk', 'value': '116,76,134,Toxicroak'},
+    {'label': '454-Toxicroak', 'value': '211,133,195'},
+    {'label': '455-Carnivine', 'value': '187,136,179'},
+    {'label': '456-Finneon', 'value': '96,116,135,Lumineon'},
+    {'label': '457-Lumineon', 'value': '142,170,170'},
+    {'label': '458-Mantyke', 'value': '105,179,128,Mantine'},
+    {'label': '459-Snover', 'value': '115,105,155,Abomasnow'},
+    {'label': '460-Abomasnow', 'value': '178,158,207'},
+    {'label': '461-Weavile', 'value': '243,171,172'},
+    {'label': '462-Magnezone', 'value': '238,205,172,Magneton,Magnemite'},
+    {'label': '463-Lickilicky', 'value': '161,181,242'},
+    {'label': '464-Rhyperior', 'value': '241,190,251,Rhyhorn,Rhydon'},
+    {'label': '465-Tangrowth', 'value': '207,184,225,Tangela'},
+    {'label': '466-Electivire', 'value': '249,163,181,Electabuzz'},
+    {'label': '467-Magmortar', 'value': '247,172,181,Magmortar'},
+    {'label': '468-Togekiss', 'value': '225,217,198,Togetic'},
+    {'label': '469-Yanmega', 'value': '231,156,200'},
+    {'label': '470-Leafeon', 'value': '216,219,163,Espeon,Flareon,Glaceon,Jolteon,Sylveon,Umbreon,Vaporeon'},
+    {'label': '471-Glaceon', 'value': '238,205,163,Espeon,Flareon,Jolteon,Leafeon,Sylveon,Umbreon,Vaporeon'},
+    {'label': '472-Gliscor', 'value': '185,222,181,Gligar'},
+    {'label': '473-Mamoswine', 'value': '247,146,242,Piloswine'},
+    {'label': '474-Porygon-Z', 'value': '264,150,198,Porygon2,Porygon'},
+    {'label': '475-Gallade', 'value': '237,195,169,Gardevoir'},
+    {'label': '476-Probopass', 'value': '135,275,155'},
+    {'label': '477-Dusknoir', 'value': '180,254,128,Dusclops'},
+    {'label': '478-Froslass', 'value': '171,150,172,Glalie'},
+    {'label': '479-Rotom (Forms)', 'value': '204,219,137'},
+    {'label': '479-Rotom (Normal)', 'value': '185,156,137'},
+    {'label': '480-Uxie', 'value': '156,270,181', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '481-Mesprit', 'value': '212,212,190', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '482-Azelf', 'value': '270,151,181', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '483-Dialga', 'value': '275,211,205', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '484-Palkia', 'value': '280,215,189', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '485-Heatran', 'value': '251,213,209', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '486-Regigigas', 'value': '287,210,221', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '487-Giratina (Altered)', 'value': '187,225,284', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '487-Giratina (Origin)', 'value': '225,187,284', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '488-Cresselia', 'value': '152,258,260', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '489-Phione', 'value': '162,162,190', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '490-Manaphy', 'value': '210,210,225', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '491-Darkrai', 'value': '285,198,172', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '492-Shaymin (Land)', 'value': '210,210,225', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '492-Shaymin (Sky)', 'value': '261,166,225', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '493-Arceus', 'value': '238,238,237', 'minIVs': '1', 'minLvl': '20'},
+    {'label': '808-Meltan', 'value': '118,99,130,Melmetal'},
+    {'label': '809-Melmetal', 'value': '226,190,264'},];
+  $( function() {
+    $( "#mon" ).autocomplete({
+      source: availableMon,
+      focus: function( event, ui ) {
+        event.preventDefault();
+        $("#mon").val(ui.item.label);
+        $('#basestats').val(ui.item.value);
+      },
+      select: function(event, ui) {
+        event.preventDefault();
+        $("#mon").val(ui.item.label);
+        $('#basestats').val(ui.item.value);
+        if (ui.item.minIVs) {
+          //console.log("minIVs found in select:"+ui.item.minIVs);
+          // ensure user inputs for A/D/S and minIVs IVs are above availableMon's minIVs
+          if ($('#AttackIV').val() < parseFloat(ui.item.minIVs)) { $('#AttackIV').val(ui.item.minIVs); }
+          if ($('#DefenseIV').val() < parseFloat(ui.item.minIVs)) { $('#DefenseIV').val(ui.item.minIVs); }
+          if ($('#StaminaIV').val() < parseFloat(ui.item.minIVs)) { $('#StaminaIV').val(ui.item.minIVs); }
+          if ($('#minIVs').val() < parseFloat(ui.item.minIVs)) { $('#minIVs').val(ui.item.minIVs); }
+        }
+        if ((ui.item.minLvl) && ($('#minLvl').val() < parseFloat(ui.item.minLvl))) {
+          //console.log("minLvl found in select:"+ui.item.minLvl);
+          // ensure user inputs for level are above availableMon's minLvl
+          $('#minLvl').val(ui.item.minLvl);
+        }
+      },
+    });
+  });
+
+  // check URL for inputs
+  var url = decodeURI(window.location.href);
+  if (url.indexOf('?') > -1)
+  {
+    // stuff before ? or after # is not what we are after, so get rid of it
+    url = url.split('?')[1]; // keep right of '?'
+    url = url.split('#')[0]; // keep left of '#'
+    //console.log("URI: Trimmed URL:"+url);
+    
+    setParamsfromURL(url);
+  }
+  
+  window.addEventListener('popstate', function(e) {
+    // e.state is equal to the data-attribute of the last image we clicked
+    //console.log("Back button pressed, passing e.state to setParamsfromURL");
+    if (e.state) {
+      //console.log("Passing e.state to setParamsfromURL");
+      setParamsfromURL(e.state);
+    } else {
+      console.log("e.state does not exist, exiting popstate listener");
+    }
+  });
+  
+  function setParamsfromURL(url)
+  {
+    // split our query string into its component parts
+    //console.log("Received url:"+url);
+    var params = url.split('&');
+    //console.log("URI: Read params:"+JSON.stringify(params));
+
+    // set page paramters from URL
+    for (var i=0; i<params.length; i++)
+    {
+      // Ex: split 'minIVs=0' on '=', [0] is left 'minIVs' [1] is right '0'
+      //console.log("URI: Set '"+params[i].split('=')[0]+"' to '"+params[i].split('=')[1]+"'");
+      // Fix weird safari bug not removing %20 properly
+      if (params[i].split('=')[1].includes("%20"))
+      {
+        console.log("URI: Browser likely Safari...found '%20' in '"+params[i]+"', removing...");
+        document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1].replace(/%20/g, " ");
+      } else {
+        if((params[i].split('=')[0] == "link") && (params[i].split('=')[1] == "true"))
         {
-          // Ex: split 'minIVs=0' on '=', [0] is left 'minIVs' [1] is right '0'
-          //console.log("URI: Set '"+params[i].split('=')[0]+"' to '"+params[i].split('=')[1]+"'");
-          // Fix weird safari bug not removing %20 properly
-          if (params[i].split('=')[1].includes("%20"))
+          console.log("We came here from an evoTable click, triggering replaceState with title='"+document.title+"'");
+          var error = history.replaceState(url, document.title, window.location.href);
+          if (error)
           {
-            console.log("URI: Browser likely Safari...found '%20' in '"+params[i]+"', removing...");
-            document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1].replace(/%20/g, " ");
-          } else {
-            if((params[i].split('=')[0] == "link") && (params[i].split('=')[1] == "true"))
+            console.log("Received an error from replaceState:"+error);
+          }
+        } else {
+          // Otherwise URL decode is working, proceed as normal...
+          document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
+        }
+      }
+    }
+    // Now that we have correct stats, let's pass them to build the table
+    getFormData();
+  }
+  
+  function getFormData()
+  {
+    // reset our max stat variables between calculations
+    //console.log("Before reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
+    maxHP = 0;
+    maxDef = 0;
+    maxAtk = 0;
+    //console.log("After reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
+    
+    // validate reCaptcha v3
+    var tokenHolder;
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2', {action: 'getFormData'}).then(function(token) {
+        // pass the token to the backend script for verification
+        //console.log("Token:"+token);
+        
+        //Make AJAX POST request to validate reCAPTCHA v3
+        console.log("Validating reCAPTCHA...");
+        $.ajax({
+          type: "POST",
+          url: "https://us-central1-sandbox-of-alex-gronbach-2.cloudfunctions.net/validateReCaptchaV3",
+          data: {"token":token},
+          success: function(data) {
+            console.log("Success");
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Error");
+            //console.log("Dumping:"+JSON.stringify(XMLHttpRequest));
+            //console.log(JSON.stringify(textStatus));
+            //console.log(JSON.stringify(errorThrown));
+            var html = "<table align=center><tr><th>ERROR</th></tr>";
+            html+="</table>"; // finish building the whole table
+            document.getElementById("box").innerHTML = html;
+            return;
+          }
+        });
+      })
+    });
+  
+    // Get the User's Input from the form
+    //console.log("Made it to getFormData\(\) !");
+    var minIVs = document.getElementById('minIVs').value;
+    //console.log("minIVs set to:"+minIVs);
+    var league=document.getElementById('league').value;
+    //console.log("league set to:"+league);
+    var pokemon=document.getElementById('mon').value;
+    if (pokemon.includes("-")) {pokemon = pokemon.split("-")[1];}
+    //console.log("pokemon set to:"+JSON.stringify(pokemon)+" from:'"+document.getElementById('mon').value+"'");
+    var basestats=document.getElementById('basestats').value;
+    //basestats = basestats.replace(/,/g, " "); //replace any commas with spaces
+    basestats = basestats.split(","); //split out array values by spaces
+    //console.log("basestats set to:"+JSON.stringify(basestats)+" from:'"+document.getElementById('mon')+"'");
+    var AttackIV=document.getElementById('AttackIV').value;
+    //console.log("AttackIV set to:"+AttackIV);
+    var DefenseIV=document.getElementById('DefenseIV').value;
+    //console.log("DefenseIV set to:"+DefenseIV);
+    var StaminaIV=document.getElementById('StaminaIV').value;
+    //console.log("StaminaIV set to:"+StaminaIV);
+    var minLvl=document.getElementById('minLvl').value;
+    //console.log("minLvl set to:"+minLvl);
+    var maxLvl=40//document.getElementById('maxLvl').value;
+    //console.log("maxLvl set to:"+maxLvl);
+    var tp=document.getElementById('TopRanks').value;
+    //console.log("TopRanks set to:"+tp); // how many IVs to display
+    
+    // ensure the user's inputs won't give NaN errors
+    if (checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl))
+    {
+      // throw NaN alert to let user know inputs are invalid and stop building table
+      return false;
+    }
+    
+    // append inputs to URL for sharing
+    var url = window.location.href;
+    if (url.indexOf('?') > -1){
+      // if we already have parameters in the URL, clear them and replace with these inputs
+      url = url.split("?")[0]; // keep left of '?' (base URL)
+    }
+    // store paramters in URL for sharing these inputs
+    var urlParams = encodeURI("minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+    url += "?"+urlParams;
+    
+    // Ensure current paramters are in the URL without screen refresh
+    // Also update the title to reflect the user's current search
+    // And add this search to user's history so back button works
+    var newTitle = "ShortcutIV - PvP Rank - "+pokemon+" "+AttackIV+"|"+DefenseIV+"|"+StaminaIV;
+    var oldTitle = document.title;
+    $(document).prop('title',newTitle);
+    
+    // Ensure current paramters are in the URL without screen refresh
+    //console.log("Old URL:"+window.location.href);
+    //console.log("New URL:"+url);
+    if (window.location.href != url) {
+      //console.log("Updating URL to match current urlParams:"+urlParams);
+      if (window.location.href.indexOf('&link=true') > -1) {
+        console.log("Came from evoTable link, replacingState newTitle='"+newTitle+"'");
+        var error = history.replaceState(url, newTitle, window.location.href);
+        if (error)
+        {
+          console.log("Received an error from replaceState:"+error);
+        }
+      } else {
+        //console.log("This was not from a evoTable link, triggering pushState as usual");
+        history.pushState(urlParams, newTitle, url);
+        console.log("PushedState newTitle:"+newTitle);
+      }
+    }
+    else {
+      console.log("Did not update URL to avoid duplicate history entry");
+      console.log("Skipped pushing duplicate for:"+newTitle);
+    }
+
+    // Now call the actual search function with the User's Inputs
+    var tpp = SearchPokeIVs(basestats[0], basestats[1], basestats[2], league, 4096, minIVs, minLvl, maxLvl);
+    //console.log("TPP Calculated to be:"+JSON.stringify(tpp));
+    
+    var evoHtml = "";
+    var evoHeader = "";
+    // Check if there are any additional evolutions available
+    if (basestats[3])
+    {
+      var extraEvos = parseFloat(basestats.length - 3);
+      //console.log("Set extraEvos="+extraEvos+" as basestats.length("+basestats.length+") - 3 = "+parseFloat(basestats.length - 3));
+      
+      // Build extra rows for each evolution available
+      for (var i=3; i < basestats.length; i++)
+      {
+        for (var j=0; j<availableMon.length; j++)
+        {
+          var searchMon = availableMon[j].label.replace(/ /g, '_');
+          if (searchMon.indexOf(basestats[i]) > 0) {
+            // if the mon to match isn't an alolan &&AND&& the mon we matched is an alolan
+            if ((basestats[i].indexOf("(Alolan)") < 0) &&  (searchMon.indexOf("(Alolan)") > 0))
             {
-              console.log("We came here from an evoTable click, triggering replaceState with title='"+document.title+"'");
-              var error = history.replaceState(url, document.title, window.location.href);
-              if (error)
+                continue; // skip this match
+            }
+            var poke = basestats[i];
+            var stats = availableMon[j].value.split(",");
+            var baseAtk = stats[0];
+            var baseDef = stats[1];
+            var baseSta = stats[2];
+            var adjMinLvl = parseFloat(minLvl-1)*2;
+            var totalEvoIVs = 0;
+
+            //console.log ("Found '"+poke+"' at "+j+", '"+availableMon[j].label+"' with basestats '"+baseAtk+","+baseDef+","+baseSta+"', calling SPIV...");
+            // Now call the actual search function with the User's Inputs
+            var evoTpp = SearchPokeIVs(baseAtk, baseDef, baseSta, league, 4096, minIVs, minLvl, maxLvl);
+            
+            // break ties for shown rows, and count total rows
+            for (var k=0; (k < 4096) && (tpp[k * 6 + 0]) ; k++)
+            {
+              if (k < tp)
               {
-                console.log("Received an error from replaceState:"+error);
+              evoTpp = tieBreakByCP(evoTpp, k, parseFloat(k+1), parseFloat(evoTpp[k * 6 + 0]), parseFloat(evoTpp[k * 6 + 1]), parseFloat(evoTpp[k * 6 + 2]), parseFloat(evoTpp[k * 6 + 3]), parseFloat(evoTpp[k * 6 + 4]), parseFloat(evoTpp[(k+1) * 6 + 0]), parseFloat(evoTpp[(k+1) * 6 + 1]), parseFloat(evoTpp[(k+1) * 6 + 2]), parseFloat(evoTpp[(k+1) * 6 + 3]), parseFloat(evoTpp[(k+1) * 6 + 4]), baseAtk, baseDef, baseSta);
               }
+            }
+            totalEvoIVs = k;
+
+            // calcualte ideal PvP rank w/IVs + base stats * cpm[cpm offset from highest smm result]
+            var glA = (parseFloat(evoTpp[0 * 6 + 1])+parseFloat(baseAtk))*cpm[evoTpp[0 * 6 + 4]];
+            var glD = (parseFloat(evoTpp[0 * 6 + 2])+parseFloat(baseDef))*cpm[evoTpp[0 * 6 + 4]];
+            var glS = (parseFloat(evoTpp[0 * 6 + 3])+parseFloat(baseSta))*cpm[evoTpp[0 * 6 + 4]];
+            var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
+            
+            // check if this evolution's cp is valid in this league with this minLvl
+            var cp = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(baseAtk)) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(baseDef)) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(baseSta)) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
+            
+            if (cp > league)
+            {
+              //console.log("Skipping evo:"+poke+" as cp("+cp+") at minLvl("+minLvl+") is too high for league:"+league);
+              extraEvos--; // remove from evo counter
+              continue; // skip the rest of this loop
+            } //else {console.log("Including evo:"+poke+" as cp("+cp+") at adjMinLvl("+adjMinLvl+") is eligible for league:"+league); }
+
+            //console.log("Calling OUR with poke="+poke);
+            evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst, totalEvoIVs);
+          }
+        }
+      }
+      // only output if we have evolutions to output
+      if (extraEvos > 0)
+      {
+        //console.log("extraEvos:"+extraEvos);
+        evoHeader = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table align=center><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+        evoHtml += "</table></p>";
+      }
+    }
+            
+    // Read all rows in tpp (until end of the array) to compute max Stats
+    var rows = 0;
+    var totalIVs = 0;
+    var maxAtkIVs = [0,0,0];
+    var maxDefIVs = [0,0,0];
+    var maxHPIVs = [0,0,0];
+    for (var i = 0; tpp[i * 6 + 0]; i++)
+    {
+      // Ensure we have the right maxStats
+      var CPM = cpm[tpp[i * 6 + 4]];
+      var tempAtk = ((parseFloat(tpp[i * 6 + 1])+parseFloat(basestats[0]))*CPM).toFixed(1);
+      var tempDef = ((parseFloat(tpp[i * 6 + 2])+parseFloat(basestats[1]))*CPM).toFixed(1);
+      var tempSta = Math.floor((parseFloat(tpp[i * 6 + 3])+parseFloat(basestats[2]))*CPM);
+      
+      if (Number(tempAtk) > Number(maxAtk)) {
+        //console.log("tempAtk:"+tempAtk+" > "+maxAtk+":maxAtk, updated!");
+        maxAtk = tempAtk;
+        maxAtkIVs[0] = parseFloat(tpp[i * 6 + 1]);
+        maxAtkIVs[1] = parseFloat(tpp[i * 6 + 2]);
+        maxAtkIVs[2] = parseFloat(tpp[i * 6 + 3]);
+      }
+      if (Number(tempDef) > Number(maxDef)) {
+        //console.log("tempDef:"+tempDef+" > "+maxDef+":maxDef, updated!");
+        maxDef = tempDef;
+        maxDefIVs[0] = parseFloat(tpp[i * 6 + 1]);
+        maxDefIVs[1] = parseFloat(tpp[i * 6 + 2]);
+        maxDefIVs[2] = parseFloat(tpp[i * 6 + 3]);
+      }
+      if (Number(tempSta) > Number(maxHP)) {
+        //console.log("tempSta:"+tempSta+" > "+maxHP+":maxHP, updated!");
+        //console.log("tempSta IVs were: "+maxHPIVs[0]+" "+maxHPIVs[1]+" "+maxHPIVs[2]+", new maxHP IVs:"+parseFloat(tpp[i * 6 + 1])+" "+parseFloat(tpp[i * 6 + 2])+" "+parseFloat(tpp[i * 6 + 3]));
+        maxHP = tempSta;
+        maxHPIVs[0] = parseFloat(tpp[i * 6 + 1]);
+        maxHPIVs[1] = parseFloat(tpp[i * 6 + 2]);
+        maxHPIVs[2] = parseFloat(tpp[i * 6 + 3]);
+      }
+      // track how many rows we will print with "rows" and break ties for shown rows
+      if ((i < tp) && (tpp[i * 6 + 0]))
+      {
+        rows = i+1; // fix off by 1 offset
+        tpp = tieBreakByCP(tpp, i, parseFloat(i+1), parseFloat(tpp[i * 6 + 0]), parseFloat(tpp[i * 6 + 1]), parseFloat(tpp[i * 6 + 2]), parseFloat(tpp[i * 6 + 3]), parseFloat(tpp[i * 6 + 4]), parseFloat(tpp[(i+1) * 6 + 0]), parseFloat(tpp[(i+1) * 6 + 1]), parseFloat(tpp[(i+1) * 6 + 2]), parseFloat(tpp[(i+1) * 6 + 3]), parseFloat(tpp[(i+1) * 6 + 4]), basestats[0], basestats[1], basestats[2]);
+      }
+      totalIVs = i+1; // fix off by 1 offset
+    }
+    
+    // Output header for Table now that we have updated all Max Stats
+    // grab base URL
+    var url = window.location.href;
+    if (url.indexOf('?') > -1){
+      // if we already have parameters in the URL, clear them and replace with these inputs
+      url = url.split("?")[0]; // keep left of '?' (base URL)
+    }
+    var maxAtkurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxAtkIVs[0]+"&DefenseIV="+maxAtkIVs[1]+"&StaminaIV="+maxAtkIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+    var maxDefurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxDefIVs[0]+"&DefenseIV="+maxDefIVs[1]+"&StaminaIV="+maxDefIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+    var maxHPurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxHPIVs[0]+"&DefenseIV="+maxHPIVs[1]+"&StaminaIV="+maxHPIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
+    var html = "<p>Your Top "+rows+" PvP "+pokemon+":<br><i>max Atk(<a href="+maxAtkurl+">"+maxAtk+"</a>), Def(<a href="+maxDefurl+">"+maxDef+"</a>), HP(<a href="+maxHPurl+">"+maxHP+"</a>)</i></p>";
+    
+    // calcualte ideal PvP rank using attack + base stat attack * cpm
+    var i = tpp[0 * 6 + 4]; // calculate cpm offset from highest smm result
+    var glA = (parseFloat(tpp[0 * 6 + 1])+parseFloat(basestats[0]))*cpm[i];
+    var glD = (parseFloat(tpp[0 * 6 + 2])+parseFloat(basestats[1]))*cpm[i];
+    var glS = (parseFloat(tpp[0 * 6 + 3])+parseFloat(basestats[2]))*cpm[i];
+    var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
+            
+    // Call function to build first row of table
+    //console.log("Calling OUR with poke="+false);
+    html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst, totalIVs);
+    
+    // Build the main data table to show top #tp rows
+    html += buildTableRows(tpp, basestats[0], basestats[1], basestats[2], glst, tp);
+            
+    // now that table is finished building, output to webpage
+    document.getElementById("box").innerHTML = evoHeader + evoHtml + html;
+    return;
+  }
+  
+  function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct, totalIVs)
+  {
+    // convert from array back to individual stats
+    var bsa = bs[0];
+    var bsd = bs[1];
+    var bss = bs[2];
+    // pull best rank from highest smm result (in tpp)
+    var rank = tpp[0 * 6 + 0];
+    // Compute combined (but not yet adjusted by cpm) stat totals
+    var uA = parseFloat(aIV)+parseFloat(bsa);
+    var uD = parseFloat(dIV)+parseFloat(bsd);
+    var uS = parseFloat(sIV)+parseFloat(bss);
+    var Star = "NA";
+    //console.log("AIV:"+aIV+" DIV:"+dIV+" SIV:"+sIV);
+    //console.log("bsa:"+bsa+" bsd:"+bsd+" bss:"+bss);
+    //console.log(">OUR: poke:"+pokemon+" recevied with pfct:"+pfct+", uA:"+uA+" uD:"+uD+" uS:"+uS+", calling GUSR...");
+    
+    // get user input smm to calculate rank
+    var smm = getUserStatRank(bsa, bsd, bss, aIV, dIV, sIV, league, minIVs, minLvl, maxLvl);
+    
+    //console.log("Entering loop with user rank:"+rank+" != smm:"+smm);
+    for (var i=0; i<4096; i++)
+    {
+      // store each rank until smm == rank
+      var rank = tpp[i * 6 + 0];
+      Star = tpp[i *6 + 5];
+      
+      // watch out for duplicate smm ranks!
+      if (rank == smm)
+      {
+        // ensure this is the right matching smm
+        if ((aIV == tpp[i * 6 + 1]) && (dIV == tpp[i * 6 + 2]) && (sIV == tpp[i * 6 + 3]))
+        {
+          // found the correct rank! Store this for later calculations
+          rank = i + 1; // offset by 1 to fix "0 rank"
+          var level = tpp[i * 6 + 4]; // get raw half-level count for cpm
+          break;
+        }
+      }
+    }
+    var cp = Math.max(10, Math.floor(uA * Math.sqrt(uD) * Math.sqrt(uS) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
+    
+    // Finish calculating "battle stat" totals by adjusting for CPM now that we have level
+    uA = uA*cpm[level];
+    uD = uD*cpm[level];
+    uS = uS*cpm[level];
+    
+    // Compute user stat perfection % compared to "perfect" PvP IVs (first slot in tpp)
+    var glst = (uA * uD * Math.floor(uS)); // convert stamina to HP for stat product
+    //console.log("BRT: glst:"+glst+" from uA:"+uA+" uD:"+uD+" uS:"+uS+", cpm["+level+"]:"+cpm[level]);
+    var pcnt = (100 * glst / pfct).toFixed(3);
+    
+    // Convert half-level to actual level
+    level = parseFloat(level / 2 + 1);
+            
+    // add table header rows to output
+    var html = "";
+    if (!pokemon) {html = "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>*</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
+    
+    // build table URL
+    var url = window.location.href;
+    if (url.indexOf('?') > -1){
+      // if we already have parameters in the URL, clear them and replace with these inputs
+      url = url.split("?")[0]; // keep left of '?' (base URL)
+    }
+    // store paramters in URL for sharing these inputs
+    url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+aIV+"&DefenseIV="+dIV+"&StaminaIV="+sIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+bs);
+    
+    // control highlight of User Data row based on rank
+    // 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
+    // use 0.02442 to approximate "Top 100" (green) when there are less than 4096 results
+    // use 0.2442 to approximate "Top 1000" (orange) when there are less than 4096 results
+    if ((rank/1) < (0.02442*totalIVs/1)) {
+      html+="<tr bgcolor=\"#2BA32A\">"; // green for "good"
+    } else if ((rank/1) < (0.2442*totalIVs/1)) {
+      html+="<tr bgcolor=\"#FF8C00\">"; // orange for "ok"
+    } else {
+      html+="<tr bgcolor=\"#B22222\">"; // red for "rubbish"
+    }
+    if (pokemon) {  // Add evolution's name with a link to that search to beginning of evolution table
+      html+="<td style=\"text-align: center; vertical-align: middle;\"><a href="+url+"&link=true>"+pokemon+"</a></td>";} //Mon
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+level+"</td>"; //Level
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+cp+"</td>"; //Final CP
+    if (!pokemon) { // Skip printing user stats if we are printing evolutions
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+Star+"</td>";} //Star Appraisal
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uA.toFixed(1))+"</td>"; //GL Atk IV
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uD.toFixed(1))+"</td>"; //GL Def IV
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+Math.floor(uS)+"</td>"; //GL Sta IV
+    html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glst.toFixed(0))+"</td>"; // Stat Product
+    html+="</tr>";
+            
+    return html;
+  }
+  
+  function buildTableRows(tpp, bsa, bsd, bss, pfct, tp)
+  {
+    var html = "";
+    // Output Top "tp" number of PvP IVs, by generating each row of table individually in loop
+    for (i = 0; ((i < tp) && (tpp[i * 6 + 0])); i++)
+    {
+      html += "<tr>";
+      var rank = i+1; // fix "rank 0" results by offsetting by 1
+      // Get stats and level from tpp array
+      var aIV = tpp[i * 6 + 1];
+      var dIV = tpp[i * 6 + 2];
+      var sIV = tpp[i * 6 + 3];
+      var level = tpp[i * 6 + 4]; // keep at half-level for CPM calculations
+      var Star = tpp[i * 6 + 5]; // Get Star Appraisal Rating for output
+      
+      // use level to convert to "battle stats" at PvP level
+      var glA = (parseFloat(aIV)+parseFloat(bsa))*cpm[level];
+      var glD = (parseFloat(dIV)+parseFloat(bsd))*cpm[level];
+      var glS = (parseFloat(sIV)+parseFloat(bss))*cpm[level];
+      var cp = Math.max(10, Math.floor((parseFloat(aIV)+parseFloat(bsa)) * Math.sqrt(parseFloat(dIV)+parseFloat(bsd)) * Math.sqrt(parseFloat(sIV)+parseFloat(bss)) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
+      //console.log("BTR: glA:"+glA+" glD:"+dIV+" glS:"+glS+" cp:"+cp);
+      
+      // compute battle stat total for % calc
+      var glst = (glA * glD * Math.floor(glS));
+      var pcnt = (100 * glst / pfct).toFixed(3);
+      
+      // adjust to remove half-level offsets for output
+      level = level / 2 + 1;
+      
+      // Output this row as html to build table
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+level+"</td>"; //Level
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+cp+"</td>"; //Final CP
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+Star+"</td>"; //Star Appraisal
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glA.toFixed(1))+"</td>"; //GL Atk IV
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glD.toFixed(1))+"</td>"; //GL Def IV
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+Math.floor(glS)+"</td>"; //GL Sta IV
+      html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(tpp[i * 6 + 0]).toFixed(0)+"</td>"; // Stat Product
+      html+="</tr>";
+    }
+    html+="</table>"; // finish building the whole table
+    return html;
+  }
+
+function getUserStatRank(baseatk0, basedef0, basesta0, AttackIV, DefenseIV, StaminaIV, league, minIVs, minLvl, maxLvl)
+{
+// Need to double minLvl/maxLvl to account for half-level indexes in CPM list
+var adjMinLvl = (minLvl-1)*2;
+var adjMaxLvl = (maxLvl-1)*2;
+
+var L = adjMaxLvl;
+var cp;
+var glA = (parseFloat(baseatk0)+parseFloat(AttackIV));
+var glD = (parseFloat(basedef0)+parseFloat(DefenseIV));
+var glS = (parseFloat(basesta0)+parseFloat(StaminaIV));
+
+//console.log("GUSR: entering loop with glA:"+glA+" glD:"+glD+" glS:"+glS+" and cpm["+L+"]:"+cpm[L]+", league:"+league+" adjMaxLvl:"+adjMaxLvl+" adjMinLvl:"+adjMinLvl);
+// Determine the max level of User IVs
+for (L = adjMaxLvl; L >= adjMinLvl; L--)
+{
+  cp = Math.max(10, Math.floor(glA * Math.sqrt(glD) * Math.sqrt(glS) * parseFloat(cpm[L]) * parseFloat(cpm[L]) / 10));
+  if (cp <= league) break;
+}
+//console.log("GUSR: Exited loop with L:"+L+" and cp:"+cp);
+
+glA = glA*cpm[L];
+glD = glD*cpm[L];
+glS = glS*cpm[L];
+  
+// Recalculate smm using IV inputs to find rank in tpp
+return (glA * glD * Math.floor(glS));
+}
+
+function SearchPokeIVs(baseatk0, basedef0, basesta0, league, numOfIVs, minIVs, minLvl, maxLvl)
+{
+// Need to double minLvl/maxLvl to account for half-level indexes in CPM list
+var adjMinLvl = (minLvl-1)*2;
+var adjMaxLvl = (maxLvl-1)*2;
+
+var ba0 = baseatk0 // base attack
+var bd0 = basedef0 // base defense
+var bs0 = basesta0 // base stamina
+//var league = league // GL or UL CP cutoff
+var tp = numOfIVs // total IVs to find
+//console.log("SPIV: Got ba0:"+ba0+" bd0:"+bd0+" bs0:"+bs0+" league:"+league+" tp:"+tp+" minIVs:"+minIVs+" adjMinLvl:"+adjMinLvl+" adjMaxLvl:"+adjMaxLvl);
+var tq = 6 * tp // total number of nested IV combinations to store: smm (rank)/A/D/S/L/*
+var cp = 4000
+var smm = 1000
+var n = 0
+var n6 = 6 * n
+// tpp: nested sorted Array of Top PvP IVs
+// smm | Attack | Defense | Stamina | Level | Star rating
+var tpp = new Array(tq+7).join('0').split('').map(parseFloat)
+// Output tpp as [0, 0, 0, ... 0, 0] tq+6 times
+// 6 slot buffer is for merging in next best IVs
+
+// Declare Loop Variables
+var a = 15; // Pokémon attack counter
+var s = 15; // Pokémon stamina counter
+var d = 15; // Pokémon defense counter
+var L = adjMaxLvl; // Pokémon level counter
+var Star = "NA"; // Track pokemon appraisal (0*/1*/2*/3*/4*)
+var glA;
+var glD;
+var glS;
+
+// calculate CPs w/various Attack (a), Stamina (s), Defense (d) IVs across levels (L), with CPM look up array
+// 4 Loops run 16 x 16 x 16 x 79 = 323,583 for IVs 0-15 and levels 0-40 (w/half levels)
+for (a = 15; a >= minIVs; a--)
+{
+  for (s = 15; s >= minIVs; s--)
+  {
+    for (d = 15; d >= minIVs; d--)
+    {
+      cp = league+1; // reset cp variable
+      for (L = adjMaxLvl; ((L >= adjMinLvl) && (cp > league)); L--)
+      {
+        glA = (parseFloat(ba0)+parseFloat(a));
+        glD = (parseFloat(bd0)+parseFloat(d));
+        glS = (parseFloat(bs0)+parseFloat(s));
+        cp = Math.max(10, Math.floor(glA * Math.sqrt(glD) * Math.sqrt(glS) * parseFloat(cpm[L]) * parseFloat(cpm[L]) /10));
+        // check if the calculated cp is eligible for the chosen league (1500 or 2500 max)
+        //console.log("cp:"+cp+" with glA:"+glA+" glD:"+glD+" glS:"+glS+" and cpm["+L+"]:"+cpm[L]+", league:"+league);
+        if (cp <= league)
+        {
+          // stat product used to rank IVs
+          glA = glA*cpm[L];
+          glD = glD*cpm[L];
+          glS = glS*cpm[L];
+          smm = parseFloat(glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
+          
+          // check this new smm(rank) against the lowest smm stored in tpp so far
+          if (smm >= tpp[tq])
+          {
+            //console.log("SPIV: Storing...");
+            // found a new best IV set! Storing...
+            
+            // Calculate Star Appraisal Rating for Storing
+            var IVsum = a/1 + d/1 + s/1
+            if (IVsum < 23) {
+              Star = "0*";
+            } else if (IVsum < 30) {
+              Star = "1*";
+            } else if (IVsum < 40) {
+              Star = "2*";
+            } else if (IVsum < 45) {
+              Star = "3*";
             } else {
-              // Otherwise URL decode is working, proceed as normal...
-              document.getElementById(params[i].split('=')[0]).value = params[i].split('=')[1];
+              Star = "4*";
             }
-          }
-        }
-        // Now that we have correct stats, let's pass them to build the table
-        getFormData();
-      }
-      
-      function getFormData()
-      {
-        // reset our max stat variables between calculations
-        //console.log("Before reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
-        maxHP = 0;
-        maxDef = 0;
-        maxAtk = 0;
-        //console.log("After reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
-        
-        // validate reCaptcha v3
-        var tokenHolder;
-        grecaptcha.ready(function() {
-          grecaptcha.execute('6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2', {action: 'getFormData'}).then(function(token) {
-            // pass the token to the backend script for verification
-            //console.log("Token:"+token);
-            
-            //Make AJAX POST request to validate reCAPTCHA v3
-            console.log("Validating reCAPTCHA...");
-            $.ajax({
-              type: "POST",
-              url: "https://us-central1-sandbox-of-alex-gronbach-2.cloudfunctions.net/validateReCaptchaV3",
-              data: {"token":token},
-              success: function(data) {
-                console.log("Success");
-              },
-              error: function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log("Error");
-                //console.log("Dumping:"+JSON.stringify(XMLHttpRequest));
-                //console.log(JSON.stringify(textStatus));
-                //console.log(JSON.stringify(errorThrown));
-                var html = "<table align=center><tr><th>ERROR</th></tr>";
-                html+="</table>"; // finish building the whole table
-                document.getElementById("box").innerHTML = html;
-                return;
-              }
-            });
-          })
-        });
-      
-        // Get the User's Input from the form
-        //console.log("Made it to getFormData\(\) !");
-        var minIVs = document.getElementById('minIVs').value;
-        //console.log("minIVs set to:"+minIVs);
-        var league=document.getElementById('league').value;
-        //console.log("league set to:"+league);
-        var pokemon=document.getElementById('mon').value;
-        if (pokemon.includes("-")) {pokemon = pokemon.split("-")[1];}
-        //console.log("pokemon set to:"+JSON.stringify(pokemon)+" from:'"+document.getElementById('mon').value+"'");
-        var basestats=document.getElementById('basestats').value;
-        //basestats = basestats.replace(/,/g, " "); //replace any commas with spaces
-        basestats = basestats.split(","); //split out array values by spaces
-        //console.log("basestats set to:"+JSON.stringify(basestats)+" from:'"+document.getElementById('mon')+"'");
-        var AttackIV=document.getElementById('AttackIV').value;
-        //console.log("AttackIV set to:"+AttackIV);
-        var DefenseIV=document.getElementById('DefenseIV').value;
-        //console.log("DefenseIV set to:"+DefenseIV);
-        var StaminaIV=document.getElementById('StaminaIV').value;
-        //console.log("StaminaIV set to:"+StaminaIV);
-        var minLvl=document.getElementById('minLvl').value;
-        //console.log("minLvl set to:"+minLvl);
-        var maxLvl=40//document.getElementById('maxLvl').value;
-        //console.log("maxLvl set to:"+maxLvl);
-        var tp=document.getElementById('TopRanks').value;
-        //console.log("TopRanks set to:"+tp); // how many IVs to display
-        
-        // ensure the user's inputs won't give NaN errors
-        if (checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl))
-        {
-          // throw NaN alert to let user know inputs are invalid and stop building table
-          return false;
-        }
-        
-        // append inputs to URL for sharing
-        var url = window.location.href;
-        if (url.indexOf('?') > -1){
-          // if we already have parameters in the URL, clear them and replace with these inputs
-          url = url.split("?")[0]; // keep left of '?' (base URL)
-        }
-        // store paramters in URL for sharing these inputs
-        var urlParams = encodeURI("minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+AttackIV+"&DefenseIV="+DefenseIV+"&StaminaIV="+StaminaIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
-        url += "?"+urlParams;
-        
-        // Ensure current paramters are in the URL without screen refresh
-        // Also update the title to reflect the user's current search
-        // And add this search to user's history so back button works
-        var newTitle = "ShortcutIV - PvP Rank - "+pokemon+" "+AttackIV+"|"+DefenseIV+"|"+StaminaIV;
-        var oldTitle = document.title;
-        $(document).prop('title',newTitle);
-        
-        // Ensure current paramters are in the URL without screen refresh
-        //console.log("Old URL:"+window.location.href);
-        //console.log("New URL:"+url);
-        if (window.location.href != url) {
-          //console.log("Updating URL to match current urlParams:"+urlParams);
-          if (window.location.href.indexOf('&link=true') > -1) {
-            console.log("Came from evoTable link, replacingState newTitle='"+newTitle+"'");
-            var error = history.replaceState(url, newTitle, window.location.href);
-            if (error)
+            for (n = 0; n < tp; n++)
             {
-              console.log("Received an error from replaceState:"+error);
-            }
-          } else {
-            //console.log("This was not from a evoTable link, triggering pushState as usual");
-            history.pushState(urlParams, newTitle, url);
-            console.log("PushedState newTitle:"+newTitle);
-          }
-        }
-        else {
-          console.log("Did not update URL to avoid duplicate history entry");
-          console.log("Skipped pushing duplicate for:"+newTitle);
-        }
 
-        // Now call the actual search function with the User's Inputs
-        var tpp = SearchPokeIVs(basestats[0], basestats[1], basestats[2], league, 4096, minIVs, minLvl, maxLvl);
-        //console.log("TPP Calculated to be:"+JSON.stringify(tpp));
-        
-        var evoHtml = "";
-        var evoHeader = "";
-        // Check if there are any additional evolutions available
-        if (basestats[3])
-        {
-          var extraEvos = parseFloat(basestats.length - 3);
-          //console.log("Set extraEvos="+extraEvos+" as basestats.length("+basestats.length+") - 3 = "+parseFloat(basestats.length - 3));
-          
-          // Build extra rows for each evolution available
-          for (var i=3; i < basestats.length; i++)
-          {
-            for (var j=0; j<availableMon.length; j++)
-            {
-              var searchMon = availableMon[j].label.replace(/ /g, '_');
-              if (searchMon.indexOf(basestats[i]) > 0) {
-                // if the mon to match isn't an alolan &&AND&& the mon we matched is an alolan
-                if ((basestats[i].indexOf("(Alolan)") < 0) &&  (searchMon.indexOf("(Alolan)") > 0))
-                {
-                    continue; // skip this match
-                }
-                var poke = basestats[i];
-                var stats = availableMon[j].value.split(",");
-                var baseAtk = stats[0];
-                var baseDef = stats[1];
-                var baseSta = stats[2];
-                var adjMinLvl = parseFloat(minLvl-1)*2;
-                var totalEvoIVs = 0;
-
-                //console.log ("Found '"+poke+"' at "+j+", '"+availableMon[j].label+"' with basestats '"+baseAtk+","+baseDef+","+baseSta+"', calling SPIV...");
-                // Now call the actual search function with the User's Inputs
-                var evoTpp = SearchPokeIVs(baseAtk, baseDef, baseSta, league, 4096, minIVs, minLvl, maxLvl);
-                
-                // break ties for shown rows, and count total rows
-                for (var k=0; (k < 4096) && (tpp[k * 6 + 0]) ; k++)
-                {
-                  if (k < tp)
-                  {
-                  evoTpp = tieBreakByCP(evoTpp, k, parseFloat(k+1), parseFloat(evoTpp[k * 6 + 0]), parseFloat(evoTpp[k * 6 + 1]), parseFloat(evoTpp[k * 6 + 2]), parseFloat(evoTpp[k * 6 + 3]), parseFloat(evoTpp[k * 6 + 4]), parseFloat(evoTpp[(k+1) * 6 + 0]), parseFloat(evoTpp[(k+1) * 6 + 1]), parseFloat(evoTpp[(k+1) * 6 + 2]), parseFloat(evoTpp[(k+1) * 6 + 3]), parseFloat(evoTpp[(k+1) * 6 + 4]), baseAtk, baseDef, baseSta);
-                  }
-                }
-                totalEvoIVs = k;
-
-                // calcualte ideal PvP rank w/IVs + base stats * cpm[cpm offset from highest smm result]
-                var glA = (parseFloat(evoTpp[0 * 6 + 1])+parseFloat(baseAtk))*cpm[evoTpp[0 * 6 + 4]];
-                var glD = (parseFloat(evoTpp[0 * 6 + 2])+parseFloat(baseDef))*cpm[evoTpp[0 * 6 + 4]];
-                var glS = (parseFloat(evoTpp[0 * 6 + 3])+parseFloat(baseSta))*cpm[evoTpp[0 * 6 + 4]];
-                var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
-                
-                // check if this evolution's cp is valid in this league with this minLvl
-                var cp = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(baseAtk)) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(baseDef)) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(baseSta)) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
-                
-                if (cp > league)
-                {
-                  //console.log("Skipping evo:"+poke+" as cp("+cp+") at minLvl("+minLvl+") is too high for league:"+league);
-                  extraEvos--; // remove from evo counter
-                  continue; // skip the rest of this loop
-                } //else {console.log("Including evo:"+poke+" as cp("+cp+") at adjMinLvl("+adjMinLvl+") is eligible for league:"+league); }
-
-                //console.log("Calling OUR with poke="+poke);
-                evoHtml += outputUserRow(stats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, evoTpp, minLvl, maxLvl, poke, glst, totalEvoIVs);
-              }
-            }
-          }
-          // only output if we have evolutions to output
-          if (extraEvos > 0)
-          {
-            //console.log("extraEvos:"+extraEvos);
-            evoHeader = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table align=center><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
-            evoHtml += "</table></p>";
-          }
-        }
-                
-        // Read all rows in tpp (until end of the array) to compute max Stats
-        var rows = 0;
-        var totalIVs = 0;
-        var maxAtkIVs = [0,0,0];
-        var maxDefIVs = [0,0,0];
-        var maxHPIVs = [0,0,0];
-        for (var i = 0; tpp[i * 6 + 0]; i++)
-        {
-          // Ensure we have the right maxStats
-          var CPM = cpm[tpp[i * 6 + 4]];
-          var tempAtk = ((parseFloat(tpp[i * 6 + 1])+parseFloat(basestats[0]))*CPM).toFixed(1);
-          var tempDef = ((parseFloat(tpp[i * 6 + 2])+parseFloat(basestats[1]))*CPM).toFixed(1);
-          var tempSta = Math.floor((parseFloat(tpp[i * 6 + 3])+parseFloat(basestats[2]))*CPM);
-          
-          if (Number(tempAtk) > Number(maxAtk)) {
-            //console.log("tempAtk:"+tempAtk+" > "+maxAtk+":maxAtk, updated!");
-            maxAtk = tempAtk;
-            maxAtkIVs[0] = parseFloat(tpp[i * 6 + 1]);
-            maxAtkIVs[1] = parseFloat(tpp[i * 6 + 2]);
-            maxAtkIVs[2] = parseFloat(tpp[i * 6 + 3]);
-          }
-          if (Number(tempDef) > Number(maxDef)) {
-            //console.log("tempDef:"+tempDef+" > "+maxDef+":maxDef, updated!");
-            maxDef = tempDef;
-            maxDefIVs[0] = parseFloat(tpp[i * 6 + 1]);
-            maxDefIVs[1] = parseFloat(tpp[i * 6 + 2]);
-            maxDefIVs[2] = parseFloat(tpp[i * 6 + 3]);
-          }
-          if (Number(tempSta) > Number(maxHP)) {
-            //console.log("tempSta:"+tempSta+" > "+maxHP+":maxHP, updated!");
-            //console.log("tempSta IVs were: "+maxHPIVs[0]+" "+maxHPIVs[1]+" "+maxHPIVs[2]+", new maxHP IVs:"+parseFloat(tpp[i * 6 + 1])+" "+parseFloat(tpp[i * 6 + 2])+" "+parseFloat(tpp[i * 6 + 3]));
-            maxHP = tempSta;
-            maxHPIVs[0] = parseFloat(tpp[i * 6 + 1]);
-            maxHPIVs[1] = parseFloat(tpp[i * 6 + 2]);
-            maxHPIVs[2] = parseFloat(tpp[i * 6 + 3]);
-          }
-          // track how many rows we will print with "rows" and break ties for shown rows
-          if ((i < tp) && (tpp[i * 6 + 0]))
-          {
-            rows = i+1; // fix off by 1 offset
-            tpp = tieBreakByCP(tpp, i, parseFloat(i+1), parseFloat(tpp[i * 6 + 0]), parseFloat(tpp[i * 6 + 1]), parseFloat(tpp[i * 6 + 2]), parseFloat(tpp[i * 6 + 3]), parseFloat(tpp[i * 6 + 4]), parseFloat(tpp[(i+1) * 6 + 0]), parseFloat(tpp[(i+1) * 6 + 1]), parseFloat(tpp[(i+1) * 6 + 2]), parseFloat(tpp[(i+1) * 6 + 3]), parseFloat(tpp[(i+1) * 6 + 4]), basestats[0], basestats[1], basestats[2]);
-          }
-          totalIVs = i+1; // fix off by 1 offset
-        }
-        
-        // Output header for Table now that we have updated all Max Stats
-        // grab base URL
-        var url = window.location.href;
-        if (url.indexOf('?') > -1){
-          // if we already have parameters in the URL, clear them and replace with these inputs
-          url = url.split("?")[0]; // keep left of '?' (base URL)
-        }
-        var maxAtkurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxAtkIVs[0]+"&DefenseIV="+maxAtkIVs[1]+"&StaminaIV="+maxAtkIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
-        var maxDefurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxDefIVs[0]+"&DefenseIV="+maxDefIVs[1]+"&StaminaIV="+maxDefIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
-        var maxHPurl = url + encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+maxHPIVs[0]+"&DefenseIV="+maxHPIVs[1]+"&StaminaIV="+maxHPIVs[2]+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+basestats);
-        var html = "<p>Your Top "+rows+" PvP "+pokemon+":<br><i>max Atk(<a href="+maxAtkurl+">"+maxAtk+"</a>), Def(<a href="+maxDefurl+">"+maxDef+"</a>), HP(<a href="+maxHPurl+">"+maxHP+"</a>)</i></p>";
-        
-        // calcualte ideal PvP rank using attack + base stat attack * cpm
-        var i = tpp[0 * 6 + 4]; // calculate cpm offset from highest smm result
-        var glA = (parseFloat(tpp[0 * 6 + 1])+parseFloat(basestats[0]))*cpm[i];
-        var glD = (parseFloat(tpp[0 * 6 + 2])+parseFloat(basestats[1]))*cpm[i];
-        var glS = (parseFloat(tpp[0 * 6 + 3])+parseFloat(basestats[2]))*cpm[i];
-        var glst = (glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
-                
-        // Call function to build first row of table
-        //console.log("Calling OUR with poke="+false);
-        html += outputUserRow(basestats, AttackIV, DefenseIV, StaminaIV, league, tp, minIVs, tpp, minLvl, maxLvl, false, glst, totalIVs);
-        
-        // Build the main data table to show top #tp rows
-        html += buildTableRows(tpp, basestats[0], basestats[1], basestats[2], glst, tp);
-                
-        // now that table is finished building, output to webpage
-        document.getElementById("box").innerHTML = evoHeader + evoHtml + html;
-        return;
-      }
-      
-      function outputUserRow(bs, aIV, dIV, sIV, league, tp, minIVs, tpp, minLvl, maxLvl, pokemon, pfct, totalIVs)
-      {
-        // convert from array back to individual stats
-        var bsa = bs[0];
-        var bsd = bs[1];
-        var bss = bs[2];
-        // pull best rank from highest smm result (in tpp)
-        var rank = tpp[0 * 6 + 0];
-        // Compute combined (but not yet adjusted by cpm) stat totals
-        var uA = parseFloat(aIV)+parseFloat(bsa);
-        var uD = parseFloat(dIV)+parseFloat(bsd);
-        var uS = parseFloat(sIV)+parseFloat(bss);
-        var Star = "NA";
-        //console.log("AIV:"+aIV+" DIV:"+dIV+" SIV:"+sIV);
-        //console.log("bsa:"+bsa+" bsd:"+bsd+" bss:"+bss);
-        //console.log(">OUR: poke:"+pokemon+" recevied with pfct:"+pfct+", uA:"+uA+" uD:"+uD+" uS:"+uS+", calling GUSR...");
-        
-        // get user input smm to calculate rank
-        var smm = getUserStatRank(bsa, bsd, bss, aIV, dIV, sIV, league, minIVs, minLvl, maxLvl);
-        
-        //console.log("Entering loop with user rank:"+rank+" != smm:"+smm);
-        for (var i=0; i<4096; i++)
-        {
-          // store each rank until smm == rank
-          var rank = tpp[i * 6 + 0];
-          Star = tpp[i *6 + 5];
-          
-          // watch out for duplicate smm ranks!
-          if (rank == smm)
-          {
-            // ensure this is the right matching smm
-            if ((aIV == tpp[i * 6 + 1]) && (dIV == tpp[i * 6 + 2]) && (sIV == tpp[i * 6 + 3]))
-            {
-              // found the correct rank! Store this for later calculations
-              rank = i + 1; // offset by 1 to fix "0 rank"
-              var level = tpp[i * 6 + 4]; // get raw half-level count for cpm
-              break;
-            }
-          }
-        }
-        var cp = Math.max(10, Math.floor(uA * Math.sqrt(uD) * Math.sqrt(uS) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
-        
-        // Finish calculating "battle stat" totals by adjusting for CPM now that we have level
-        uA = uA*cpm[level];
-        uD = uD*cpm[level];
-        uS = uS*cpm[level];
-        
-        // Compute user stat perfection % compared to "perfect" PvP IVs (first slot in tpp)
-        var glst = (uA * uD * Math.floor(uS)); // convert stamina to HP for stat product
-        //console.log("BRT: glst:"+glst+" from uA:"+uA+" uD:"+uD+" uS:"+uS+", cpm["+level+"]:"+cpm[level]);
-        var pcnt = (100 * glst / pfct).toFixed(3);
-        
-        // Convert half-level to actual level
-        level = parseFloat(level / 2 + 1);
-                
-        // add table header rows to output
-        var html = "";
-        if (!pokemon) {html = "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>*</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
-        
-        // build table URL
-        var url = window.location.href;
-        if (url.indexOf('?') > -1){
-          // if we already have parameters in the URL, clear them and replace with these inputs
-          url = url.split("?")[0]; // keep left of '?' (base URL)
-        }
-        // store paramters in URL for sharing these inputs
-        url += encodeURI("?minIVs="+minIVs+"&league="+league+"&mon="+pokemon+"&AttackIV="+aIV+"&DefenseIV="+dIV+"&StaminaIV="+sIV+"&minLvl="+minLvl+"&maxLvl="+maxLvl+"&TopRanks="+tp+"&basestats="+bs);
-        
-        // control highlight of User Data row based on rank
-        // 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
-        // use 0.02442 to approximate "Top 100" (green) when there are less than 4096 results
-        // use 0.2442 to approximate "Top 1000" (orange) when there are less than 4096 results
-        if ((rank/1) < (0.02442*totalIVs/1)) {
-          html+="<tr bgcolor=\"#2BA32A\">"; // green for "good"
-        } else if ((rank/1) < (0.2442*totalIVs/1)) {
-          html+="<tr bgcolor=\"#FF8C00\">"; // orange for "ok"
-        } else {
-          html+="<tr bgcolor=\"#B22222\">"; // red for "rubbish"
-        }
-        if (pokemon) {  // Add evolution's name with a link to that search to beginning of evolution table
-          html+="<td style=\"text-align: center; vertical-align: middle;\"><a href="+url+"&link=true>"+pokemon+"</a></td>";} //Mon
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+level+"</td>"; //Level
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+cp+"</td>"; //Final CP
-        if (!pokemon) { // Skip printing user stats if we are printing evolutions
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+Star+"</td>";} //Star Appraisal
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uA.toFixed(1))+"</td>"; //GL Atk IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(uD.toFixed(1))+"</td>"; //GL Def IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+Math.floor(uS)+"</td>"; //GL Sta IV
-        html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glst.toFixed(0))+"</td>"; // Stat Product
-        html+="</tr>";
-                
-        return html;
-      }
-      
-      function buildTableRows(tpp, bsa, bsd, bss, pfct, tp)
-      {
-        var html = "";
-        // Output Top "tp" number of PvP IVs, by generating each row of table individually in loop
-        for (i = 0; ((i < tp) && (tpp[i * 6 + 0])); i++)
-        {
-          html += "<tr>";
-          var rank = i+1; // fix "rank 0" results by offsetting by 1
-          // Get stats and level from tpp array
-          var aIV = tpp[i * 6 + 1];
-          var dIV = tpp[i * 6 + 2];
-          var sIV = tpp[i * 6 + 3];
-          var level = tpp[i * 6 + 4]; // keep at half-level for CPM calculations
-          var Star = tpp[i * 6 + 5]; // Get Star Appraisal Rating for output
-          
-          // use level to convert to "battle stats" at PvP level
-          var glA = (parseFloat(aIV)+parseFloat(bsa))*cpm[level];
-          var glD = (parseFloat(dIV)+parseFloat(bsd))*cpm[level];
-          var glS = (parseFloat(sIV)+parseFloat(bss))*cpm[level];
-          var cp = Math.max(10, Math.floor((parseFloat(aIV)+parseFloat(bsa)) * Math.sqrt(parseFloat(dIV)+parseFloat(bsd)) * Math.sqrt(parseFloat(sIV)+parseFloat(bss)) * parseFloat(cpm[level]) * parseFloat(cpm[level]) / 10));
-          //console.log("BTR: glA:"+glA+" glD:"+dIV+" glS:"+glS+" cp:"+cp);
-          
-          // compute battle stat total for % calc
-          var glst = (glA * glD * Math.floor(glS));
-          var pcnt = (100 * glst / pfct).toFixed(3);
-          
-          // adjust to remove half-level offsets for output
-          level = level / 2 + 1;
-          
-          // Output this row as html to build table
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+rank+"</td>"; //Rank
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+level+"</td>"; //Level
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+cp+"</td>"; //Final CP
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+aIV+"</td>"; //Atk IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+dIV+"</td>"; //Def IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+sIV+"</td>"; //Sta IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+Star+"</td>"; //Star Appraisal
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+pcnt+"%"+"</td>"; //Perfection
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glA.toFixed(1))+"</td>"; //GL Atk IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(glD.toFixed(1))+"</td>"; //GL Def IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+Math.floor(glS)+"</td>"; //GL Sta IV
-          html+="<td style=\"text-align: center; vertical-align: middle;\">"+parseFloat(tpp[i * 6 + 0]).toFixed(0)+"</td>"; // Stat Product
-          html+="</tr>";
-        }
-        html+="</table>"; // finish building the whole table
-        return html;
-      }
-
-  function getUserStatRank(baseatk0, basedef0, basesta0, AttackIV, DefenseIV, StaminaIV, league, minIVs, minLvl, maxLvl)
-  {
-    // Need to double minLvl/maxLvl to account for half-level indexes in CPM list
-    var adjMinLvl = (minLvl-1)*2;
-    var adjMaxLvl = (maxLvl-1)*2;
-    
-    var L = adjMaxLvl;
-    var cp;
-    var glA = (parseFloat(baseatk0)+parseFloat(AttackIV));
-    var glD = (parseFloat(basedef0)+parseFloat(DefenseIV));
-    var glS = (parseFloat(basesta0)+parseFloat(StaminaIV));
-    
-    //console.log("GUSR: entering loop with glA:"+glA+" glD:"+glD+" glS:"+glS+" and cpm["+L+"]:"+cpm[L]+", league:"+league+" adjMaxLvl:"+adjMaxLvl+" adjMinLvl:"+adjMinLvl);
-    // Determine the max level of User IVs
-    for (L = adjMaxLvl; L >= adjMinLvl; L--)
-    {
-      cp = Math.max(10, Math.floor(glA * Math.sqrt(glD) * Math.sqrt(glS) * parseFloat(cpm[L]) * parseFloat(cpm[L]) / 10));
-      if (cp <= league) break;
-    }
-    //console.log("GUSR: Exited loop with L:"+L+" and cp:"+cp);
-    
-    glA = glA*cpm[L];
-    glD = glD*cpm[L];
-    glS = glS*cpm[L];
-      
-    // Recalculate smm using IV inputs to find rank in tpp
-    return (glA * glD * Math.floor(glS));
-    }
-
-  function SearchPokeIVs(baseatk0, basedef0, basesta0, league, numOfIVs, minIVs, minLvl, maxLvl)
-  {
-    // Need to double minLvl/maxLvl to account for half-level indexes in CPM list
-    var adjMinLvl = (minLvl-1)*2;
-    var adjMaxLvl = (maxLvl-1)*2;
-    
-    var ba0 = baseatk0 // base attack
-    var bd0 = basedef0 // base defense
-    var bs0 = basesta0 // base stamina
-    //var league = league // GL or UL CP cutoff
-    var tp = numOfIVs // total IVs to find
-    //console.log("SPIV: Got ba0:"+ba0+" bd0:"+bd0+" bs0:"+bs0+" league:"+league+" tp:"+tp+" minIVs:"+minIVs+" adjMinLvl:"+adjMinLvl+" adjMaxLvl:"+adjMaxLvl);
-    var tq = 6 * tp // total number of nested IV combinations to store: smm (rank)/A/D/S/L/*
-    var cp = 4000
-    var smm = 1000
-    var n = 0
-    var n6 = 6 * n
-    // tpp: nested sorted Array of Top PvP IVs
-    // smm | Attack | Defense | Stamina | Level | Star rating
-    var tpp = new Array(tq+7).join('0').split('').map(parseFloat)
-    // Output tpp as [0, 0, 0, ... 0, 0] tq+6 times
-    // 6 slot buffer is for merging in next best IVs
-
-    // Declare Loop Variables
-    var a = 15; // Pokémon attack counter
-    var s = 15; // Pokémon stamina counter
-    var d = 15; // Pokémon defense counter
-    var L = adjMaxLvl; // Pokémon level counter
-    var Star = "NA"; // Track pokemon appraisal (0*/1*/2*/3*/4*)
-    var glA;
-    var glD;
-    var glS;
-
-    // calculate CPs w/various Attack (a), Stamina (s), Defense (d) IVs across levels (L), with CPM look up array
-    // 4 Loops run 16 x 16 x 16 x 79 = 323,583 for IVs 0-15 and levels 0-40 (w/half levels)
-    for (a = 15; a >= minIVs; a--)
-    {
-      for (s = 15; s >= minIVs; s--)
-      {
-        for (d = 15; d >= minIVs; d--)
-        {
-          cp = league+1; // reset cp variable
-          for (L = adjMaxLvl; ((L >= adjMinLvl) && (cp > league)); L--)
-          {
-            glA = (parseFloat(ba0)+parseFloat(a));
-            glD = (parseFloat(bd0)+parseFloat(d));
-            glS = (parseFloat(bs0)+parseFloat(s));
-            cp = Math.max(10, Math.floor(glA * Math.sqrt(glD) * Math.sqrt(glS) * parseFloat(cpm[L]) * parseFloat(cpm[L]) /10));
-            // check if the calculated cp is eligible for the chosen league (1500 or 2500 max)
-            //console.log("cp:"+cp+" with glA:"+glA+" glD:"+glD+" glS:"+glS+" and cpm["+L+"]:"+cpm[L]+", league:"+league);
-            if (cp <= league)
-            {
-              // stat product used to rank IVs
-              glA = glA*cpm[L];
-              glD = glD*cpm[L];
-              glS = glS*cpm[L];
-              smm = parseFloat(glA * glD * Math.floor(glS)); // convert stamina to HP for stat product
-              
-              // check this new smm(rank) against the lowest smm stored in tpp so far
-              if (smm >= tpp[tq])
+              n6 = 6 * n // get old smm index
+              // Is new smm better than stored smm?
+              if (smm >= tpp[n6])
               {
-                //console.log("SPIV: Storing...");
-                // found a new best IV set! Storing...
-                
-                // Calculate Star Appraisal Rating for Storing
-                var IVsum = a/1 + d/1 + s/1
-                if (IVsum < 23) {
-                  Star = "0*";
-                } else if (IVsum < 30) {
-                  Star = "1*";
-                } else if (IVsum < 40) {
-                  Star = "2*";
-                } else if (IVsum < 45) {
-                  Star = "3*";
-                } else {
-                  Star = "4*";
-                }
-                for (n = 0; n < tp; n++)
+                // Insert new high rank smm/stats/level at this index
+                tpp.splice(n6, 0, smm, a, d, s, L, Star)
+                // Did we save too many Top IVs?
+                if (tpp.length > tq)
                 {
-
-                  n6 = 6 * n // get old smm index
-                  // Is new smm better than stored smm?
-                  if (smm >= tpp[n6])
+                  // remove old highest smm/stats/level
+                  for (var i = tpp.length - tq - 6 ; i > 0; i--)
                   {
-                    // Insert new high rank smm/stats/level at this index
-                    tpp.splice(n6, 0, smm, a, d, s, L, Star)
-                    // Did we save too many Top IVs?
-                    if (tpp.length > tq)
-                    {
-                      // remove old highest smm/stats/level
-                      for (var i = tpp.length - tq - 6 ; i > 0; i--)
-                      {
-                        tpp.pop()
-                      }
-                    }
-                    // after insertion, stop searching tpp
-                    break;
+                    tpp.pop()
                   }
                 }
+                // after insertion, stop searching tpp
+                break;
               }
-              //else {console.log("Skipping over...");}
-            } // Skip next iterations of loop as we already found the max cp
-    }}}} // end of quad loop
-    // window.addEventListener('load', calculate, false);
-    // pass nested Array of Top IVs
-    // calculate(tpp);
-  //console.log("SPIV: Finished! TPP is:");
-  //console.log(JSON.stringify(tpp));
-  return tpp;
-  } // end of SearchPokeIVs()
-      
-      // function used to verify if the User's Inputs will return NaN (if they are impossible)
-      // will return true if it detects a NaN case, otherwise will return false
-      function checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl)
-      {
-        // check if user IVs are not less than minIVs
-        if (((AttackIV/1) < (minIVs/1)) || ((DefenseIV/1) < (minIVs/1)) || ((StaminaIV/1) < (minIVs/1)))
-        {
-          alert("One or more of your IVs are below minimum IVs, please fix your inputs and try again.");
-          return true;
-        }
-        
-        // check if this pokemon with this minLvl can have a CP below this league
-        var adjMinLvl = parseFloat(minLvl-1)*2;
-        var CP = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(basestats[0])) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(basestats[1])) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(basestats[2])) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
-        if ((CP/1) > (league/1))
-        {
-          alert(pokemon+" at level "+minLvl+" with IVs "+AttackIV+"/"+DefenseIV+"/"+StaminaIV+" has CP:"+CP+" which is over "+league+". Please fix your inputs and try again");
-          return true;
-        }
-        
-        return false;
-      }
-      
-      function tieBreakByCP(tpp, rows, nextRow, curSMM, curAtk, curDef, curStm, curLvl, nexSMM, nexAtk, nexDef, nexStm, nexLvl, bsa, bsd, bss)
-      {
-        // Does the nextSMM even exist? && are they identical?
-        if ((nexSMM > 0) && (curSMM == nexSMM))
-        {
-          //console.log ("Found a tie (row):"+rows+" curSMM:"+curSMM+"==nexSMM"+nexSMM);
-          //console.log("b4--"+rows+": "+curSMM+"-"+curAtk+"-"+curDef+"-"+curStm+"-"+curLvl);
-          //console.log("b4--"+nextRow+": "+nexSMM+"-"+nexAtk+"-"+nexDef+"-"+nexStm+"-"+nexLvl);
-          var tempA = curAtk+parseFloat(bsa);
-          var tempD = curDef+parseFloat(bsd);
-          var tempS = curStm+parseFloat(bss);
-          var tempCPM = parseFloat(cpm[curLvl]);
-          var cp0 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
-          //console.log("Calculated cp0:"+cp0+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
-            
-          var tempA = parseFloat(nexAtk+parseFloat(bsa));
-          var tempD = parseFloat(nexDef+parseFloat(bsd));
-          var tempS = parseFloat(nexStm+parseFloat(bss));
-          var tempCPM = parseFloat(cpm[nexLvl]);
-          var cp1 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
-          //console.log("Calculated cp1:"+cp1+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
-            
-          //console.log("Comparing cp0:"+cp0+" to cp1:"+cp1);
-          // need to swap these two so the higher cp gets ranked higher!
-          if (cp0 < cp1)
-          {
-            //console.log("Swapping cp0:"+cp0+"at row:"+rows+" with cp1:"+cp1+"at row:"+nextRow);
-            tpp[rows * 6 + 0] = nexSMM;
-            tpp[rows * 6 + 1] = nexAtk;
-            tpp[rows * 6 + 2] = nexDef;
-            tpp[rows * 6 + 3] = nexStm;
-            tpp[rows * 6 + 4] = nexLvl;
-            tpp[nextRow * 6 + 0] = curSMM;
-            tpp[nextRow * 6 + 1] = curAtk;
-            tpp[nextRow * 6 + 2] = curDef;
-            tpp[nextRow * 6 + 3] = curStm;
-            tpp[nextRow * 6 + 4] = curLvl;
-              
-            //console.log("after--"+rows+": "+tpp[rows * 6 + 0]+"-"+tpp[rows * 6 + 1]+"-"+tpp[rows * 6 + 2]+"-"+tpp[rows * 6 + 3]+"-"+tpp[rows * 6 + 4]);
-            //console.log("after--"+nextRow+": "+tpp[nextRow * 6 + 0]+"-"+tpp[nextRow * 6 + 1]+"-"+tpp[nextRow * 6 + 2]+"-"+tpp[nextRow * 6 + 3]+"-"+tpp[nextRow * 6 + 4]);
+            }
           }
-        }
-        return tpp;
+          //else {console.log("Skipping over...");}
+        } // Skip next iterations of loop as we already found the max cp
+}}}} // end of quad loop
+// window.addEventListener('load', calculate, false);
+// pass nested Array of Top IVs
+// calculate(tpp);
+//console.log("SPIV: Finished! TPP is:");
+//console.log(JSON.stringify(tpp));
+return tpp;
+} // end of SearchPokeIVs()
+  
+  // function used to verify if the User's Inputs will return NaN (if they are impossible)
+  // will return true if it detects a NaN case, otherwise will return false
+  function checkForNaN(minIVs, league, pokemon, basestats, AttackIV, DefenseIV, StaminaIV, minLvl)
+  {
+    // check if user IVs are not less than minIVs
+    if (((AttackIV/1) < (minIVs/1)) || ((DefenseIV/1) < (minIVs/1)) || ((StaminaIV/1) < (minIVs/1)))
+    {
+      alert("One or more of your IVs are below minimum IVs, please fix your inputs and try again.");
+      return true;
+    }
+    
+    // check if this pokemon with this minLvl can have a CP below this league
+    var adjMinLvl = parseFloat(minLvl-1)*2;
+    var CP = Math.max(10, Math.floor((parseFloat(AttackIV)+parseFloat(basestats[0])) * Math.sqrt(parseFloat(DefenseIV)+parseFloat(basestats[1])) * Math.sqrt(parseFloat(StaminaIV)+parseFloat(basestats[2])) * parseFloat(cpm[adjMinLvl]) * parseFloat(cpm[adjMinLvl]) / 10));
+    if ((CP/1) > (league/1))
+    {
+      alert(pokemon+" at level "+minLvl+" with IVs "+AttackIV+"/"+DefenseIV+"/"+StaminaIV+" has CP:"+CP+" which is over "+league+". Please fix your inputs and try again");
+      return true;
+    }
+    
+    return false;
+  }
+  
+  function tieBreakByCP(tpp, rows, nextRow, curSMM, curAtk, curDef, curStm, curLvl, nexSMM, nexAtk, nexDef, nexStm, nexLvl, bsa, bsd, bss)
+  {
+    // Does the nextSMM even exist? && are they identical?
+    if ((nexSMM > 0) && (curSMM == nexSMM))
+    {
+      //console.log ("Found a tie (row):"+rows+" curSMM:"+curSMM+"==nexSMM"+nexSMM);
+      //console.log("b4--"+rows+": "+curSMM+"-"+curAtk+"-"+curDef+"-"+curStm+"-"+curLvl);
+      //console.log("b4--"+nextRow+": "+nexSMM+"-"+nexAtk+"-"+nexDef+"-"+nexStm+"-"+nexLvl);
+      var tempA = curAtk+parseFloat(bsa);
+      var tempD = curDef+parseFloat(bsd);
+      var tempS = curStm+parseFloat(bss);
+      var tempCPM = parseFloat(cpm[curLvl]);
+      var cp0 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
+      //console.log("Calculated cp0:"+cp0+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
+        
+      var tempA = parseFloat(nexAtk+parseFloat(bsa));
+      var tempD = parseFloat(nexDef+parseFloat(bsd));
+      var tempS = parseFloat(nexStm+parseFloat(bss));
+      var tempCPM = parseFloat(cpm[nexLvl]);
+      var cp1 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
+      //console.log("Calculated cp1:"+cp1+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
+        
+      //console.log("Comparing cp0:"+cp0+" to cp1:"+cp1);
+      // need to swap these two so the higher cp gets ranked higher!
+      if (cp0 < cp1)
+      {
+        //console.log("Swapping cp0:"+cp0+"at row:"+rows+" with cp1:"+cp1+"at row:"+nextRow);
+        tpp[rows * 6 + 0] = nexSMM;
+        tpp[rows * 6 + 1] = nexAtk;
+        tpp[rows * 6 + 2] = nexDef;
+        tpp[rows * 6 + 3] = nexStm;
+        tpp[rows * 6 + 4] = nexLvl;
+        tpp[nextRow * 6 + 0] = curSMM;
+        tpp[nextRow * 6 + 1] = curAtk;
+        tpp[nextRow * 6 + 2] = curDef;
+        tpp[nextRow * 6 + 3] = curStm;
+        tpp[nextRow * 6 + 4] = curLvl;
+          
+        //console.log("after--"+rows+": "+tpp[rows * 6 + 0]+"-"+tpp[rows * 6 + 1]+"-"+tpp[rows * 6 + 2]+"-"+tpp[rows * 6 + 3]+"-"+tpp[rows * 6 + 4]);
+        //console.log("after--"+nextRow+": "+tpp[nextRow * 6 + 0]+"-"+tpp[nextRow * 6 + 1]+"-"+tpp[nextRow * 6 + 2]+"-"+tpp[nextRow * 6 + 3]+"-"+tpp[nextRow * 6 + 4]);
       }
-
+    }
+    return tpp;
+  }
 </script>
-</body></div></div>
+</body>
 </html>
