@@ -33,6 +33,9 @@
 	<!-- Import Type Table Building JQuery functions -->
 	<script src="https://shortcutIV.com/includes/buildTypeTable.js"></script>
 	<script src="https://shortcutIV.com/includes/GAME_MASTER_stripped.js"></script>
+    <script src="https://shortcutIV.com/includes/findPokes.js"></script>
+    <script src="https://shortcutIV.com/includes/findTypes.js"></script>
+    <script src="https://shortcutIV.com/includes/silphCups.js"></script>
   <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -98,7 +101,20 @@
           <option value="Rock">Rock</option>
           <option value="Steel">Steel</option>
           <option value="Water">Water</option>
-        </select><br /><br />
+        </select><br />
+        <select id="silphCup">
+          <option>Select Silph Cup</option>
+          <option value="boulder">Boulder</option>
+          <option value="twilight">Twilight</option>
+          <option value="tempest">Tempest</option>
+          <option value="kingdom">Kingdom</option>
+          <option value="nightmare">Nightmare</option>
+          <option value="rainbow">Rainbow</option>
+          <option value="jungle">Jungle</option>
+          <option value="s1regionals">S1 Regionals</option>
+        </select><br />
+        <table style="text-align:center" id="cupTypesContainer"></table>
+        <br />
         <table style="text-align:center" id="resultsContainer"></table>
         <!--Results output here by JQuery-->
         <div style="overflow-x:auto;"></div>
@@ -111,12 +127,63 @@
   <!-- Footer Code Below -->
   <nav data-load="/includes/footer.html"></nav>
 <script>
+
+const silphCups = {"boulder":boulder, "twilight":twilight, "tempest":tempest, "kingdom":kingdom, "nightmare":nightmare, "rainbow":rainbow, "jungle":jungle, "s1regionals":s1regionals};
+
   // Default to loading a table
   $(document).ready(function(){outputHTML();});
   
   // Change the table shown when the user selects a new type
   $('#type').change(outputHTML);
   $('#type2').change(outputHTML);
+  $('#silphCup').change(outputTypes);
+  
+  function newType(type1, type2)
+  {
+    console.log("Hello World!");
+    //console.log("nT: type1="+type1);
+    //console.log("nT: type2="+type2);
+  }
+  
+  function outputTypes() {
+  	$("#cupTypesContainer").html("");
+  	var types = mergeCupT1pes(document.getElementById('silphCup').value);
+    //console.log("oT: types("+Object.keys(types).length+"):"+JSON.stringify(types));
+    var maxLength = 0;
+    var keys = Object.keys(types);
+    for (var i=0; i<keys.length; i++)
+    {
+      //console.log("Comparing types[keys["+i+"]].length("+types[keys[i]].length+") to maxLength("+maxLength+")");
+      maxLength = Math.max(types[keys[i]].length, maxLength);
+    }
+    var buffer = ""
+    for (i=0; i<keys.length; i++)
+    {
+      buffer =  buffer.concat('<tr><td class="'+cap1stL(keys[i])+'" onclick="newType('+cap1stL(keys[i])+')">'+cap1stL(keys[i])+'</td><td>&</td>');
+      for (var j=0; j<maxLength; j++)
+      {
+        if (types[keys[i]][j] !== undefined)
+        {
+          buffer =  buffer.concat('<td class="'+cap1stL(types[keys[i]][j])+'" onclick="newType('+cap1stL(keys[i])+', '+cap1stL(types[keys[i]][j])+')">'+cap1stL(types[keys[i]][j])+' </td>');
+        }
+      }
+      buffer =  buffer.concat('</tr>');
+    }
+  $("#cupTypesContainer").append(buffer);
+  }
+  function mergeCupT1pes(silphCup)
+{
+  var finalTypes = {};
+  for (var i=0; i<silphCups[silphCup].length; i++)
+  {
+    finalTypes[silphCups[silphCup][i]] = findTypes(silphCups[silphCup][i].toLowerCase());
+  }
+  return finalTypes;
+}
+function cap1stL(string) 
+{
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
 </script>
 </body>
 </html>
