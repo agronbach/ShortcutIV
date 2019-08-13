@@ -60,7 +60,7 @@ visibility: hidden;
 }
 
 /* Header CSS */
-ul {
+ul.header {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -69,11 +69,11 @@ ul {
   background:#C0C0C0;
 }
 
-li {
+li.header {
   float: left;
 }
 
-li a {
+li.header a {
   display: block;
   color: black;
   text-align: center;
@@ -81,21 +81,21 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+li.header a:hover:not(.active) {
   background-color: #ddd;
 }
 
-li a.active {
+li.header a.active {
   color: white;
   background-color: #4CAF50;
 }
 
 /* Special CSS for tiny mobile screens */
 @media only screen and (max-width: 365px) {
-  ul {
+  ul.header {
     font-size: 80%;
   }
-  li a {
+  li.header a {
     padding: 7px 8px;
   }
   section {
