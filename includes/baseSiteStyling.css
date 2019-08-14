@@ -93,7 +93,7 @@ li.header a.active {
 /* Special CSS for tiny mobile screens */
 @media only screen and (max-width: 365px) {
   ul.header {
-    font-size: 80%;
+    font-size: 4vw;
   }
   li.header a {
     padding: 7px 8px;
@@ -103,5 +103,6 @@ li.header a.active {
   }
   table {
     width: 80%;
+    font-size: 4vw;
   }
 }
