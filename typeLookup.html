@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141600603-1');
+  </script>
+  <!-- Include pre-loads to reduce/optimize page load time-->
+  <link rel="preload" href="https://shortcutIV.com/includes/baseSiteStyling.css" as="style">
+  <link rel="preload" href="https://shortcutIV.com/includes/httpsRedirect.js" as="script">
+  <link rel="preload" href="https://shortcutIV.com/includes/buildTypeTable.js" as="script">
   <title>ShortcutIV - Type Chart</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Pokemon Go Type Chart Generator, built to help Trainers study and master Resistances, Weaknesses, SE, and NVE matchups for both single and dual-type Pokemon."/>
-  <script src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
+  <script async src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
   <!-- Includes for FavIcon support-->
   <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/favIcon/apple-icon-60x60.png">
@@ -28,23 +41,12 @@
   <link rel="stylesheet" href="https://shortcutIV.com/includes/typeChartStyling.css">
   <link rel="stylesheet" href="https://shortcutIV.com/includes/baseSiteStyling.css">
   <link rel="stylesheet" href="https://shortcutIV.com/includes/typeColors.css">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
 	<!-- Import Type Table Building JQuery functions -->
 	<script src="https://shortcutIV.com/includes/buildTypeTable.js"></script>
 	<script src="https://shortcutIV.com/includes/GAME_MASTER_stripped.js"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-141600603-1');
-    </script>
   <!--Rest of Head-->
-  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
   <!-- Import JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://shortcutIV.com/includes/includes.js"></script>
 </head>
 <body>
   <header>
@@ -109,14 +111,14 @@
   	</div>
 	</section>
   <!-- Footer Code Below -->
-  <nav data-load="/includes/footer.html"></nav>
-<script>
+  <script src="https://shortcutIV.com/includes/escapedFooter.js"></script>
+  <script>
   // Default to loading a table
   $(document).ready(function(){outputHTML();});
   
   // Change the table shown when the user selects a new type
   $('#type').change(outputHTML);
   $('#type2').change(outputHTML);
-</script>
+  </script>
 </body>
 </html>
