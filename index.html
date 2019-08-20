@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141600603-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145799979-1"></script>
   <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-141600603-1');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'UA-145799979-1');
   </script>
   <!-- Include pre-loads to reduce/optimize page load time-->
   <link rel="preload" href="https://shortcutIV.com/includes/baseSiteStyling.css" as="style">
   <link rel="preload" href="https://shortcutIV.com/includes/httpsRedirect.js" as="script">
+  <link rel="preload" href="https://shortcutIV.com/includes/escapedFooter.js" as="script">
   <title>ShortcutIV - PvP Rankings</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,24 +40,36 @@
   <!-- End Includes for favIcon support-->
   <link rel="stylesheet" href="https://shortcutIV.com/includes/baseSiteStyling.css">
   <style>
-/* Center tables for demo */
-[data-table-theme*=gray] {
-  margin: 0 auto;
+/* Center tables for demo
+[data-table-theme*=gray]*/
+table.resultsContainer {
+  /*margin: 0 auto;*/
   color: #333;
-  background: white;
-  border: 1px solid grey;
+  /*background: white;*/
+  /*border: 1px solid grey;*/
   font-size: 12pt;
   border-collapse: collapse;
+  /*Center the tables */
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
 }
 
-[data-table-theme*=gray] thead th,
+/*[data-table-theme*=gray] thead th,
 [data-table-theme*=gray] tfoot th {
   border: 1px solid lightgrey;
 }
 
-/* Blank Table Style */
-[data-table-theme*=blank] {
+/* Blank Table Style
+[data-table-theme*=blank] */
+table.optionContainer {
   border: 0;
+  /*Center the tables */
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  /* Stop mobile 80% "collapse" */
+  width: 0 !important;
 }
   </style>
   <!--Rest of Head-->
@@ -78,12 +91,12 @@
   <section>
     <div id="container">
       <div id="body">
-        <form align=center>
+        <form align="center">
           <div class="ui-widget">
             <input id="mon" placeholder="Pok&eacute;mon" required>
           </div>
-         <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
-          <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td title="What Level Floor to Search?">Lvl</td></tr>
+         <table class="optionContainer" id="row1">
+          <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td title="What Level Floor to Search?">Lvl</td></tr><tr>
           <td><select title="Your Attack IV" id="AttackIV">
             <option value="15">15</option>
             <option value="14">14</option>
@@ -179,7 +192,7 @@
             <option value="38">38</option>
             <option value="39">39</option>
             <option value="40">40</option>
-          </select></td>
+          </select></td></tr><tr>
           <td hidden><select id="maxLvl">
             <option value="40">40</option>
             <option value="39">39</option>
@@ -225,9 +238,9 @@
            <td hidden><select id="maxHP"><option value="0">0</option></select></td>
            <td hidden><select id="maxDef"><option value="0">0</option></select></td>
            <td hidden><select id="maxAtk"><option value="0">0</option></select></td>
-          </table>
+          </tr></table>
           <div hidden id="basestats"></div>
-          <table align=center cellspacing="0" cellpadding="0" data-table-theme=blank>
+          <table class="optionContainer" id="row2">
           <tr>
             <td title="Which IV Floor to Search?">Minimum IVs</td><td title="How many results to display?">Top</td>
           </tr>
@@ -255,7 +268,7 @@
             </select></td>
           </tr>
           </table>
-          <table align=center cellspacing="0" cellpadding="4" data-table-theme=blank><tr>
+          <table class="optionContainer" id="row3"><tr>
           <td><select title="Which PvP League to Search?" id="league">
             <option value="1500">Great League (1500)</option>
             <option value="2500">Ultra League (2500)</option>
@@ -265,7 +278,9 @@
           </tr></table>
         </form>
         <div style="overflow-x:auto;">
-          <table data-table-theme=gray><div id= "box"><br/><br/><br/></div></table>
+          <div class="resultsContainer" id= "savedResults"></div>
+          <div class="resultsContainer" id= "resultsDiv"></div>
+          <!--table class="resultsContainer"><div id= "resultsDiv"><br/><br/><br/></div></table-->
         </div>
         <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
         <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
@@ -749,7 +764,7 @@
     {'label': '437-Bronzong', 'value': '161,213,167'},
     {'label': '438-Bonsly', 'value': '124,133,137,Sudowoodo'},
     {'label': '439-Mime Jr.', 'value': '125,142,85,Mr._Mime'},
-    {'label': '440-Happiny', 'value': '25,77,225,Chansey,Chansey'},
+    {'label': '440-Happiny', 'value': '25,77,225,Chansey,Blissey'},
     {'label': '441-Chatot', 'value': '183,91,183'},
     {'label': '442-Spiritomb', 'value': '169,199,137'},
     {'label': '443-Gible', 'value': '124,84,151,Gabite,Garchomp'},
@@ -904,36 +919,6 @@
     maxDef = 0;
     maxAtk = 0;
     //console.log("After reset -- maxHP:"+maxHP+" maxDef:"+maxDef+" maxAtk:"+maxAtk);
-    
-    // validate reCaptcha v3
-    var tokenHolder;
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2', {action: 'getFormData'}).then(function(token) {
-        // pass the token to the backend script for verification
-        //console.log("Token:"+token);
-        
-        //Make AJAX POST request to validate reCAPTCHA v3
-        console.log("Validating reCAPTCHA...");
-        $.ajax({
-          type: "POST",
-          url: "https://us-central1-sandbox-of-alex-gronbach-2.cloudfunctions.net/validateReCaptchaV3",
-          data: {"token":token},
-          success: function(data) {
-            console.log("Success");
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log("Error");
-            //console.log("Dumping:"+JSON.stringify(XMLHttpRequest));
-            //console.log(JSON.stringify(textStatus));
-            //console.log(JSON.stringify(errorThrown));
-            var html = "<table align=center><tr><th>ERROR</th></tr>";
-            html+="</table>"; // finish building the whole table
-            document.getElementById("box").innerHTML = html;
-            return;
-          }
-        });
-      })
-    });
   
     // Get the User's Input from the form
     //console.log("Made it to getFormData\(\) !");
@@ -967,6 +952,39 @@
       // throw NaN alert to let user know inputs are invalid and stop building table
       return false;
     }
+    
+    // validate reCaptcha v3
+    var tokenHolder;
+    var time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var request = {"minIVs":minIVs, "league":league, "pokemon":pokemon, "AttackIV":AttackIV, "DefenseIV":DefenseIV, "StaminaIV":StaminaIV, "minLvl":minLvl, "time":time};
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2', {action: 'getFormData'}).then(function(token) {
+        // pass the token to the backend script for verification
+        //console.log("Token:"+token);
+        
+        //Make AJAX POST request to validate reCAPTCHA v3
+        console.log("Validating reCAPTCHA...");
+        $.ajax({
+          type: "POST",
+          url: "https://us-central1-sandbox-of-alex-gronbach-2.cloudfunctions.net/validateReCaptchaV3",
+          //url: "https://us-central1-shortcutiv-sandbox.cloudfunctions.net/validateReCaptchaV3-shortcutIV",
+          data: {"token":token, "request":request},
+          success: function(data) {
+            console.log("Success");
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Error");
+            //console.log("Dumping:"+JSON.stringify(XMLHttpRequest));
+            //console.log(JSON.stringify(textStatus));
+            //console.log(JSON.stringify(errorThrown));
+            var html = "<table align=center><tr><th>ERROR</th></tr>";
+            html+="</table>"; // finish building the whole table
+            document.getElementById("box").innerHTML = html;
+            return;
+          }
+        });
+      })
+    });
     
     // append inputs to URL for sharing
     var url = window.location.href;
@@ -1079,7 +1097,7 @@
       if (extraEvos > 0)
       {
         //console.log("extraEvos:"+extraEvos);
-        evoHeader = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table align=center><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+        evoHeader = "<p>"+extraEvos+" "+pokemon+" family evo(s): <i>("+AttackIV+"-"+DefenseIV+"-"+StaminaIV+")</i><table class='resultsContainer'><tr><th>Pokemon</th><th>Rank</th><th>Lvl</th><th>CP</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
         evoHtml += "</table></p>";
       }
     }
@@ -1156,7 +1174,7 @@
     html += buildTableRows(tpp, basestats[0], basestats[1], basestats[2], glst, tp);
             
     // now that table is finished building, output to webpage
-    document.getElementById("box").innerHTML = evoHeader + evoHtml + html;
+    document.getElementById("resultsDiv").innerHTML = evoHeader + evoHtml + html;
     return;
   }
   
@@ -1185,7 +1203,6 @@
     {
       // store each rank until smm == rank
       var rank = tpp[i * 6 + 0];
-      Star = tpp[i *6 + 5];
       
       // watch out for duplicate smm ranks!
       if (rank == smm)
@@ -1193,6 +1210,9 @@
         // ensure this is the right matching smm
         if ((aIV == tpp[i * 6 + 1]) && (dIV == tpp[i * 6 + 2]) && (sIV == tpp[i * 6 + 3]))
         {
+          //store the star rating
+          Star = tpp[i *6 + 5];
+          
           // found the correct rank! Store this for later calculations
           rank = i + 1; // offset by 1 to fix "0 rank"
           var level = tpp[i * 6 + 4]; // get raw half-level count for cpm
@@ -1217,7 +1237,7 @@
             
     // add table header rows to output
     var html = "";
-    if (!pokemon) {html = "<table align=center><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>*</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
+    if (!pokemon) {html = "<table class='resultsContainer'><tr><th>Rank</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>*</th><th>%</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";}
     
     // build table URL
     var url = window.location.href;
@@ -1360,10 +1380,10 @@ var tpp = new Array(tq+7).join('0').split('').map(parseFloat)
 // 6 slot buffer is for merging in next best IVs
 
 // Declare Loop Variables
-var a = 15; // Pokémon attack counter
-var s = 15; // Pokémon stamina counter
-var d = 15; // Pokémon defense counter
-var L = adjMaxLvl; // Pokémon level counter
+var a = 15; // Pokemon attack counter
+var s = 15; // Pokemon stamina counter
+var d = 15; // Pokemon defense counter
+var L = adjMaxLvl; // Pokemon level counter
 var Star = "NA"; // Track pokemon appraisal (0*/1*/2*/3*/4*)
 var glA;
 var glD;
@@ -1413,6 +1433,7 @@ for (a = 15; a >= minIVs; a--)
             } else {
               Star = "4*";
             }
+            //console.log("Star="+Star+" from IVsum of "+IVsum+" = "+a/1+" + "+b/1+" + "+c/1);
             for (n = 0; n < tp; n++)
             {
 
@@ -1482,6 +1503,8 @@ return tpp;
       var tempD = curDef+parseFloat(bsd);
       var tempS = curStm+parseFloat(bss);
       var tempCPM = parseFloat(cpm[curLvl]);
+      var tempStar = tpp[rows * 6 + 5];
+      var nexStar = tpp[nextRow * 6 + 5];
       var cp0 = Math.max(10, Math.floor(tempA* Math.sqrt(tempD)* Math.sqrt(tempS)* tempCPM* tempCPM / 10));
       //console.log("Calculated cp0:"+cp0+" with A:"+tempA+" D:"+tempD+" S:"+tempS+" CPM:"+tempCPM);
         
@@ -1502,11 +1525,13 @@ return tpp;
         tpp[rows * 6 + 2] = nexDef;
         tpp[rows * 6 + 3] = nexStm;
         tpp[rows * 6 + 4] = nexLvl;
+        tpp[rows * 6 + 5] = nexStar;
         tpp[nextRow * 6 + 0] = curSMM;
         tpp[nextRow * 6 + 1] = curAtk;
         tpp[nextRow * 6 + 2] = curDef;
         tpp[nextRow * 6 + 3] = curStm;
         tpp[nextRow * 6 + 4] = curLvl;
+        tpp[nextRow * 6 + 5] = tempStar;
           
         //console.log("after--"+rows+": "+tpp[rows * 6 + 0]+"-"+tpp[rows * 6 + 1]+"-"+tpp[rows * 6 + 2]+"-"+tpp[rows * 6 + 3]+"-"+tpp[rows * 6 + 4]);
         //console.log("after--"+nextRow+": "+tpp[nextRow * 6 + 0]+"-"+tpp[nextRow * 6 + 1]+"-"+tpp[nextRow * 6 + 2]+"-"+tpp[nextRow * 6 + 3]+"-"+tpp[nextRow * 6 + 4]);
