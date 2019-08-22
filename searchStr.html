@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics >
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145799979-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -9,15 +9,15 @@
     gtag('js', new Date());
     
     gtag('config', 'UA-145799979-1');
-  </script-->
+  </script>
   <!-- Include pre-loads to reduce/optimize page load time-->
   <link rel="preload" href="https://shortcutIV.com/includes/baseSiteStyling.css" as="style">
   <link rel="preload" href="https://shortcutIV.com/includes/httpsRedirect.js" as="script">
   <link rel="preload" href="https://shortcutIV.com/includes/escapedFooter.js" as="script">
-  <title>ShortcutIV - About</title>
+  <title>ShortcutIV - PvP Search Strings</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Welcome Trainers! ShortcutIV hosts our PvP IV Lookup tool, and is a playground for all of my other Pokemon Go related tool ideas, such as our Type Lookup chart generator and companion Typing Quiz"/>
+  <meta name="description" content="Use this tool to create search strings to find the best (or trash the worst) Pokémon for PvP! These strings can be copied and pasted into the Pokémon Go app to help you narrow down your collection to know what to keep and what to send to Professor Willow"/>
   <script async src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
   <!-- Includes for FavIcon support-->
   <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
@@ -129,13 +129,15 @@ li.dropdown {
     var league = document.getElementById('league').value;;
     var limit = document.getElementById('limit').value;
     var trash = document.getElementById('trash').checked;
+    var lang = document.getElementById('lang').value.split(',');
+    var cpstr = lang[1], hpstr = lang[2];
     //var ranks = calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league);
 
-    outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league), limit, value[0], trash, output);
+    outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league), limit, value[0], trash, output, lang[1], lang[2]);
     
   }
   
-  function outputStr(ranks, limit, id, trash, output) {
+  function outputStr(ranks, limit, id, trash, output, cpstr, hpstr) {
     console.log("outputStr (except ranks): limit="+limit+" id="+id+" trash="+trash);
     //console.log("outputStr ranks="+JSON.stringify(ranks));
     
@@ -189,12 +191,12 @@ li.dropdown {
     // output CPs and HPs
     cps = Array.from(cps);
     cps.sort((a, b) => a - b);
-    output.value += id + '&' + get_matching_string(cps, "cp");
+    output.value += id + '&' + get_matching_string(cps, cpstr);
     
     if(!trash) {
       hps = Array.from(hps);
       hps.sort((a, b) => a - b);
-      output.value += '&' + get_matching_string(hps, "hp");
+      output.value += '&' + get_matching_string(hps, hpstr);
     }
     
     return output;
@@ -849,6 +851,20 @@ li.dropdown {
 <label>
 	Trash String:
 	<input id="trash" type="checkbox" onchange="start()">
+</label>
+<label>
+	Language:
+	<select id="lang" onchange="start()">
+		<option value="en,cp,hp">English</option>
+		<option value="ja,cp,hp">Japanese</option>
+		<option value="fr,pc,pv">French</option>
+		<option value="es,pc,puntos de salud">Spanish</option>
+		<option value="de,wp,kp">German</option>
+		<option value="il,pl,punti salute">Italian</option>
+		<option value="ko,cp,hp">Korean</option>
+		<option value="zh,cp,hp">Chinese</option>
+		<option value="pt,pc,ps">Portuguese</option>
+	</select>
 </label>
 </body>
 </html>
