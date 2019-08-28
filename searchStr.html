@@ -149,13 +149,14 @@
     var limit = document.getElementById('limit').value;
     var trash = document.getElementById('trash').checked;
     var hundo = document.getElementById('hundo').checked;
+    var hptrash = document.getElementById('hptrash').checked;
     var lang = document.getElementById('lang').value.split(',');
     var cpstr = lang[1], hpstr = lang[2];
     //var ranks = calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league);
-    outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league), base, baseatk, basedef, basesta, limit, trash, hundo, league, output, lang[1], lang[2]);
+    outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league), base, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, lang[1], lang[2]);
   }
   
-  function outputStr(ranks, id, baseatk, basedef, basesta, limit, trash, hundo, league, output, cpstr, hpstr) {
+  function outputStr(ranks, id, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, cpstr, hpstr) {
     console.log("outputStr (except ranks, output): id:"+id+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
     //console.log("outputStr ranks="+JSON.stringify(ranks));
     
@@ -186,26 +187,38 @@
     }
     
     var cps = new Set(), hps = new Set();
-    
+    var maxCP = 0, maxHP = 0;
+
     // generate all the cps and hps for matching
+    // for ranks 1 to user limit, up to maxLvl (L) for league
     for (var i=0; ((i<rLength) && (i<limit)); i++) {
-      // for ranks 1 to user limit, up to maxLvl (L) for league
+      
+      // start at maxLvl (up to league limit)
       var maxLvl = (ranks[rKeys[i]].L - 1)*2;
+      // see if this is a half-level (these don't spawn in the wild)
+      if (maxLvl%2 != 0)
+      {
+        // ensure we build search string only on "full" levels
+        maxLvl = maxLvl - 1; // set to non-half level
+      }
       //console.log("Setting maxLvl="+maxLvl+" for "+rKeys[i]);
-      // don't match half level CPs in search strings
+      
+      // skip half level CPs in search strings to improve accuracy
       for( var level = maxLvl; level >= 0; level = level - 2 ) {
         var cp = Math.max(10, Math.floor((baseatk/1 + ranks[rKeys[i]].IVs.A) * Math.sqrt(basedef/1 + ranks[rKeys[i]].IVs.D) * Math.sqrt(basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level] * cpm[level] / 10));
         //console.log("Calculated CP("+cp+") via Math.max(10, Math.floor(("+baseatk+" + "+ranks[rKeys[i]].IVs.A+") * Math.sqrt("+basedef+" + "+ranks[rKeys[i]].IVs.D+") * Math.sqrt("+basesta+" + "+ranks[rKeys[i]].IVs.S+") * "+cpm[level]+" * cpm[level] / 10));")
         cps.add(cp);
+
+        // generate hps for more accurate search string matching
+        var hp = Math.max(10, Math.floor((basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level]));
+        hps.add(hp);
         
-        // only generate hps if not trashing
-        if (!trash) {
-          var hp = Math.max(10, Math.floor((basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level]));
-          hps.add(hp);
-        }
+        // update counters for maxCP and maxHP
+        if (maxCP < cp) {maxCP = cp};
+        if (maxHP < hp) {maxHP = hp};
       }
     }
-    
+
     // if we are trashing but skipping hundos
     if ((trash) && (!hundo) && (starVal !== '4*'))
     {
@@ -213,16 +226,6 @@
     } else {
       // ensure old output is cleared!
       output.value = '';
-    }
-    
-    // if we want to prevent accidental trashing of hundos (15/15/15)
-    if ((trash) && (!hundo))
-    {
-      // generate all possible hundo CPs within league limit and add to cps
-      for( var level = maxLvl; level >= 0; level = level - 2 ) {
-        cp = Math.max(10, Math.floor((ranks[rKeys[i]].base.A + 15) * Math.sqrt(ranks[rKeys[i]].base.D + 15) * Math.sqrt(ranks[rKeys[i]].base.S + 15) * cpm[level] * cpm[level] / 10));
-        cps.add(cp);
-      }
     }
     
     // if all same appraisal star rating, add to string output
@@ -234,14 +237,34 @@
       }
     }
     
+    // original CP list for debugging
+    var debug_cps = Array.from(cps);
+    debug_cps.sort((a, b) => a - b);
+    console.log("cps before invert:"+JSON.stringify(debug_cps));
+    
+    // original HP list for debugging
+    if (trash) {
+    var debug_hps = Array.from(hps);
+    debug_hps.sort((a, b) => a - b);
+    console.log("hps before invert:"+JSON.stringify(debug_hps));}
+    
     // invert the string for trashing
     if (trash)
     {
-      for (var i=10; i<league; i++) {
+      console.log("Flipping cps and hps with maxCP("+maxCP+") and maxHP("+maxHP+")");
+      for (var i=10; i<=maxCP; i++) {
         if( cps.has(i) ) {
   				cps.delete(i);
   			} else {
   				cps.add(i);
+			  }
+      }
+      
+      for (var i=10; i<=maxHP; i++) {
+        if( hps.has(i) ) {
+  				hps.delete(i);
+  			} else {
+  				hps.add(i);
 			  }
       }
     }
@@ -249,13 +272,21 @@
     // output CPs and HPs
     cps = Array.from(cps);
     cps.sort((a, b) => a - b);
-    console.log("cps:"+JSON.stringify(cps));
+    console.log("cps after invert:"+JSON.stringify(cps));
     output.value += id + '&' + get_matching_string(cps, cpstr);
     
     if(!trash) {
       hps = Array.from(hps);
       hps.sort((a, b) => a - b);
       output.value += '&' + get_matching_string(hps, hpstr);
+      console.log("hps generated:"+JSON.stringify(hps));
+    } else {
+      if (hptrash) {
+        hps = Array.from(hps);
+        hps.sort((a, b) => a - b);
+        output.value += ',' + get_matching_string(hps, hpstr);
+        console.log("hps after invert:"+JSON.stringify(hps));
+      }
     }
     
     return output;
@@ -837,18 +868,23 @@
 	Trash String:
 	<input id="trash" type="checkbox" onchange="start()">
 </label>
+<section><h3>Settings:</h3>
 <label>
 	Trash Perfect IVs:
 	<input id="hundo" type="checkbox" checked onchange="start()">
-</label>
+</label><br />
+<label>
+	Include HPs in Trash String:
+	<input id="hptrash" type="checkbox" onchange="start()">
+</label><br />
 <label>
 	Use Base Evolution:
 	<input id="base" type="checkbox" checked onchange="start()">
-</label>
+</label><br />
 <label>
 	Use Baby Form:
 	<input id="baby" type="checkbox" onchange="start()">
-</label>
+</label><br />
 <label>
 	Language:
 	<select id="lang" onchange="start()">
@@ -863,5 +899,6 @@
 		<option value="pt,pc,ps">Portuguese</option>
 	</select>
 </label>
+</section>
 </body>
 </html>
