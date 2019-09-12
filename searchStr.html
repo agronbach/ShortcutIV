@@ -74,7 +74,7 @@
   <script src="https://shortcutIV.com/includes/escapedFooter.js"></script>
   <script src="https://shortcutIV.com/includes/sortingHat.js"></script>
   <script src="https://shortcutIV.com/includes/awesomplete.min.js"></script>
-  <input id="pokeList" />
+  <input id="pokeList" placeholder="Final Mon"/>
   <script>
   
   // define Awesomeplete list https://leaverou.github.io/awesomplete/
@@ -83,7 +83,6 @@
   
   var awesomplete = new Awesomplete(input, {
     list: [
-      {'label': '&nbsp;', 'value': '0,0,0,0'},
       {'label': 'Bulbasaur', 'value': '1,118,111,128,2,3'},
       {'label': 'Ivysaur', 'value': '2,151,143,155,1,3'},
       {'label': 'Venusaur', 'value': '3,198,189,190,1,2'},
@@ -631,7 +630,7 @@
       URL = decodeURI(URL);
       //console.log("Read URL as: "+URL);
       var values = URL.split("&");
-      //console.log("Values array as: "+JSON.stringify(values));
+      console.log("Values array as: "+JSON.stringify(values));
       for (var i=0; i<values.length; i++)
       {
         switch (values[i].split("=")[0]) {
@@ -646,20 +645,27 @@
             break;
           case "o":
             var options = (''+values[i].split("=")[1]);
-            document.getElementById('trash').checked = options[4];
-            document.getElementById('hundo').checked = options[3];
-            document.getElementById('hptrash').checked = options[2];
-            document.getElementById('base').checked = options[1];
-            document.getElementById('baby').checked = options[0];
+            
+            if (options[0] == 1) { document.getElementById('trash').checked = true;
+            } else { document.getElementById('trash').checked = false; }
+            
+            if (options[1] == 1) { document.getElementById('hundo').checked = true;
+            } else { document.getElementById('hundo').checked = false; }
+            
+            if (options[2] == 1) { document.getElementById('hptrash').checked = true;
+            } else { document.getElementById('hptrash').checked = false; }
+            
+            if (options[3] == 1) { document.getElementById('base').checked = true;
+            } else { document.getElementById('base').checked = false; }
+            
+            if (options[4] == 1) { document.getElementById('baby').checked = true;
+            } else { document.getElementById('baby').checked = false; }
             break;
           case "l":
             var lang = document.getElementById('lang');
             var languages = lang.options.length;
-            for (var j=0; j<languages; j++)
-            {
-              //console.log("Checking j="+j+", lang.options[j].value:"+JSON.stringify(lang.options[j].value));
-              if (lang.options[j].value.split(",")[0] == values[i].split("=")[1])
-              {
+            for (var j=0; j<languages; j++) {
+              if (lang.options[j].value.split(",")[0] == values[i].split("=")[1]) {
                 lang.options[j].selected = true;
                 break;
               }
@@ -805,7 +811,7 @@
         message = "String trashes all "+basemon+" except perfect IV (15/15/15) and Top "+limit+ " PvP "+selected;
       }
     } else {
-      message = "String finds Top "+limit+ " "+basemon+", to be used in PvP as "+selected;
+      message = "String finds Top "+limit+ " "+basemon+", for PvP "+selected;
     }
     //console.log(message);
     document.getElementById('outputSummaryBox').innerHTML = "<p>"+message+"</p>";
@@ -841,9 +847,23 @@
     var firstStarVal = ranks[rKeys[0]].IVs.star;
     var secondStarVal = undefined;
     var thirdStarVal = undefined;
+    var no0star = true;
+    var no1star = true;
+    var no2star = true;
+    var no3star = true;
+    var no4star = true;
+    var no5star = true;
 
     // see if we can output only one appraisal star in string (if all match)
     for (var i=1; ((i<rLength) && (i<limit)); i++) {
+      
+      // track which star appraisal values are present within limit
+      if ((no0star) && (ranks[rKeys[i]].IVs.star === "0*")) { no0star = false; }
+        else { if ((no1star) && (ranks[rKeys[i]].IVs.star === "1*")) { no1star = false; }
+        else { if ((no2star) && (ranks[rKeys[i]].IVs.star === "2*")) { no2star = false; }
+        else { if ((no3star) && (ranks[rKeys[i]].IVs.star === "3*")) { no3star = false; }
+        else { if ((no4star) && (ranks[rKeys[i]].IVs.star === "4*")) { no4star = false; }
+      }}}}
       
       if (firstStarVal == ranks[rKeys[i]].IVs.star) { continue; } else {
         if (secondStarVal === undefined) {
@@ -870,29 +890,36 @@
           }
       }
     }
-    console.log("singleStar("+firstStarVal+"): "+singleStar+", dualStar("+secondStarVal+"): "+dualStar+", triStar("+thirdStarVal+"): "+triStar+", loop exited with i="+i);
     
+    console.log("Set values no0star:"+no0star+" no1star:"+no1star+" no2star:"+no2star+" no3star:"+no3star+" no4star:"+no4star);
+
     // let the user know to adjust their query
-    var message = '';
-    if (triStar !== true) {
-      // there are four different appraisals within limit
-      message = "Top "+triStar+ " ranks are all "+thirdStarVal+", "+secondStarVal+", "+firstStarVal+", appraisals";
-      document.getElementById('feedbackBox').innerHTML = "<p><i>"+message+"</i></p>";
-    } else {
-      // there are three different appraisals within limit
-      if (dualStar !== true) {
-      message = "Top "+dualStar+ " ranks are all "+secondStarVal+", "+firstStarVal+", appraisals";
-      document.getElementById('feedbackBox').innerHTML = "<p><i>"+message+"</i></p>";
+    if (!trash)
+    {
+      var message = '';
+      if (triStar !== true) {
+        // there are four different appraisals within limit
+        message = "Top "+triStar+ " ranks are all "+thirdStarVal+", "+secondStarVal+", "+firstStarVal+", appraisals";
+        document.getElementById('feedbackBox').innerHTML = "<p><i>"+message+"</i></p>";
       } else {
-        // there are two different appraisals within limit
-        if (singleStar !== true) {
-          message = "Top "+singleStar+ " ranks are all "+firstStarVal+" appraisals";
-          document.getElementById('feedbackBox').innerHTML = "<p><i>"+message+"</i></p>";
-          } else {
-            // there are more than four different appraisals within limit
-            document.getElementById('feedbackBox').innerHTML = "";
-          }
+        // there are three different appraisals within limit
+        if (dualStar !== true) {
+        message = "Top "+dualStar+ " ranks are all "+secondStarVal+", "+firstStarVal+", appraisals";
+        document.getElementById('feedbackBox').innerHTML = "<p><i>"+message+"</i></p>";
+        } else {
+          // there are two different appraisals within limit
+          if (singleStar !== true) {
+            message = "Top "+singleStar+ " ranks are all "+firstStarVal+" appraisals";
+            document.getElementById('feedbackBox').innerHTML = "<p><i>"+message+"</i></p>";
+            } else {
+              // there are more than four different appraisals within limit
+              document.getElementById('feedbackBox').innerHTML = "";
+            }
+        }
       }
+    } else {
+    // clear for trash string output
+    document.getElementById('feedbackBox').innerHTML = "";
     }
     
     var cps = new Set(), hps = new Set();
@@ -910,82 +937,57 @@
         // ensure we build search string only on "full" levels
         maxLvl = maxLvl - 1; // set to non-half level
       }
-      //console.log("Setting maxLvl="+maxLvl+" for "+rKeys[i]);
-      
+
       // skip half level CPs in search strings to improve accuracy
       for( var level = maxLvl; level >= 0; level = level - 2 ) {
         var cp = Math.max(10, Math.floor((baseatk/1 + ranks[rKeys[i]].IVs.A) * Math.sqrt(basedef/1 + ranks[rKeys[i]].IVs.D) * Math.sqrt(basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level] * cpm[level] / 10));
-        //console.log("Calculated CP("+cp+") via Math.max(10, Math.floor(("+baseatk+" + "+ranks[rKeys[i]].IVs.A+") * Math.sqrt("+basedef+" + "+ranks[rKeys[i]].IVs.D+") * Math.sqrt("+basesta+" + "+ranks[rKeys[i]].IVs.S+") * "+cpm[level]+" * cpm[level] / 10));")
-        cps.add(cp);
 
         // generate hps for more accurate search string matching
         var hp = Math.max(10, Math.floor((basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level]));
-        hps.add(hp);
         
-        // update counters for maxCP and maxHP
+
+        // update counters for maxCP0 and maxHP0
         if (maxCP < cp) {maxCP = cp};
         if (maxHP < hp) {maxHP = hp};
+        cps.add(cp);
+        hps.add(hp);
       }
     }
 
     // if we are trashing but skipping hundos
-    if ((trash) && (!hundo) && (firstStarVal !== '4*') && (secondStarVal !== '4*') && (thirdStarVal !== '4*')) {
+    if ((trash) && (!hundo)) {
       output.value = '!4*&';
     } else {
       // ensure old output is cleared!
       output.value = '';
     }
     
-    // if all same appraisal star rating, add to string output
-    if (singleStar === true) {
-      console.log("Only one star detected");
-      if (trash) {
-        output.value += '!' + firstStarVal + '&';
-      } else {
-        output.value += firstStarVal + '&';
-      }
-    } else {
-      if (dualStar === true) {
-        console.log("Two stars detected");
-        if (trash) {
-          output.value += '!' + firstStarVal + ',' + '!' + secondStarVal + '&';
-        } else {
-          output.value += firstStarVal + ',' + secondStarVal + '&';
-        }
-      } else {
-        if (triStar === true) {
-          console.log("Three stars detected");
-          if (trash) {
-            output.value += '!' + firstStarVal + ',' +  '!' + secondStarVal + ',' +  '!' + thirdStarVal + '&';
-          } else {
-            output.value += firstStarVal + ',' + secondStarVal + ',' + thirdStarVal + '&';
-          }
-        }
-      }
+    // output the CPs and HPs
+    outputCPsHPs(firstStarVal, singleStar, cps, maxCP, hps, maxHP, output, id, cpstr, hpstr, trash, hptrash);
+    
+    if ((!trash) && (singleStar !== true)) {
+      // help narrow down search accuracy
+      if (no0star) { output.value += '&!0*'; }
+      if (no1star) { output.value += '&!1*'; }
+      if (no2star) { output.value += '&!2*'; }
+      if (no3star) { output.value += '&!3*'; }
+      if (no4star) { output.value += '&!4*'; }
     }
+    return output;
+  }
+  
+  function outputCPsHPs(starVal, singleStar, cps, maxCP, hps, maxHP, output, id, cpstr, hpstr, trash, hptrash) {
+    //console.log("Flipping cps and hps with maxCP("+maxCP+") and maxHP("+maxHP+")");
     
-    // original CP list for debugging
-    var debug_cps = Array.from(cps);
-    debug_cps.sort((a, b) => a - b);
-    //console.log("cps before invert:"+JSON.stringify(debug_cps));
-    
-    // original HP list for debugging
     if (trash) {
-    var debug_hps = Array.from(hps);
-    debug_hps.sort((a, b) => a - b);
-    //console.log("hps before invert:"+JSON.stringify(debug_hps));
-    }
-    
-    // invert the string for trashing
-    if (trash)
-    {
-      //console.log("Flipping cps and hps with maxCP("+maxCP+") and maxHP("+maxHP+")");
+      
+      // flip CPs and HPs for trashing
       for (var i=10; i<=maxCP; i++) {
         if( cps.has(i) ) {
   				cps.delete(i);
   			} else {
   				cps.add(i);
-			  }
+  		  }
       }
       
       for (var i=10; i<=maxHP; i++) {
@@ -993,31 +995,38 @@
   				hps.delete(i);
   			} else {
   				hps.add(i);
-			  }
+  		  }
       }
-    }
-    
-    // output CPs and HPs
-    cps = Array.from(cps);
-    cps.sort((a, b) => a - b);
-    //console.log("cps after invert:"+JSON.stringify(cps));
-    output.value += id + '&' + get_matching_string(cps, cpstr);
-    
-    if(!trash) {
-      hps = Array.from(hps);
-      hps.sort((a, b) => a - b);
-      output.value += '&' + get_matching_string(hps, hpstr);
-      //console.log("hps generated:"+JSON.stringify(hps));
-    } else {
+      
+      // output CPs and HPs
+      cps = Array.from(cps);
+      cps.sort((a, b) => a - b);
+      //console.log("cps after invert:"+JSON.stringify(cps));
+      output.value += id + '&' + get_matching_string(cps, cpstr);
+      
       if (hptrash) {
         hps = Array.from(hps);
         hps.sort((a, b) => a - b);
         output.value += ',' + get_matching_string(hps, hpstr);
         //console.log("hps after invert:"+JSON.stringify(hps));
+        }
+    } else {
+      // output CPs and HPs
+      cps = Array.from(cps);
+      cps.sort((a, b) => a - b);
+      //console.log("cps after invert:"+JSON.stringify(cps));
+      if (singleStar === true) {
+        output.value += id + '&' + starVal + '&' + get_matching_string(cps, cpstr);
+      } else {
+        output.value += id + '&' + get_matching_string(cps, cpstr);
       }
+      
+      hps = Array.from(hps);
+      hps.sort((a, b) => a - b);
+      output.value += '&' + get_matching_string(hps, hpstr);
+      //console.log("hps generated:"+JSON.stringify(hps));
     }
-    
-    return output;
+    return true;
   }
   
   function get_matching_string(a, t) {
@@ -1070,7 +1079,7 @@
 </label><br />
 <label>
 	Include HPs in Trash String:
-	<input id="hptrash" type="checkbox" onchange="start()">
+	<input id="hptrash" type="checkbox" checked onchange="start()">
 </label><br />
 <label>
 	Use Base Evolution:
