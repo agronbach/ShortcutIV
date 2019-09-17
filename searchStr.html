@@ -881,8 +881,8 @@
   }
   
   function outputStr(ranks, id, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, cpstr, hpstr) {
-    console.log("outputStr (except ranks, output): id:"+id+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
-    console.log("outputStr ranks="+JSON.stringify(ranks));
+    //console.log("outputStr (except ranks, output): id:"+id+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
+    //console.log("outputStr ranks="+JSON.stringify(ranks));
     
     var rKeys = Object.keys(ranks);
     var rLength = rKeys.length;
@@ -929,7 +929,7 @@
                 if (thirdStarVal == ranks[rKeys[i]].IVs.star) { continue; } else {
                   // store first mismatch position in triStar
                   if (triStar === true) {
-                    console.log("Found first mismatch / 4th star at: ranks[rKeys["+i+"]].IVs.star:" +ranks[rKeys[i]].IVs.star);
+                    //console.log("Found first mismatch / 4th star at: ranks[rKeys["+i+"]].IVs.star:" +ranks[rKeys[i]].IVs.star);
                     triStar = i; }
                 }
               }
@@ -938,7 +938,7 @@
       }
     }
     
-    console.log("Set values no0star:"+no0star+" no1star:"+no1star+" no2star:"+no2star+" no3star:"+no3star+" no4star:"+no4star);
+    //console.log("Set values no0star:"+no0star+" no1star:"+no1star+" no2star:"+no2star+" no3star:"+no3star+" no4star:"+no4star);
 
     // let the user know to adjust their query
     if (!trash)
