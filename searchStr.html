@@ -608,6 +608,51 @@
       {'label': 'Shaymin (Land)', 'value': '492,210,210,225'},
       {'label': 'Shaymin (Sky)', 'value': '492,261,166,225'},
       {'label': 'Arceus', 'value': '493,238,238,237'},
+      {'label': 'Snivy', 'value': '495,88,107,128,496,497'},
+      {'label': 'Servine', 'value': '496,122,152,155,497'},
+      {'label': 'Serperior', 'value': '497,161,204,181,496'},
+      {'label': 'Tepig', 'value': '498,115,85,163,499,500'},
+      {'label': 'Pignite', 'value': '499,173,106,207,500'},
+      {'label': 'Emboar', 'value': '500,235,127,242,499'},
+      {'label': 'Oshawott', 'value': '501,117,85,146,502,503'},
+      {'label': 'Dewott', 'value': '502,159,116,181,503'},
+      {'label': 'Samurott', 'value': '503,212,157,216,502'},
+      {'label': 'Patrat', 'value': '504,98,73,128,505'},
+      {'label': 'Watchog', 'value': '505,165,139,155'},
+      {'label': 'Lillipup', 'value': '506,107,86,128,507,508'},
+      {'label': 'Herdier', 'value': '507,145,126,163,508'},
+      {'label': 'Stoutland', 'value': '508,206,182,198,507'},
+      {'label': 'Purrloin', 'value': '509,98,73,121,510'},
+      {'label': 'Liepard', 'value': '510,187,106,162'},
+      {'label': 'Pansage', 'value': '511,104,94,137,512'},
+      {'label': 'Simisage', 'value': '512,206,133,181'},
+      {'label': 'Pansear', 'value': '513,104,94,137,514'},
+      {'label': 'Simisear', 'value': '514,206,133,181'},
+      {'label': 'Panpour', 'value': '515,104,94,137,516'},
+      {'label': 'Simipour', 'value': '516,206,133,181'},
+      {'label': 'Pidove', 'value': '519,98,80,137,520,521'},
+      {'label': 'Tranquill', 'value': '520,144,107,158,521'},
+      {'label': 'Unfezant', 'value': '521,226,146,190,520'},
+      {'label': 'Blitzle', 'value': '522,118,64,128,523'},
+      {'label': 'Zebstrika', 'value': '523,211,136,181'},
+      {'label': 'Drilbur', 'value': '529,154,85,155,530'},
+      {'label': 'Excadrill', 'value': '530,255,129,242'},
+      {'label': 'Foongus', 'value': '590,97,91,170,591'},
+      {'label': 'Amoongus', 'value': '591,155,139,249'},
+      {'label': 'Ferroseed', 'value': '597,82,155,127,598'},
+      {'label': 'Ferrothorn', 'value': '598,158,223,179'},
+      {'label': 'Klink', 'value': '599,98,121,120,600,601'},
+      {'label': 'Klang', 'value': '600,150,174,155,601'},
+      {'label': 'Klinklang', 'value': '601,199,214,155,600'},
+      {'label': 'Litwick', 'value': '607,108,98,137,608'},
+      {'label': 'Lampent', 'value': '608,169,115,155'},
+      {'label': 'Golett', 'value': '622,127,92,153,623'},
+      {'label': 'Golurk', 'value': '623,222,154,205'},
+      {'label': 'Heatmor', 'value': '631,204,129,198'},
+      {'label': 'Durant', 'value': '632,217,188,151'},
+      {'label': 'Deino', 'value': '633,116,93,141,634,635'},
+      {'label': 'Zweilous', 'value': '634,159,135,176,635'},
+      {'label': 'Hydreigon', 'value': '635,256,188,211,634'},
       {'label': 'Meltan', 'value': '808,118,99,130,809'},
       {'label': 'Melmetal', 'value': '809,226,190,264,808'}
     ],
@@ -836,8 +881,8 @@
   }
   
   function outputStr(ranks, id, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, cpstr, hpstr) {
-    //console.log("outputStr (except ranks, output): id:"+id+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
-    //console.log("outputStr ranks="+JSON.stringify(ranks));
+    console.log("outputStr (except ranks, output): id:"+id+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
+    console.log("outputStr ranks="+JSON.stringify(ranks));
     
     var rKeys = Object.keys(ranks);
     var rLength = rKeys.length;
@@ -883,7 +928,9 @@
               } else {
                 if (thirdStarVal == ranks[rKeys[i]].IVs.star) { continue; } else {
                   // store first mismatch position in triStar
-                  triStar = i;
+                  if (triStar === true) {
+                    console.log("Found first mismatch / 4th star at: ranks[rKeys["+i+"]].IVs.star:" +ranks[rKeys[i]].IVs.star);
+                    triStar = i; }
                 }
               }
             }
