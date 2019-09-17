@@ -11,6 +11,9 @@ https://jsoneditoronline.org/
 [?!contains (templateId,'_SHADOW')]
 [?!contains (templateId,'_PURIFIED')]
 
+[*].{pokemonId: pokemonSettings.pokemonId,  form: pokemonSettings.form, evolutionIds: pokemonSettings.evolutionBranch[*].evolution, evolutionForms: pokemonSettings.evolutionBranch[*].form, familyId: pokemonSettings.familyId, parentPokemonId: pokemonSettings.parentPokemonId, baseAttack: pokemonSettings.stats.baseAttack, baseDefense: pokemonSettings.stats.baseDefense, baseStamina: pokemonSettings.stats.baseStamina, type: pokemonSettings.type, type2: pokemonSettings.type2, templateId: templateId}
+
+/* Description of fields we pulled from the Game Master file
 templateId = Dex # (V0025_POKEMON_PIKACHU)
 pokemonSettings.pokemonID = Name
 pokemonSettings.type
@@ -20,6 +23,4 @@ pokemonSettings.stats.baseDefense
 pokemonSettings.stats.baseStamina
 pokemonSettings.evolutionBranch = all evolutions (need to remove "candyCost", "kmBuddyDistanceRequirement", "mustBeBuddy", "onlyDaytime", "priority", "onlyNighttime", "lureItemRequirement")
 pokemonSettings.parentPokemonId = what this poke evolves from (including babies)
-pokemonSettings.form = which form this is
-
-[*].{pokemonId: pokemonSettings.pokemonId,  form: pokemonSettings.form, evolutionIds: pokemonSettings.evolutionBranch[*].evolution, evolutionForms: pokemonSettings.evolutionBranch[*].form, familyId: pokemonSettings.familyId, parentPokemonId: pokemonSettings.parentPokemonId, baseAttack: pokemonSettings.stats.baseAttack, baseDefense: pokemonSettings.stats.baseDefense, baseStamina: pokemonSettings.stats.baseStamina, type: pokemonSettings.type, type2: pokemonSettings.type2, templateId: templateId}
+pokemonSettings.form = which form this is */
