@@ -52,25 +52,26 @@
         border-collapse: collapse;
         margin-left:auto;
         margin-right:auto;
-        line-height: 5px;
       }
       
       #outTable td, #outTable th {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
+        line-height: 5px;
       }
       
-      #outTable, th {
-        line-height: 15px;
-        padding: 3px;
-      }
-      
-      #inputTable {
+
+      #inputTable td, #inputTable th {
         line-height: 11px;
       }
       
+      #inputTable li {
+        line-height: normal;
+      }
+      
       #outTable tr:nth-child(even){background-color: #f2f2f2;}
+      #outTable tr:hover {background-color: #ddd;}
       
       /* control highlight of User Data row based on rank
        * 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
@@ -88,11 +89,19 @@
       #outTable tr.rubbish {background-color: #B22222}
       
       #outTable th {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        line-height: 15px;
+        padding: 3px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         text-align: center;
-        background-color: #4CAF50;
-        color: white;
+        background-color: #C0C0C0;
+        color: black;
+      }
+      input[type=number] {
+        width: 44px;
+      }
+      input[id=pokeList] {
+        width: 131px;
       }
     </style>
     <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
@@ -120,10 +129,71 @@
     </header>
     <br />
     <section>
-      <input id="pokeList" placeholder="Pok&eacute;mon"/>
-      <label>Top # Ranks:<input type="number" value="10" id="limit" min="1" max="4096" onchange="start"></label><br /><br />
-      <div style="overflow-x:auto;" id="outputBox"><i>Please select a Pok&eacute;mon above to continue...</i></div>
+      <table id="inputTable">
+        <tr><td></td><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td></tr>
+        <tr>
+          <td><input id="pokeList" placeholder="Pok&eacute;mon"/></td>
+          <td><select title="Your Attack IV" id="aIV" onchange="start()">
+            <option value=""></option>
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select></td>
+          <td><select title="Your Defense IV" id="dIV" onchange="start()">
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select></td>
+          <td><select title="Your Stamina IV" id="sIV" onchange="start()">
+            <option value="15">15</option>
+            <option value="14">14</option>
+            <option value="13">13</option>
+            <option value="12">12</option>
+            <option value="11">11</option>
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select></td>
+          <td></td>
+        </tr>
+      </table>
+      
       <div id="feedbackBox"></div>
+      <div style="overflow-x:auto;" id="outputBox"><i><br/>Please select a Pok&eacute;mon above to continue...</i></div>
     
       <!-- Footer Code Below -->
       <script src="https://shortcutIV.com/includes/escapedFooter.js"></script>
@@ -230,10 +300,10 @@
                 break;
               case "IVs":
                 var ivStr = values[i].split("=")[1];
-                document.getElementById('aIV').value = ivStr.split("_")[0];
-                ivStr = ivStr.split("_")[1];
-                document.getElementById('dIV').value = ivStr.split("_")[0];
-                document.getElementById('sIV').value = ivStr.split("_")[1];
+                ivStr = ivStr.split("_");
+                document.getElementById('aIV').value = ivStr[0];
+                document.getElementById('dIV').value = ivStr[1];
+                document.getElementById('sIV').value = ivStr[2];
                 break;
             }
           }
@@ -248,7 +318,7 @@
       }
       
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
-        console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
+        //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         var html = "";
 
         for (i=0; i<totalRanks; i++) {
@@ -299,7 +369,7 @@
       }
       
       function start() {
-        
+
         // exit if we haven't selected a mon yet
         if ((awesomplete.suggestions === undefined) && (selected === undefined)) {
           console.log("No pokemon found by start(), received:'"+awesomplete.suggestions+"' and '"+selected+"'");
@@ -358,7 +428,7 @@
         var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
         var evos = monInfo.slice(4, monInfo.length);
         var evoLen = evos.length
-        console.log("evos.length:"+evoLen+", evos:"+evos);
+        //console.log("evos.length:"+evoLen+", evos:"+evos);
         
         // ensure we actually generated something to output
         var keys = Object.keys(ranks);
@@ -388,10 +458,10 @@
           time = new Date();
           //console.log("Updated lastTime to ("+lastTime.toISOString().slice(0, 19).replace('T', ' ')+"), and time to ("+time.toISOString().slice(0, 19).replace('T', ' ')+")");
           if (timeDiff > 3000) { // 3 seconds
-            console.log("Time difference ("+timeDiff+") greater than 3 seconds, inserting to BQ")
+            //console.log("Time difference ("+timeDiff+") greater than 3 seconds, inserting to BQ")
             bqInsert = true;
           } else {
-            console.log("Time difference ("+timeDiff+") less than 3 seconds, skipping BQ insert")
+            //console.log("Time difference ("+timeDiff+") less than 3 seconds, skipping BQ insert")
           }
         }
         
@@ -430,6 +500,14 @@
         // we have at least one rank to output, let's print!
         var html = "<table id='outTable'><tr><th>#</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>Apr</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
         var evoHtml = "";
+        
+        // prepare max stat html output
+        var URL = window.location.href.split("?")[0];
+        var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
+        var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
+        var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
+        var maxes = "<p>Your Top "+limit+" PvP "+selected+":<br><i>max Atk(<a href="+maxAtkurl+">"+ranks.maxAtk.value.toFixed(1)+"</a>), Def(<a href="+maxDefurl+">"+ranks.maxDef.value.toFixed(1)+"</a>), HP(<a href="+maxHPurl+">"+ranks.maxHP.value+"</a>)</i></p>";
+
         if (aIV && dIV && sIV) {
           //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
           if ((aIV >= (floor/1)) && (dIV >= (floor/1)) && (sIV >= (floor/1))) {
@@ -440,31 +518,28 @@
             if (evos) {
               evoHtml += "<p><i>"+evoLen+" "+selected+" family evo(s): ("+aIV+"-"+dIV+"-"+sIV+")</i></p><table id='outTable'><tr><th>Pokemon</th><th>#</th><th>Lvl</th><th>CP</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
               var pokeListLen = pokeList.length;
-              console.log("Need to output rows for:"+evos);
+              //console.log("Need to output rows for:"+evos);
               for (var e=0; e<evoLen; e++) {
-                console.log("Attempting to find evos[e("+e+")]:"+evos[e]);
+                //console.log("Attempting to find evos[e("+e+")]:"+evos[e]);
                 for (var f=(evos[e])-1; f<pokeListLen; f++) {
                   var evoMonInfo = pokeList[f].value.split(",");
-                  console.log("Searching for evos[e("+e+")]:"+evos[e]+", at index f="+f);
+                  //console.log("Searching for evos[e("+e+")]:"+evos[e]+", at index f="+f);
                   if ((evoMonInfo[0])/1 == evos[e]/1) {
-                    console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
+                    //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
                     var evoTotalRanks = keys.length;
                     var evoMaxStatProd = keys[0].split(".")[0];
                     var evoMon = pokeList[f].label;
                     // create link for evo table entry
-                    var uri = window.location.href.split("?")[0];
                     var IVs = aIV + "_" + dIV + "_" + sIV;
-                    uri = uri + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+IVs;
+                    uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+IVs;
                     evoHtml += getMonRank(evoTotalRanks, evoRanks, evoKeys, evoMaxStatProd, aIV, dIV, sIV, evoMon, uri);
                     break;
-                  } else {
-                    console.log("No match: pokeList[f("+f+")].value("+pokeList[f].value+").split(",")[0]"+pokeList[f].value.split(",")[0]+" != evos[e("+e+")]/1:"+evos[e]/1)
                   }
                 }
               }
-              evoHtml += "</table><br /><br />"
+              evoHtml += "</table><br />"
             }
           } else {
             console.log("Detected IV below Floor:"+floor+" aIV:"+aIV+" dIV:"+dIV+" sIV:"+sIV)
@@ -472,7 +547,7 @@
           }
         } else {
           //console.log("Missing an IV, detected: aIV:"+aIV+" dIV:"+dIV+" sIV:"+sIV)
-          document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV below to check your Pok&eacute;mon's PvP Rank</i></p>";
+          document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV above to check your Pok&eacute;mon's PvP Rank</i></p>";
         }
         
         // print main table output
@@ -492,14 +567,13 @@
           html+="</tr>";
         }
         html+="</table>"; // finish building the whole table
-        output.innerHTML = evoHtml + html;
+        output.innerHTML = evoHtml + maxes + html;
         
         // update the URL with search parameters
         // URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
         // pokeList limit league floor minLvl aIV dIV sIV
         // mon      r     cp     f     lvl    IVs
-        var uri = window.location.href.split("?")[0];
-        uri = uri + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl
+        uri = URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl
         if (aIV && dIV && sIV) {
           var IVs = aIV + "_" + dIV + "_" + sIV;
           uri += "&IVs="+IVs;
@@ -510,134 +584,67 @@
         window.history.pushState(null, newTitle, uri);
         return true;
       }
-      
       </script>
       <h3>Settings:</h3>
-      <table id="inputTable">
-        <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td></tr><tr>
-                <td><select title="Your Attack IV" id="aIV" onchange="start()">
-                  <option value=""></option>
-                  <option value="15">15</option>
-                  <option value="14">14</option>
-                  <option value="13">13</option>
-                  <option value="12">12</option>
-                  <option value="11">11</option>
-                  <option value="10">10</option>
-                  <option value="9">9</option>
-                  <option value="8">8</option>
-                  <option value="7">7</option>
-                  <option value="6">6</option>
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                  <option value="3">3</option>
-                  <option value="2">2</option>
-                  <option value="1">1</option>
-                  <option value="0">0</option>
-                </select></td>
-                <td><select title="Your Defense IV" id="dIV" onchange="start()">
-                  <option value="15">15</option>
-                  <option value="14">14</option>
-                  <option value="13">13</option>
-                  <option value="12">12</option>
-                  <option value="11">11</option>
-                  <option value="10">10</option>
-                  <option value="9">9</option>
-                  <option value="8">8</option>
-                  <option value="7">7</option>
-                  <option value="6">6</option>
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                  <option value="3">3</option>
-                  <option value="2">2</option>
-                  <option value="1">1</option>
-                  <option value="0">0</option>
-                </select></td>
-                <td><select title="Your Stamina IV" id="sIV" onchange="start()">
-                  <option value="15">15</option>
-                  <option value="14">14</option>
-                  <option value="13">13</option>
-                  <option value="12">12</option>
-                  <option value="11">11</option>
-                  <option value="10">10</option>
-                  <option value="9">9</option>
-                  <option value="8">8</option>
-                  <option value="7">7</option>
-                  <option value="6">6</option>
-                  <option value="5">5</option>
-                  <option value="4">4</option>
-                  <option value="3">3</option>
-                  <option value="2">2</option>
-                  <option value="1">1</option>
-                  <option value="0">0</option>
-                </select></td>
-                <td></td></tr></table>
-      <label>
-      	League:
-      	<select id="league" onchange="start()">
-      		<option value="1500">Great League</option>
-      		<option value="2500">Ultra League</option>
-      		<option value="5000">Master League</option>
-      	</select>
-      </label><br />
-      <label>
-      	IV Floor:
-      	<select id="floor" onchange="start()">
-      		<option value="0">0: Wild Caught</option>
-                  <option value="1">1: Trade, Good Friend</option>
-                  <option value="2">2: Trade(Gr8)/Purified</option>
-                  <option value="3">3: Trade, Ultra Friend</option>
-                  <option value="4">4: Weather Boost</option>
-                  <option value="5">5: Trade, Best Friend</option>
-                  <option value="10">10: Raid/Hatch</option>
-                  <option value="12">12: Lucky Trade</option>
-      	</select>
-      </label><br />
-      <label>
-      	Min Level:
-      	<select title="What Level Floor to Search?" id="minLvl" onchange="start()">
-                  <option value="1">1: Wild Caught</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15: Research Reward</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20: Raid Reward</option>
-                  <option value="21">21</option>
-                  <option value="22">22</option>
-                  <option value="23">23</option>
-                  <option value="24">24</option>
-                  <option value="25">25: Purified</option>
-                  <option value="26">26</option>
-                  <option value="27">27</option>
-                  <option value="28">28</option>
-                  <option value="29">29</option>
-                  <option value="30">30</option>
-                  <option value="31">31</option>
-                  <option value="32">32</option>
-                  <option value="33">33</option>
-                  <option value="34">34</option>
-                  <option value="35">35</option>
-                  <option value="36">36</option>
-                  <option value="37">37</option>
-                  <option value="38">38</option>
-                  <option value="39">39</option>
-                  <option value="40">40</option>
-                </select>
-      </label>
-      <br /><br />
+      <label>Top # Ranks:<input type="number" value="10" id="limit" min="1" max="4096" onchange="start()"></label><br />
+      <label>League:<select id="league" onchange="start()">
+        <option value="1500">Great League</option>
+    		<option value="2500">Ultra League</option>
+    		<option value="5000">Master League</option>
+    	</select></label><br />
+      <label>IV Floor:<select id="floor" onchange="start()">
+        <option value="0">0: Wild Caught</option>
+        <option value="1">1: Trade, Good Friend</option>
+        <option value="2">2: Trade(Gr8)/Purified</option>
+        <option value="3">3: Trade, Ultra Friend</option>
+        <option value="4">4: Weather Boost</option>
+        <option value="5">5: Trade, Best Friend</option>
+        <option value="10">10: Raid/Hatch</option>
+        <option value="12">12: Lucky Trade</option>
+      </select></label><br />
+      <label>Min Level:<select title="What Level Floor to Search?" id="minLvl" onchange="start()">
+        <option value="1">1: Wild Caught</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15: Research Reward</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20: Raid Reward</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25: Purified</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+      </select></label><br />
+      <br />
       <div style="overflow-x:auto;">
         <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
         <a style="color:#AED6F1" href="https://policies.google.com/privacy">Privacy Policy</a> and
