@@ -154,3 +154,7 @@ visibility: hidden;
     font-size: 4vw;
   }
 }
+
+h3 {line-height: 0px;}
+
+section {text-align: center;}
