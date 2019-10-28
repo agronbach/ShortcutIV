@@ -44,6 +44,7 @@
   <!-- End Includes for favIcon support-->
   <link rel="stylesheet" href="https://shortcutIV.com/includes/baseSiteStyling.css">
   <link rel="stylesheet" href="https://shortcutIV.com/includes/awesomplete.base.css">
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
 </head>
 <body onload="checkURI()">
   <header>
@@ -115,7 +116,7 @@
       URL = decodeURI(URL);
       //console.log("Read URL as: "+URL);
       var values = URL.split("&");
-      console.log("Values array as: "+JSON.stringify(values));
+      //console.log("Values array as: "+JSON.stringify(values));
       for (var i=0; i<values.length; i++)
       {
         switch (values[i].split("=")[0]) {
@@ -215,7 +216,7 @@
     
     // ignore base for Hitmons
     if ((base) && (!(['106', '107', '237'].includes(value[0]))))  {
-      console.log("Finding base evo, (['106', '107', '237'].includes(value):"+(['106', '107', '237'].includes(value[0])))
+      //console.log("Finding base evo, (['106', '107', '237'].includes(value):"+(['106', '107', '237'].includes(value[0])))
       var baseID = 10000;
       base = value[0];
       baseID = value[0].split("&")[0];
@@ -275,13 +276,11 @@
     for (i = 0; i < awesomplete.options.list.length; i++) {
       awesomplete.options.list[i].value.split(',')[0];
       if (base === awesomplete.options.list[i].value.split(',')[0]) {
-        console.log("Found base("+base+") at i:("+i+")");
+        //console.log("Found base("+base+") at i:("+i+")");
         if (found) {
           if (selected !== awesomplete.options.list[i].label) {
-            console.log("No match: selected("+selected+") != "+awesomplete.options.list[i].label+" at i:("+i+")");
+            //console.log("No match: selected("+selected+") != "+awesomplete.options.list[i].label+" at i:("+i+")");
             continue;
-          } else {
-            console.log("Matched! selected("+selected+") === "+awesomplete.options.list[i].label+" at i:("+i+")");
           }
         }
         basemon = awesomplete.options.list[i].label;
@@ -299,7 +298,34 @@
     var hptrash = document.getElementById('hptrash').checked;
     var lang = document.getElementById('lang').value.split(',');
     var cpstr = lang[1], hpstr = lang[2];
-    //var ranks = calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league);
+    
+    // validate reCaptcha v3
+    // code reference: https://www.simoahava.com/analytics/improve-google-analytics-bot-detection-with-recaptcha/
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2', {action: 'searchStr'}).then(function(token) {
+        
+        //Make xhr POST request to validate reCAPTCHA v3
+        console.log("Validating reCAPTCHA...");
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          if ((xhr.response !== 'noChange') && (xhr.response === 'Success')) {
+            console.log("Success!");
+          } else if (xhr.response === 'Error') {
+            output.value = "ERROR";
+            console.log("Error! xhr.status:"+xhr.status+" xhr.responseText:"+JSON.stringify(xhr.responseText));
+            return false;
+          } else {
+            console.log("Unknown Response! xhr.status:"+xhr.status+" xhr.responseText:"+JSON.stringify(xhr.responseText));
+          }
+        };
+        xhr.open('POST', 'https://us-central1-sandbox-of-alex-gronbach-2.cloudfunctions.net/validateReCaptchaV3', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        //xhr.send('token=ERROR');
+        xhr.send('token=' + token + '&bqInsert=' + false + '&request=' + null);
+      });
+    });
+    
+    // prepare the output for the user!
     outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league, 0, 0), base, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, lang[1], lang[2]);
     
     // let the user know what we just output
