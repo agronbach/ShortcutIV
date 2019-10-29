@@ -4,6 +4,24 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
   // Each item stored by statProd.CP
   // Rank definition: { "12613615.1500": { "IVs": {"A":14, "D":14, "S":14, "star": "3*"}, "base": {"A":145, "D":105, "S":115}, "battle": {"A":145, "D":105, "S":115}, "L":25},
   var ranks = {};
+  var maxAtk = {
+    value : 0,
+    aIV   : 0,
+    dIV   : 0,
+    sIV   : 0,
+  };
+  var maxDef = {
+    value : 0,
+    aIV   : 0,
+    dIV   : 0,
+    sIV   : 0,
+  };
+  var maxHP = {
+    value : 0,
+    aIV   : 0,
+    dIV   : 0,
+    sIV   : 0,
+  };
   minLvl = Math.max(0, (minLvl - 1) * 2) // use half-levels
   
   // cpm array used for calculations
@@ -22,6 +40,25 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 				  var aSt = (baseatk + atk)*cpm[level];
 				  var dSt = (basedef + def)*cpm[level];
 				  var sSt = Math.floor((basesta + sta)*cpm[level]);
+				  //update maxStats as necessary
+			    if (maxAtk.value < aSt) {
+			      maxAtk.value = aSt;
+			      maxAtk.aIV = atk;
+			      maxAtk.dIV = def;
+			      maxAtk.sIV = sta;
+			    }
+			    if (maxDef.value < dSt) {
+			      maxDef.value = dSt;
+			      maxDef.aIV = atk;
+			      maxDef.dIV = def;
+			      maxDef.sIV = sta;
+			    }
+			    if (maxHP.value < sSt) {
+			      maxHP.value = sSt;
+			      maxHP.aIV = atk;
+			      maxHP.dIV = def;
+			      maxHP.sIV = sta;
+			    }
 				  var statProd = Math.round(aSt * dSt * sSt);
 				  var newIndex = statProd + cp;
 				  var IVsum = atk/1 + def/1 + sta/1;
@@ -44,11 +81,18 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 			}
 	  }
   }
+  
   // sort by statProd+CP before returning
   const sorted = {};
   Object.keys(ranks).sort(function(a, b){return b-a}).forEach(function(key) {
     sorted[key] = ranks[key];
   });
-  //console.log("calculate output:"+JSON.stringify(sorted));
+  
+  //add max stats to object
+  sorted["maxAtk"] = maxAtk;
+  sorted["maxDef"] = maxDef;
+  sorted["maxHP"] = maxHP;
+  
+  console.log("calculate output:"+JSON.stringify(sorted));
   return sorted;
 }
