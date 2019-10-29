@@ -133,7 +133,7 @@
         <tr><td></td><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td></tr>
         <tr>
           <td><input id="pokeList" placeholder="Pok&eacute;mon"/></td>
-          <td><select title="Your Attack IV" id="aIV" onchange="start()">
+          <td><select title="Your Attack IV" id="aIV" oninput="start()">
             <option value=""></option>
             <option value="15">15</option>
             <option value="14">14</option>
@@ -152,7 +152,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td><select title="Your Defense IV" id="dIV" onchange="start()">
+          <td><select title="Your Defense IV" id="dIV" oninput="start()">
             <option value="15">15</option>
             <option value="14">14</option>
             <option value="13">13</option>
@@ -170,7 +170,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td><select title="Your Stamina IV" id="sIV" onchange="start()">
+          <td><select title="Your Stamina IV" id="sIV" oninput="start()">
             <option value="15">15</option>
             <option value="14">14</option>
             <option value="13">13</option>
@@ -321,7 +321,11 @@
         //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         var html = "";
 
-        for (i=0; i<totalRanks; i++) {
+        for (i=0; i<(totalRanks-3); i++) {
+          
+          /*if ((keys[i] == "maxAtk") || (keys[i] == "maxDef") || (keys[i] == "maxHP")) {
+            continue; // skip max stat entries
+          }*/
           
           if (aIV == ranks[keys[i]].IVs.A) {
             if (dIV == ranks[keys[i]].IVs.D) {
@@ -434,7 +438,7 @@
         var keys = Object.keys(ranks);
         var totalRanks = keys.length;
         var maxStatProd = keys[0].split(".")[0];
-        //console.log("Ranks ("+totalRanks+"): "+JSON.stringify(ranks));
+        console.log("Ranks ("+totalRanks+"): "+JSON.stringify(ranks));
         if (totalRanks/1 < 1) {
           // nothing to output, print Error and exit
           output.innerHTML = "";
@@ -528,8 +532,8 @@
                     //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
-                    var evoTotalRanks = keys.length;
-                    var evoMaxStatProd = keys[0].split(".")[0];
+                    var evoTotalRanks = evoKeys.length;
+                    var evoMaxStatProd = evoKeys[0].split(".")[0];
                     var evoMon = pokeList[f].label;
                     // create link for evo table entry
                     var IVs = aIV + "_" + dIV + "_" + sIV;
@@ -550,9 +554,17 @@
           document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV above to check your Pok&eacute;mon's PvP Rank</i></p>";
         }
         
+        //var num = 1;
+        //var loopLimit = limit;
         // print main table output
-        for (i=0; (i<limit && i<totalRanks); i++) {
-          html+="<tr><td>"+(1+i)+"</td>"; //Rank
+        for (i=0; (i<limit && i<(totalRanks-3)); i++) {
+          /*if ((keys[i] == "maxAtk") || (keys[i] == "maxDef") || (keys[i] == "maxHP")) {
+            loopLimit = loopLimit/1 + 1/1;
+            console.log("Increased loopLimit to "+loopLimit+" as keys["+i+"]="+keys[i])
+            continue; // skip max stat entries
+          }*/
+          //console.log("Attempting to print row:"+i+" with keys["+i+"]="+keys[i]);
+          html+="<tr><td>"+(i+1)+"</td>"; //Rank
           html+="<td>"+ranks[keys[i]].L+"</td>"; //Level
           html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
           html+="<td>"+ranks[keys[i]].IVs.A+"</td>"; //Atk IV
@@ -565,6 +577,8 @@
           html+="<td>"+ranks[keys[i]].battle.S+"</td>"; //GL Sta IV
           html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
           html+="</tr>";
+          
+          //num = num + 1; // increment counter
         }
         html+="</table>"; // finish building the whole table
         output.innerHTML = evoHtml + maxes + html;
@@ -586,13 +600,13 @@
       }
       </script>
       <h3>Settings:</h3>
-      <label>Top # Ranks:<input type="number" value="10" id="limit" min="1" max="4096" onchange="start()"></label><br />
-      <label>League:<select id="league" onchange="start()">
+      <label>Top # Ranks:<input type="number" value="10" id="limit" min="1" max="4096" oninput="start()"></label><br />
+      <label>League:<select id="league" oninput="start()">
         <option value="1500">Great League</option>
     		<option value="2500">Ultra League</option>
     		<option value="5000">Master League</option>
     	</select></label><br />
-      <label>IV Floor:<select id="floor" onchange="start()">
+      <label>IV Floor:<select id="floor" oninput="start()">
         <option value="0">0: Wild Caught</option>
         <option value="1">1: Trade, Good Friend</option>
         <option value="2">2: Trade(Gr8)/Purified</option>
@@ -602,7 +616,7 @@
         <option value="10">10: Raid/Hatch</option>
         <option value="12">12: Lucky Trade</option>
       </select></label><br />
-      <label>Min Level:<select title="What Level Floor to Search?" id="minLvl" onchange="start()">
+      <label>Min Level:<select title="What Level Floor to Search?" id="minLvl" oninput="start()">
         <option value="1">1: Wild Caught</option>
         <option value="2">2</option>
         <option value="3">3</option>
