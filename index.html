@@ -510,7 +510,8 @@
         var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
         var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
         var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
-        var maxes = "<p>Your Top "+limit+" PvP "+selected+":<br><i>max Atk(<a href="+maxAtkurl+">"+ranks.maxAtk.value.toFixed(1)+"</a>), Def(<a href="+maxDefurl+">"+ranks.maxDef.value.toFixed(1)+"</a>), HP(<a href="+maxHPurl+">"+ranks.maxHP.value+"</a>)</i></p>";
+        var printLimit = Math.min(limit, totalRanks);
+        var maxes = "<p>Your Top "+printLimit+" PvP "+selected+":<br><i>max Atk(<a href="+maxAtkurl+">"+ranks.maxAtk.value.toFixed(1)+"</a>), Def(<a href="+maxDefurl+">"+ranks.maxDef.value.toFixed(1)+"</a>), HP(<a href="+maxHPurl+">"+ranks.maxHP.value+"</a>)</i></p>";
 
         if (aIV && dIV && sIV) {
           //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
@@ -524,12 +525,14 @@
               var pokeListLen = pokeList.length;
               //console.log("Need to output rows for:"+evos);
               for (var e=0; e<evoLen; e++) {
-                //console.log("Attempting to find evos[e("+e+")]:"+evos[e]);
-                for (var f=(evos[e])-1; f<pokeListLen; f++) {
+                //console.log("Attempting to find evos[e("+e+")]:"+evos[e]+" with pokeListLen:"+pokeListLen);
+                var searchStart = ((evos[e]).split("&")[0])-1
+                //console.log("f starting at searchStart:"+searchStart+", iterating while f<pokeListLen("+pokeListLen+")")
+                for (var f=searchStart; f<pokeListLen; f++) {
                   var evoMonInfo = pokeList[f].value.split(",");
-                  //console.log("Searching for evos[e("+e+")]:"+evos[e]+", at index f="+f);
-                  if ((evoMonInfo[0])/1 == evos[e]/1) {
-                    //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
+                  //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f);
+                  if (evoMonInfo[0].indexOf(evos[e])>-1) {
+                    console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
                     var evoTotalRanks = evoKeys.length;
