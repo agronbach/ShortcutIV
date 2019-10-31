@@ -432,7 +432,7 @@
         var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
         var evos = monInfo.slice(4, monInfo.length);
         var evoLen = evos.length
-        //console.log("evos.length:"+evoLen+", evos:"+evos);
+        console.log("evos.length:"+evoLen+", evos:"+evos);
         
         // ensure we actually generated something to output
         var keys = Object.keys(ranks);
@@ -519,7 +519,7 @@
             document.getElementById('feedbackBox').innerHTML = "";
             html += getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV);
             
-            if (evos) {
+            if (evoLen) {
               evoHtml += "<p><i>"+evoLen+" "+selected+" family evo(s): ("+aIV+"-"+dIV+"-"+sIV+")</i></p><table id='outTable'><tr><th>Pokemon</th><th>#</th><th>Lvl</th><th>CP</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
               var pokeListLen = pokeList.length;
               //console.log("Need to output rows for:"+evos);
