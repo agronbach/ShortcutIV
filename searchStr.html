@@ -14,7 +14,7 @@
   <link rel="preload" href="https://shortcutIV.com/includes/baseSiteStyling.css" as="style">
   <link rel="preload" href="https://shortcutIV.com/includes/httpsRedirect.js" as="script">
   <link rel="preload" href="https://shortcutIV.com/includes/escapedFooter.js" as="script">
-  <link rel="preload" href="https://shortcutIV.com/includes/sortingHat.js" as="script">
+  <link rel="preload" href="https://shortcutIV.com/includes/sortingHatArray.js" as="script">
   <link rel="preload" href="https://shortcutIV.com/includes/awesomplete.base.css" as="style">
   <link rel="preload" href="https://shortcutIV.com/includes/awesomplete.min.js" as="script">
   <link rel="preload" href="https://shortcutIV.com/includes/pokeList.js" as="script">
@@ -72,22 +72,22 @@
     <input id="pokeList" placeholder="Final Mon"/>
     <label>
     	Top # Ranks:
-    	<input type="number" value="10" id="limit" min="1" max="4096" onchange="start()">
+    	<input type="number" value="10" id="limit" min="1" max="4096" oninput="start()">
     </label>
     <br />
-    <label>Leauge:<select id="league" onchange="start()">
+    <label>Leauge:<select id="league" oninput="start()">
       <option value="1500">Great League</option>
 	  	<option value="2500">Ultra League</option>
   		<option value="5000">Master League</option></select>
   	</label>
-    <label>Trash String:<input id="trash" type="checkbox" onchange="start()"></label>
+    <label>Trash String:<input id="trash" type="checkbox" oninput="start()"></label>
     <br /><br />
       <textarea id="output" rows="10" style="width: 100%; height: 50%;" onclick="autocopy(this)"></textarea>
       <div id="outputSummaryBox"></div>
       <div id="feedbackBox"></div>
       <!-- Footer Code Below -->
     <script src="https://shortcutIV.com/includes/escapedFooter.js"></script>
-    <script src="https://shortcutIV.com/includes/sortingHat.js"></script>
+    <script src="https://shortcutIV.com/includes/sortingHatArray.js"></script>
     <script src="https://shortcutIV.com/includes/awesomplete.min.js"></script>
     <script src="https://shortcutIV.com/includes/pokeList.js"></script>
 <script>
@@ -326,21 +326,7 @@
     });
     
     // prepare the output for the user!
-    outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league, 0, 0), base, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, lang[1], lang[2]);
-    
-    // let the user know what we just output
-    var message = "";
-    if (trash) {
-      if (hundo) {
-        message = "String trashes all "+basemon+" except Top "+limit+ " PvP "+selected;
-      } else {
-        message = "String trashes all "+basemon+" except perfect IV (15/15/15) and Top "+limit+ " PvP "+selected;
-      }
-    } else {
-      message = "String finds Top "+limit+ " "+basemon+", for PvP "+selected;
-    }
-    //console.log(message);
-    document.getElementById('outputSummaryBox').innerHTML = "<p>"+message+"</p>";
+    outputStr(calculate(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), league, 0, 0), base, basemon, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, lang[1], lang[2]);
     
     // build binary encoding of settings
     var binary = "";
@@ -361,16 +347,17 @@
     return true;
   }
   
-  function outputStr(ranks, id, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, cpstr, hpstr) {
-    //console.log("outputStr (except ranks, output): id:"+id+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
+  function outputStr(ranks, id, mon, baseatk, basedef, basesta, limit, trash, hundo, hptrash, league, output, cpstr, hpstr) {
+    //console.log("outputStr (except ranks, output): id:"+id+", mon:"+mon+", baseatk:"+baseatk+", basedef:"+basedef+", basesta:"+basesta+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
     //console.log("outputStr ranks="+JSON.stringify(ranks));
     
     var rKeys = Object.keys(ranks);
-    var rLength = rKeys.length;
+    var rLength = rKeys.length - 3; // skip max stat entries
+    var totalRanks = rLength;
     var singleStar = true;
     var dualStar = true;
     var triStar = true;
-    var firstStarVal = ranks[rKeys[0]].IVs.star;
+    var firstStarVal = ranks[rKeys[0]][0].IVs.star;
     var secondStarVal = undefined;
     var thirdStarVal = undefined;
     var no0star = true;
@@ -379,43 +366,57 @@
     var no3star = true;
     var no4star = true;
     var no5star = true;
+    
+    // set first ranking's noXstar value before entering the loop below
+    if ((no0star) && (ranks[rKeys[0]][0].IVs.star === "0*")) { no0star = false; }
+    else { if ((no1star) && (ranks[rKeys[0]][0].IVs.star === "1*")) {no1star=false;}
+    else { if ((no2star) && (ranks[rKeys[0]][0].IVs.star === "2*")) {no2star=false;}
+    else { if ((no3star) && (ranks[rKeys[0]][0].IVs.star === "3*")) {no3star=false;}
+    else { if ((no4star) && (ranks[rKeys[0]][0].IVs.star === "4*")) {no4star=false;}
+    }}}}
 
     // see if we can output only one appraisal star in string (if all match)
     for (var i=1; ((i<rLength) && (i<limit)); i++) {
+      for (var j=0; j<ranks[rKeys[i]].length; j++) {
+        if (j>0) {
+          //console.log("Found hash collision row at "+rKeys[i]+"! "+JSON.stringify(ranks[rKeys[i]], null, 2));
+          totalRanks = totalRanks + 1;
+        }
       
-      // track which star appraisal values are present within limit
-      if ((no0star) && (ranks[rKeys[i]].IVs.star === "0*")) { no0star = false; }
-        else { if ((no1star) && (ranks[rKeys[i]].IVs.star === "1*")) { no1star = false; }
-        else { if ((no2star) && (ranks[rKeys[i]].IVs.star === "2*")) { no2star = false; }
-        else { if ((no3star) && (ranks[rKeys[i]].IVs.star === "3*")) { no3star = false; }
-        else { if ((no4star) && (ranks[rKeys[i]].IVs.star === "4*")) { no4star = false; }
-      }}}}
-      
-      if (firstStarVal == ranks[rKeys[i]].IVs.star) { continue; } else {
-        if (secondStarVal === undefined) {
-          // store first mismatch position in singleStar, init secondStarVal
-          singleStar = i;
-          secondStarVal = ranks[rKeys[i]].IVs.star;
-          
-          // knowing that ranks[rKeys[i]].IVs.star != firstStarVal, check if == secondStarVal
-          } else {
-            if (secondStarVal == ranks[rKeys[i]].IVs.star) { continue; } else {
-              if (thirdStarVal === undefined) {
-                // store first mismatch position in dualStar, init thirdStarVal
-                dualStar = i;
-                thirdStarVal = ranks[rKeys[i]].IVs.star;
-                
-              // knowing that ranks[rKeys[i]].IVs.star != firstStarVal and != secondStarVal, check if == thirdStarVal
-              } else {
-                if (thirdStarVal == ranks[rKeys[i]].IVs.star) { continue; } else {
-                  // store first mismatch position in triStar
-                  if (triStar === true) {
-                    //console.log("Found first mismatch / 4th star at: ranks[rKeys["+i+"]].IVs.star:" +ranks[rKeys[i]].IVs.star);
-                    triStar = i; }
+        // track which star appraisal values are present within limit
+        if ((no0star) && (ranks[rKeys[i]][j].IVs.star === "0*")) { no0star = false; }
+          else { if ((no1star) && (ranks[rKeys[i]][j].IVs.star === "1*")) {no1star=false;}
+          else { if ((no2star) && (ranks[rKeys[i]][j].IVs.star === "2*")) {no2star=false;}
+          else { if ((no3star) && (ranks[rKeys[i]][j].IVs.star === "3*")) {no3star=false;}
+          else { if ((no4star) && (ranks[rKeys[i]][j].IVs.star === "4*")) {no4star=false;}
+        }}}}
+        
+        if (firstStarVal == ranks[rKeys[i]][j].IVs.star) { continue; } else {
+          if (secondStarVal === undefined) {
+            // store first mismatch position in singleStar, init secondStarVal
+            singleStar = i;
+            secondStarVal = ranks[rKeys[i]][j].IVs.star;
+            
+            // knowing that ranks[rKeys[i]][j].IVs.star != firstStarVal, check if == secondStarVal
+            } else {
+              if (secondStarVal == ranks[rKeys[i]][j].IVs.star) { continue; } else {
+                if (thirdStarVal === undefined) {
+                  // store first mismatch position in dualStar, init thirdStarVal
+                  dualStar = i;
+                  thirdStarVal = ranks[rKeys[i]][j].IVs.star;
+                  
+                // knowing that ranks[rKeys[i]][j].IVs.star != firstStarVal and != secondStarVal, check if == thirdStarVal
+                } else {
+                  if (thirdStarVal == ranks[rKeys[i]][j].IVs.star) { continue; } else {
+                    // store first mismatch position in triStar
+                    if (triStar === true) {
+                      //console.log("Found first mismatch / 4th star at: ranks[rKeys["+i+"]].IVs.star:" +ranks[rKeys[i]][j].IVs.star);
+                      triStar = i; }
+                  }
                 }
               }
             }
-          }
+        }
       }
     }
     
@@ -456,29 +457,31 @@
     // generate all the cps and hps for matching
     // for ranks 1 to user limit, up to maxLvl (L) for league
     for (var i=0; ((i<rLength) && (i<limit)); i++) {
+      for (var j=0; j<ranks[rKeys[i]].length; j++) {
       
-      // start at maxLvl (up to league limit)
-      var maxLvl = (ranks[rKeys[i]].L - 1)*2;
-      // see if this is a half-level (these don't spawn in the wild)
-      if (maxLvl%2 != 0)
-      {
-        // ensure we build search string only on "full" levels
-        maxLvl = maxLvl - 1; // set to non-half level
-      }
-
-      // skip half level CPs in search strings to improve accuracy
-      for( var level = maxLvl; level >= 0; level = level - 2 ) {
-        var cp = Math.max(10, Math.floor((baseatk/1 + ranks[rKeys[i]].IVs.A) * Math.sqrt(basedef/1 + ranks[rKeys[i]].IVs.D) * Math.sqrt(basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level] * cpm[level] / 10));
-
-        // generate hps for more accurate search string matching
-        var hp = Math.max(10, Math.floor((basesta/1 + ranks[rKeys[i]].IVs.S) * cpm[level]));
-        
-
-        // update counters for maxCP0 and maxHP0
-        if (maxCP < cp) {maxCP = cp};
-        if (maxHP < hp) {maxHP = hp};
-        cps.add(cp);
-        hps.add(hp);
+        // start at maxLvl (up to league limit)
+        var maxLvl = (ranks[rKeys[i]][j].L - 1)*2;
+        // see if this is a half-level (these don't spawn in the wild)
+        if (maxLvl%2 != 0)
+        {
+          // ensure we build search string only on "full" levels
+          maxLvl = maxLvl - 1; // set to non-half level
+        }
+  
+        // skip half level CPs in search strings to improve accuracy
+        for( var level = maxLvl; level >= 0; level = level - 2 ) {
+          var cp = Math.max(10, Math.floor((baseatk/1 + ranks[rKeys[i]][j].IVs.A) * Math.sqrt(basedef/1 + ranks[rKeys[i]][j].IVs.D) * Math.sqrt(basesta/1 + ranks[rKeys[i]][j].IVs.S) * cpm[level] * cpm[level] / 10));
+  
+          // generate hps for more accurate search string matching
+          var hp = Math.max(10, Math.floor((basesta/1 + ranks[rKeys[i]][j].IVs.S) * cpm[level]));
+          
+  
+          // update counters for maxCP0 and maxHP0
+          if (maxCP < cp) {maxCP = cp};
+          if (maxHP < hp) {maxHP = hp};
+          cps.add(cp);
+          hps.add(hp);
+        }
       }
     }
 
@@ -501,6 +504,22 @@
       if (no3star) { output.value += '&!3*'; }
       if (no4star) { output.value += '&!4*'; }
     }
+    
+    // let the user know what we just output
+    var message = "";
+    var printLimit = Math.min(limit, totalRanks);
+    if (trash) {
+      if (hundo) {
+        message = "String trashes all "+mon+" except Top "+printLimit+ " PvP "+selected;
+      } else {
+        message = "String trashes all "+mon+" except perfect IV (15/15/15) and Top "+printLimit+ " PvP "+selected;
+      }
+    } else {
+      message = "String finds Top "+printLimit+ " "+mon+", for PvP "+selected;
+    }
+    //console.log(message);
+    document.getElementById('outputSummaryBox').innerHTML = "<p>"+message+"</p>";
+    
     return output;
   }
   
@@ -587,23 +606,23 @@
     <h3>Settings:</h3>
     <label>
     	Trash Perfect IVs:
-    	<input id="hundo" type="checkbox" checked onchange="start()">
+    	<input id="hundo" type="checkbox" checked oninput="start()">
     </label><br />
     <label>
     	Include HPs in Trash String:
-    	<input id="hptrash" type="checkbox" checked onchange="start()">
+    	<input id="hptrash" type="checkbox" checked oninput="start()">
     </label><br />
     <label>
     	Use Base Evolution:
-    	<input id="base" type="checkbox" checked onchange="start()">
+    	<input id="base" type="checkbox" checked oninput="start()">
     </label><br />
     <label>
     	Use Baby Form:
-    	<input id="baby" type="checkbox" onchange="start()">
+    	<input id="baby" type="checkbox" oninput="start()">
     </label><br />
     <label>
     	Language:
-    	<select id="lang" onchange="start()">
+    	<select id="lang" oninput="start()">
     		<option value="en,cp,hp">English</option>
     		<option value="ja,cp,hp">Japanese</option>
     		<option value="fr,pc,pv">French</option>

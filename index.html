@@ -14,7 +14,7 @@
     <link rel="preload" href="https://shortcutIV.com/includes/baseSiteStyling.css" as="style">
     <link rel="preload" href="https://shortcutIV.com/includes/httpsRedirect.js" as="script">
     <link rel="preload" href="https://shortcutIV.com/includes/escapedFooter.js" as="script">
-    <link rel="preload" href="https://shortcutIV.com/includes/sortingHat.js" as="script">
+    <link rel="preload" href="https://shortcutIV.com/includes/sortingHatArray.js" as="script">
     <link rel="preload" href="https://shortcutIV.com/includes/awesomplete.base.css" as="style">
     <link rel="preload" href="https://shortcutIV.com/includes/awesomplete.min.js" as="script">
     <link rel="preload" href="https://shortcutIV.com/includes/pokeList.js" as="script">
@@ -197,7 +197,7 @@
     
       <!-- Footer Code Below -->
       <script src="https://shortcutIV.com/includes/escapedFooter.js"></script>
-      <script src="https://shortcutIV.com/includes/sortingHat.js"></script>
+      <script src="https://shortcutIV.com/includes/sortingHatArray.js"></script>
       <script src="https://shortcutIV.com/includes/awesomplete.min.js"></script>
       <script src="https://shortcutIV.com/includes/pokeList.js"></script>
         
@@ -211,6 +211,7 @@
       var mythNoTrade = [151,251,385];
       var raidNoTrade = [386,491,647];
       var lastTime = undefined;
+      var i=0,j=0;
     
       var awesomplete = new Awesomplete(input, {list: pokeList,
         // insert label instead of value into the input.
@@ -279,7 +280,7 @@
           //console.log("Read URL as: "+URL);
           var values = URL.split("&");
           //console.log("Values array as: "+JSON.stringify(values));
-          for (var i=0; i<values.length; i++)
+          for (i=0; i<values.length; i++)
           {
             switch (values[i].split("=")[0]) {
               case "mon":
@@ -321,55 +322,52 @@
         //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         var html = "";
 
-        for (i=0; i<(totalRanks-3); i++) {
-          
-          /*if ((keys[i] == "maxAtk") || (keys[i] == "maxDef") || (keys[i] == "maxHP")) {
-            continue; // skip max stat entries
-          }*/
-          
-          if (aIV == ranks[keys[i]].IVs.A) {
-            if (dIV == ranks[keys[i]].IVs.D) {
-              if (sIV == ranks[keys[i]].IVs.S) {
-
-                // control highlight of User Data row based on rank
-                // this has been moved to CSS Stylings as of re-write
-                // 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
-                // use 0.02442 to approximate "Top 100" (green) when there are less than 4096 results
-                // use 0.2442 to approximate "Top 1000" (orange) when there are less than 4096 results
-                if ((i+1) < (0.02442*totalRanks/1)) {
-                  html+="<tr class='good'>"; // green for "good"
-                } else if ((i+1) < (0.2442*totalRanks/1)) {
-                  html+="<tr class='ok'>"; // orange for "ok"
-                } else {
-                  html+="<tr class='rubbish'>"; // red for "rubbish"
+        for (i=0; i<totalRanks; i++) {
+            for (j=0; j<ranks[keys[i]].length; j++) {
+              if (aIV == ranks[keys[i]][j].IVs.A) {
+                if (dIV == ranks[keys[i]][j].IVs.D) {
+                  if (sIV == ranks[keys[i]][j].IVs.S) {
+    
+                    // control highlight of User Data row based on rank
+                    // this has been moved to CSS Stylings as of re-write
+                    // 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
+                    // use 0.02442 to approximate "Top 100" (green) when there are less than 4096 results
+                    // use 0.2442 to approximate "Top 1000" (orange) when there are less than 4096 results
+                    if ((i+1) < (0.02442*totalRanks/1)) {
+                      html+="<tr class='good'>"; // green for "good"
+                    } else if ((i+1) < (0.2442*totalRanks/1)) {
+                      html+="<tr class='ok'>"; // orange for "ok"
+                    } else {
+                      html+="<tr class='rubbish'>"; // red for "rubbish"
+                    }
+                    
+                    //Pokemon	Rank	Lvl	CP	%	PvP Atk	PvP Def	PvP HP	Stat Prod
+                    // output the row for this individual mon
+                    // if there is an evo mon passed in, print/exclude certain rows
+                    // allows for more code re-use / less versioning to maintain
+                    if (mon) {html+="<td><a href='"+encodeURI(uri)+"'>"+mon+"</a></td>";} //evoMon
+                    html+="<td>"+(1+i)+"</td>"; //Rank
+                    html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
+                    html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
+                    if (!mon) { // skip if this is an evoTable print
+                      html+="<td>"+ranks[keys[i]][j].IVs.A+"</td>"; //Atk IV
+                      html+="<td>"+ranks[keys[i]][j].IVs.D+"</td>"; //Def IV
+                      html+="<td>"+ranks[keys[i]][j].IVs.S+"</td>"; //Sta IV
+                      html+="<td>"+ranks[keys[i]][j].IVs.star+"</td>"; //Star Appraisal
+                    }
+                    html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; //Perfection
+                    html+="<td>"+parseFloat(ranks[keys[i]][j].battle.A).toFixed(1)+"</td>"; //GL Atk IV
+                    html+="<td>"+parseFloat(ranks[keys[i]][j].battle.D).toFixed(1)+"</td>"; //GL Def IV
+                    html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; //GL Sta IV
+                    html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
+                    html+="</tr>";
+                    break; // stop reading the loop!
+                  }
                 }
-                
-                //Pokemon	Rank	Lvl	CP	%	PvP Atk	PvP Def	PvP HP	Stat Prod
-                // output the row for this individual mon
-                // if there is an evo mon passed in, print/exclude certain rows
-                // allows for more code re-use / less versioning to maintain
-                if (mon) {html+="<td><a href='"+encodeURI(uri)+"'>"+mon+"</a></td>";} //evoMon
-                html+="<td>"+(1+i)+"</td>"; //Rank
-                html+="<td>"+ranks[keys[i]].L+"</td>"; //Level
-                html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
-                if (!mon) { // skip if this is an evoTable print
-                  html+="<td>"+ranks[keys[i]].IVs.A+"</td>"; //Atk IV
-                  html+="<td>"+ranks[keys[i]].IVs.D+"</td>"; //Def IV
-                  html+="<td>"+ranks[keys[i]].IVs.S+"</td>"; //Sta IV
-                  html+="<td>"+ranks[keys[i]].IVs.star+"</td>"; //Star Appraisal
-                }
-                html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; //Perfection
-                html+="<td>"+parseFloat(ranks[keys[i]].battle.A).toFixed(1)+"</td>"; //GL Atk IV
-                html+="<td>"+parseFloat(ranks[keys[i]].battle.D).toFixed(1)+"</td>"; //GL Def IV
-                html+="<td>"+ranks[keys[i]].battle.S+"</td>"; //GL Sta IV
-                html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
-                html+="</tr>";
-                break; // stop reading the loop!
               }
             }
           }
-        }
-        return html;
+          return html;
       }
       
       function start() {
@@ -436,9 +434,8 @@
         
         // ensure we actually generated something to output
         var keys = Object.keys(ranks);
-        var totalRanks = keys.length;
-        var maxStatProd = keys[0].split(".")[0];
-        console.log("Ranks ("+totalRanks+"): "+JSON.stringify(ranks));
+        var totalRanks = (keys.length) - 3; // remove all 3 max stat entries
+        
         if (totalRanks/1 < 1) {
           // nothing to output, print Error and exit
           output.innerHTML = "";
@@ -446,6 +443,7 @@
           console.log("No ranks generated!");
           return false;
         }
+        var maxStatProd = keys[0].split(".")[0];
         
         // compare times to buffer inserts to BQ
         var bqInsert = false;
@@ -510,8 +508,6 @@
         var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
         var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
         var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
-        var printLimit = Math.min(limit, totalRanks);
-        var maxes = "<p>Your Top "+printLimit+" PvP "+selected+":<br><i>max Atk(<a href="+maxAtkurl+">"+ranks.maxAtk.value.toFixed(1)+"</a>), Def(<a href="+maxDefurl+">"+ranks.maxDef.value.toFixed(1)+"</a>), HP(<a href="+maxHPurl+">"+ranks.maxHP.value+"</a>)</i></p>";
 
         if (aIV && dIV && sIV) {
           //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
@@ -535,7 +531,7 @@
                     console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
-                    var evoTotalRanks = evoKeys.length;
+                    var evoTotalRanks = (evoKeys.length) - 3; //remove 3 max stat entries from count
                     var evoMaxStatProd = evoKeys[0].split(".")[0];
                     var evoMon = pokeList[f].label;
                     // create link for evo table entry
@@ -557,33 +553,36 @@
           document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV above to check your Pok&eacute;mon's PvP Rank</i></p>";
         }
         
-        //var num = 1;
-        //var loopLimit = limit;
-        // print main table output
-        for (i=0; (i<limit && i<(totalRanks-3)); i++) {
-          /*if ((keys[i] == "maxAtk") || (keys[i] == "maxDef") || (keys[i] == "maxHP")) {
-            loopLimit = loopLimit/1 + 1/1;
-            console.log("Increased loopLimit to "+loopLimit+" as keys["+i+"]="+keys[i])
-            continue; // skip max stat entries
-          }*/
-          //console.log("Attempting to print row:"+i+" with keys["+i+"]="+keys[i]);
-          html+="<tr><td>"+(i+1)+"</td>"; //Rank
-          html+="<td>"+ranks[keys[i]].L+"</td>"; //Level
-          html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
-          html+="<td>"+ranks[keys[i]].IVs.A+"</td>"; //Atk IV
-          html+="<td>"+ranks[keys[i]].IVs.D+"</td>"; //Def IV
-          html+="<td>"+ranks[keys[i]].IVs.S+"</td>"; //Sta IV
-          html+="<td>"+ranks[keys[i]].IVs.star+"</td>"; //Star Appraisal
-          html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; //Perfection
-          html+="<td>"+parseFloat(ranks[keys[i]].battle.A).toFixed(1)+"</td>"; //GL Atk IV
-          html+="<td>"+parseFloat(ranks[keys[i]].battle.D).toFixed(1)+"</td>"; //GL Def IV
-          html+="<td>"+ranks[keys[i]].battle.S+"</td>"; //GL Sta IV
-          html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
-          html+="</tr>";
+        
+        // print main table output and count actual outputted rows/ranks
+        var loopRanks = totalRanks;
+        console.log("Expecting "+loopRanks+" rows to output");
+        for (i=0; (i<limit && i<loopRanks); i++) {
+          for (var j=0; j<ranks[keys[i]].length; j++) {
+            if (j>0) {
+              //console.log("Printing hash collision row at "+keys[i]+"! "+JSON.stringify(ranks[keys[i]], null, 2));
+              totalRanks = totalRanks + 1; // increment counter to include collisions and count actual rows printed
+            }
           
-          //num = num + 1; // increment counter
+            //console.log("Attempting to print row:"+i+" with ranks[keys["+i+"]]["+j+"]="+JSON.stringify(ranks[keys[i]][j], null, 2));
+            html+="<tr><td>"+(i+1)+"</td>"; //Rank
+            html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
+            html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
+            html+="<td>"+ranks[keys[i]][j].IVs.A+"</td>"; //Atk IV
+            html+="<td>"+ranks[keys[i]][j].IVs.D+"</td>"; //Def IV
+            html+="<td>"+ranks[keys[i]][j].IVs.S+"</td>"; //Sta IV
+            html+="<td>"+ranks[keys[i]][j].IVs.star+"</td>"; //Star Appraisal
+            html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; //Perfection
+            html+="<td>"+parseFloat(ranks[keys[i]][j].battle.A).toFixed(1)+"</td>"; //GL Atk IV
+            html+="<td>"+parseFloat(ranks[keys[i]][j].battle.D).toFixed(1)+"</td>"; //GL Def IV
+            html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; //GL Sta IV
+            html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
+            html+="</tr>";
+          }
         }
         html+="</table>"; // finish building the whole table
+        var printLimit = Math.min(limit, totalRanks);
+        var maxes = "<p>Your Top "+printLimit+" PvP "+selected+":<br><i>max Atk(<a href="+maxAtkurl+">"+ranks.maxAtk.value.toFixed(1)+"</a>), Def(<a href="+maxDefurl+">"+ranks.maxDef.value.toFixed(1)+"</a>), HP(<a href="+maxHPurl+">"+ranks.maxHP.value+"</a>)</i></p>";
         output.innerHTML = evoHtml + maxes + html;
         
         // update the URL with search parameters
