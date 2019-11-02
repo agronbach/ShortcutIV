@@ -3,25 +3,10 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
   //console.log("calculate: Received: baseatk="+baseatk+" basedef="+basedef+" basesta="+basesta+" league="+league+" floor="+floor+" minLvl="+minLvl);
   // Each item stored by statProd.CP
   // Rank definition: { "12613615.1500": { "IVs": {"A":14, "D":14, "S":14, "star": "3*"}, "base": {"A":145, "D":105, "S":115}, "battle": {"A":145, "D":105, "S":115}, "L":25},
-  var ranks = {};
-  var maxAtk = {
-    value : 0,
-    aIV   : 0,
-    dIV   : 0,
-    sIV   : 0,
-  };
-  var maxDef = {
-    value : 0,
-    aIV   : 0,
-    dIV   : 0,
-    sIV   : 0,
-  };
-  var maxHP = {
-    value : 0,
-    aIV   : 0,
-    dIV   : 0,
-    sIV   : 0,
-  };
+  var ranks = [];
+  var maxAtk = {value:0,aIV:0,dIV:0,sIV:0,};
+  var maxDef = {value:0,aIV:0,dIV:0,sIV:0,};
+  var maxHP = {value:0,aIV:0,dIV:0,sIV:0,};
   minLvl = Math.max(0, (minLvl - 1) * 2) // use half-levels
   
   // cpm array used for calculations
@@ -40,42 +25,25 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 				  var aSt = (baseatk + atk)*cpm[level];
 				  var dSt = (basedef + def)*cpm[level];
 				  var sSt = Math.floor((basesta + sta)*cpm[level]);
-				  //update maxStats as necessary
-			    if (maxAtk.value < aSt) {
-			      maxAtk.value = aSt;
-			      maxAtk.aIV = atk;
-			      maxAtk.dIV = def;
-			      maxAtk.sIV = sta;
-			    }
-			    if (maxDef.value < dSt) {
-			      maxDef.value = dSt;
-			      maxDef.aIV = atk;
-			      maxDef.dIV = def;
-			      maxDef.sIV = sta;
-			    }
-			    if (maxHP.value < sSt) {
-			      maxHP.value = sSt;
-			      maxHP.aIV = atk;
-			      maxHP.dIV = def;
-			      maxHP.sIV = sta;
-			    }
+				  //update maxStats if necessary
+			    if (maxAtk.value < aSt) {maxAtk.value = aSt;maxAtk.aIV = atk;maxAtk.dIV = def;maxAtk.sIV = sta;}
+			    if (maxDef.value < dSt) {maxDef.value = dSt;maxDef.aIV = atk;maxDef.dIV = def;maxDef.sIV = sta;}
+			    if (maxHP.value < sSt) {maxHP.value = sSt;maxHP.aIV = atk;maxHP.dIV = def;maxHP.sIV = sta;}
+			    
 				  var statProd = Math.round(aSt * dSt * sSt);
-				  var newIndex = statProd + cp;
 				  var IVsum = atk/1 + def/1 + sta/1;
 				  var Star = "NA";
-          if (IVsum < 23) {
-            Star = "0*";
-          } else if (IVsum < 30) {
-            Star = "1*";
-          } else if (IVsum < 40) {
-            Star = "2*";
-          } else if (IVsum < 45) {
-            Star = "3*";
-          } else {
-            Star = "4*";
-          }
+          if (IVsum<23){Star="0*";}else if(IVsum<30){Star="1*";}
+          else if (IVsum<40){Star="2*";}else if(IVsum<45){Star="3*";}else{Star="4*";}
 				  level = level/2 + 1;
-				  ranks[statProd+"."+cp] = { "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level};
+				  
+				  // store as arrays to prevent hash collisions from dropping entires
+				  var newIndex = statProd+"."+cp;
+				  if (!(newIndex in ranks)) {
+				    ranks[newIndex] = [{ "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level}];
+				  } else {
+				    ranks[newIndex].push({ "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level});
+				  }
 				  break; // stop evaluating this IV combination
 				}
 			}
@@ -93,6 +61,6 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
   sorted["maxDef"] = maxDef;
   sorted["maxHP"] = maxHP;
   
-  console.log("calculate output:"+JSON.stringify(sorted));
+  //console.log("calculate output:"+JSON.stringify(sorted, null, 2));
   return sorted;
 }
