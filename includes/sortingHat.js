@@ -4,9 +4,9 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
   // Each item stored by statProd.CP
   // Rank definition: { "12613615.1500": { "IVs": {"A":14, "D":14, "S":14, "star": "3*"}, "base": {"A":145, "D":105, "S":115}, "battle": {"A":145, "D":105, "S":115}, "L":25},
   var ranks = [];
-  var maxAtk = {value:0,aIV:0,dIV:0,sIV:0,};
-  var maxDef = {value:0,aIV:0,dIV:0,sIV:0,};
-  var maxHP = {value:0,aIV:0,dIV:0,sIV:0,};
+  var maxAtk = {value:0,aIV:0,dIV:0,sIV:0,sp:0};
+  var maxDef = {value:0,aIV:0,dIV:0,sIV:0,sp:0};
+  var maxHP = {value:0,aIV:0,dIV:0,sIV:0,sp:0};
   minLvl = Math.max(0, (minLvl - 1) * 2) // use half-levels
   
   // cpm array used for calculations
@@ -21,12 +21,16 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 		  var aSt = (baseatk + atk)*cpm[level];
 		  var dSt = (basedef + def)*cpm[level];
 		  var sSt = Math.floor((basesta + sta)*cpm[level]);
-		  //update maxStats if necessary
-	    if (maxAtk.value < aSt) {maxAtk.value = aSt;maxAtk.aIV = atk;maxAtk.dIV = def;maxAtk.sIV = sta;}
-	    if (maxDef.value < dSt) {maxDef.value = dSt;maxDef.aIV = atk;maxDef.dIV = def;maxDef.sIV = sta;}
-	    if (maxHP.value < sSt) {maxHP.value = sSt;maxHP.aIV = atk;maxHP.dIV = def;maxHP.sIV = sta;}
-	    
 		  var statProd = Math.round(aSt * dSt * sSt);
+		  //update maxStats if necessary
+	    if ((maxAtk.value <= aSt) && (maxAtk.sp < statProd)) {
+	      maxAtk.value = aSt;maxAtk.aIV = atk;maxAtk.dIV = def;maxAtk.sIV = sta;maxAtk.sp = statProd;}
+	    if ((maxDef.value <= dSt) && (maxDef.sp < statProd)) {
+	      maxDef.value = dSt;maxDef.aIV = atk;maxDef.dIV = def;maxDef.sIV = sta;maxDef.sp = statProd;}
+	    if ((maxHP.value <= sSt) && (maxHP.sp < statProd)) {
+	      maxHP.value = sSt;maxHP.aIV = atk;maxHP.dIV = def;maxHP.sIV = sta;maxHP.sp = statProd;}
+	    
+		  
 		  var IVsum = atk/1 + def/1 + sta/1;
 		  var Star = "NA";
       if (IVsum<23){Star="0*";}else if(IVsum<30){Star="1*";}else if (IVsum<37){Star="2*";}else if(IVsum<45){Star="3*";}else{Star="4*";}
