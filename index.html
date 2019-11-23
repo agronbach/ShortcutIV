@@ -318,6 +318,29 @@
         }
       }
       
+      function tradePcnts (totalRanks, ranks, keys, rank) {
+        // Keep track of eligible/total higher ranked mons
+        var tGo=0,eGo=0,tGr=0,eGr=0,tUf=0,eUf=0,tBf=0,eBf=0;
+        //console.log("tPcnts: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", rank:"+rank);
+        
+        for (i=0; i<totalRanks; i++) {
+            for (j=0; j<ranks[keys[i]].length; j++) {
+              //1IV=tGo,eGo + 2IV=tGr,eGr + 3IV=tUf,eUf + 5IV = tBf,eBf
+              if ((ranks[keys[i]][j].IVs.A > 4) && (ranks[keys[i]][j].IVs.D > 4) && (ranks[keys[i]][j].IVs.S > 4)) {
+                if (rank/1 < keys[i].split(".")[0]/1) {eBf=eBf+1;eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}tBf=tBf+1;tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;
+              } else if ((ranks[keys[i]][j].IVs.A > 2) && (ranks[keys[i]][j].IVs.D > 2) && (ranks[keys[i]][j].IVs.S > 2)) {
+                if (rank/1 < keys[i].split(".")[0]/1) {eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;
+              } else if ((ranks[keys[i]][j].IVs.A > 1) && (ranks[keys[i]][j].IVs.D > 1) && (ranks[keys[i]][j].IVs.S > 1)) {
+                if (rank/1 < keys[i].split(".")[0]/1) {eGr = eGr + 1;eGo = eGo + 1;}tGr = tGr + 1;tGo = tGo + 1;
+              } else if ((ranks[keys[i]][j].IVs.A > 0) && (ranks[keys[i]][j].IVs.D > 0) && (ranks[keys[i]][j].IVs.S > 0)) {
+                if (rank/1 < keys[i].split(".")[0]/1) {eGo = eGo + 1;}tGo = tGo + 1;
+              }
+            }
+        }
+        //console.log("Found the following -- tGo:"+tGo+" eGo:"+eGo+" tGr:"+tGr+" eGr:"+eGr+" tUf:"+tUf+" eUf:"+eUf+" tBf:"+tBf+" eBf:"+eBf);
+        return "<table id='outTable'><th>Friendship</th><th>Chance to Improve</th><th>Higher Rank</th><th>Lower Rank</th><th>Total Combinations</th><tr><td>Good (IV&ge;1)</td><td>"+(100*eGo/3375).toFixed(1)+"%</td><td>"+eGo+"</td><td>"+tGo+"</td><td>3375</td></tr><tr><td>Great (IV&ge;2)</td><td>"+(100*eGr/2744).toFixed(1)+"%</td><td>"+eGr+"</td><td>"+tGr+"</td><td>2744</td></tr><tr><td>Ultra (IV&ge;3)</td><td>"+(100*eUf/2197).toFixed(1)+"%</td><td>"+eUf+"</td><td>"+tUf+"</td><td>2197</td></tr><tr><td>Best (IV&ge;5)</td><td>"+(100*eBf/1331).toFixed(1)+"%</td><td>"+eBf+"</td><td>"+tBf+"</td><td>1331</td></tr></table>"
+      }
+      
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
         //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         var html = "";
@@ -430,7 +453,7 @@
         var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
         var evos = monInfo.slice(4, monInfo.length);
         var evoLen = evos.length
-        console.log("evos.length:"+evoLen+", evos:"+evos);
+        //console.log("evos.length:"+evoLen+", evos:"+evos);
         
         // ensure we actually generated something to output
         var keys = Object.keys(ranks);
@@ -528,7 +551,7 @@
                   var evoMonInfo = pokeList[f].value.split(",");
                   //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f);
                   if (evoMonInfo[0].indexOf(evos[e])>-1) {
-                    console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
+                    //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
                     var evoTotalRanks = (evoKeys.length) - 3; //remove 3 max stat entries from count
@@ -556,7 +579,7 @@
         
         // print main table output and count actual outputted rows/ranks
         var loopRanks = totalRanks;
-        console.log("Expecting "+loopRanks+" rows to output");
+        //console.log("Expecting "+loopRanks+" rows to output");
         for (i=0; (i<limit && i<loopRanks); i++) {
           for (var j=0; j<ranks[keys[i]].length; j++) {
             if (j>0) {
@@ -583,7 +606,16 @@
         html+="</table>"; // finish building the whole table
         var printLimit = Math.min(limit, totalRanks);
         var maxes = "<p>Your Top "+printLimit+" PvP "+selected+":<br><i>max Atk(<a href="+maxAtkurl+">"+ranks.maxAtk.value.toFixed(1)+"</a>), Def(<a href="+maxDefurl+">"+ranks.maxDef.value.toFixed(1)+"</a>), HP(<a href="+maxHPurl+">"+ranks.maxHP.value+"</a>)</i></p>";
-        output.innerHTML = evoHtml + maxes + html;
+        
+        // compute trade percentages
+        var trades = "";
+        var rank = html.split('</td></tr><tr><td>')[0];
+        if ((rank != null) && (document.getElementById('trade').checked) && (aIV && dIV && sIV)) {
+          rank = rank.split('</td><td>');
+          rank = rank[rank.length-1];
+          trades = tradePcnts(totalRanks, ranks, keys, rank)
+        }
+        output.innerHTML = evoHtml + maxes + html + "<br>" + trades;
         
         // update the URL with search parameters
         // URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
@@ -660,6 +692,7 @@
         <option value="39">39</option>
         <option value="40">40</option>
       </select></label><br />
+      <label>Display Trade Improvement %:<input id="trade" type="checkbox" oninput="start()"></label><br />
       <br />
       <div style="overflow-x:auto;">
         <p style="color:silver;font-size:0.6em">This site is protected by reCAPTCHA and the Google
