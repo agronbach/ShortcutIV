@@ -299,6 +299,10 @@
               case "lvl":
                 document.getElementById('minLvl').value = values[i].split("=")[1];
                 break;
+              case "dti":
+                if (values[i].split("=")[1] == 1) { document.getElementById('trade').checked = true;
+                } else { document.getElementById('trade').checked = false; }
+                break;
               case "IVs":
                 var ivStr = values[i].split("=")[1];
                 ivStr = ivStr.split("_");
@@ -327,13 +331,13 @@
             for (j=0; j<ranks[keys[i]].length; j++) {
               //1IV=tGo,eGo + 2IV=tGr,eGr + 3IV=tUf,eUf + 5IV = tBf,eBf
               if ((ranks[keys[i]][j].IVs.A > 4) && (ranks[keys[i]][j].IVs.D > 4) && (ranks[keys[i]][j].IVs.S > 4)) {
-                if (rank/1 < keys[i].split(".")[0]/1) {eBf=eBf+1;eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}tBf=tBf+1;tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;
+                if (rank/1<keys[i].split(".")[0]/1){eBf=eBf+1;eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}else{tBf=tBf+1;tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;}
               } else if ((ranks[keys[i]][j].IVs.A > 2) && (ranks[keys[i]][j].IVs.D > 2) && (ranks[keys[i]][j].IVs.S > 2)) {
-                if (rank/1 < keys[i].split(".")[0]/1) {eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;
+                if (rank/1 < keys[i].split(".")[0]/1) {eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}else{tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;}
               } else if ((ranks[keys[i]][j].IVs.A > 1) && (ranks[keys[i]][j].IVs.D > 1) && (ranks[keys[i]][j].IVs.S > 1)) {
-                if (rank/1 < keys[i].split(".")[0]/1) {eGr = eGr + 1;eGo = eGo + 1;}tGr = tGr + 1;tGo = tGo + 1;
+                if (rank/1 < keys[i].split(".")[0]/1) {eGr = eGr + 1;eGo = eGo + 1;}else{tGr = tGr + 1;tGo = tGo + 1;}
               } else if ((ranks[keys[i]][j].IVs.A > 0) && (ranks[keys[i]][j].IVs.D > 0) && (ranks[keys[i]][j].IVs.S > 0)) {
-                if (rank/1 < keys[i].split(".")[0]/1) {eGo = eGo + 1;}tGo = tGo + 1;
+                if (rank/1 < keys[i].split(".")[0]/1) {eGo = eGo + 1;}else{tGo = tGo + 1;}
               }
             }
         }
@@ -531,14 +535,21 @@
         var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
         var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
         var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
+        
+        // used to ensure we don't Display Trade Improvement % for ineligible IVs
+        var gmRhtml = null;
 
         if (aIV && dIV && sIV) {
           //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
           if ((aIV >= (floor/1)) && (dIV >= (floor/1)) && (sIV >= (floor/1))) {
             //console.log("All 3 IVs > floor("+floor+"): "+aIV+", "+dIV+", "+sIV+", ");
             document.getElementById('feedbackBox').innerHTML = "";
-            html += getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV);
-            
+            gmRhtml = getMonRank(totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV);
+            if ((aIV && dIV && sIV) && (gmRhtml == "")) {
+              console.log("Detected too high CP after getMonRank (inside aIV && dIV && sIV)");
+              document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs are over "+league+" CP for "+selected+"<br>Please check the Min Level in Settings and try again</i></p>";
+            } else {html += gmRhtml;}
+
             if (evoLen) {
               evoHtml += "<p><i>"+evoLen+" "+selected+" family evo(s): ("+aIV+"-"+dIV+"-"+sIV+")</i></p><table id='outTable'><tr><th>Pokemon</th><th>#</th><th>Lvl</th><th>CP</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
               var pokeListLen = pokeList.length;
@@ -610,18 +621,25 @@
         // compute trade percentages
         var trades = "";
         var rank = html.split('</td></tr><tr><td>')[0];
-        if ((rank != null) && (document.getElementById('trade').checked) && (aIV && dIV && sIV)) {
+        if ((gmRhtml != "") && (rank != null) && (document.getElementById('trade').checked) && (aIV && dIV && sIV)) {
           rank = rank.split('</td><td>');
           rank = rank[rank.length-1];
           trades = tradePcnts(totalRanks, ranks, keys, rank)
         }
+        
+        if ((aIV && dIV && sIV) && (gmRhtml == '') && (rank == null)) {
+          console.log("Detected IVs over CP limit in gmRhtml and rank check (2nd one)");
+          document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs are not eligible for the "+league+" CP cap<br>Please check the Min Level in Settings and try again</i></p>";
+        }
         output.innerHTML = evoHtml + maxes + html + "<br>" + trades;
         
         // update the URL with search parameters
+        var dti = 0;
+        if (document.getElementById('trade').checked){dti="1";}else{dti="0";}
         // URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
         // pokeList limit league floor minLvl aIV dIV sIV
         // mon      r     cp     f     lvl    IVs
-        uri = URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl
+        uri = URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&dti="+dti
         if (aIV && dIV && sIV) {
           var IVs = aIV + "_" + dIV + "_" + sIV;
           uri += "&IVs="+IVs;
