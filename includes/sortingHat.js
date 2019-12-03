@@ -23,11 +23,11 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 		  var sSt = Math.floor((basesta + sta)*cpm[level]);
 		  var statProd = Math.round(aSt * dSt * sSt);
 		  //update maxStats if necessary
-	    if ((maxAtk.value <= aSt) && (maxAtk.sp < statProd)) {
+	    if ((maxAtk.value < aSt) || ((maxAtk.sp < statProd) && (maxAtk.value <= aSt))) {
 	      maxAtk.value = aSt;maxAtk.aIV = atk;maxAtk.dIV = def;maxAtk.sIV = sta;maxAtk.sp = statProd;}
-	    if ((maxDef.value <= dSt) && (maxDef.sp < statProd)) {
+		if ((maxDef.value < dSt) || ((maxDef.sp < statProd) && (maxDef.value <= dSt))) {
 	      maxDef.value = dSt;maxDef.aIV = atk;maxDef.dIV = def;maxDef.sIV = sta;maxDef.sp = statProd;}
-	    if ((maxHP.value <= sSt) && (maxHP.sp < statProd)) {
+		if ((maxHP.value < sSt) || ((maxHP.sp < statProd) && (maxHP.value <= sSt))) {
 	      maxHP.value = sSt;maxHP.aIV = atk;maxHP.dIV = def;maxHP.sIV = sta;maxHP.sp = statProd;}
 	    
 		  
