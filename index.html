@@ -529,13 +529,14 @@
         // we have at least one rank to output, let's print!
         var html = "<table id='outTable'><tr><th>#</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>Apr</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
         var evoHtml = "";
+        var searchLink = "";
         
         // prepare max stat html output
         var URL = window.location.href.split("?")[0];
         var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
         var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
         var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
-        
+
         // used to ensure we don't Display Trade Improvement % for ineligible IVs
         var gmRhtml = null;
 
@@ -620,18 +621,28 @@
         
         // compute trade percentages
         var trades = "";
-        var rank = html.split('</td></tr><tr><td>')[0];
-        if ((gmRhtml != "") && (rank != null) && (document.getElementById('trade').checked) && (aIV && dIV && sIV)) {
-          rank = rank.split('</td><td>');
-          rank = rank[rank.length-1];
-          trades = tradePcnts(totalRanks, ranks, keys, rank)
+        var statProd = html.split('</td></tr><tr><td>')[0];
+        var searchRank = statProd;
+        if ((gmRhtml != "") && (statProd != null) && (aIV && dIV && sIV)) {
+          statProd = statProd.split('</td><td>');
+          statProd = statProd[statProd.length-1];
+          if (document.getElementById('trade').checked) {
+            trades = tradePcnts(totalRanks, ranks, keys, statProd)
+          }
+          // add code for Search String links here
+          //https://www.shortcutiv.com/searchStr.html?mon=Victreebel&r=19&cp=1500&o=10110&l=en
+          searchRank = searchRank.split("<th>Stat Prod</th></tr><tr class='")[1];
+          searchRank = searchRank.split("'><td>")[1];
+          searchRank = searchRank.split("</td><td>")[0];
+          searchLink = "<p><a href='https://www.shortcutiv.com/searchStr.html?mon="+selected+"&r="
+          searchLink += searchRank+"&cp="+league+"&o=10110&l=en'>Generate "+selected+" Search String to Trash below Rank "+searchRank+"</a></p><br>"
         }
         
         if ((aIV && dIV && sIV) && (gmRhtml == '') && (rank == null)) {
           console.log("Detected IVs over CP limit in gmRhtml and rank check (2nd one)");
           document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs are not eligible for the "+league+" CP cap<br>Please check the Min Level in Settings and try again</i></p>";
         }
-        output.innerHTML = evoHtml + maxes + html + "<br>" + trades;
+        output.innerHTML = evoHtml + searchLink + maxes + html + "<br>" + trades;
         
         // update the URL with search parameters
         var dti = 0;
