@@ -505,6 +505,16 @@
       if (no4star) { output.value += '&!4*'; }
     }
     
+    if (mon == "Burmy") {
+      if (selected == "Mothim") {
+        console.log("Found Mothim!");
+        output.value += "&male";
+      } else if (selected.indexOf("Wormadam") > -1 ) {
+        console.log("Found:"+mon);
+        output.value += "&female";
+      }
+    }
+    
     // let the user know what we just output
     var message = "";
     var printLimit = Math.min(limit, totalRanks);
