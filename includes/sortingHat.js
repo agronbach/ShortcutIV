@@ -23,13 +23,12 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 		  var sSt = Math.floor((basesta + sta)*cpm[level]);
 		  var statProd = Math.round(aSt * dSt * sSt);
 		  //update maxStats if necessary
-	    if ((maxAtk.value < aSt) || ((maxAtk.sp < statProd) && (maxAtk.value <= aSt))) {
-	      maxAtk.value = aSt;maxAtk.aIV = atk;maxAtk.dIV = def;maxAtk.sIV = sta;maxAtk.sp = statProd;}
-		if ((maxDef.value < dSt) || ((maxDef.sp < statProd) && (maxDef.value <= dSt))) {
-	      maxDef.value = dSt;maxDef.aIV = atk;maxDef.dIV = def;maxDef.sIV = sta;maxDef.sp = statProd;}
-		if ((maxHP.value < sSt) || ((maxHP.sp < statProd) && (maxHP.value <= sSt))) {
-	      maxHP.value = sSt;maxHP.aIV = atk;maxHP.dIV = def;maxHP.sIV = sta;maxHP.sp = statProd;}
-	    
+		  if ((maxAtk.value < aSt) || ((maxAtk.sp < statProd) && (maxAtk.value <= aSt))) {
+		    maxAtk.value = aSt;maxAtk.aIV = atk;maxAtk.dIV = def;maxAtk.sIV = sta;maxAtk.sp = statProd;}
+		  if ((maxDef.value < dSt) || ((maxDef.sp < statProd) && (maxDef.value <= dSt))) {
+		    maxDef.value = dSt;maxDef.aIV = atk;maxDef.dIV = def;maxDef.sIV = sta;maxDef.sp = statProd;}
+		  if ((maxHP.value < sSt) || ((maxHP.sp < statProd) && (maxHP.value <= sSt))) {
+		    maxHP.value = sSt;maxHP.aIV = atk;maxHP.dIV = def;maxHP.sIV = sta;maxHP.sp = statProd;}
 		  
 		  var IVsum = atk/1 + def/1 + sta/1;
 		  var Star = "NA";
@@ -37,11 +36,33 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl) {
 		  level = level/2 + 1;
 		  
 		  // store as arrays to prevent hash collisions from dropping entires
-		  var newIndex = statProd+"."+cp;
+		  // Tie Breaking Order: 1)StatProd -> 2)AtkStat -> 3)HPval -> 4)finalCP -> 5)ERROR
+		  var newIndex = statProd+"."+Math.round(100000*aSt);
 		  if (!(newIndex in ranks)) {
-		    ranks[newIndex] = [{ "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level}];
+		    ranks[newIndex] = [{ "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level, "CP":cp}];
 		  } else {
-		    ranks[newIndex].push({ "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level});
+		    var i=0;
+		    var foundIndex = false;
+		    var collision = false;
+		    var ranksLen = ranks[newIndex].length;
+		    for (i=0; i<ranksLen; i++) {
+		      if (sSt > ranks[newIndex][i].battle.S) {
+		        foundIndex = true;
+		        break;
+		      } else if (sSt == ranks[newIndex][i].battle.S) {
+		        if (cp > ranks[newIndex][i].CP) {
+		          foundIndex = true;
+		          break;
+		        } else if (cp == ranks[newIndex][i].CP) {
+		          collision = true;
+		        }
+		      }
+		    }
+		    ranks[newIndex].splice(i, 0, { "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level, "CP":cp})
+		    if (collision === true){
+		      console.log("Need 5th tie breaker for newIndex("+newIndex+"):"+JSON.stringify(ranks[newIndex]));
+		    }
+		    //console.log("collision array AFTER splice:"+JSON.stringify(ranks[newIndex]));
 		  }
 		  break; // stop evaluating this IV combination
   }}}}
