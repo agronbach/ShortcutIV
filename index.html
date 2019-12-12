@@ -454,7 +454,7 @@
         var dIV = document.getElementById('dIV').value;
         var sIV = document.getElementById('sIV').value;
         var floor = document.getElementById('floor').value;
-        var ranks = calculat3(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
+        var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
         var evos = monInfo.slice(4, monInfo.length);
         var evoLen = evos.length
         //console.log("evos.length:"+evoLen+", evos:"+evos);
@@ -564,7 +564,7 @@
                   //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f);
                   if (evoMonInfo[0].indexOf(evos[e])>-1) {
                     //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
-                    var evoRanks = calculat3(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
+                    var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
                     var evoTotalRanks = (evoKeys.length) - 3; //remove 3 max stat entries from count
                     var evoMaxStatProd = evoKeys[0].split(".")[0];
