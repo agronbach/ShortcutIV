@@ -375,7 +375,7 @@
                     if (mon) {html+="<td><a href='"+encodeURI(uri)+"'>"+mon+"</a></td>";} //evoMon
                     html+="<td>"+(1+i)+"</td>"; //Rank
                     html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
-                    html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
+                    html+="<td>"+ranks[keys[i]][j].CP+"</td>"; //Final CP
                     if (!mon) { // skip if this is an evoTable print
                       html+="<td>"+ranks[keys[i]][j].IVs.A+"</td>"; //Atk IV
                       html+="<td>"+ranks[keys[i]][j].IVs.D+"</td>"; //Def IV
@@ -454,7 +454,7 @@
         var dIV = document.getElementById('dIV').value;
         var sIV = document.getElementById('sIV').value;
         var floor = document.getElementById('floor').value;
-        var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
+        var ranks = calculat3(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
         var evos = monInfo.slice(4, monInfo.length);
         var evoLen = evos.length
         //console.log("evos.length:"+evoLen+", evos:"+evos);
@@ -564,7 +564,7 @@
                   //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f);
                   if (evoMonInfo[0].indexOf(evos[e])>-1) {
                     //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
-                    var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
+                    var evoRanks = calculat3(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
                     var evoKeys = Object.keys(evoRanks);
                     var evoTotalRanks = (evoKeys.length) - 3; //remove 3 max stat entries from count
                     var evoMaxStatProd = evoKeys[0].split(".")[0];
@@ -591,18 +591,21 @@
         
         // print main table output and count actual outputted rows/ranks
         var loopRanks = totalRanks;
+        var currentRank = 1;
+        var loopLimit = limit
         //console.log("Expecting "+loopRanks+" rows to output");
-        for (i=0; (i<limit && i<loopRanks); i++) {
+        for (i=0; (i<loopLimit && i<loopRanks); i++) {
           for (var j=0; j<ranks[keys[i]].length; j++) {
             if (j>0) {
               //console.log("Printing hash collision row at "+keys[i]+"! "+JSON.stringify(ranks[keys[i]], null, 2));
               totalRanks = totalRanks + 1; // increment counter to include collisions and count actual rows printed
+              loopLimit = loopLimit - 1;
             }
           
             //console.log("Attempting to print row:"+i+" with ranks[keys["+i+"]]["+j+"]="+JSON.stringify(ranks[keys[i]][j], null, 2));
-            html+="<tr><td>"+(i+1)+"</td>"; //Rank
+            html+="<tr><td>"+(currentRank)+"</td>"; //Rank
             html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
-            html+="<td>"+keys[i].split(".")[1]+"</td>"; //Final CP
+            html+="<td>"+ranks[keys[i]][j].CP+"</td>"; //Final CP
             html+="<td>"+ranks[keys[i]][j].IVs.A+"</td>"; //Atk IV
             html+="<td>"+ranks[keys[i]][j].IVs.D+"</td>"; //Def IV
             html+="<td>"+ranks[keys[i]][j].IVs.S+"</td>"; //Sta IV
@@ -613,6 +616,7 @@
             html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; //GL Sta IV
             html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
             html+="</tr>";
+            currentRank = currentRank + 1;
           }
         }
         html+="</table>"; // finish building the whole table
