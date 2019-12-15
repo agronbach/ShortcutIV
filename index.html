@@ -348,9 +348,19 @@
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
         //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         var html = "";
+        // print main table output and count actual outputted rows/ranks
+        var loopLimit = limit
+        var currentRank = 1;
+        var loopRanks = totalRanks;
 
-        for (i=0; i<totalRanks; i++) {
+        for (i=0; (i<totalRanks && i<loopRanks); i++) {
             for (j=0; j<ranks[keys[i]].length; j++) {
+              if (j>0) {
+                //console.log("Printing hash collision row at "+keys[i]+"! "+JSON.stringify(ranks[keys[i]], null, 2));
+                totalRanks = totalRanks + 1; // increment counter to include collisions and count actual rows printed
+                currentRank = currentRank + 1;
+                loopRanks = loopRanks - 1;
+              }
               if (aIV == ranks[keys[i]][j].IVs.A) {
                 if (dIV == ranks[keys[i]][j].IVs.D) {
                   if (sIV == ranks[keys[i]][j].IVs.S) {
@@ -373,7 +383,7 @@
                     // if there is an evo mon passed in, print/exclude certain rows
                     // allows for more code re-use / less versioning to maintain
                     if (mon) {html+="<td><a href='"+encodeURI(uri)+"'>"+mon+"</a></td>";} //evoMon
-                    html+="<td>"+(1+i)+"</td>"; //Rank
+                    html+="<td>"+(currentRank+i)+"</td>"; //Rank
                     html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
                     html+="<td>"+ranks[keys[i]][j].CP+"</td>"; //Final CP
                     if (!mon) { // skip if this is an evoTable print
