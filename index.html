@@ -346,20 +346,18 @@
       }
       
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
-        //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
+        console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
+        //console.log("Dumping ranks:"+)
         var html = "";
-        // print main table output and count actual outputted rows/ranks
-        var loopLimit = limit
-        var currentRank = 1;
-        var loopRanks = totalRanks;
+        var actualRank = 1;
 
-        for (i=0; (i<totalRanks && i<loopRanks); i++) {
+        console.log("Attempting to find rank of "+aIV+"/"+dIV+"/"+sIV+"...");
+        for (i=0; (i<totalRanks && ranks[keys[i]].length); i++) {
             for (j=0; j<ranks[keys[i]].length; j++) {
               if (j>0) {
                 //console.log("Printing hash collision row at "+keys[i]+"! "+JSON.stringify(ranks[keys[i]], null, 2));
                 totalRanks = totalRanks + 1; // increment counter to include collisions and count actual rows printed
-                currentRank = currentRank + 1;
-                loopRanks = loopRanks - 1;
+                actualRank = actualRank + 1;
               }
               if (aIV == ranks[keys[i]][j].IVs.A) {
                 if (dIV == ranks[keys[i]][j].IVs.D) {
@@ -383,7 +381,7 @@
                     // if there is an evo mon passed in, print/exclude certain rows
                     // allows for more code re-use / less versioning to maintain
                     if (mon) {html+="<td><a href='"+encodeURI(uri)+"'>"+mon+"</a></td>";} //evoMon
-                    html+="<td>"+(currentRank+i)+"</td>"; //Rank
+                    html+="<td>"+(actualRank+i)+"</td>"; //Rank
                     html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
                     html+="<td>"+ranks[keys[i]][j].CP+"</td>"; //Final CP
                     if (!mon) { // skip if this is an evoTable print
@@ -472,7 +470,7 @@
         // ensure we actually generated something to output
         var keys = Object.keys(ranks);
         var totalRanks = (keys.length) - 3; // remove all 3 max stat entries
-        
+
         if (totalRanks/1 < 1) {
           // nothing to output, print Error and exit
           output.innerHTML = "";
@@ -551,9 +549,9 @@
         var gmRhtml = null;
 
         if (aIV && dIV && sIV) {
-          //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
+          console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
           if ((aIV >= (floor/1)) && (dIV >= (floor/1)) && (sIV >= (floor/1))) {
-            //console.log("All 3 IVs > floor("+floor+"): "+aIV+", "+dIV+", "+sIV+", ");
+            console.log("All 3 IVs > floor("+floor+"): "+aIV+", "+dIV+", "+sIV+", ");
             document.getElementById('feedbackBox').innerHTML = "";
             gmRhtml = getMonRank(totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV);
             if ((aIV && dIV && sIV) && (gmRhtml == "")) {
@@ -601,7 +599,7 @@
         
         // print main table output and count actual outputted rows/ranks
         var loopRanks = totalRanks;
-        var currentRank = 1;
+        var actualRank = 1;
         var loopLimit = limit
         //console.log("Expecting "+loopRanks+" rows to output");
         for (i=0; (i<loopLimit && i<loopRanks); i++) {
@@ -613,7 +611,7 @@
             }
           
             //console.log("Attempting to print row:"+i+" with ranks[keys["+i+"]]["+j+"]="+JSON.stringify(ranks[keys[i]][j], null, 2));
-            html+="<tr><td>"+(currentRank)+"</td>"; //Rank
+            html+="<tr><td>"+(actualRank)+"</td>"; //Rank
             html+="<td>"+ranks[keys[i]][j].L+"</td>"; //Level
             html+="<td>"+ranks[keys[i]][j].CP+"</td>"; //Final CP
             html+="<td>"+ranks[keys[i]][j].IVs.A+"</td>"; //Atk IV
@@ -626,7 +624,7 @@
             html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; //GL Sta IV
             html+="<td>"+keys[i].split(".")[0]+"</td>"; // Stat Product
             html+="</tr>";
-            currentRank = currentRank + 1;
+            actualRank = actualRank + 1;
           }
         }
         html+="</table>"; // finish building the whole table
