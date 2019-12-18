@@ -47,7 +47,7 @@
     <style>
       /*https://www.w3schools.com/css/css_table.asp*/
       
-      #outTable, #inputTable {
+      #outTable, #inputTable, #tradeTable {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         margin-left:auto;
@@ -61,6 +61,11 @@
         line-height: 5px;
       }
       
+      #tradeTable td, #tradeTable th {
+        border: 1px solid #ddd;
+        padding: 0px;
+        text-align: center;
+      }
 
       #inputTable td, #inputTable th {
         line-height: 11px;
@@ -70,8 +75,8 @@
         line-height: normal;
       }
       
-      #outTable tr:nth-child(even){background-color: #f2f2f2;}
-      #outTable tr:hover {background-color: #ddd;}
+      #outTable tr:nth-child(even), #tradeTable tr:nth-child(even) {background-color: #f2f2f2;}
+      #outTable tr:hover, #tradeTable tr:hover {background-color: #ddd;}
       
       /* control highlight of User Data row based on rank
        * 1000/4096 ~= 0.2442 and 100/4096 ~= 0.02442
@@ -88,7 +93,7 @@
       #outTable tr.ok {background-color: #FF8C00}
       #outTable tr.rubbish {background-color: #B22222}
       
-      #outTable th {
+      #outTable th, #tradeTable th {
         line-height: 15px;
         padding: 3px;
         padding-top: 5px;
@@ -324,14 +329,15 @@
       
       function tradePcnts (totalRanks, ranks, keys, rank) {
         // Keep track of eligible/total higher ranked mons
-        var tGo=0,eGo=0,tGr=0,eGr=0,tUf=0,eUf=0,tBf=0,eBf=0;
+        var tGo=0,eGo=0,tGr=0,eGr=0,tUf=0,eUf=0,tBf=0,eBf=0,tLf=0,eLf=0;
         //console.log("tPcnts: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", rank:"+rank);
         
-        for (i=0; i<totalRanks; i++) {
+        for (i=0; (i<totalRanks && (keys[i].indexOf(".")>-1)); i++) {
+          //console.log("tPctns: attempting to check i="+i+" and keys[i]:"+keys[i]);
             for (j=0; j<ranks[keys[i]].length; j++) {
-              //1IV=tGo,eGo + 2IV=tGr,eGr + 3IV=tUf,eUf + 5IV = tBf,eBf
-              if ((ranks[keys[i]][j].IVs.A > 4) && (ranks[keys[i]][j].IVs.D > 4) && (ranks[keys[i]][j].IVs.S > 4)) {
-                if (rank/1<keys[i].split(".")[0]/1){eBf=eBf+1;eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}else{tBf=tBf+1;tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;}
+              //1IV=tGo,eGo + 2IV=tGr,eGr + 3IV=tUf,eUf + 5IV=tBf,eBf + 12V=tLf,eLf
+              if ((ranks[keys[i]][j].IVs.A > 11) && (ranks[keys[i]][j].IVs.D > 11) && (ranks[keys[i]][j].IVs.S > 11)) {if (rank/1<keys[i].split(".")[0]/1){eLf=eLf+1;eBf=eBf+1;eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}else{tLf=tLf+1;tBf=tBf+1;tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;}
+              } else if ((ranks[keys[i]][j].IVs.A > 4) && (ranks[keys[i]][j].IVs.D > 4) && (ranks[keys[i]][j].IVs.S > 4)) {if (rank/1<keys[i].split(".")[0]/1){eBf=eBf+1;eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}else{tBf=tBf+1;tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;}
               } else if ((ranks[keys[i]][j].IVs.A > 2) && (ranks[keys[i]][j].IVs.D > 2) && (ranks[keys[i]][j].IVs.S > 2)) {
                 if (rank/1 < keys[i].split(".")[0]/1) {eUf=eUf+1;eGr=eGr+1;eGo=eGo+1;}else{tUf=tUf+1;tGr=tGr+1;tGo=tGo+1;}
               } else if ((ranks[keys[i]][j].IVs.A > 1) && (ranks[keys[i]][j].IVs.D > 1) && (ranks[keys[i]][j].IVs.S > 1)) {
@@ -341,17 +347,17 @@
               }
             }
         }
-        //console.log("Found the following -- tGo:"+tGo+" eGo:"+eGo+" tGr:"+tGr+" eGr:"+eGr+" tUf:"+tUf+" eUf:"+eUf+" tBf:"+tBf+" eBf:"+eBf);
-        return "<table id='outTable'><th>Friendship</th><th>Chance to Improve</th><th>Higher Rank</th><th>Lower Rank</th><th>Total Combinations</th><tr><td>Good (IV&ge;1)</td><td>"+(100*eGo/3375).toFixed(1)+"%</td><td>"+eGo+"</td><td>"+tGo+"</td><td>3375</td></tr><tr><td>Great (IV&ge;2)</td><td>"+(100*eGr/2744).toFixed(1)+"%</td><td>"+eGr+"</td><td>"+tGr+"</td><td>2744</td></tr><tr><td>Ultra (IV&ge;3)</td><td>"+(100*eUf/2197).toFixed(1)+"%</td><td>"+eUf+"</td><td>"+tUf+"</td><td>2197</td></tr><tr><td>Best (IV&ge;5)</td><td>"+(100*eBf/1331).toFixed(1)+"%</td><td>"+eBf+"</td><td>"+tBf+"</td><td>1331</td></tr></table>"
+        console.log("Found the following -- tGo:"+tGo+" eGo:"+eGo+" tGr:"+tGr+" eGr:"+eGr+" tUf:"+tUf+" eUf:"+eUf+" tBf:"+tBf+" eBf:"+eBf+" tLf:"+tLf+" eLf:"+eLf);
+        return "<table id='tradeTable'><th>Friendship</th><th>Chance to Improve</th><th>Higher Rank</th><th>Lower Rank</th><th>Total Combinations</th><tr><td>Good (IV&ge;1)</td><td>"+(100*eGo/3375).toFixed(1)+"%</td><td>"+eGo+"</td><td>"+tGo+"</td><td>3375</td></tr><tr><td>Great (IV&ge;2)</td><td>"+(100*eGr/2744).toFixed(1)+"%</td><td>"+eGr+"</td><td>"+tGr+"</td><td>2744</td></tr><tr><td>Ultra (IV&ge;3)</td><td>"+(100*eUf/2197).toFixed(1)+"%</td><td>"+eUf+"</td><td>"+tUf+"</td><td>2197</td></tr><tr><td>Best (IV&ge;5)</td><td>"+(100*eBf/1331).toFixed(1)+"%</td><td>"+eBf+"</td><td>"+tBf+"</td><td>1331</td></tr><tr><td>Lucky (IV&ge;12)</td><td>"+(100*eLf/64).toFixed(1)+"%</td><td>"+eLf+"</td><td>"+tLf+"</td><td>64</td></tr></table>"
       }
       
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
-        console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
+        //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         //console.log("Dumping ranks:"+)
         var html = "";
         var actualRank = 1;
 
-        console.log("Attempting to find rank of "+aIV+"/"+dIV+"/"+sIV+"...");
+        //console.log("Attempting to find rank of "+aIV+"/"+dIV+"/"+sIV+"...");
         for (i=0; (i<totalRanks && ranks[keys[i]].length); i++) {
             for (j=0; j<ranks[keys[i]].length; j++) {
               if (j>0) {
