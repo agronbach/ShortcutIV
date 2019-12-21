@@ -231,6 +231,9 @@
             if (document.getElementById('minLvl').value/1 < 15) {
               document.getElementById('minLvl').value = 15;
             }
+            if (document.getElementById('maxLvl').value/1 < 15) {
+              document.getElementById('maxLvl').value = 15;
+            }
             if (document.getElementById('floor').value/1 < 1) {
               document.getElementById('floor').value = 1;
             }
@@ -240,6 +243,9 @@
               // set min IVs to 1 and min Level to 20
               if (document.getElementById('minLvl').value/1 < 20) {
                 document.getElementById('minLvl').value = 20;
+              }
+              if (document.getElementById('maxLvl').value/1 < 20) {
+                document.getElementById('maxLvl').value = 20;
               }
               if (document.getElementById('floor').value/1 < 1) {
                 document.getElementById('floor').value = 1;
@@ -251,6 +257,9 @@
                 if (document.getElementById('minLvl').value/1 < 15) {
                   document.getElementById('minLvl').value = 15;
                 }
+                if (document.getElementById('maxLvl').value/1 < 15) {
+                  document.getElementById('maxLvl').value = 15;
+                }
                 if (document.getElementById('floor').value/1 < 10) {
                   document.getElementById('floor').value = 10;
                 }
@@ -260,6 +269,9 @@
                   // set min IVs to 10 and min Level to 20
                   if (document.getElementById('minLvl').value/1 < 20) {
                     document.getElementById('minLvl').value = 20;
+                  }
+                  if (document.getElementById('maxLvl').value/1 < 20) {
+                    document.getElementById('maxLvl').value = 20;
                   }
                   if (document.getElementById('floor').value/1 < 10) {
                     document.getElementById('floor').value = 10;
@@ -277,8 +289,8 @@
         var URL = window.location.href.split("?")[1];
         //URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
         // Need:
-        // pokeList limit aIV dIV sIV league floor minLvl
-        // mon      r     IVs         cp     f     lvl
+        // pokeList limit aIV dIV sIV league floor minLvl maxLvl
+        // mon      r     IVs         cp     f     min    max
         if (URL)
         {
           URL = decodeURI(URL);
@@ -301,8 +313,11 @@
               case "f":
                 document.getElementById('floor').value = values[i].split("=")[1];
                 break;
-              case "lvl":
+              case "min":
                 document.getElementById('minLvl').value = values[i].split("=")[1];
+                break;
+              case "max":
+                document.getElementById('maxLvl').value = values[i].split("=")[1];
                 break;
               case "dti":
                 if (values[i].split("=")[1] == 1) { document.getElementById('trade').checked = true;
@@ -352,7 +367,7 @@
       }
       
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
-        //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
+        console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         //console.log("Dumping ranks:"+)
         var html = "";
         var actualRank = 1;
@@ -396,7 +411,7 @@
                       html+="<td>"+ranks[keys[i]][j].IVs.S+"</td>"; //Sta IV
                       html+="<td>"+ranks[keys[i]][j].IVs.star+"</td>"; //Star Appraisal
                     }
-                    html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; //Perfection
+                    html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(3)+"%"+"</td>"; //Perfection
                     html+="<td>"+parseFloat(ranks[keys[i]][j].battle.A).toFixed(1)+"</td>"; //GL Atk IV
                     html+="<td>"+parseFloat(ranks[keys[i]][j].battle.D).toFixed(1)+"</td>"; //GL Def IV
                     html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; //GL Sta IV
@@ -457,7 +472,7 @@
         
         // need to adjust for raid/reward only (L15 or L20)
         var minLvl = document.getElementById('minLvl').value;
-        
+        var maxLvl = document.getElementById('maxLvl').value;
         
         // get base stats of whatever form we are outputting string for
         var baseatk, basedef, basesta, basemon, i = 0;
@@ -468,7 +483,7 @@
         var dIV = document.getElementById('dIV').value;
         var sIV = document.getElementById('sIV').value;
         var floor = document.getElementById('floor').value;
-        var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl);
+        var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl, maxLvl);
         var evos = monInfo.slice(4, monInfo.length);
         var evoLen = evos.length
         //console.log("evos.length:"+evoLen+", evos:"+evos);
@@ -511,7 +526,7 @@
         // null any missing IVs before inserting to BQ
         var atkIV = null, defIV = null, staIV = null;
         if (aIV && dIV && sIV) {atkIV = aIV;defIV = dIV;staIV = sIV;}
-        var request = {"pokemon":selected, "numRanks":limit, "AttackIV":atkIV, "DefenseIV":defIV, "StaminaIV":staIV, "league":league, "minIVs":floor, "minLvl":minLvl, "time":time.toISOString().slice(0, 19).replace('T', ' ')};
+        var request = {"pokemon":selected, "numRanks":limit, "AttackIV":atkIV, "DefenseIV":defIV, "StaminaIV":staIV, "league":league, "minIVs":floor, "minLvl":minLvl, "maxLvl":maxLvl, "time":time.toISOString().slice(0, 19).replace('T', ' ')};
         
         
         // validate reCaptcha v3
@@ -547,9 +562,9 @@
         
         // prepare max stat html output
         var URL = window.location.href.split("?")[0];
-        var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
-        var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
-        var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
+        var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
+        var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
+        var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
 
         // used to ensure we don't Display Trade Improvement % for ineligible IVs
         var gmRhtml = null;
@@ -578,14 +593,14 @@
                   //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f);
                   if (evoMonInfo[0].indexOf(evos[e])>-1) {
                     //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
-                    var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl);
+                    var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl, maxLvl);
                     var evoKeys = Object.keys(evoRanks);
                     var evoTotalRanks = (evoKeys.length) - 3; //remove 3 max stat entries from count
                     var evoMaxStatProd = evoKeys[0].split(".")[0];
                     var evoMon = pokeList[f].label;
                     // create link for evo table entry
                     var IVs = aIV + "_" + dIV + "_" + sIV;
-                    uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&IVs="+IVs;
+                    uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+IVs;
                     evoHtml += getMonRank(evoTotalRanks, evoRanks, evoKeys, evoMaxStatProd, aIV, dIV, sIV, evoMon, uri);
                     break;
                   }
@@ -624,7 +639,7 @@
             html+="<td>"+ranks[keys[i]][j].IVs.D+"</td>"; //Def IV
             html+="<td>"+ranks[keys[i]][j].IVs.S+"</td>"; //Sta IV
             html+="<td>"+ranks[keys[i]][j].IVs.star+"</td>"; //Star Appraisal
-            html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; //Perfection
+            html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(3)+"%"+"</td>"; //Perfection
             html+="<td>"+parseFloat(ranks[keys[i]][j].battle.A).toFixed(1)+"</td>"; //GL Atk IV
             html+="<td>"+parseFloat(ranks[keys[i]][j].battle.D).toFixed(1)+"</td>"; //GL Def IV
             html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; //GL Sta IV
@@ -666,9 +681,9 @@
         var dti = 0;
         if (document.getElementById('trade').checked){dti="1";}else{dti="0";}
         // URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
-        // pokeList limit league floor minLvl aIV dIV sIV
-        // mon      r     cp     f     lvl    IVs
-        uri = URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&lvl="+minLvl+"&dti="+dti
+        // pokeList limit league floor minLvl maxLvl aIV dIV sIV
+        // mon      r     cp     f     min    max    IVs
+        uri = URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti
         if (aIV && dIV && sIV) {
           var IVs = aIV + "_" + dIV + "_" + sIV;
           uri += "&IVs="+IVs;
@@ -738,6 +753,53 @@
         <option value="38">38</option>
         <option value="39">39</option>
         <option value="40">40</option>
+      </select></label><br />
+      <label>Max Level:<select title="What Level Floor to Search?" id="maxLvl" oninput="start()">
+        <option value="1">1: Wild Caught</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15: Research Reward</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20: Raid Reward</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25: Purified</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option selected value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
       </select></label><br />
       <label>Display Trade Improvement %:<input id="trade" type="checkbox" oninput="start()"></label><br />
       <br />
