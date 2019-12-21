@@ -362,12 +362,12 @@
               }
             }
         }
-        console.log("Found the following -- tGo:"+tGo+" eGo:"+eGo+" tGr:"+tGr+" eGr:"+eGr+" tUf:"+tUf+" eUf:"+eUf+" tBf:"+tBf+" eBf:"+eBf+" tLf:"+tLf+" eLf:"+eLf);
+        //console.log("Found the following -- tGo:"+tGo+" eGo:"+eGo+" tGr:"+tGr+" eGr:"+eGr+" tUf:"+tUf+" eUf:"+eUf+" tBf:"+tBf+" eBf:"+eBf+" tLf:"+tLf+" eLf:"+eLf);
         return "<table id='tradeTable'><th>Friendship</th><th>Chance to Improve</th><th>Higher Rank</th><th>Lower Rank</th><th>Total Combinations</th><tr><td>Good (IV&ge;1)</td><td>"+(100*eGo/3375).toFixed(1)+"%</td><td>"+eGo+"</td><td>"+tGo+"</td><td>3375</td></tr><tr><td>Great (IV&ge;2)</td><td>"+(100*eGr/2744).toFixed(1)+"%</td><td>"+eGr+"</td><td>"+tGr+"</td><td>2744</td></tr><tr><td>Ultra (IV&ge;3)</td><td>"+(100*eUf/2197).toFixed(1)+"%</td><td>"+eUf+"</td><td>"+tUf+"</td><td>2197</td></tr><tr><td>Best (IV&ge;5)</td><td>"+(100*eBf/1331).toFixed(1)+"%</td><td>"+eBf+"</td><td>"+tBf+"</td><td>1331</td></tr><tr><td>Lucky (IV&ge;12)</td><td>"+(100*eLf/64).toFixed(1)+"%</td><td>"+eLf+"</td><td>"+tLf+"</td><td>64</td></tr></table>"
       }
       
       function getMonRank (totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV, mon, uri) {
-        console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
+        //console.log("gMR: received totalRanks:"+totalRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri)
         //console.log("Dumping ranks:"+)
         var html = "";
         var actualRank = 1;
@@ -570,9 +570,9 @@
         var gmRhtml = null;
 
         if (aIV && dIV && sIV) {
-          console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
+          //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
           if ((aIV >= (floor/1)) && (dIV >= (floor/1)) && (sIV >= (floor/1))) {
-            console.log("All 3 IVs > floor("+floor+"): "+aIV+", "+dIV+", "+sIV+", ");
+            //console.log("All 3 IVs > floor("+floor+"): "+aIV+", "+dIV+", "+sIV+", ");
             document.getElementById('feedbackBox').innerHTML = "";
             gmRhtml = getMonRank(totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV);
             if ((aIV && dIV && sIV) && (gmRhtml == "")) {
