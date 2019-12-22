@@ -622,7 +622,7 @@
             gmRhtml = getMonRank(totalRanks, ranks, keys, maxStatProd, aIV0, dIV0, sIV0);
             for (i=1; i<rowNum; i++)
             {
-              console.log("Attempting to get IVs for rowNum="+i);
+              //console.log("Attempting to get IVs for rowNum="+i);
               try{
                 var curaIV = eval("aIV"+i).value // ensure this exists
               }
@@ -631,11 +631,11 @@
               }
               var curdIV = eval("dIV"+i).value;
               var cursIV = eval("sIV"+i).value;
-              console.log("Getting Mon Rank for row i="+i+", IVs:"+curaIV+"/"+curdIV+"/"+cursIV);
+              //console.log("Getting Mon Rank for row i="+i+", IVs:"+curaIV+"/"+curdIV+"/"+cursIV);
               if (curaIV && curdIV && cursIV) {
                 gmRhtml += getMonRank(totalRanks, ranks, keys, maxStatProd, curaIV, curdIV, cursIV);
               } else {
-                console.log("All 3 IVs do not exist for row i="+i+", IVs:"+curaIV+"/"+curdIV+"/"+cursIV);
+                console.log("Skipping row i="+i+" due to missing IVs:"+curaIV+"/"+curdIV+"/"+cursIV);
               }
             }
             if ((aIV0 && dIV0 && sIV0) && (gmRhtml == "")) {
