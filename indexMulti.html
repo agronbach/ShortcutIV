@@ -237,7 +237,7 @@
             <option value="0">0</option>
           </select></td>
           <td id="plusCell"><button class="circle plus" onclick="doTheInsert(2)"></button></td>
-          <td><!--button class="button buttonMinus" onclick="doTheRemoval(1)"></button--></td>
+          <td><!--button class="button buttonMinus" onclick="doTheRemoval()"></button--></td>
         </tr>
       </table>
       
@@ -763,21 +763,25 @@
         var prevNum = num-1;
         rowNum = num;
         var newRow=document.getElementById('inputTable').insertRow();
-        newRow.innerHTML = "<tr><td></td><td><select title='Your Attack IV' id='aIV"+prevNum+"' oninput='start()'><option value=''></option><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Defense IV' id='dIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Stamina IV' id='sIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><button class='circle minus' onclick='doTheRemoval("+num+")'"+/*value='num+-'*/"></button></td></tr>"
+        newRow.innerHTML = "<tr><td></td><td><select title='Your Attack IV' id='aIV"+prevNum+"' oninput='start()'><option value=''></option><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Defense IV' id='dIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Stamina IV' id='sIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><button class='circle minus' onclick='doTheRemoval()'"+/*value='num+-'*/"></button></td></tr>"
         
         // update the hidden count of the original row add button to avoid overlapping row nums
         document.getElementById('plusCell').innerHTML = "<td id='plusCell'><button class='circle plus' onclick='doTheInsert("+nextNum+")' "+/*value="+nextNum+"+*/"></button></td>"
       }
       
-      function doTheRemoval(num) {
-        try{
+      function doTheRemoval() {
+        // event.target will be the input element.
+        var td = event.target.parentNode;
+        var tr = td.parentNode; // the row to be removed
+        tr.parentNode.removeChild(tr);
+        /*try{
           document.getElementById("inputTable").deleteRow(num);
         }
         catch(DOMException) {
           console.log("Row does not exist, deleting last row instead");
           var tableLen = document.getElementById("inputTable").rows.length;
           document.getElementById("inputTable").deleteRow(tableLen-1);
-        }
+        }*/
         start();
       }
       
