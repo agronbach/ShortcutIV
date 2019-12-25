@@ -493,20 +493,18 @@
           {
             if (selected == awesomplete.suggestions[i].label)
             {
-              console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
+              //console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
               mon = awesomplete.suggestions[i].value;
             }
           }
-          console.log("Here2: awesomplete.suggestions.length:"+awesomplete.suggestions.length);
         } else {
-          console.log("Here3");
           // need to ensure we have the right mon selected
           var listLen = awesomplete.options.list.length;
           for (var i=0; i<listLen; i++)
           {
             if (selected == awesomplete.options.list[i].label)
             {
-              console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
+              //console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
               mon = awesomplete.options.list[i].value;
             }
           }
@@ -519,9 +517,9 @@
           console.log("Cannot find monInfo, returning");
           return;
         }
-        console.log("monInfo set to:"+JSON.stringify(monInfo));
+        //console.log("monInfo set to:"+JSON.stringify(monInfo));
         var output = document.getElementById('outputBox');
-        console.log("start(): '"+selected+"' data received as:"+JSON.stringify(mon));
+        //console.log("start(): '"+selected+"' data received as:"+JSON.stringify(mon));
         
         // need to adjust for raid/reward only (L15 or L20)
         var minLvl = document.getElementById('minLvl').value;
