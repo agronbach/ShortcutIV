@@ -493,27 +493,35 @@
           {
             if (selected == awesomplete.suggestions[i].label)
             {
-              //console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
+              console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
               mon = awesomplete.suggestions[i].value;
             }
           }
+          console.log("Here2: awesomplete.suggestions.length:"+awesomplete.suggestions.length);
         } else {
+          console.log("Here3");
           // need to ensure we have the right mon selected
           var listLen = awesomplete.options.list.length;
           for (var i=0; i<listLen; i++)
           {
             if (selected == awesomplete.options.list[i].label)
             {
-              //console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
+              console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)
               mon = awesomplete.options.list[i].value;
             }
           }
         }
-    
+        
         var monInfo = mon.split(',');
-        //console.log("monInfo set to:"+JSON.stringify(monInfo));
+        // Ensure we get the info we need to continue
+        if (monInfo == "")
+        {
+          console.log("Cannot find monInfo, returning");
+          return;
+        }
+        console.log("monInfo set to:"+JSON.stringify(monInfo));
         var output = document.getElementById('outputBox');
-        //console.log("start(): '"+selected+"' data received as:"+JSON.stringify(mon));
+        console.log("start(): '"+selected+"' data received as:"+JSON.stringify(mon));
         
         // need to adjust for raid/reward only (L15 or L20)
         var minLvl = document.getElementById('minLvl').value;
@@ -769,19 +777,13 @@
         document.getElementById('plusCell').innerHTML = "<td id='plusCell'><button class='circle plus' onclick='doTheInsert("+nextNum+")' "+/*value="+nextNum+"+*/"></button></td>"
       }
       
+      // solution from: https://stackoverflow.com/questions/11553768/remove-table-row-after-clicking-table-row-delete-button
       function doTheRemoval() {
         // event.target will be the input element.
         var td = event.target.parentNode;
         var tr = td.parentNode; // the row to be removed
         tr.parentNode.removeChild(tr);
-        /*try{
-          document.getElementById("inputTable").deleteRow(num);
-        }
-        catch(DOMException) {
-          console.log("Row does not exist, deleting last row instead");
-          var tableLen = document.getElementById("inputTable").rows.length;
-          document.getElementById("inputTable").deleteRow(tableLen-1);
-        }*/
+
         start();
       }
       
