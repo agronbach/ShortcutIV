@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics --
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145799979-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -180,7 +180,7 @@
       <table id="inputTable">
         <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td id="plusCell"><button class="circle plus" onclick="doTheInsert(2)"></button></td></tr>
         <tr>
-          <td><select title="Your Attack IV" id="aIV0" oninput="start()">
+          <td><select title="Your Attack IV" class="aIV" id="aIV0" oninput="start()">
             <option value=""></option>
             <option value="15">15</option>
             <option value="14">14</option>
@@ -199,7 +199,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td><select title="Your Defense IV" id="dIV0" oninput="start()">
+          <td><select title="Your Defense IV" class="dIV" id="dIV0" oninput="start()">
             <option value="15">15</option>
             <option value="14">14</option>
             <option value="13">13</option>
@@ -217,7 +217,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td><select title="Your Stamina IV" id="sIV0" oninput="start()">
+          <td><select title="Your Stamina IV" class="sIV" id="sIV0" oninput="start()">
             <option value="15">15</option>
             <option value="14">14</option>
             <option value="13">13</option>
@@ -528,9 +528,32 @@
     
         var league = document.getElementById('league').value;
         var limit = document.getElementById('limit').value;
-        var aIV0 = document.getElementById('aIV0').value;
-        var dIV0 = document.getElementById('dIV0').value;
-        var sIV0 = document.getElementById('sIV0').value;
+        
+        // this try catch block prevents the page from erroring out if
+        // the user has removed the inital IV input row (aIV0-dIV0-sIV0)
+        // by finding the next lowest numbered row to replace it with
+        try {
+          var aIV0 = document.getElementById('aIV0').value;
+          var dIV0 = document.getElementById('dIV0').value;
+          var sIV0 = document.getElementById('sIV0').value;
+        } catch (TypeError) {
+          // gather all attack IV select boxes on the page
+          var elements = document.getElementsByClassName('aIV');
+          var lastTag = "aIV99";
+          // find the lowest number aIVx element on the page
+          for (const tag in elements) {
+            console.log(`${tag}: ${elements[tag].id}`);
+            if (lastTag > elements[tag].id) {
+              lastTag = elements[tag].id;
+            }
+          }
+          // split out the trailing number to use as the new "aIV0"
+          lastTag = lastTag.match(/\d+/g); //get trailing num
+          console.log("Found lowest tag # to be:"+lastTag)
+          var aIV0 = document.getElementById('aIV'+lastTag).value;
+          var dIV0 = document.getElementById('dIV'+lastTag).value;
+          var sIV0 = document.getElementById('sIV'+lastTag).value;
+        }
         var floor = document.getElementById('floor').value;
         var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl, maxLvl);
         var evos = monInfo.slice(4, monInfo.length);
@@ -767,7 +790,7 @@
         var prevNum = num-1;
         rowNum = num;
         var newRow=document.getElementById('inputTable').insertRow();
-        newRow.innerHTML = "<tr><td><select title='Your Attack IV' id='aIV"+prevNum+"' oninput='start()'><option value=''></option><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Defense IV' id='dIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Stamina IV' id='sIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><button class='circle minus' onclick='doTheRemoval()'"+/*value='num+-'*/"></button></td></tr>"
+        newRow.innerHTML = "<tr><td><select title='Your Attack IV' class='aIV' id='aIV"+prevNum+"' oninput='start()'><option value=''></option><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Defense IV' class='dIV' id='dIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Stamina IV' class='sIV' id='sIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><button class='circle minus' onclick='doTheRemoval()'"+/*value='num+-'*/"></button></td></tr>"
         
         // update the hidden count of the original row add button to avoid overlapping row nums
         document.getElementById('plusCell').innerHTML = "<td id='plusCell'><button class='circle plus' onclick='doTheInsert("+nextNum+")' "+/*value="+nextNum+"+*/"></button></td>"
