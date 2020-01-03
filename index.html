@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics --
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145799979-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -542,14 +542,14 @@
           var lastTag = "aIV99";
           // find the lowest number aIVx element on the page
           for (const tag in elements) {
-            console.log(`${tag}: ${elements[tag].id}`);
+            //console.log(`${tag}: ${elements[tag].id}`);
             if (lastTag > elements[tag].id) {
               lastTag = elements[tag].id;
             }
           }
+          console.log("aIV0 was removed, found next lowest tag:"+lastTag);
           // split out the trailing number to use as the new "aIV0"
           lastTag = lastTag.match(/\d+/g); //get trailing num
-          console.log("Found lowest tag # to be:"+lastTag)
           var aIV0 = document.getElementById('aIV'+lastTag).value;
           var dIV0 = document.getElementById('dIV'+lastTag).value;
           var sIV0 = document.getElementById('sIV'+lastTag).value;
