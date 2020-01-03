@@ -108,6 +108,49 @@
       input[id=pokeList] {
         width: 131px;
       }
+      /* Button code from: https://stackoverflow.com/questions/33766350/how-to-perfectly-center-a-plus-sign-in-a-circle-using-css */
+      .circle {
+        border: 1px solid #aaa;
+        box-shadow: inset 1px 1px 3px #fff;
+        width: 18px;
+        height: 18px;
+        border-radius: 100%;
+        position: relative;
+        margin: 4px;
+        display: inline-block;
+        vertical-align: middle;
+        background: #aaaaaa4f;
+      }
+      .circle:hover{
+        background: radial-gradient(#aaa, #fff);
+      }
+      .circle:active{
+        background: #6363634f;
+      }
+      .circle:before,.circle:after{
+        content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+      }
+      /* PLUS */
+      .circle.plus:before,.circle.plus:after {
+        background:green;
+        box-shadow: 1px 1px 1px #ffffff9e;
+      }
+      .circle.plus:before{
+        width: 2px;
+        margin: 3px auto;
+      }
+      .circle.plus:after{
+        margin: auto 3px;
+        height: 2px;
+        box-shadow: none;
+      }
+      /* MINUS */
+      .circle.minus:before{
+        background: #cc0000;
+        margin: auto 3px;
+        height: 2px;
+        box-shadow: 0px 1px 1px #ffffff9e;
+      }
     </style>
     <script src="https://www.google.com/recaptcha/api.js?render=6LfY-KYUAAAAAIYnP89WU5GWU-MMg_uy0z_7t9c2"></script>
   </head>
@@ -119,7 +162,7 @@
           <div class="dropdown-content">
             <a href="/" class="active">Rankings</a>
             <a href="/searchStr.html">Search Strings</a>
-            <a href="https://routinehub.co/shortcut/1721">iOS Shortcut</a>
+            <!--a href="https://routinehub.co/shortcut/1721">iOS Shortcut</a-->
           </div>
         </li>
         <li class="dropdown">
@@ -133,12 +176,11 @@
       </ul>
     </header>
     <br />
-    <section>
+    <section><input id="pokeList" placeholder="Pok&eacute;mon"/>
       <table id="inputTable">
-        <tr><td></td><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td></tr>
+        <tr><td title="Your Attack IV">Atk</td><td title="Your Defense IV">Def</td><td title="Your Stamina IV">Sta</td><td id="plusCell"><button class="circle plus" onclick="doTheInsert(2)"></button></td></tr>
         <tr>
-          <td><input id="pokeList" placeholder="Pok&eacute;mon"/></td>
-          <td><select title="Your Attack IV" id="aIV" oninput="start()">
+          <td><select title="Your Attack IV" id="aIV0" oninput="start()">
             <option value=""></option>
             <option value="15">15</option>
             <option value="14">14</option>
@@ -157,7 +199,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td><select title="Your Defense IV" id="dIV" oninput="start()">
+          <td><select title="Your Defense IV" id="dIV0" oninput="start()">
             <option value="15">15</option>
             <option value="14">14</option>
             <option value="13">13</option>
@@ -175,7 +217,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td><select title="Your Stamina IV" id="sIV" oninput="start()">
+          <td><select title="Your Stamina IV" id="sIV0" oninput="start()">
             <option value="15">15</option>
             <option value="14">14</option>
             <option value="13">13</option>
@@ -193,7 +235,7 @@
             <option value="1">1</option>
             <option value="0">0</option>
           </select></td>
-          <td></td>
+          <td id="plusCell"><button class="circle minus" onclick="doTheRemoval()"></button></td>
         </tr>
       </table>
       
@@ -217,6 +259,7 @@
       var raidNoTrade = [386,491,647];
       var lastTime = undefined;
       var i=0,j=0;
+      var rowNum = 1; // track total number of rows
     
       var awesomplete = new Awesomplete(input, {list: pokeList,
         // insert label instead of value into the input.
@@ -289,7 +332,7 @@
         var URL = window.location.href.split("?")[1];
         //URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
         // Need:
-        // pokeList limit aIV dIV sIV league floor minLvl maxLvl
+        // pokeList limit aIV0 dIV0 sIV0 league floor minLvl maxLvl
         // mon      r     IVs         cp     f     min    max
         if (URL)
         {
@@ -326,9 +369,9 @@
               case "IVs":
                 var ivStr = values[i].split("=")[1];
                 ivStr = ivStr.split("_");
-                document.getElementById('aIV').value = ivStr[0];
-                document.getElementById('dIV').value = ivStr[1];
-                document.getElementById('sIV').value = ivStr[2];
+                document.getElementById('aIV0').value = ivStr[0];
+                document.getElementById('dIV0').value = ivStr[1];
+                document.getElementById('sIV0').value = ivStr[2];
                 break;
             }
           }
@@ -464,8 +507,14 @@
             }
           }
         }
-    
+        
         var monInfo = mon.split(',');
+        // Ensure we get the info we need to continue
+        if (monInfo == "")
+        {
+          console.log("Cannot find monInfo, returning");
+          return;
+        }
         //console.log("monInfo set to:"+JSON.stringify(monInfo));
         var output = document.getElementById('outputBox');
         //console.log("start(): '"+selected+"' data received as:"+JSON.stringify(mon));
@@ -479,9 +528,9 @@
     
         var league = document.getElementById('league').value;
         var limit = document.getElementById('limit').value;
-        var aIV = document.getElementById('aIV').value;
-        var dIV = document.getElementById('dIV').value;
-        var sIV = document.getElementById('sIV').value;
+        var aIV0 = document.getElementById('aIV0').value;
+        var dIV0 = document.getElementById('dIV0').value;
+        var sIV0 = document.getElementById('sIV0').value;
         var floor = document.getElementById('floor').value;
         var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl, maxLvl);
         var evos = monInfo.slice(4, monInfo.length);
@@ -525,7 +574,7 @@
         
         // null any missing IVs before inserting to BQ
         var atkIV = null, defIV = null, staIV = null;
-        if (aIV && dIV && sIV) {atkIV = aIV;defIV = dIV;staIV = sIV;}
+        if (aIV0 && dIV0 && sIV0) {atkIV = aIV0;defIV = dIV0;staIV = sIV0;}
         var request = {"pokemon":selected, "numRanks":limit, "AttackIV":atkIV, "DefenseIV":defIV, "StaminaIV":staIV, "league":league, "minIVs":floor, "minLvl":minLvl, "maxLvl":maxLvl, "time":time.toISOString().slice(0, 19).replace('T', ' ')};
         
         
@@ -569,19 +618,37 @@
         // used to ensure we don't Display Trade Improvement % for ineligible IVs
         var gmRhtml = null;
 
-        if (aIV && dIV && sIV) {
-          //console.log("Found all 3 IVs: "+aIV+", "+dIV+", "+sIV+", ");
-          if ((aIV >= (floor/1)) && (dIV >= (floor/1)) && (sIV >= (floor/1))) {
-            //console.log("All 3 IVs > floor("+floor+"): "+aIV+", "+dIV+", "+sIV+", ");
+        if (aIV0 && dIV0 && sIV0) {
+          //console.log("Found all 3 IVs: "+aIV0+", "+dIV0+", "+sIV0+", ");
+          if ((aIV0 >= (floor/1)) && (dIV0 >= (floor/1)) && (sIV0 >= (floor/1))) {
+            //console.log("All 3 IVs > floor("+floor+"): "+aIV0+", "+dIV0+", "+sIV0+", ");
             document.getElementById('feedbackBox').innerHTML = "";
-            gmRhtml = getMonRank(totalRanks, ranks, keys, maxStatProd, aIV, dIV, sIV);
-            if ((aIV && dIV && sIV) && (gmRhtml == "")) {
-              console.log("Detected too high CP after getMonRank (inside aIV && dIV && sIV)");
+            gmRhtml = getMonRank(totalRanks, ranks, keys, maxStatProd, aIV0, dIV0, sIV0);
+            for (i=1; i<rowNum; i++)
+            {
+              //console.log("Attempting to get IVs for rowNum="+i);
+              try{
+                var curaIV = eval("aIV"+i).value // ensure this exists
+              }
+              catch(ReferenceError) {
+                continue; // skip this loop iteration, user likely deleted an input row
+              }
+              var curdIV = eval("dIV"+i).value;
+              var cursIV = eval("sIV"+i).value;
+              //console.log("Getting Mon Rank for row i="+i+", IVs:"+curaIV+"/"+curdIV+"/"+cursIV);
+              if (curaIV && curdIV && cursIV) {
+                gmRhtml += getMonRank(totalRanks, ranks, keys, maxStatProd, curaIV, curdIV, cursIV);
+              } else {
+                console.log("Skipping row i="+i+" due to missing IVs:"+curaIV+"/"+curdIV+"/"+cursIV);
+              }
+            }
+            if ((aIV0 && dIV0 && sIV0) && (gmRhtml == "")) {
+              console.log("Detected too high CP after getMonRank (inside aIV0 && dIV0 && sIV0)");
               document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs are over "+league+" CP for "+selected+"<br>Please check the Min Level in Settings and try again</i></p>";
             } else {html += gmRhtml;}
 
             if (evoLen) {
-              evoHtml += "<p><i>"+evoLen+" "+selected+" family evo(s): ("+aIV+"-"+dIV+"-"+sIV+")</i></p><table id='outTable'><tr><th>Pokemon</th><th>#</th><th>Lvl</th><th>CP</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
+              evoHtml += "<p><i>"+evoLen+" "+selected+" family evo(s): ("+aIV0+"-"+dIV0+"-"+sIV0+")</i></p><table id='outTable'><tr><th>Pokemon</th><th>#</th><th>Lvl</th><th>CP</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
               var pokeListLen = pokeList.length;
               //console.log("Need to output rows for:"+evos);
               for (var e=0; e<evoLen; e++) {
@@ -599,9 +666,9 @@
                     var evoMaxStatProd = evoKeys[0].split(".")[0];
                     var evoMon = pokeList[f].label;
                     // create link for evo table entry
-                    var IVs = aIV + "_" + dIV + "_" + sIV;
+                    var IVs = aIV0 + "_" + dIV0 + "_" + sIV0;
                     uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+IVs;
-                    evoHtml += getMonRank(evoTotalRanks, evoRanks, evoKeys, evoMaxStatProd, aIV, dIV, sIV, evoMon, uri);
+                    evoHtml += getMonRank(evoTotalRanks, evoRanks, evoKeys, evoMaxStatProd, aIV0, dIV0, sIV0, evoMon, uri);
                     break;
                   }
                 }
@@ -609,11 +676,11 @@
               evoHtml += "</table><br />"
             }
           } else {
-            console.log("Detected IV below Floor:"+floor+" aIV:"+aIV+" dIV:"+dIV+" sIV:"+sIV)
+            console.log("Detected IV below Floor:"+floor+" aIV0:"+aIV0+" dIV0:"+dIV0+" sIV0:"+sIV0)
             document.getElementById('feedbackBox').innerHTML = "<p><i>Please ensure all of your IVs are above the IV Floor and try again</i></p>";
           }
         } else {
-          //console.log("Missing an IV, detected: aIV:"+aIV+" dIV:"+dIV+" sIV:"+sIV)
+          //console.log("Missing an IV, detected: aIV0:"+aIV0+" dIV0:"+dIV0+" sIV0:"+sIV0)
           document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV above to check your Pok&eacute;mon's PvP Rank</i></p>";
         }
         
@@ -656,7 +723,7 @@
         var trades = "";
         var statProd = html.split('</td></tr><tr><td>')[0];
         var searchRank = statProd;
-        if ((gmRhtml != "") && (statProd != null) && (aIV && dIV && sIV)) {
+        if ((gmRhtml != "") && (statProd != null) && (aIV0 && dIV0 && sIV0)) {
           statProd = statProd.split('</td><td>');
           statProd = statProd[statProd.length-1];
           if (document.getElementById('trade').checked) {
@@ -671,7 +738,7 @@
           searchLink += searchRank+"&cp="+league+"&o=10110&l=en'>Generate "+selected+" Search String to Trash below Rank "+searchRank+"</a></p><br>"
         }
         
-        if ((aIV && dIV && sIV) && (gmRhtml == '') && (rank == null)) {
+        if ((aIV0 && dIV0 && sIV0) && (gmRhtml == '') && (rank == null)) {
           console.log("Detected IVs over CP limit in gmRhtml and rank check (2nd one)");
           document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs are not eligible for the "+league+" CP cap<br>Please check the Min Level in Settings and try again</i></p>";
         }
@@ -681,11 +748,11 @@
         var dti = 0;
         if (document.getElementById('trade').checked){dti="1";}else{dti="0";}
         // URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
-        // pokeList limit league floor minLvl maxLvl aIV dIV sIV
+        // pokeList limit league floor minLvl maxLvl aIV0 dIV0 sIV0
         // mon      r     cp     f     min    max    IVs
         uri = URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti
-        if (aIV && dIV && sIV) {
-          var IVs = aIV + "_" + dIV + "_" + sIV;
+        if (aIV0 && dIV0 && sIV0) {
+          var IVs = aIV0 + "_" + dIV0 + "_" + sIV0;
           uri += "&IVs="+IVs;
         }
         uri = encodeURI(uri);
@@ -694,6 +761,28 @@
         window.history.pushState(null, newTitle, uri);
         return true;
       }
+      
+      function doTheInsert(num) {
+        var nextNum = num+1;
+        var prevNum = num-1;
+        rowNum = num;
+        var newRow=document.getElementById('inputTable').insertRow();
+        newRow.innerHTML = "<tr><td><select title='Your Attack IV' id='aIV"+prevNum+"' oninput='start()'><option value=''></option><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Defense IV' id='dIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><select title='Your Stamina IV' id='sIV"+prevNum+"' oninput='start()'><option value='15'>15</option><option value='14'>14</option><option value='13'>13</option><option value='12'>12</option><option value='11'>11</option><option value='10'>10</option><option value='9'>9</option><option value='8'>8</option><option value='7'>7</option><option value='6'>6</option><option value='5'>5</option><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option><option value='0'>0</option></select></td><td><button class='circle minus' onclick='doTheRemoval()'"+/*value='num+-'*/"></button></td></tr>"
+        
+        // update the hidden count of the original row add button to avoid overlapping row nums
+        document.getElementById('plusCell').innerHTML = "<td id='plusCell'><button class='circle plus' onclick='doTheInsert("+nextNum+")' "+/*value="+nextNum+"+*/"></button></td>"
+      }
+      
+      // solution from: https://stackoverflow.com/questions/11553768/remove-table-row-after-clicking-table-row-delete-button
+      function doTheRemoval() {
+        // event.target will be the input element.
+        var td = event.target.parentNode;
+        var tr = td.parentNode; // the row to be removed
+        tr.parentNode.removeChild(tr);
+
+        start();
+      }
+      
       </script>
       <h3>Settings:</h3>
       <label>Top # Ranks:<input type="number" value="10" id="limit" min="1" max="4096" oninput="start()"></label><br />
