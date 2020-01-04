@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics --
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145799979-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -696,48 +696,7 @@
                     //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     
                     // ensure we don't show impossible Tyrogue evos
-                    if (selected == "Tyrogue") {
-                      if (aIV0 === dIV0 && aIV0 === sIV0) {console.log("Tyrogue: All IVs equal, random evo (showing all 3)");
-                      } else if (aIV0 === dIV0 || aIV0 === sIV0 || dIV0 === sIV0) {
-                        if (aIV0 === dIV0) {
-                          if ((sIV0 < aIV0) && (evos[e]/1 == "237")) {
-                            console.log("Tyrogue: Stamina is lowest, skipping HT evo");
-                            continue; //skip Hitmontop
-                          } else if ((sIV0 > aIV0) && (evos[e]/1 != "237")) {
-                            console.log("Tyrogue: Stamina is highest, skipping non-HT evo");
-                            continue; //only show Hitmontop
-                          }
-                        } else if (dIV0 === sIV0) {
-                          if ((aIV0 < dIV0) && (evos[e]/1 == "106")) {
-                            console.log("Tyrogue: Attack is lowest, skipping HL evo");
-                            continue; //skip Hitmonlee
-                          } else if ((aIV0 > dIV0) && (evos[e]/1 != "106")) {
-                            console.log("Tyrogue: Attack is highest, skipping non-HL evo");
-                            continue; //only show Hitmonlee
-                          }
-                        } else if (aIV0 === sIV0) {
-                          if ((dIV0 < sIV0) && (evos[e]/1 == "107")) {
-                            console.log("Tyrogue: Defense is lowest, skipping HC evo");
-                            continue; //skip Hitmonchan
-                          } else if ((dIV0 > sIV0) && (evos[e]/1 != "107")) {
-                            console.log("Tyrogue: Defense is highest, skipping non-HC evo");
-                            continue; //only show Hitmonchan
-                          }
-                        }
-                      } else if ((aIV0 > dIV0) && (aIV0 > sIV0)) {
-                          if (evos[e]/1 != "106") {//Only show Hitmonlee
-                            console.log("Tyrogue: Attack is highest, skipping non-HL evo");
-                            continue; }
-                      } else if ((dIV0 > sIV0) && (dIV0 > aIV0)) {
-                        if (evos[e]/1 != "107") {//Only show Hitmonchan
-                          console.log("Tyrogue: Defense is highest, skipping non-HC evo");
-                          continue; }
-                      } else if ((sIV0 > dIV0) && (sIV0 > aIV0)) {
-                        if (evos[e]/1 != "237") {//Only show Hitmontop
-                          console.log("Tyrogue: Stamina is highest, skipping non-HT evo");
-                          continue; }
-                      } else {console.log("Tyrogue: Not sure how this is possible?");}
-                    }
+                    if (selected == "Tyrogue") {if (wrongTyroEvo(aIV0, dIV0, sIV0, evos[e])) {continue;}}
                 
                     var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl, maxLvl);
                     var evoKeys = Object.keys(evoRanks);
@@ -835,6 +794,50 @@
         var newTitle = "ShortcutIV - PvP Rankings - " + "Rank " + limit + " " + selected + " ("+league+")";
         window.history.pushState(null, newTitle, uri);
         return true;
+      }
+      
+      function wrongTyroEvo(aIV, dIV, sIV, eNum) {
+        if (aIV/1 === dIV/1 && aIV/1 === sIV/1) {console.log("Tyrogue: All IVs equal, random evo (showing all 3)"); return false;
+          } else if (aIV/1 === dIV/1 || aIV/1 === sIV/1 || dIV/1 === sIV/1) {
+            if (aIV/1 === dIV/1) {
+              if ((sIV/1 < aIV/1) && (eNum/1 == "237")) {
+                console.log("Tyrogue: Stamina is lowest, skipping HT evo");
+                return true; //skip Hitmontop
+              } else if ((sIV/1 > aIV/1) && (eNum/1 != "237")) {
+                console.log("Tyrogue: Stamina is highest, skipping non-HT evo");
+                return true; //only show Hitmontop
+              }
+            } else if (dIV/1 === sIV/1) {
+              if ((aIV/1 < dIV/1) && (eNum/1 == "106")) {
+                console.log("Tyrogue: Attack is lowest, skipping HL evo");
+                return true; //skip Hitmonlee
+              } else if ((aIV/1 > dIV/1) && (eNum/1 != "106")) {
+                console.log("Tyrogue: Attack is highest, skipping non-HL evo");
+                return true; //only show Hitmonlee
+              }
+            } else if (aIV/1 === sIV/1) {
+              if ((dIV/1 < sIV/1) && (eNum/1 == "107")) {
+                console.log("Tyrogue: Defense is lowest, skipping HC evoa");
+                return true; //skip Hitmonchan
+              } else if ((dIV/1 > sIV/1) && (eNum/1 != "107")) {
+                console.log("Tyrogue: Defense is highest, skipping non-HC evo");
+                return true; //only show Hitmonchan
+              }
+            }
+          } else if ((aIV/1 > dIV/1) && (aIV/1 > sIV/1)) {
+              if (eNum/1 != "106") {//Only show Hitmonlee
+                console.log("Tyrogue: Attack is highest, skipping non-HL evo");
+                return true; }
+          } else if ((dIV/1 > sIV/1) && (dIV/1 > aIV/1)) {
+            if (eNum/1 != "107") {//Only show Hitmonchan
+              console.log("Tyrogue: Defense is highest, skipping non-HC evo");
+              return true; }
+          } else if ((sIV/1 > dIV/1) && (sIV/1 > aIV/1)) {
+            if (eNum/1 != "237") {//Only show Hitmontop
+              console.log("Tyrogue: Stamina is highest, skipping non-HT evo");
+              return true; }
+          } else {console.log("Tyrogue: Not sure how this is possible?");return false;}
+        return false;
       }
       
       function doTheInsert(num) {
