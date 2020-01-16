@@ -683,15 +683,19 @@
             //console.log("evoLen="+evoLen+", inputRows="+inputRows)
             if ((evoLen) && (inputRows == 1)) {
               evoHtml += "<p><i>"+evoLen+" "+selected+" family evo(s): ("+aIV0+"-"+dIV0+"-"+sIV0+")</i></p><table id='outTable'><tr><th>Pokemon</th><th>#</th><th>Lvl</th><th>CP</th><th>Perfect</th><th>PvP Atk</th><th>PvP Def</th><th>PvP HP</th><th>Stat Prod</th></tr>";
-              var pokeListLen = pokeList.length;
+              // correct for 0 index so pokeList.length is end of pokeList.js (instead of one past end)
+              var pokeListLen = pokeList.length-1;
+              // scale pokeList to actual dexEnd
+              var dexEnd = pokeList[pokeListLen].value.split(",")[0];
+              var scaling = pokeListLen/dexEnd;
               //console.log("Need to output rows for:"+evos);
               for (var e=0; e<evoLen; e++) {
                 //console.log("Attempting to find evos[e("+e+")]:"+evos[e]+" with pokeListLen:"+pokeListLen);
-                var searchStart = ((evos[e]).split("&")[0])-1
-                //console.log("f starting at searchStart:"+searchStart+", iterating while f<pokeListLen("+pokeListLen+")")
-                for (var f=searchStart; f<pokeListLen; f++) {
+                var searchStart = parseInt(scaling * ((evos[e]).split("&")[0]))
+                //console.log("f starting at searchStart:"+searchStart+", iterating while f<pokeListLen("+pokeListLen+"):"+pokeList[pokeListLen].label)
+                for (var f=searchStart; f<=pokeListLen; f++) {
                   var evoMonInfo = pokeList[f].value.split(",");
-                  //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f);
+                  //console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f+":"+pokeList[f].label);
                   if (evoMonInfo[0].indexOf(evos[e])>-1) {
                     //console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                     
