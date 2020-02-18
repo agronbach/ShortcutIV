@@ -18,10 +18,10 @@
     <link rel="preload" href="https://shortcutIV.com/includes/awesomplete.base.css" as="style">
     <link rel="preload" href="https://shortcutIV.com/includes/awesomplete.min.js" as="script">
     <link rel="preload" href="https://shortcutIV.com/includes/pokeList.js" as="script">
-    <title>ShortcutIV - PvP Rankings</title>
+    <title>PvP IV Rankings - ShortcutIV</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Pok&eacute;mon Go&trade; PvP IV Rankings lookup tool for comparing your Pokemon's IVs to ideal PvP IVs. Finds PvP IVs for any wild-caught, weather boosted, traded, raided, hatched, and even purified Pokemon! Did you catch the very best?"/>
+    <meta name="description" content="PvP IV Pok&eacute;mon Go&trade; Rankings lookup tool for comparing your Pokemon's IVs to ideal PvP IVs. Finds PvP IVs for any wild-caught, weather boosted, traded, raided, hatched, and even purified Pokemon! Did you catch the very best?"/>
     <script async src="https://shortcutIV.com/includes/httpsRedirect.js"></script>
     <!-- Includes for FavIcon support-->
     <link rel="apple-touch-icon" sizes="57x57" href="/favIcon/apple-icon-57x57.png">
@@ -385,6 +385,7 @@
     
         var league = document.getElementById('league').value;
         var limit = document.getElementById('limit').value;
+        var dti = document.getElementById("trade").checked;
         
         // this try catch block prevents the page from erroring out if
         // the user has removed the inital IV input row (aIV0-dIV0-sIV0)
@@ -494,12 +495,12 @@
         
         // prepare max stat html output
         var URL = window.location.href.split("?")[0];
-        var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
-        var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
-        var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
-        var minAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.minAtk.aIV + "_" + ranks.minAtk.dIV + "_" + ranks.minAtk.sIV);
-        var minDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.minDef.aIV + "_" + ranks.minDef.dIV + "_" + ranks.minDef.sIV);
-        var minHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+ranks.minHP.aIV + "_" + ranks.minHP.dIV + "_" + ranks.minHP.sIV);
+        var maxAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+ranks.maxAtk.aIV + "_" + ranks.maxAtk.dIV + "_" + ranks.maxAtk.sIV);
+        var maxDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+ranks.maxDef.aIV + "_" + ranks.maxDef.dIV + "_" + ranks.maxDef.sIV);
+        var maxHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+ranks.maxHP.aIV + "_" + ranks.maxHP.dIV + "_" + ranks.maxHP.sIV);
+        var minAtkurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+ranks.minAtk.aIV + "_" + ranks.minAtk.dIV + "_" + ranks.minAtk.sIV);
+        var minDefurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+ranks.minDef.aIV + "_" + ranks.minDef.dIV + "_" + ranks.minDef.sIV);
+        var minHPurl = encodeURI(URL + "?mon="+selected+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+ranks.minHP.aIV + "_" + ranks.minHP.dIV + "_" + ranks.minHP.sIV);
 
         // used to ensure we don't Display Trade Improvement % for ineligible IVs
         var gmRhtml = null;
@@ -572,7 +573,7 @@
                     var evoMon = pokeList[f].label;
                     // create link for evo table entry
                     var IVs = aIV0 + "_" + dIV0 + "_" + sIV0;
-                    uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&IVs="+IVs;
+                    uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&IVs="+IVs;
                     evoHtml += getMonRank(evoNumRanks, evoRanks, evoKeys, evoMaxStatProd, aIV0, dIV0, sIV0, evoMon, uri);
                     break;
                   }
@@ -646,8 +647,6 @@
         output.innerHTML = evoHtml + searchLink + maxes + html + "<br>" + trades;
         
         // update the URL with search parameters
-        var dti = 0;
-        if (document.getElementById('trade').checked){dti="1";}else{dti="0";}
         // URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";
         // pokeList limit league floor minLvl maxLvl aIV0 dIV0 sIV0
         // mon      r     cp     f     min    max    IVs
@@ -658,7 +657,7 @@
         }
         uri = encodeURI(uri);
         //console.log("URI:"+uri);
-        var newTitle = "ShortcutIV - PvP Rankings - " + "Rank " + limit + " " + selected + " ("+league+")";
+        var newTitle = "PvP IV Rankings - " + "Rank " + limit + " " + selected + " ("+league+")" + " - ShortcutIV";
         window.history.pushState(null, newTitle, uri);
         return true;
       }
@@ -698,8 +697,8 @@
                 document.getElementById('maxLvl').value = values[i].split("=")[1];
                 break;
               case "dti":
-                if (values[i].split("=")[1] == 1) { document.getElementById('trade').checked = true;
-                } else { document.getElementById('trade').checked = false; }
+                if (values[i].split("=")[1] == 1) { document.getElementById('trade').checked = true;console.log("Detected dti flag");
+                } else { document.getElementById('trade').checked = false;console.log("No dti flag"); }
                 break;
               case "IVs":
                 var ivStr = values[i].split("=")[1];
