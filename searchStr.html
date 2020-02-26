@@ -349,8 +349,10 @@
       //https://stackoverflow.com/questions/13735247/changing-the-href-of-a-link-tag-using-javascript
       //<link rel="canonical" href="https://example.com/dresses/green-dresses" />
       var newLink = document.createElement('link');
+      newLink.rel = "canonical";
       newLink.href = "https://shortcutiv.com/searchStr.html";
-      document.getElementsByTagName("head")[0].appendChild(newlink);
+      document.getElementsByTagName("head")[0].appendChild(newLink);
+      console.log("Added newLink("+newLink+") to head:"+document.getElementsByTagName('head'));
       canonicalLink = false;
     }
     return true;
