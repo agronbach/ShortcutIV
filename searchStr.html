@@ -95,6 +95,7 @@
   // define Awesomeplete list https://leaverou.github.io/awesomplete/
   var input = document.getElementById("pokeList");
   var selected = undefined;
+  var canonicalLink = true;
   
   var awesomplete = new Awesomplete(input, {list: pokeList,
   	// insert label instead of value into the input.
@@ -343,7 +344,15 @@
     //console.log("URI:"+uri);
     var newTitle = "ShortcutIV - PvP Search Strings - " + "Rank " + limit + " " + selected + " ("+league+")";
     window.history.pushState(null, newTitle, uri);
-
+    
+    if (canonicalLink) {
+      //https://stackoverflow.com/questions/13735247/changing-the-href-of-a-link-tag-using-javascript
+      //<link rel="canonical" href="https://example.com/dresses/green-dresses" />
+      var newLink = document.createElement('link');
+      newLink.href = "https://shortcutiv.com/searchStr.html";
+      document.getElementsByTagName("head")[0].appendChild(newlink);
+      canonicalLink = false;
+    }
     return true;
   }
   
@@ -352,7 +361,7 @@
     //console.log("outputStr ranks="+JSON.stringify(ranks));
     
     var rKeys = Object.keys(ranks);
-    var rLength = rKeys.length - 3; // skip max stat entries
+    var rLength = rKeys.length - 7; // remove all 3 max stat entries, all 3 min stat entries and numRanks
     var totalRanks = rLength;
     var singleStar = true;
     var dualStar = true;
