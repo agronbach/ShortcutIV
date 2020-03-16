@@ -14,7 +14,7 @@
     <link rel="preload" href="https://shortcutIV.com/includes/baseSiteStyling.css" as="style">
     <link rel="preload" href="https://shortcutIV.com/includes/httpsRedirect.js" as="script">
     <link rel="preload" href="https://shortcutIV.com/includes/escapedFooter.js" as="script">
-    <link rel="preload" href="https://shortcutIV.com/includes/sortingHat.js" as="script">
+    <link rel="preload" href="https://shortcutIV.com/includes/sortingHatv2.js" as="script">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js" as="script">
     <link rel="preload" href="https://shortcutIV.com/includes/pokeList.js" as="script">
@@ -242,7 +242,7 @@
     
       <!-- Footer Code Below -->
       <script src="https://shortcutIV.com/includes/escapedFooter.js"></script>
-      <script src="https://shortcutIV.com/includes/sortingHat.js"></script>
+      <script src="https://shortcutIV.com/includes/sortingHatv2.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
       <script src="https://shortcutIV.com/includes/pokeList.js"></script>
         
@@ -423,7 +423,7 @@
         var maxLvl = document.getElementById('maxLvl').value;
         var league = document.getElementById('league').value;
         var limit = document.getElementById('limit').value;
-        var dti = document.getElementById("trade").checked;
+        var dti = document.getElementById("dti").checked;
         var cmp = document.getElementById("cmp").checked;
         var shdw = document.getElementById('shdw').checked;
         var floor = document.getElementById('floor').value;
@@ -512,7 +512,7 @@
         var html = "<table id='outTable'><tr><th>#</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>Apr</th><th>Perfect</th>";
         
         /*include cmp columns if checked*/
-        if (document.getElementById('cmp').checked) {
+        if (cmp) {
           if (ranks.numRanks < 100) {
             /*if there isn't a top 100, make it Top numRanks*/
             html+="<th>R1 CMP</th><th>T"+ranks.numRanks+" CMP</th>";
@@ -567,7 +567,7 @@
                       /*ensure we don't show impossible Tyrogue evos*/
                       if (selected == "Tyrogue") {if (wrongTyroEvo(aIV[i], dIV[i], sIV[i], evos[e])) {continue;}}
                       
-                      var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl, maxLvl);
+                      var evoRanks = calculate(parseInt(evoMonInfo[1]), parseInt(evoMonInfo[2]), parseInt(evoMonInfo[3]), league, floor, minLvl, maxLvl, false);
                       /*console.log("calculate returned evoRanks: "+JSON.stringify(evoRanks)+" for league:"+league+", floor:"+floor+",  minLvl:"+minLvl+", maxLvl:"+maxLvl);*/
                       var evoKeys = Object.keys(evoRanks);
                       var evoNumRanks = evoRanks.numRanks;
@@ -666,7 +666,7 @@
         if ((gmRhtml != "") && (statProd != null) && (aIV[0] && dIV[0] && sIV[0])) {
           statProd = statProd.split('</td><td>');
           statProd = statProd[statProd.length-1];
-          if (document.getElementById('trade').checked) {
+          if (dti) {
             trades = tradePcnts(numRanks, ranks, keys, statProd, floor);
           }
           /*add code for Search String links here*/
@@ -740,7 +740,7 @@
           URL = decodeURI(URL);
           /*console.log("Read URL as: "+URL);*/
           var values = URL.split("&");
-          /*console.log("Values array as: "+JSON.stringify(values));*/
+          console.log("Values array as: "+JSON.stringify(values));
           for (var i=0; i<values.length; i++)
           {
             switch (values[i].split("=")[0]) {
@@ -764,15 +764,15 @@
                 document.getElementById('maxLvl').value = values[i].split("=")[1];
                 break;
               case "dti":
-                if (values[i].split("=")[1] == 1) { document.getElementById('trade').checked = true;}
-                else { document.getElementById('trade').checked = false;}
+                if (values[i].split("=")[1] == "true") {document.getElementById('dti').checked = true;}
+                else { document.getElementById('dti').checked = false;}
                 break;
               case "cmp":
-                if (values[i].split("=")[1] == 1) { document.getElementById('cmp').checked = true;}
+                if (values[i].split("=")[1] == "true") { document.getElementById('cmp').checked = true;}
                 else { document.getElementById('cmp').checked = false;}
                 break;
               case "shdw":
-                if (values[i].split("=")[1] == 1) { document.getElementById('shdw').checked = true;}
+                if (values[i].split("=")[1] == "true") { document.getElementById('shdw').checked = true;}
                 else { document.getElementById('shdw').checked = false;}
                 break;
               case "IVs":
@@ -840,7 +840,7 @@
       function tradePcnts(numRanks, ranks, keys, rank, floor) {
         /*Keep track of eligible/total higher ranked mons*/
         var lGo=0,hGo=0,lGr=0,hGr=0,lUf=0,hUf=0,lBf=0,hBf=0,lLf=0,hLf=0,hNo=0;
-        /*console.log("tPcnts: received numRanks:"+numRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", rank:"+rank);*/
+        /*console.log("tPcnts: received numRanks:"+numRanks+", ranks:"+JSON.stringify(ranks)+", keys[0]:"+keys[0]+", rank:"+rank);*/
 
         for (var i=0; (i<numRanks && (keys[i].indexOf(".")>-1)); i++) {
           /*console.log("tPctns: attempting to check i="+i+" and keys[i]:"+keys[i]);*/
@@ -1004,7 +1004,7 @@
                 html+="<td>"+ranks[keys[i]][j].IVs.star+"</td>"; /*Star Appraisal*/
               }
               html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; /*Perfection*/
-              if ((!mon) && (document.getElementById('cmp').checked)) {
+              if ((!mon) && (cmp==true)) {
                   html+="<td>"+ranks[keys[i]][j].IVs.R1+"</td>"; /*R1 CMP*/
                   html+="<td>"+ranks[keys[i]][j].IVs.T100+"%"+"</td>"; /*T100 CMP*/
                   usrAtk = parseFloat(ranks[keys[i]][j].battle.A).toFixed(1);
@@ -1235,7 +1235,7 @@
         <option value="44">44</option>
         <option value="45">45</option>
       </select></label><br />
-      <label>Display Trade Improvement %:<input id="trade" type="checkbox" oninput="start()"></label><br />
+      <label>Display Trade Improvement %:<input id="dti" type="checkbox" oninput="start()"></label><br />
       <label>Calculate CMP Tie Breaking:<input id="cmp" type="checkbox" oninput="start()"></label><br />
       <br />
       <div style="overflow-x:auto;">
