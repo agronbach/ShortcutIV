@@ -512,7 +512,7 @@
         var html = "<table id='outTable'><tr><th>#</th><th>Lvl</th><th>CP</th><th>Atk IV</th><th>Def IV</th><th>Sta IV</th><th>Apr</th><th>Perfect</th>";
         
         /*include cmp columns if checked*/
-        if (cmp) {
+        if (cmp == true) {
           if (ranks.numRanks < 100) {
             /*if there isn't a top 100, make it Top numRanks*/
             html+="<th>R1 CMP</th><th>T"+ranks.numRanks+" CMP</th>";
@@ -541,7 +541,7 @@
           if (aIV[i] && dIV[i] && sIV[i]) {
             if ((aIV[i] >= (floor/1)) && (dIV[i] >= (floor/1)) && (sIV[i] >= (floor/1))) {
               /*console.log("i:"+i+" All 3 IVs > floor("+floor+"): "+aIV[i]+", "+dIV[i]+", "+sIV[i]+", aIV.length:"+aIV.length);*/
-              gmRhtml = getMonRank(numRanks, ranks, keys, shdw, maxStatProd, aIV[i], dIV[i], sIV[i]);
+              gmRhtml = getMonRank(numRanks, ranks, keys, shdw, cmp, maxStatProd, aIV[i], dIV[i], sIV[i]);
               if (aIV[i] && dIV[i] && sIV[i] && (gmRhtml == "")) {
                 console.log("i:"+i+" Detected too high CP after getMonRank");
                 document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs (row "+(i+1)+") are over "+league+" CP for "+selected+"<br>Please check Settings: Min Level and try again</i></p>";
@@ -577,7 +577,7 @@
                       IVs = aIV[i] + "_" + dIV[i] + "_" + sIV[i];
                       uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&cmp="+cmp+"&shdw="+shdw+"&IVs="+IVs;
                       /*console.log("About to pass IVs:"+aIV[i]+", "+dIV[i]+", "+sIV[i]+" to getMonRank");*/
-                      var evoGMRhtml = getMonRank(evoNumRanks, evoRanks, evoKeys, shdw, evoMaxStatProd, aIV[i], dIV[i], sIV[i], evoMon, uri);
+                      var evoGMRhtml = getMonRank(evoNumRanks, evoRanks, evoKeys, shdw, cmp, evoMaxStatProd, aIV[i], dIV[i], sIV[i], evoMon, uri);
                       if (evoGMRhtml) {
                         if (evoHtml) {
                           /*if this is a second evo, just add it*/
@@ -968,7 +968,7 @@
         return outHTML;
       }
       
-      function getMonRank(numRanks, ranks, keys, shdw, maxStatProd, aIV, dIV, sIV, mon, uri) {
+      function getMonRank(numRanks, ranks, keys, shdw, cmp, maxStatProd, aIV, dIV, sIV, mon, uri) {
         /*console.log("gMR: received numRanks:"+numRanks+", ranks:"+ranks+", keys[0]:"+keys[0]+", maxStatProd:"+maxStatProd+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV+", mon:"+mon+", uri:"+uri);*/
         var html = "";
         var actualRank = 1;
@@ -1004,7 +1004,7 @@
                 html+="<td>"+ranks[keys[i]][j].IVs.star+"</td>"; /*Star Appraisal*/
               }
               html+="<td>"+parseFloat((100*keys[i].split(".")[0])/maxStatProd).toFixed(2)+"%"+"</td>"; /*Perfection*/
-              if ((!mon) && (cmp==true)) {
+              if ((!mon) && (cmp)) {
                   html+="<td>"+ranks[keys[i]][j].IVs.R1+"</td>"; /*R1 CMP*/
                   html+="<td>"+ranks[keys[i]][j].IVs.T100+"%"+"</td>"; /*T100 CMP*/
                   usrAtk = parseFloat(ranks[keys[i]][j].battle.A).toFixed(1);
