@@ -24,7 +24,7 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl, maxLvl, inv
         for( var level = maxLvl; level >= minLvl; level-- ) {
           var cp = Math.max(10, Math.floor((baseatk + atk) * Math.sqrt(basedef + def) * Math.sqrt(basesta + sta) * cpm[level] * cpm[level] / 10));
     		  if (cp > league) {
-    		    if (level == minLvl) {
+    		    if ((level == minLvl) && (invalid)) {
     		      invalids.push({"A":atk, "D":def, "S":sta, "cp":cp});
     		    }
     		    continue; /* keep searching for level */
