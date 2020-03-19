@@ -857,37 +857,40 @@
       function tradePcnts(numRanks, ranks, keys, rank, floor, numIVs, aIV, dIV, sIV) {
         /*Keep track of eligible/total higher ranked mons*/
         var lGo=0,hGo=0,lGr=0,hGr=0,lUf=0,hUf=0,lBf=0,hBf=0,lLf=0,hLf=0,hNo=0;
-        /*console.log("tPcnts: received numRanks:"+numRanks+", ranks:"+JSON.stringify(ranks)+", keys[0]:"+keys[0]+", rank:"+rank);*/
+        /*console.log("tradePcnts: received numRanks:"+numRanks+", keys[0]:"+keys[0]+", rank:"+rank+", floor:"+floor+", numIVs:"+numIVs+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV);*/
+        /*console.log("tradePcnts: ranks:"+JSON.stringify(ranks));*/
 
+        var totalMons = 0;
         for (var i=0; (i<numRanks && (keys[i].indexOf(".")>-1)); i++) {
           /*console.log("tPctns: attempting to check i="+i+" and keys[i]:"+keys[i]);*/
             for (var j=0; j<ranks[keys[i]].length; j++) {
               /*1IV=lGo,hGo + 2IV=lGr,hGr + 3IV=lUf,hUf + 5IV=lBf,hBf + 12V=lLf,hLf*/
-              if ((ranks[keys[i]][j].IVs.A > 11) && (ranks[keys[i]][j].IVs.D > 11) && (ranks[keys[i]][j].IVs.S > 11)) {
+              /*console.log("tradePcnts: Checking:"+ranks[keys[i]][j].IVs.A/1+"/"+ranks[keys[i]][j].IVs.D/1+"/"+ranks[keys[i]][j].IVs.S/1+", rank:"+keys[i].split(".")[0]/1+" vs. "+rank/1);*/
+              if ((ranks[keys[i]][j].IVs.A/1 > 11) && (ranks[keys[i]][j].IVs.D/1 > 11) && (ranks[keys[i]][j].IVs.S/1 > 11)) {
                 if (rank/1<keys[i].split(".")[0]/1){
                   hLf=hLf+1;hBf=hBf+1;hUf=hUf+1;hGr=hGr+1;hGo=hGo+1;hNo=hNo+1;
                 } else {
                   lLf=lLf+1;lBf=lBf+1;lUf=lUf+1;lGr=lGr+1;lGo=lGo+1;
                 }
-              } else if ((ranks[keys[i]][j].IVs.A > 4) && (ranks[keys[i]][j].IVs.D > 4) && (ranks[keys[i]][j].IVs.S > 4)) {
+              } else if ((ranks[keys[i]][j].IVs.A/1 > 4) && (ranks[keys[i]][j].IVs.D/1 > 4) && (ranks[keys[i]][j].IVs.S/1 > 4)) {
                 if (rank/1<keys[i].split(".")[0]/1) {
                   hBf=hBf+1;hUf=hUf+1;hGr=hGr+1;hGo=hGo+1;hNo=hNo+1;
                 } else {
                   lBf=lBf+1;lUf=lUf+1;lGr=lGr+1;lGo=lGo+1;
                 }
-              } else if ((ranks[keys[i]][j].IVs.A > 2) && (ranks[keys[i]][j].IVs.D > 2) && (ranks[keys[i]][j].IVs.S > 2)) {
+              } else if ((ranks[keys[i]][j].IVs.A/1 > 2) && (ranks[keys[i]][j].IVs.D/1 > 2) && (ranks[keys[i]][j].IVs.S/1 > 2)) {
                 if (rank/1 < keys[i].split(".")[0]/1) {
                   hUf=hUf+1;hGr=hGr+1;hGo=hGo+1;hNo=hNo+1;
                 } else {
                   lUf=lUf+1;lGr=lGr+1;lGo=lGo+1;
                 }
-              } else if ((ranks[keys[i]][j].IVs.A > 1) && (ranks[keys[i]][j].IVs.D > 1) && (ranks[keys[i]][j].IVs.S > 1)) {
+              } else if ((ranks[keys[i]][j].IVs.A/1 > 1) && (ranks[keys[i]][j].IVs.D/1 > 1) && (ranks[keys[i]][j].IVs.S/1 > 1)) {
                 if (rank/1 < keys[i].split(".")[0]/1) {
                   hGr=hGr+1;hGo=hGo+1;hNo=hNo+1;
                 } else {
                   lGr = lGr + 1;lGo = lGo + 1;
                 }
-              } else if ((ranks[keys[i]][j].IVs.A > 0) && (ranks[keys[i]][j].IVs.D > 0) && (ranks[keys[i]][j].IVs.S > 0)) {
+              } else if ((ranks[keys[i]][j].IVs.A/1 > 0) && (ranks[keys[i]][j].IVs.D/1 > 0) && (ranks[keys[i]][j].IVs.S/1 > 0)) {
                 if (rank/1 < keys[i].split(".")[0]/1) {
                   hGo=hGo+1;hNo=hNo+1;
                 } else {
@@ -898,8 +901,11 @@
                   hNo=hNo+1;
                 }
               }
+            totalMons = totalMons + 1;
             }
         }
+        /*console.log("Stopped after i:"+i+", totalMons:"+totalMons+", ranks[keys[i]]:"+JSON.stringify(ranks[keys[i]]));*/
+        /*console.log("tradePcnts: calculated hLf:"+hLf+", hBf:"+hBf+", hUf:"+hUf+", hGr:"+hGr+", hGo:"+hGo+", hNo:"+hNo);*/
         
         /* Count up invalid CP combinations by friendship (over CP cap) */
         var iGo=0,iGr=0,iUf=0,iBf=0,iLf=0,iNo=0;
@@ -1060,7 +1066,7 @@
                 html+="<td>"+numOut(ranks[keys[i]][j].battle.D,1)+"</td>"; /*GL Def Total*/
               }
               html+="<td>"+ranks[keys[i]][j].battle.S+"</td>"; /*GL Sta IV*/
-              html+="<td>"+keys[i].split(".")[0]+"</td>"; /*Stat Product*/
+              html+="<td>"+keys[i].split(".")[0]+"</td></tr>"; /*Stat Product*/
               /*console.log("Found rank="+actualRank);*/
               break; /* we found it, stop searching / leave the loop!*/
             }
