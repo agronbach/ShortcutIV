@@ -270,6 +270,20 @@
         /*insert label instead of value into the input*/
         replace: function(suggestion) {
           this.input.value = suggestion.label;
+          if (selected) {
+            /* Clear all existing IV Input Rows */
+            for (var i=0; i<aIV.length; i++) {
+              /* voodoo to actually remove all the rows one by one */
+              var tr = document.getElementById('aIV['+i+']').parentNode;
+              tr.parentNode.parentNode.removeChild(tr.parentNode);
+            }
+            /* clear the value arrays */
+            aIV.splice(0, aIV.length);
+            dIV.splice(0, dIV.length);
+            sIV.splice(0, sIV.length);
+            /* Re-Add default IV Input Row */
+            doTheInsert();
+          }
           selected = suggestion.label;
           
           /*reset Min Level if we adjusted it previously*/
@@ -389,7 +403,7 @@
           {
             if (selected == awesomplete.suggestions[i].label)
             {
-              /*console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)*/
+              /*console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label);*/
               mon = awesomplete.suggestions[i].value;
             }
           }
@@ -400,7 +414,7 @@
           {
             if (selected == awesomplete.options.list[i].label)
             {
-              /*console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label)*/
+              /*console.log("mon set to selected == awesomplete.suggestions["+i+"].label:"+awesomplete.suggestions[i].label);*/
               mon = awesomplete.options.list[i].value;
             }
           }
@@ -446,6 +460,10 @@
           return false;
         }
         var maxStatProd = keys[0].split(".")[0];
+        
+        /*if (lastMon === undefined) {
+          lastMon = mon;
+        }*/
         
         for (var i=0; i<aIV.length; i++)
         { /* Ensure we have current IVs for all input rows */
@@ -1140,12 +1158,6 @@
       
       /*solution from: https://stackoverflow.com/questions/11553768/remove-table-row-after-clicking-table-row-delete-button*/
       function doTheRemoval() {
-        
-        /* If only one row, refuse to remove it */
-        if (aIV.length == 1) {
-          start();
-          return true;
-        }
         /*event.target will be the input element*/
         /*console.log("doTheRemoval: event.target.parentNode.parentNode:"+JSON.stringify(event.target.parentNode.parentNode.innerHTML));*/
         var td = event.target.parentNode;
@@ -1172,6 +1184,11 @@
         console.log("dIV after removal:"+JSON.stringify(dIV));
         console.log("sIV after removal:"+JSON.stringify(sIV));*/
         tr.parentNode.removeChild(tr);
+        
+        /* If we removed all rows, add one back */
+        if (aIV.length < 1) {
+          doTheInsert();
+        }
         start();
         return true;
       }
