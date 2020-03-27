@@ -672,11 +672,11 @@
         var trades = "";
         var searchLink = "";
         var statProd = html.split('</td></tr><tr><td>')[0];
-        if ((gmRhtml != "") && (statProd != null) && (aIV[0] && dIV[0] && sIV[0])) {
+        if ((gmRhtml != "") && (statProd != null) && (aIV[aIV.length-1] && dIV[aIV.length-1] && sIV[aIV.length-1])) {
           statProd = statProd.split('</td><td>');
           statProd = statProd[statProd.length-1];
-          if (dti) {
-            trades = tradePcnts(numRanks, ranks, keys, statProd, floor, aIV.length, aIV[0], dIV[0], sIV[0]);
+          if (dti)  {
+            trades = tradePcnts(numRanks, ranks, keys, statProd, floor, aIV.length, aIV[aIV.length-1], dIV[aIV.length-1], sIV[aIV.length-1]);
           }
           /*Generate Search String links for each IV set*/
           /*https://shortcutiv.com/searchStr.html?mon=Medicham&r=10&cp=1500&o=1011100&l=en*/
@@ -857,7 +857,7 @@
       function tradePcnts(numRanks, ranks, keys, rank, floor, numIVs, aIV, dIV, sIV) {
         /*Keep track of eligible/total higher ranked mons*/
         var lGo=0,hGo=0,lGr=0,hGr=0,lUf=0,hUf=0,lBf=0,hBf=0,lLf=0,hLf=0,hNo=0;
-        /*console.log("tradePcnts: received numRanks:"+numRanks+", keys[0]:"+keys[0]+", rank:"+rank+", floor:"+floor+", numIVs:"+numIVs+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV);*/
+        console.log("tradePcnts: received numRanks:"+numRanks+", keys[0]:"+keys[0]+", rank:"+rank+", floor:"+floor+", numIVs:"+numIVs+", aIV:"+aIV+", dIV:"+dIV+", sIV:"+sIV);
         /*console.log("tradePcnts: ranks:"+JSON.stringify(ranks));*/
 
         var totalMons = 0;
