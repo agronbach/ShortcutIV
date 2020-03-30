@@ -186,7 +186,7 @@
   }
   function start() {
     
-    if ((document.getElementById('league').value == "All") || ((getComputedStyle(document.getElementById("leagueRanks"), null).display == "block") && (document.getElementById('league').value != "All"))) {
+    if (((document.getElementById('league').value == "All") && (getComputedStyle(document.getElementById("leagueRanks"), null).display != "block")) || ((getComputedStyle(document.getElementById("leagueRanks"), null).display == "block") && (document.getElementById('league').value != "All"))) {
       /* https://stackoverflow.com/questions/18353574/how-to-show-hide-div-on-selection-of-any-drop-down-value */
       /* https://stackoverflow.com/questions/4866229/check-element-css-display-with-javascript */
       document.getElementById("leagueRanks").style.display = (getComputedStyle(document.getElementById("leagueRanks"), null).display == "block") ? "none":"block";
@@ -505,7 +505,6 @@
         console.log("maxCP is: "+maxCP+", only need Great + Ultra League");
         ranks = calculat3(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), 1500, 0, 0, 40);
         ULranks = calculat3(parseInt(value[1]), parseInt(value[2]), parseInt(value[3]), 2500, 0, 0, 40);
-        //console.log("document.getElementById('GLlimit').value:"+document.getElementById('GLlimit').value+", ranks.length:"+ranks.length);
         rKeys = Object.keys(ranks);
         for (var i=document.getElementById('GLlimit').value/1; i<rKeys.length ;i++) {delete ranks[rKeys[i]];}
         ULkeys = Object.keys(ULranks);
@@ -533,7 +532,7 @@
       for (var i=document.getElementById('GLlimit').value/1; i<rKeys.length ;i++) {delete mergedRanks[rKeys[i]];}
     }
     
-    console.log("outputStr mergedRanks="+JSON.stringify(mergedRanks));
+    /*console.log("outputStr mergedRanks="+JSON.stringify(mergedRanks));*/
     
     rKeys = Object.keys(mergedRanks);
     var rLength = (league != "All") ? limit:mergedRanks.numRanks;
@@ -677,7 +676,7 @@
     
     /* let the user know what we just output */
     var message = "";
-    //var printLimit = Math.min(limit, numRanks);
+    /*var printLimit = Math.min(limit, numRanks);*/
     if ((trash) && (!onlyZero)) {
       if ((hundo) && (zero)) {
         message = "String trashes all "+mon+" except Top "+rLength+ " PvP "+selected;
