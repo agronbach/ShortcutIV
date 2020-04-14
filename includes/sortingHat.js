@@ -55,12 +55,12 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl, maxLvl, inv
     		  level = level/2 + 1;
     		  
     		  /* store as arrays to prevent hash collisions from dropping entires */
-    		  /* Tie Breaking Order: 1)StatProd -> 2)AtkStat -> 3)HPval -> 4)finalCP -> 5)ERROR */
+    		  /* Tie Breaking Order: 1)StatProd -> 2)AtkStat -> 3)HPval -> 4)finalCP -> 5)StaIV -> 6)ERROR */
     		  var newIndex = statProd+"."+Math.round(100000*aSt);
     		  if (!(newIndex in ranks)) {
     		    ranks[newIndex] = [{ "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level, "CP":cp}];
     		  } else {
-    		    var i,collision = false;
+    		    var i;
     		    var ranksLen = ranks[newIndex].length;
     		    for (i=0; i<ranksLen; i++) {
     		      if (sSt > ranks[newIndex][i].battle.S) {
@@ -69,14 +69,16 @@ function calculate(baseatk, basedef, basesta, league, floor, minLvl, maxLvl, inv
     		        if (cp > ranks[newIndex][i].CP) {
     		          break;
     		        } else if (cp == ranks[newIndex][i].CP) {
-    		          collision = true;
+    		          if (sta > ranks[newIndex][i].IVs.S) {
+    		            /*console.log("Used 5th tie breaker (Stamina IV) for newIndex("+newIndex+"):"+JSON.stringify(ranks[newIndex]));*/
+    		            break;
+    		          } else if (sta == ranks[newIndex][i].IVs.S) {
+    		            console.log("Need 6th tie breaker for newIndex("+newIndex+"):"+JSON.stringify(ranks[newIndex]));
+    		          }
     		        }
     		      }
     		    }
     		    ranks[newIndex].splice(i, 0, { "IVs": {"A":atk, "D":def, "S":sta, "star":Star}, "battle":{"A":aSt, "D":dSt, "S":sSt}, "L":level, "CP":cp});
-    		    if (collision === true){
-    		      console.log("Need 5th tie breaker for newIndex("+newIndex+"):"+JSON.stringify(ranks[newIndex]));
-    		    }
     		  }
     		  numRanks = numRanks + 1;
     		  break; /* stop evaluating this IV combination */
