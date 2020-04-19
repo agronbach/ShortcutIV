@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics --
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145799979-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -135,8 +135,8 @@
   
   function checkEvoInputs(i, evo) {
     var evoName = "Middle Evolution";
-    console.log("chEvoI: otherEvos.length:"+otherEvos.length);
-    console.log("chEvoI: otherEvos:"+JSON.stringify(otherEvos));
+    /*console.log("chEvoI: otherEvos.length:"+otherEvos.length);*/
+    /*console.log("chEvoI: otherEvos:"+JSON.stringify(otherEvos));*/
     if ((otherEvos) && (otherEvos.length > 2)) {evoName = otherEvos[i];}
     else if (!(evo)) {evoName = "<i>No Additional Evolutions Found</i>";}
     
@@ -145,9 +145,9 @@
     var ulVal = (document.getElementById('ULlimit['+i+']')) ? document.getElementById('ULlimit['+i+']').value : 10;
     var mlVal = (document.getElementById('MLlimit['+i+']')) ? document.getElementById('MLlimit['+i+']').value : 10;
     
-    console.log("Obtained glVal:"+glVal+", ulVal:"+ulVal+", mlVal:"+mlVal);
+    /*console.log("Obtained glVal:"+glVal+", ulVal:"+ulVal+", mlVal:"+mlVal);*/
     
-    console.log("chEvoI: otherEvo["+i+"]...");
+    /*console.log("chEvoI: otherEvo["+i+"]...");*/
     if ((document.getElementById('otherEvo['+i+']')) && (document.getElementById('otherEvo['+i+']').checked)) {
       if (document.getElementById('league').value == "All") {document.getElementById('midLimits').innerHTML = evoName+": <input id='otherEvo["+i+"]' type='checkbox' oninput='addBoxes()'> <div id='evoName["+i+"]' style='display: inline-block;'></div>GL:<input type='number' value='"+glVal+"' id='GLlimit["+i+"]' min='1' max='4096' oninput='start()'>UL:<input type='number' value='"+ulVal+"' id='ULlimit["+i+"]' min='1' max='4096' oninput='start()'>ML:<input type='number' value='"+mlVal+"' id='MLlimit["+i+"]' min='1' max='4096' oninput='start()'>";}
       else {document.getElementById('midLimits').innerHTML = evoName+": <input id='otherEvo["+i+"]' type='checkbox' oninput='addBoxes()'> <div id='evoName["+i+"]' style='display: inline-block;'></div>Top # Ranks:<input type='number' value='"+glVal+"' id='GLlimit["+i+"]' min='1' max='4096' oninput='start()'>";}
@@ -192,7 +192,6 @@
             break;
           case "r":
             var rStr = (values[i].split("=")[1]).split("-");
-            console.log("rStr:"+rStr);
             if (rStr.length > 1) {
               document.getElementById('GLlimit[1]').value = rStr[0];
               document.getElementById('ULlimit[1]').value = rStr[1];
@@ -323,8 +322,8 @@
       var midID = 10000;
       baseVals[0] = value[0];
       baseID = value[0].split("&")[0];
-      console.log("Using baseVals[0] of:"+baseVals[0]);
-      console.log("Using baseID of:"+baseID);
+      /*console.log("Using baseVals[0] of:"+baseVals[0]);
+      console.log("Using baseID of:"+baseID);*/
       
       for (i=4; i<value.length; i++)
       {
@@ -342,15 +341,15 @@
         if (baseID/1 > value[i]/1) {
           baseVals[0] = value[i];
           baseID = value[i];
-          console.log("Updated base evo to "+baseVals[0]);
+          /*console.log("Updated base evo to "+baseVals[0]);*/
         } else if ((value[i]/1 > baseVals[0]/1) && (midID/1 > value[i]/1)) {
           midID = value[i];
           midVals[0] = value[i];
           console.log("Updated middle evo to "+midVals[0]);
         }
       }
-      console.log("Found base evo to be "+baseVals[0]);
-      console.log("Found middle evo to be "+midVals[0]);
+      /*console.log("Found base evo to be "+baseVals[0]);
+      console.log("Found middle evo to be "+midVals[0]);*/
     } else {
       /* if we aren't using base evo, use the select mon's ID */
       console.log("Skipping finding base evo, (['106', '107', '237'].includes(value):"+(['106', '107', '237'].includes(value[0])));
@@ -378,7 +377,7 @@
     /* foundBase boolean fixes same dexNum forms displaying incorrectly (Rotom) */
     var foundBase = false;
     var foundMid = false;
-    console.log("midVals[0]:"+midVals[0]);
+    /*console.log("midVals[0]:"+midVals[0]);*/
     /* get base stats of whatever form we are outputting string for */
     for (i = 0; i < awesomplete.options.list.length; i++) {
       awesomplete.options.list[i].value.split(',')[0];
@@ -405,7 +404,8 @@
           }
         }
         midVals[4] = awesomplete.options.list[i].label;
-        otherEvos.push(awesomplete.options.list[i].label);
+        if (!(otherEvos.includes(awesomplete.options.list[i].label))) {otherEvos.push(awesomplete.options.list[i].label);}
+        console.log("otherEvos:"+JSON.stringify(otherEvos));
         midVals[1] = awesomplete.options.list[i].value.split(',')[1];
         midVals[2] = awesomplete.options.list[i].value.split(',')[2];
         midVals[3] = awesomplete.options.list[i].value.split(',')[3];
@@ -496,18 +496,17 @@
     return true;
   }
   
-  function getRanks(evoVals, limit, trash, hundo, zero, onlyZero, league) {
+  function getRanks(evoVals, trash, hundo, zero, onlyZero, league) {
     
     /*var evoVals = [];
     evoVals[0] = baseVals;
     evoVals[1] = finalVals;
     evoVals[2] = midVals;*/
     
-    console.log("Received evoVals:"+JSON.stringify(evoVals));
+    /*console.log("Received evoVals:"+JSON.stringify(evoVals));*/
     
-    var message = "String ", numRanks = limit, rKeys, GLkeys, ULkeys, MLkeys, i, j;
-    var GLranks = {}, ULranks = {}, MLranks = {};
-    
+    var message = "String ", numRanks, rKeys, GLkeys, ULkeys, MLkeys, i, j;
+    var baseRanks = {}, GLranks = {}, ULranks = {}, MLranks = {};
     
     for (i=0; i<evoVals.length; i++) {
       console.log("Loop #"+i+": evoVals["+i+"]:"+JSON.stringify(evoVals[i]));
@@ -520,6 +519,21 @@
           } else {
             message += "finds "+evoVals[i][4]+" as ";
           }
+          
+          evoVals[i].push(Math.max(10, Math.floor((evoVals[i][1]/1 + 15) * Math.sqrt(evoVals[i][2]/1 + 15) * Math.sqrt(evoVals[i][3]/1 + 15) * cpm[(40 - 1)*2] * cpm[(40 - 1)*2] / 10)));
+          
+          if (evoVals[i][5]/1 > 1300) {
+            console.log("Base evo ("+evoVals[i][4]+") Max CP is:"+evoVals[i][5]/1+", adding to evo list...");
+            baseRanks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 1500, 0, 0, 40);
+            message += "PvP "+evoVals[i][4]+" for Top "+document.getElementById('limit').value/1+ " GL,<br>and ";
+            GLkeys = Object.keys(baseRanks);
+            for (j=document.getElementById('limit').value/1; j<GLkeys.length; j++) {delete baseRanks[GLkeys[j]];}
+            
+            evoVals[i].push(baseRanks);
+            evoVals[i][6].numRanks = document.getElementById('limit').value/1;
+          } else {
+            console.log("Base evo ("+evoVals[i][4]+") Max CP is only:"+evoVals[i][5]/1+", NOT adding to evo list");
+          }
           break;
 
         case 1: /* final evolution */
@@ -527,39 +541,49 @@
           
           if (league != "All") {
             GLranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), league, 0, 0, 40);
-            message += "Top "+numRanks+ " PvP "+evoVals[i][4];
+            message += "Top "+document.getElementById('limit').value/1+ " PvP "+evoVals[i][4];
             rKeys = Object.keys(GLranks);
-            for (j=numRanks; j<rKeys.length; j++) {delete GLranks[rKeys[j]];}
+            for (j=document.getElementById('limit').value/1; j<rKeys.length; j++) {delete GLranks[rKeys[j]];}
             evoVals[i].push(GLranks);
-            evoVals[i][6].numRanks = numRanks;
+            evoVals[i][6].numRanks = document.getElementById('limit').value/1;
 
           } else {
             /* Run Great League Calculations first, always need to be done for all Leagues */
             GLranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 1500, 0, 0, 40);
             message += "PvP "+evoVals[i][4]+" for Top "+document.getElementById('GLlimit['+i+']').value+ " GL";
             GLkeys = Object.keys(GLranks);
+            console.log("Limiting i="+i+" by GLlimit["+i+"]="+document.getElementById('GLlimit['+i+']').value/1);
             for (j=document.getElementById('GLlimit['+i+']').value/1; j<GLkeys.length; j++) {delete GLranks[GLkeys[j]];}
-            numRanks = document.getElementById('GLlimit['+i+']').value/1;
+            numRanks = (Object.keys(GLranks)).length/1;
 
             if (evoVals[i][5]/1 > 1500) {
               ULranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 2500, 0, 0, 40);
               message += ", and Top "+document.getElementById('ULlimit['+i+']').value+ " UL";
               ULkeys = Object.keys(ULranks);
+              console.log("Limiting i="+i+" by ULlimit["+i+"]="+document.getElementById('ULlimit['+i+']').value/1);
               for (j=document.getElementById('ULlimit['+i+']').value/1; j<ULkeys.length; j++) {delete ULranks[ULkeys[j]];}
-              numRanks += document.getElementById('ULlimit['+i+']').value/1;
+              numRanks = (Object.keys(ULranks)).length/1;
             }
             
             if (evoVals[i][5]/1 > 2500) {
               MLranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 5000, 0, 0, 40);
               message += ", and Top "+document.getElementById('MLlimit['+i+']').value+ " ML";
               MLkeys = Object.keys(MLranks);
+              console.log("Limiting i="+i+" by MLlimit["+i+"]="+document.getElementById('MLlimit['+i+']').value/1);
               for (j=document.getElementById('MLlimit['+i+']').value/1; j<MLkeys.length; j++) {delete MLranks[MLkeys[j]];}
-              numRanks += document.getElementById('MLlimit['+i+']').value/1;
+              /*numRanks += document.getElementById('MLlimit['+i+']').value/1;*/
+              numRanks = (Object.keys(MLranks)).length/1;
             }
             evoVals[i].push({...GLranks, ...ULranks, ...MLranks});
             evoVals[i][6].numRanks = numRanks;
           }
-          console.log("Finished case 1 successfully!");
+          
+          /* merge into existing array and update total numRanks */
+          if (evoVals[0][5]/1 > 1300) {
+            evoVals[1][6] = {...evoVals[0][6], ...evoVals[1][6]};
+            evoVals[1][6].numRanks = evoVals[0][6].numRanks/1 + evoVals[1][6].numRanks/1;
+          }
+      
           break;
 
         default: /* any additional evos */
@@ -570,38 +594,43 @@
               GLranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), league, 0, 0, 40);
               message += " and PvP "+evoVals[i][4];
               rKeys = Object.keys(GLranks);
-              for (j=numRanks; j<rKeys.length; j++) {delete GLranks[rKeys[j]];}
+              for (j=document.getElementById('GLlimit['+i+']').value/1; j<rKeys.length; j++) {delete GLranks[rKeys[j]];}
               evoVals[i].push(GLranks);
-
-              /* merge into existing array and update total numRanks */
-              evoVals[1][6] = {...evoVals[1][6], ...evoVals[i][6]};
-              evoVals[1][6].numRanks = evoVals[1][6].numRanks/1 + numRanks/1;
+              evoVals[i][6].numRanks = (Object.keys(GLranks)).length/1;
+              
             } else {
               /* Run Great League Calculations first, always need to be done for all Leagues */
               GLranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 1500, 0, 0, 40);
               message += ",<br> and PvP "+evoVals[i][4]+" for Top "+document.getElementById('GLlimit['+i+']').value+ " GL";
               GLkeys = Object.keys(GLranks);
+              /*console.log("Limiting i="+i+" by GLlimit["+i+"]="+document.getElementById('GLlimit['+i+']').value/1);*/
               for (j=document.getElementById('GLlimit['+i+']').value/1; j<GLkeys.length; j++) {delete GLranks[GLkeys[j]];}
-              numRanks = document.getElementById('GLlimit['+i+']').value/1;
+              numRanks = (Object.keys(GLranks)).length/1;
   
               if (evoVals[i][5]/1 > 1500) {
                 ULranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 2500, 0, 0, 40);
                 message += ", and Top "+document.getElementById('ULlimit['+i+']').value+ " UL";
                 ULkeys = Object.keys(ULranks);
+                /*console.log("Limiting i="+i+" by ULlimit["+i+"]="+document.getElementById('ULlimit['+i+']').value/1);*/
                 for (j=document.getElementById('ULlimit['+i+']').value/1; j<ULkeys.length; j++) {delete ULranks[ULkeys[j]];}
-                numRanks += document.getElementById('ULlimit['+i+']').value/1;
+                numRanks = (Object.keys(ULranks)).length/1;
               }
               
               if (evoVals[i][5]/1 > 2500) {
                 MLranks = calculate(parseInt(evoVals[i][1]), parseInt(evoVals[i][2]), parseInt(evoVals[i][3]), 5000, 0, 0, 40);
                 message += ", and Top "+document.getElementById('MLlimit['+i+']').value+ " ML";
                 MLkeys = Object.keys(MLranks);
+                /*console.log("Limiting i="+i+" by MLlimit["+i+"]="+document.getElementById('MLlimit['+i+']').value/1);*/
                 for (j=document.getElementById('MLlimit['+i+']').value/1; j<MLkeys.length; j++) {delete MLranks[MLkeys[j]];}
-                numRanks += document.getElementById('MLlimit['+i+']').value/1;
+                numRanks = (Object.keys(MLranks)).length/1;
               }
               evoVals[i].push({...GLranks, ...ULranks, ...MLranks});
-              evoVals[i][6].numRanks = numRanks;
+              evoVals[i][6].numRanks = numRanks/1;
             }
+            
+            /* merge into existing array and update total numRanks */
+            evoVals[1][6] = {...evoVals[1][6], ...evoVals[i][6]};
+            evoVals[1][6].numRanks = evoVals[1][6].numRanks/1 + evoVals[i][6].numRanks/1;
           } else {
             console.log("default: skipping evo: "+evoVals[i][4]+"...");
           }
@@ -615,16 +644,18 @@
   
   function outputStr(finalVals, baseVals, midVals, limit, trash, hundo, zero, onlyZero, short, league, binary, output, cpstr, hpstr) {
     /* baseVals[0]: id, baseVals[1]: baseatk, baseVals[2]: basedef: baseVals[3]: basesta, baseVals[4]: mon */
-    console.log("outputStr: finalVals[0]:"+finalVals[0]+", finalVals[1]:"+finalVals[1]+", finalVals[2]:"+finalVals[2]+", finalVals[3]:"+finalVals[3]+", finalVals[4]:"+finalVals[4]+", baseVals[0]:"+baseVals[0]+", baseVals[1]:"+baseVals[1]+", baseVals[2]:"+baseVals[2]+", baseVals[3]:"+baseVals[3]+", baseVals[4]:"+baseVals[4]+", midVals[0]:"+midVals[0]+", midVals[1]:"+midVals[1]+", midVals[2]:"+midVals[2]+", midVals[3]:"+midVals[3]+", midVals[4]:"+midVals[4]+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", zero:"+zero+", onlyZero:"+onlyZero+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);
+    /*console.log("outputStr: finalVals[0]:"+finalVals[0]+", finalVals[1]:"+finalVals[1]+", finalVals[2]:"+finalVals[2]+", finalVals[3]:"+finalVals[3]+", finalVals[4]:"+finalVals[4]+", baseVals[0]:"+baseVals[0]+", baseVals[1]:"+baseVals[1]+", baseVals[2]:"+baseVals[2]+", baseVals[3]:"+baseVals[3]+", baseVals[4]:"+baseVals[4]+", midVals[0]:"+midVals[0]+", midVals[1]:"+midVals[1]+", midVals[2]:"+midVals[2]+", midVals[3]:"+midVals[3]+", midVals[4]:"+midVals[4]+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", zero:"+zero+", onlyZero:"+onlyZero+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);*/
     
     var evoVals = [];
     evoVals[0] = baseVals;
     evoVals[1] = finalVals.slice(0, 5); /*remove extra evo dex nums */
     evoVals[2] = midVals;
-    console.log("Merged baseVals("+JSON.stringify(baseVals)+"), finalVals("+JSON.stringify(finalVals)+"), and midVals("+JSON.stringify(midVals)+") into evoVals("+JSON.stringify(evoVals)+")");
+    
+    /*console.log("Merged baseVals("+JSON.stringify(baseVals)+"), finalVals("+JSON.stringify(finalVals)+"), and midVals("+JSON.stringify(midVals)+")");
+    console.log("into evoVals("+JSON.stringify(evoVals)+")");*/
     
     /* create our rank object to compute cps/hps from for output string */
-    evoVals = getRanks(evoVals, limit, trash, hundo, zero, onlyZero, league);
+    evoVals = getRanks(evoVals, trash, hundo, zero, onlyZero, league);
     const mergedRanks = evoVals[1][6];
     const rLength = evoVals[1][6].numRanks;
     console.log("rLength: "+rLength);
@@ -669,17 +700,18 @@
       return output;
     } else {
       if ((!zero) && (trash)) {
-        results = getZeroCPs(baseVals[1], baseVals[2], baseVals[3], cpm, maxCP, maxHP, cps[0], hps[0]);
+        results = getZeroCPs(evoVals[0][1], evoVals[0][2], evoVals[0][3], cpm, maxCP, maxHP, cps[0], hps[0]);
         cps[0] = results[0];
         hps[0] = results[1];
         maxCP = results[2];
         maxHP = results[3];
       }
-      console.log("Entering cp/hp generation loop...");
+      /*console.log("Entering cp/hp generation loop...");*/
       /* generate all the cps and hps for matching */
       /* for ranks 1 to user limit, up to maxLvl (L) for league */
       for (i=0; i<rLength; i++) {
         for (j=0; j<mergedRanks[rKeys[i]].length; j++) {
+          /*console.log("i:"+i+" j:"+j);*/
         
           /* start at maxLvl (up to league limit) */
           var maxLvl = (mergedRanks[rKeys[i]][j].L - 1)*2;
@@ -740,22 +772,32 @@
       /*console.log("outputStr: About to update maxCP:"+JSON.stringify(maxCP)+", and maxHP:"+JSON.stringify(maxHP));*/
       maxCP.fill(Math.max(...maxCP));
       maxHP.fill(Math.max(...maxHP));
-      console.log("outputStr: Updated maxCP:"+JSON.stringify(maxCP)+", and maxHP:"+JSON.stringify(maxHP));
+      /*console.log("outputStr: Updated maxCP:"+JSON.stringify(maxCP)+", and maxHP:"+JSON.stringify(maxHP));*/
     }
-    
+      
     /* output the CPs and HPs */
-    /* var newArray = oldArray.slice(); */
-    console.log("outputStr: First call to outputCPsHPsBuckets...");
+    /*console.log("outputStr: First call to outputCPsHPsBuckets...");*/
     outputCPsHPsBuckets(cps.slice(), maxCP, hps.slice(), maxHP, output, baseVals[0], cpstr, hpstr, trash, hundo, onlyZero);
     var origOut = output.value;
-    console.log("Checking output length...");
+    /*console.log("Checking output length...");*/
     if (origOut.length > 2000) {
       document.getElementById('overflow1').value = output.value.slice(0, 2000);
       document.getElementById('overflow2').value = output.value.slice(2001, 4000);
       document.getElementById('overflow3').value = output.value.slice(4001, 6000);
       document.getElementById('overflow4').value = output.value.slice(6001, output.value.length);
     }
-    console.log("outputStr: First output length - origOut.length="+origOut.length);
+    /*console.log("outputStr: First output length - origOut.length="+origOut.length);*/
+    
+    if (baseVals[4] == "Burmy") {
+      if (finalVals[4] == "Mothim") {
+        console.log("Found Mothim!");
+        output.value += "&male";
+      } else if (finalVals[4].indexOf("Wormadam") > -1 ) {
+        console.log("Found:"+baseVals[4]);
+        output.value += "&female";
+      }
+    }
+    return output;
     
     if (origOut.length > 2000) {
       console.log("Too long for iOS:"+origOut.length+" with short:"+short);
@@ -875,7 +917,8 @@
   
   function outputCPsHPsBuckets(cps, maxCP, hps, maxHP, output, id, cpstr, hpstr, trash, hundo, onlyZero) {
     
-    console.log("--outputCPsHPsBuckets: maxCP:"+JSON.stringify(maxCP)+", maxHP:"+JSON.stringify(maxHP)+", trash:"+trash+" hundo:"+hundo+", onlyZero:"+onlyZero);
+    /*console.log("--outputCPsHPsBuckets: maxCP:"+JSON.stringify(maxCP)+", maxHP:"+JSON.stringify(maxHP)+", trash:"+trash+" hundo:"+hundo+", onlyZero:"+onlyZero);*/
+    
 
     var emptyBuf = "";
     output.value = id; /* add dex num */
@@ -906,6 +949,7 @@
         /* output CPs */
         cps[i] = Array.from(cps[i]);
         cps[i].sort((a, b) => a - b);
+        /*console.log("--outputCPsHPsBuckets: cps["+i+"]: "+JSON.stringify(cps[i]));*/
         output.value += '&!'+i+'*,' + get_matching_string(cps[i], cpstr);
         
         if (!trash) {
@@ -913,7 +957,7 @@
         }
         
         /* skip empty hps */
-        console.log("--outputCPsHPsBuckets: hps["+i+"].size:"+hps[i].size);
+        /*console.log("--outputCPsHPsBuckets: hps["+i+"].size:"+hps[i].size);*/
         if (hps[i].size > 0) {
           hps[i] = Array.from(hps[i]);
           hps[i].sort((a, b) => a - b);
@@ -928,7 +972,7 @@
       }
     }
     output.value += emptyBuf; /* add trash stuff */
-    console.log("--outputCPsHPsBuckets: Generated string is "+output.value.length+" characters long");
+    /*console.log("--outputCPsHPsBuckets: Generated string is "+output.value.length+" characters long");*/
     return true;
   }
   
@@ -988,7 +1032,7 @@
         if ((output.value.length + hpBuf.length) <= 2000) {
           output.value += hpBuf;
         } else {
-          console.log("--outputCPsHPsCombined: output.value.length:"+output.value.length+" + hpBuf.length:"+hpBuf.length+" will be over 2000 char limit, dropping hpBuf");
+          /*console.log("--outputCPsHPsCombined: output.value.length:"+output.value.length+" + hpBuf.length:"+hpBuf.length+" will be over 2000 char limit, dropping hpBuf");*/
         }
       }
     }
