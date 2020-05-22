@@ -458,7 +458,7 @@
       
       /* special case for base evolution search */
       if (j==0) {
-        evoVals[j] = findMonName(evoVals[0][0], awesomplete.options.list, offset, awesomplete.options.list[i].value.split(',')[1]/1);
+        evoVals[j] = findMonName(evoVals[0][0], awesomplete.options.list, offset, evoVals[0][0], false);
                                                           /* TODO: NEED TO FIX ROTOM MISMATCH HERE!!! */
         if (evoVals[0][5] > 0) {/*Don't process limits for blank evos*/
           console.log("Updating limits for evoVals[0]:"+JSON.stringify(evoVals[0]));
@@ -477,6 +477,7 @@
       document.getElementById('evoName['+j+']').innerHTML = evoVals[j][4]+" ("+evoVals[j][5]+")";
       if (evoVals[j][5] > 0) {/*Don't process limits for blank evos*/
         if (league == "All") {
+          console.log("Processing league limits with evoVals["+j+"][5]:"+evoVals[j][5]);
           if (evoVals[j][5] > 2500) {
             evoVals[j][8] = document.getElementById('MLlimit['+j+']').value/1;
             document.getElementById('MLlimit['+j+']').style="display: inline-block;"; document.getElementById('labelMLlimit['+j+']').style="display: inline-block;";
@@ -485,7 +486,7 @@
             evoVals[j][7] = document.getElementById('ULlimit['+j+']').value/1;
             document.getElementById('ULlimit['+j+']').style="display: inline-block;"; document.getElementById('labelULlimit['+j+']').style="display: inline-block;";
           } else {evoVals[j][7] = 0; document.getElementById('ULlimit['+j+']').style="display: none;"; document.getElementById('labelULlimit['+j+']').style="display: none;";}
-          if (evoVals[j][5] > 1350) {
+          if (((j==1) && (evoVals[j][5] < 1351)) || (evoVals[j][5] > 1350)) { /* first case is for low Search String (useless ones mostly) */
             evoVals[j][6] = document.getElementById('GLlimit['+j+']').value/1;
             document.getElementById('GLlimit['+j+']').style="display: inline-block;"; document.getElementById('labelGLlimit['+j+']').style="display: inline-block;";
           } else {evoVals[j][6] = 0; document.getElementById('GLlimit['+j+']').style="display: none;"; document.getElementById('labelGLlimit['+j+']').style="display: none;";}
@@ -613,7 +614,7 @@
   
   function findMonName(toFind, matches, offset, checked, value) {
     var results = [], startIndex = 0, dexToFind = 0;
-    console.log("::findMonName: Received toFind:"+JSON.stringify(toFind)+", offset:"+offset+", value:"+value);
+    /*console.log("::findMonName: Received toFind:"+JSON.stringify(toFind)+", offset:"+offset+", checked:"+checked+", value:"+value);*/
     
     if (value) {
       startIndex = value[0]/1 + offset/1; dexToFind = value[0]/1;
@@ -650,14 +651,16 @@
       
       if (dexToFind/1 === matches[i].value.split(',')[0]/1)
       {
-        /*console.log("Found dexToFind("+dexToFind+") at i="+i+", value:"+value);*/
+        console.log("Found dexToFind("+dexToFind+") at i="+i+", value:"+value);
         toFind = matches[i].label;
         if (value) {
+          /*console.log("value found for toFind:"+toFind);*/
           results[0] = value[0]/1;
           results[1] = value[1]/1;
           results[2] = value[2]/1;
           results[3] = value[3]/1;
         } else {
+          /*console.log("value not found for toFind:"+toFind);*/
           results[0] = checked;
           results[1] = matches[i].value.split(',')[1]/1;
           results[2] = matches[i].value.split(',')[2]/1;
@@ -665,7 +668,7 @@
         }
         results[4] = matches[i].label;
         results[5] = (Math.max(10, Math.floor((results[1]/1 + 15) * Math.sqrt(results[2]/1 + 15) * Math.sqrt(results[3]/1 + 15) * cpm[(40 - 1)*2] * cpm[(40 - 1)*2] / 10)));
-        console.log("results updated to:"+JSON.stringify(results));
+        /*console.log("results updated to:"+JSON.stringify(results));*/
         break;
       }
     }
@@ -821,8 +824,8 @@
   
   function outputStr(evoVals, trash, hundo, zero, onlyZero, league, binary, output, cpstr, hpstr) {
     if (perfTiming) {var outputStrT0 = performance.now();}
-    /*console.log("outputStr: finalVals:"+JSON.stringify(finalVals)+", evoVals:"+JSON.stringify(evoVals)+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", zero:"+zero+", onlyZero:"+onlyZero+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);*/
-    
+    /*console.log("outputStr: evoVals:"+JSON.stringify(evoVals)+", limit:"+limit+", trash:"+trash+", hundo:"+hundo+", zero:"+zero+", onlyZero:"+onlyZero+", league:"+league+", cpstr:"+cpstr+", hpstr:"+hpstr);*/
+
     /* create our rank object to compute cps/hps from for output string */
     const mergedRanks = getRanks(evoVals, trash, hundo, zero, onlyZero, league);
 
