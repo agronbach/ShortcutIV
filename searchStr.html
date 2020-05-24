@@ -983,15 +983,17 @@
     
     /* output cps and hps */
     for (var i=0; i<maxLoops; i++) {
+      /*console.log("Starting loop, i="+i+", emptyBuf="+emptyBuf);*/
       if (i == 4) { /* handle 4* case */
         if ((trash) && (!hundo)) {
           emptyBuf += '&!'+i+'*';
           continue;
         } else if (cps[4].size > 0) {
-          if (!trash) {emptyBuf = '&4*';continue;}
+          if (!trash) {emptyBuf += '&4*';continue;}
         }
       }
       /* skip empty sets */
+      /*console.log("Detected cps["+i+"] has size of:"+cps[i].size);*/
       if (cps[i].size > 0) {
         /* only flip CPs/HPs if non-zero */
         if ((trash) && (!onlyZero)) {
@@ -1022,9 +1024,11 @@
         }
       } else if (!trash) { /* skip empty appraisal sets in search string */
         emptyBuf += '&!'+i+'*';
+        /*console.log("Updated emptyBuf to:"+emptyBuf);*/
       }
     }
     output.value += emptyBuf; /* add trash stuff */
+    /*console.log("output.value is now:"+output.value);*/
     /*console.log("--outputCPsHPsBuckets: Generated string is "+output.value.length+" characters long");*/
     if (perfTiming) {var outputCPsHPsBucketsT1 = performance.now();
     console.log("outputCPsHPsBuckets: Execution took "+(outputCPsHPsBucketsT1-outputCPsHPsBucketsT0).toFixed(1)+"ms");}
