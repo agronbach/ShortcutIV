@@ -266,7 +266,9 @@
       let dIV=[document.getElementById('dIV[0]').value];
       let sIV=[document.getElementById('sIV[0]').value];
       let rIV=[];
-    
+      let megaList = [3,6,9,15,18,65,80,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,334,354,359,362,373,376,380,381,384,428,445,448,460,475,531];
+      let megaNote = "";
+
       var awesomplete = new Awesomplete(input, {list: pokeList,
         /*insert label instead of value into the input*/
         replace: function(suggestion) {
@@ -435,7 +437,8 @@
         output.innerHTML = ""; /*ensure we clear the prior output between runs*/
         chart.innerHTML = ""; /*ensure we clear the prior output between runs*/
         rIV = []; /* make sure we clear the prior output between runs */
-
+        var uri;
+        var IVs;
         /*need to adjust for raid/reward only (L15 or L20)*/
         var minLvl = document.getElementById('minLvl').value;
         var maxLvl = document.getElementById('maxLvl').value;
@@ -448,10 +451,22 @@
         var floor = document.getElementById('floor').value;
         var ranks = calculate(parseInt(monInfo[1]), parseInt(monInfo[2]), parseInt(monInfo[3]), league, floor, minLvl, maxLvl, dti);
         var evos = monInfo.slice(4, monInfo.length);
+        
+        /* check for and add Mega Evo to evos */
+        const dexNums = evos.concat(monInfo[0]);
+        for (i=0; i<dexNums.length; i++) {
+          if (megaList.includes(dexNums[i]/1)) {
+            console.log("Found a Mega at dexNums["+i+"]:"+dexNums[i]);
+            megaNote = "Please note Mega Evolution base stats are speculative and subject to change!"
+            evos.push(dexNums[i]+"&mega");
+            console.log("evos updated to:"+evos);
+          } else {
+            console.log("No Mega for dexNums["+i+"]:"+dexNums[i]);
+          }
+        }
+        
         var evoLen = evos.length;
-        /*console.log("evos.length:"+evoLen+", evos:"+evos);*/
-        var uri;
-        var IVs;
+        console.log("evos.length:"+evoLen+", evos:"+evos);
         
         /*ensure we actually generated something to output*/
         var keys = Object.keys(ranks);
@@ -573,14 +588,29 @@
                 var scaling = pokeListLen/dexEnd;
                 /*console.log("i: "+i+" Need to output rows for:"+evos);*/
                 for (var e=0; e<evoLen; e++) {
-                  /*console.log("Attempting to find evos[e("+e+")]:"+evos[e]+" with pokeListLen:"+pokeListLen);*/
+                  console.log("Attempting to find evos[e("+e+")]:"+evos[e]+" with pokeListLen:"+pokeListLen);
                   var searchStart = parseInt(scaling * ((evos[e]).split("&")[0]));
-                  /*console.log("f starting at searchStart:"+searchStart+", iterating while f<pokeListLen("+pokeListLen+"):"+pokeList[pokeListLen].label)*/
+                  console.log("f starting at searchStart:"+searchStart+", iterating while f<pokeListLen("+pokeListLen+"):"+pokeList[pokeListLen].label)
                   for (var f=searchStart; f<=pokeListLen; f++) {
-                    var evoMonInfo = pokeList[f].value.split(",");
-                    /*console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f+":"+pokeList[f].label);*/
+                    if (evos[e].indexOf("&mega") > 0) {
+                      console.log("Trying to find mega: "+evos[e]);
+                      evoMonInfo[0] = evos[e];
+                      for (var m=0; m<megaStats.length; m++) {
+                        /*console.log("(megaStats[m].value.split(',')[0]/1("+megaStats[m].value.split(',')[0]/1+") ?== ("+evos[e].split('&')[0]/1+")evos[e].split('&')[0]/1)");*/
+                        if (megaStats[m].value.split(",")[0]/1 === evos[e].split("&")[0]/1) {
+                          evoMonInfo = megaStats[m].value.split(",");
+                          evoMonInfo[0] = evos[e];
+                          pokeList[f].label = megaStats[m].label;
+                          console.log("Found "+pokeList[f].label+"'s stats, updated evoMonInfo to:"+JSON.stringify(evoMonInfo));
+                          break;
+                        }
+                      }
+                    } else {
+                      var evoMonInfo = pokeList[f].value.split(",");
+                    }
+                    console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f+":"+pokeList[f].label);
                     if (evoMonInfo[0].indexOf(evos[e])>-1) {
-                      /*console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)*/
+                      console.log("Found a match: pokeList[f("+f+")].value("+pokeList[f].value+").split(\",\")[0]"+pokeList[f].value.split(",")[0]+" == evos[e("+e+")]/1:"+evos[e]/1)
                       
                       /*ensure we don't show impossible Tyrogue evos*/
                       if (selected == "Tyrogue") {if (wrongTyroEvo(aIV[i], dIV[i], sIV[i], evos[e])) {continue;}}
@@ -594,7 +624,7 @@
                       /*create link for evo table entry*/
                       IVs = aIV[i] + "_" + dIV[i] + "_" + sIV[i];
                       uri = URL + "?mon="+evoMon+"&r="+limit+"&cp="+league+"&f="+floor+"&min="+minLvl+"&max="+maxLvl+"&dti="+dti+"&cmp="+cmp+"&shdw="+shdw+"&IVs="+IVs;
-                      /*console.log("About to pass IVs:"+aIV[i]+", "+dIV[i]+", "+sIV[i]+" to getMonRank");*/
+                      console.log("About to pass IVs:"+aIV[i]+", "+dIV[i]+", "+sIV[i]+" to getMonRank");
                       var evoGMRhtml = getMonRank(evoNumRanks, evoRanks, evoKeys, shdw, cmp, evoMaxStatProd, aIV[i], dIV[i], sIV[i], aIV.length, evoMon, uri);
                       if (evoGMRhtml) {
                         if (evoHtml) {
@@ -619,6 +649,8 @@
                       /*console.log("getMonRank returned evoHtml: "+JSON.stringify(evoHtml));*/
                       break;
                     }
+                  
+                    if (evos[e].indexOf("&mega") > 0) {break;}
                   }
                 }
               }
@@ -629,6 +661,7 @@
           } else {
             console.log("i:"+i+" Missing an IV, detected: aIV[i]:"+aIV[i]+" dIV[i]:"+dIV[i]+" sIV[i]:"+sIV[i]);
             document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV above to check your "+selected+"'s "+leagueName+" PvP Rank</i></p>";
+            megaNote = "";
           }
         }
         evoHtml += "</table>";
@@ -707,7 +740,7 @@
           document.getElementById('feedbackBox').innerHTML = "<p><i>Your IVs are not eligible for the "+league+" CP cap<br>Please check the Min Level in Settings and try again</i></p>";
         }
         
-        output.innerHTML = evoHtml + evoFeedback + maxes + html + searchLink + "<br>" + trades;
+        output.innerHTML = evoHtml + megaNote + evoFeedback + maxes + html + searchLink + "<br>" + trades;
         
         /*update the URL with search parameters*/
         /*URL = "mon=Gyarados&r=5&cp=2500&f=1&lvl=10&IVs=0_15_15";*/
@@ -1226,6 +1259,8 @@
         start();
         return true;
       }
+      let megaStats = [{"label":"Mega_Venusaur","value":"3,241,246,190"},{"label":"Mega_Charizard_X","value":"6,273,213,186"},{"label":"Mega_Charizard_Y","value":"6,290,193,170"},{"label":"Mega_Blastoise","value":"9,264,237,188"},{"label":"Mega_Beedrill","value":"15,303,148,163"},{"label":"Mega_Pidgeot","value":"18,280,175,195"},{"label":"Mega_Alakazam","value":"65,334,176,133"},{"label":"Mega_Slowbro","value":"80,224,259,216"},{"label":"Mega_Gengar","value":"94,317,181,141"},{"label":"Mega_Kangaskhan","value":"115,246,210,233"},{"label":"Mega_Pinsir","value":"127,278,210,149"},{"label":"Mega_Gyarados","value":"130,266,225,197"},{"label":"Mega_Aerodactyl","value":"142,266,192,173"},{"label":"Mega_Mewtwo_X","value":"150,375,202,214"},{"label":"Mega_Mewtwo_Y","value":"150,388,209,214"},{"label":"Mega_Ampharos","value":"181,268,185,189"},{"label":"Mega_Steelix","value":"208,212,327,181"},{"label":"Mega_Scizor","value":"212,254,228,157"},{"label":"Mega_Heracross","value":"214,304,203,173"},{"label":"Mega_Houndoom","value":"229,289,194,181"},{"label":"Mega_Tyranitar","value":"248,281,251,205"},{"label":"Mega_Sceptile","value":"254,292,169,157"},{"label":"Mega_Blaziken","value":"257,299,153,173"},{"label":"Mega_Swampert","value":"260,258,198,205"},{"label":"Mega_Gardevoir","value":"282,296,208,154"},{"label":"Mega_Sableye","value":"302,151,216,137"},{"label":"Mega_Mawile","value":"303,188,217,137"},{"label":"Mega_Aggron","value":"306,225,301,157"},{"label":"Mega_Medicham","value":"308,205,179,155"},{"label":"Mega_Manectric","value":"310,286,179,172"},{"label":"Mega_Sharpedo","value":"319,289,144,172"},{"label":"Mega_Camerupt","value":"323,253,183,172"},{"label":"Mega_Altaria","value":"334,222,218,181"},{"label":"Mega_Banette","value":"354,312,160,162"},{"label":"Mega_Absol","value":"359,314,130,163"},{"label":"Mega_Glalie","value":"362,252,168,190"},{"label":"Mega_Salamence","value":"373,282,228,197"},{"label":"Mega_Metagross","value":"376,273,263,173"},{"label":"Mega_Latias","value":"380,263,271,173"},{"label":"Mega_Latios","value":"381,305,219,173"},{"label":"Mega_Rayquaza","value":"384,354,197,213"},{"label":"Mega_Lopunny","value":"428,282,214,163"},{"label":"Mega_Garchomp","value":"445,309,202,217"},{"label":"Mega_Lucario","value":"448,310,175,172"},{"label":"Mega_Abomasnow","value":"460,240,191,207"},{"label":"Mega_Gallade","value":"475,297,209,154"},{"label":"Mega_Audino","value":"531,147,239,230"}];
+      /*let megaStats = [{"atk":"241","def":"246","id":"3","name":"Mega_Venusaur","sta":"190"},{"atk":"273","def":"213","id":"6","name":"Mega_Charizard_X","sta":"186"},{"atk":"290","def":"193","id":"6","name":"Mega_Charizard_Y","sta":"170"},{"atk":"264","def":"237","id":"9","name":"Mega_Blastoise","sta":"188"},{"atk":"303","def":"148","id":"15","name":"Mega_Beedrill","sta":"163"},{"atk":"280","def":"175","id":"18","name":"Mega_Pidgeot","sta":"195"},{"atk":"334","def":"176","id":"65","name":"Mega_Alakazam","sta":"133"},{"atk":"224","def":"259","id":"80","name":"Mega_Slowbro","sta":"216"},{"atk":"317","def":"181","id":"94","name":"Mega_Gengar","sta":"141"},{"atk":"246","def":"210","id":"115","name":"Mega_Kangaskhan","sta":"233"},{"atk":"278","def":"210","id":"127","name":"Mega_Pinsir","sta":"149"},{"atk":"266","def":"225","id":"130","name":"Mega_Gyarados","sta":"197"},{"atk":"266","def":"192","id":"142","name":"Mega_Aerodactyl","sta":"173"},{"atk":"375","def":"202","id":"150","name":"Mega_Mewtwo_X","sta":"214"},{"atk":"388","def":"209","id":"150","name":"Mega_Mewtwo_Y","sta":"214"},{"atk":"268","def":"185","id":"181","name":"Mega_Ampharos","sta":"189"},{"atk":"212","def":"327","id":"208","name":"Mega_Steelix","sta":"181"},{"atk":"254","def":"228","id":"212","name":"Mega_Scizor","sta":"157"},{"atk":"304","def":"203","id":"214","name":"Mega_Heracross","sta":"173"},{"atk":"289","def":"194","id":"229","name":"Mega_Houndoom","sta":"181"},{"atk":"281","def":"251","id":"248","name":"Mega_Tyranitar","sta":"205"},{"atk":"292","def":"169","id":"254","name":"Mega_Sceptile","sta":"157"},{"atk":"299","def":"153","id":"257","name":"Mega_Blaziken","sta":"173"},{"atk":"258","def":"198","id":"260","name":"Mega_Swampert","sta":"205"},{"atk":"296","def":"208","id":"282","name":"Mega_Gardevoir","sta":"154"},{"atk":"151","def":"216","id":"302","name":"Mega_Sableye","sta":"137"},{"atk":"188","def":"217","id":"303","name":"Mega_Mawile","sta":"137"},{"atk":"225","def":"301","id":"306","name":"Mega_Aggron","sta":"157"},{"atk":"205","def":"179","id":"308","name":"Mega_Medicham","sta":"155"},{"atk":"286","def":"179","id":"310","name":"Mega_Manectric","sta":"172"},{"atk":"289","def":"144","id":"319","name":"Mega_Sharpedo","sta":"172"},{"atk":"253","def":"183","id":"323","name":"Mega_Camerupt","sta":"172"},{"atk":"222","def":"218","id":"334","name":"Mega_Altaria","sta":"181"},{"atk":"312","def":"160","id":"354","name":"Mega_Banette","sta":"162"},{"atk":"314","def":"130","id":"359","name":"Mega_Absol","sta":"163"},{"atk":"252","def":"168","id":"362","name":"Mega_Glalie","sta":"190"},{"atk":"282","def":"228","id":"373","name":"Mega_Salamence","sta":"197"},{"atk":"273","def":"263","id":"376","name":"Mega_Metagross","sta":"173"},{"atk":"263","def":"271","id":"380","name":"Mega_Latias","sta":"173"},{"atk":"305","def":"219","id":"381","name":"Mega_Latios","sta":"173"},{"atk":"354","def":"197","id":"384","name":"Mega_Rayquaza","sta":"213"},{"atk":"282","def":"214","id":"428","name":"Mega_Lopunny","sta":"163"},{"atk":"309","def":"202","id":"445","name":"Mega_Garchomp","sta":"217"},{"atk":"310","def":"175","id":"448","name":"Mega_Lucario","sta":"172"},{"atk":"240","def":"191","id":"460","name":"Mega_Abomasnow","sta":"207"},{"atk":"297","def":"209","id":"475","name":"Mega_Gallade","sta":"154"},{"atk":"147","def":"239","id":"531","name":"Mega_Audino","sta":"230"}];*/
       </script>
       <h3>Settings:</h3>
       <label>Top # Ranks:<input type="number" value="10" id="limit" min="1" max="4096" oninput="start()"></label><br />
