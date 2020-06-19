@@ -458,7 +458,9 @@
       
       /* special case for base evolution search */
       if (j==0) {
+        console.log("Attempting to call findMonName...");
         evoVals[j] = findMonName(evoVals[0][0], awesomplete.options.list, offset, evoVals[0][0], false);
+        console.log("Returned from call to findMonName...");
                                                           /* TODO: NEED TO FIX ROTOM MISMATCH HERE!!! */
         if (evoVals[0][5] > 0) {/*Don't process limits for blank evos*/
           console.log("Updating limits for evoVals[0]:"+JSON.stringify(evoVals[0]));
@@ -471,7 +473,7 @@
       evoVals[j] = new Array(9).fill(0);
       if (j==1) {evoVals[j] = findMonName(document.getElementById('evoName['+j+']').innerHTML, awesomplete.options.list, offset, false, value);
       } else if (getComputedStyle(document.getElementById('evoName['+j+']'), null).display == "inline-block") {
-        evoVals[j] = findMonName(document.getElementById('evoName['+j+']').innerHTML, awesomplete.options.list, offset, document.getElementById('evoCB['+j+']').checked);
+        evoVals[j] = findMonName(document.getElementById('evoName['+j+']').textContent, awesomplete.options.list, offset, document.getElementById('evoCB['+j+']').checked);
       }
       
       document.getElementById('evoName['+j+']').innerHTML = evoVals[j][4]+" ("+evoVals[j][5]+")";
@@ -510,6 +512,8 @@
       }
       console.log("evoVals["+j+"] is now: "+JSON.stringify(evoVals[j]));
     }
+    
+    console.log("Got to line 518 successfully");
     
     /* validate reCaptcha v3 */
     /* code reference: https://www.simoahava.com/analytics/improve-google-analytics-bot-detection-with-recaptcha/ */
@@ -614,18 +618,29 @@
   
   function findMonName(toFind, matches, offset, checked, value) {
     var results = [], startIndex = 0, dexToFind = 0;
-    /*console.log("::findMonName: Received toFind:"+JSON.stringify(toFind)+", offset:"+offset+", checked:"+checked+", value:"+value);*/
+    /*console.log("::findMonName: Received toFind:"+toFind+", offset:"+offset+", checked:"+checked+", value:"+value);*/
     
     if (value) {
-      startIndex = value[0]/1 + offset/1; dexToFind = value[0]/1;
-      /*console.log("Set startIndex:"+startIndex+" and dexToFind:"+dexToFind);*/
-    } else {startIndex = toFind/1+offset/1; dexToFind = toFind/1;}
-    /*console.log("matches.length:"+matches.length);*/
+      dexToFind = value[0].split(",")[0].split("&")[0]/1; startIndex = dexToFind/1 + offset/1;
+      /*console.log("Value("+value+") found, set startIndex:"+startIndex+" and dexToFind:"+dexToFind);
+      console.log("Updating toFind from: "+toFind+" to: "+value[0].split(",")[0]);*/
+      toFind = value[0].split(",")[0];
+    } else {
+      if(toFind.indexOf("&") > 0){
+        /*console.log("toFind contains non-numeric characters ("+toFind+"), proceeding to strip out just numbers for startIndex calculation...");*/
+        startIndex = toFind.split("&")[0]/1+offset/1; dexToFind = toFind.split("&")[0]/1;
+        /*console.log("No value; set startIndex:"+startIndex+" and dexToFind:"+dexToFind);*/
+      } else {
+        startIndex = toFind/1+offset/1; dexToFind = toFind/1;
+        /*console.log("No value; set startIndex:"+startIndex+" and dexToFind:"+dexToFind);*/
+      }
+    }
+    /*console.log("matches.length:"+matches.length+", startIndex:"+startIndex+", dexToFind:"+dexToFind);*/
     
     /* Correct for melmetal array out of bounds case */
     if (startIndex > matches.length) {startIndex = matches.length - 2;}
     
-    /*console.log("startIndex/1("+startIndex+") ?= ("+matches[startIndex].value.split(',')[0]/1+")matches[startIndex].value.split(',')[0]/1)");*/
+    /*console.log("startIndex/1("+startIndex+") <? ("+matches[startIndex].value.split(',')[0]/1+")matches[startIndex].value.split(',')[0]/1)");*/
     if (startIndex/1 < matches[startIndex].value.split(',')[0]/1) {
       if ((startIndex/1-offset/1) > matches[startIndex].value.split(',')[0]/1) {
         startIndex = startIndex/1 - offset/1;
@@ -636,31 +651,32 @@
       }
     }
     
-    /*console.log("Starting loop with startIndex:"+startIndex);
-    console.log("Trying to locate dexToFind:"+dexToFind);*/
-    
+    /*console.log("Starting loop startIndex:"+startIndex+", dexToFind:"+dexToFind);*/
     for (i = startIndex, offset=0; i < matches.length; i++, offset++)
     {
-      /*console.log("i:"+i+", startIndex:"+startIndex+", offset:"+offset);
-      console.log("About to check dexToFind/1("+dexToFind/1+") ?= ("+matches[i].value.split(',')[0]/1+")matches["+i+"].value.split(',')[0]/1)...");*/
-      if ((!(matches[i].value.split(',')[0]).match(/[A-Za-z]/)) && (dexToFind/1 < (matches[i].value.split(',')[0]/1))) {
-        /*console.log("Stopping comparing as dexToFind("+dexToFind+") < ("+matches[i].value.split(',')[0]/1+")matches[i].value.split(',')[0]/1");
-        console.log("(i("+i+") >= matches.length("+matches.length+")) || (results[4]("+results[4]+") == 0)");*/
+      /*console.log("i:"+i+" dexToFind/1("+dexToFind/1+") < ("+matches[i].value.split(',')[0]+")matches[i].value.split(',')[0].split('&')[0]/1:"+(dexToFind/1 < (matches[i].value.split(',')[0].split('&')[0]/1)));*/
+      
+      /* (!(matches[i].value.split(',')[0]).match(/[A-Za-z]/)) checks for &galar or &eggsonly, etc  */
+      if ((!(matches[i].value.split(',')[0]).match(/[A-Za-z]/)) && (dexToFind/1 < (matches[i].value.split(',')[0].split('&')[0]/1))) {
+        
+        console.log("Stopping comparing as we overshot the dexToFind("+dexToFind+"), matches["+i+"].value.split(',')[0]:"+matches[i].value.split(',')[0]);
+        console.log("(i("+i+") >= matches.length("+matches.length+")) || (results[4]("+results[4]+") == 0)");
         break;
       }
       
-      if (dexToFind/1 === matches[i].value.split(',')[0]/1)
+      /* Check for an actual match and record values to retun if it is a match */
+      if ((dexToFind/1 === matches[i].value.split(',')[0].split('&')[0]/1) && (toFind === matches[i].value.split(',')[0]))
       {
-        console.log("Found dexToFind("+dexToFind+") at i="+i+", value:"+value);
+        /*console.log("Found dexToFind("+dexToFind+") at i="+i+", value:"+value+", toFind:"+toFind+", matches[i].value.split(',')[0]:"+matches[i].value.split(',')[0]);*/
         toFind = matches[i].label;
         if (value) {
-          /*console.log("value found for toFind:"+toFind);*/
-          results[0] = value[0]/1;
+          /*console.log("value passed in as:"+value);*/
+          results[0] = value[0];
           results[1] = value[1]/1;
           results[2] = value[2]/1;
           results[3] = value[3]/1;
         } else {
-          /*console.log("value not found for toFind:"+toFind);*/
+          /*console.log("value not passed in:"+value);*/
           results[0] = checked;
           results[1] = matches[i].value.split(',')[1]/1;
           results[2] = matches[i].value.split(',')[2]/1;
