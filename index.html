@@ -266,7 +266,6 @@
       let dIV=[document.getElementById('dIV[0]').value];
       let sIV=[document.getElementById('sIV[0]').value];
       let rIV=[];
-      let megaNote = "";
 
       var awesomplete = new Awesomplete(input, {list: pokeList,
         /*insert label instead of value into the input*/
@@ -383,6 +382,7 @@
       
       function start() {
         if (perfTiming) {var startT0 = performance.now();}
+        let megaNote = "";
 
         /*exit if we haven't selected a mon yet*/
         if ((awesomplete.suggestions === undefined) && (selected === undefined)) {
@@ -395,6 +395,7 @@
             return;
           } else {
             console.log("start: Found mon in both:'"+awesomplete.suggestions+"' and '"+selected+"'");
+            if (selected.indexOf("Mega_") > -1)  {megaNote = "<p><i>Please note Mega Evolution base stats are speculative and subject to change!</i></p>";}
             /*console.log("aIV[0]:'"+aIV[0]+"', dIV[0]:'"+dIV[0]+"', sIV[0]:'"+sIV[0]+"' aIV.length:"+aIV.length);*/
           }
         }
@@ -576,7 +577,7 @@
                   var searchStart = parseInt(scaling * ((evos[e]).split("&")[0]));
                   /*console.log("f starting at searchStart:"+searchStart+", iterating while f<("+pokeListLen+")pokeListLen");*/
                   for (var f=searchStart; f<=pokeListLen; f++) {
-                    if (evos[e].indexOf("&mega") > 0) {megaNote = "Please note Mega Evolution base stats are speculative and subject to change!";}
+                    if (evos[e].indexOf("&mega") > -1) {megaNote = "<i>Please note Mega Evolution base stats are speculative and subject to change!</i>";}
                     var evoMonInfo = pokeList[f].value.split(",");
                     /*console.log("Checking evoMonInfo("+evoMonInfo+") vs evos[e("+e+")]:"+evos[e]+", at index f="+f+":"+pokeList[f].label);*/
                     if (evoMonInfo[0].indexOf(evos[e])>-1) {
@@ -629,7 +630,7 @@
           } else {
             console.log("i:"+i+" Missing an IV, detected: aIV[i]:"+aIV[i]+" dIV[i]:"+dIV[i]+" sIV[i]:"+sIV[i]);
             document.getElementById('feedbackBox').innerHTML = "<p><i>Enter an Attack IV above to check your "+selected+"'s "+leagueName+" PvP Rank</i></p>";
-            megaNote = "";
+            /*megaNote = "";*/
           }
         }
         evoHtml += "</table>";
